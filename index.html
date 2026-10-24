@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DESPAG - Painel de Controle 2026</title>
+    
+    <!-- ESPAÇO RESERVADO PARA O ÍCONE DO APLICATIVO NO CELULAR (PWA / HOME SCREEN) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+    <meta name="theme-color" content="#090d16">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#090d16',
+                        darkcard: '#111827',
+                        darksidebar: '#0d1322',
+                        neonblue: '#0ea5e9',
+                        neongreen: '#10b981',
+                        neonred: '#ef4444',
+                    },
+                    boxShadow: {
+                        'neon-blue': '0 0 22px rgba(14, 165, 233, 0.55)',
+                        'neon-green': '0 0 15px rgba(16, 185, 129, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #090d16;
+            color: #f1f5f9;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        .neon-card {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .neon-card:hover {
+            border-color: #0ea5e9;
+            box-shadow: 0 0 22px rgba(14, 165, 233, 0.55);
+            transform: translateY(-3px);
+        }
+
+        #sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sidebar-closed {
+            transform: translateX(-100%);
+        }
+
+        .sidebar-open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white">
+
+    <!-- ================= TELA DE LOGIN ================= -->
+    <div id="loginOverlay" class="fixed inset-0 bg-darkbg z-[100] flex items-center justify-center p-4">
+        <div class="neon-card w-full max-w-md p-8 rounded-2xl space-y-6 border border-sky-900/50 shadow-neon-blue">
+            <div class="text-center space-y-2">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-sky-600 to-blue-500 mx-auto flex items-center justify-center text-white font-extrabold text-3xl shadow-neon-blue">
+                    D
+                </div>
+                <h2 class="text-2xl font-black text-white tracking-wider">DESPAG</h2>
+                <p class="text-xs text-sky-400">Acesso Restrito ao Sistema Financeiro</p>
+            </div>
+
+            <form onsubmit="autenticarLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Usuário Administrador</label>
+                    <input type="text" id="loginUser" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" placeholder="Digite o usuário" required>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Senha de Acesso</label>
+                    <input type="password" id="loginPass" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" placeholder="Digite a senha" required>
+                </div>
+
+                <div id="loginError" class="hidden text-xs text-rose-500 bg-rose-950/50 p-2.5 rounded-lg border border-rose-800 text-center">
+                    Usuário ou senha incorretos!
+                </div>
+
+                <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold rounded-xl shadow-neon-blue transition">
+                    Entrar no Sistema
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- OVERLAY DA SIDEBAR RETRÁTIL -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/70 z-40 hidden backdrop-blur-sm transition-opacity" onclick="toggleSidebar()"></div>
+
+    <!-- SIDEBAR RETRÁTIL -->
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-darksidebar border-r border-gray-800 z-50 sidebar-closed flex flex-col justify-between shadow-2xl">
+        <div>
+            <div class="p-5 flex items-center justify-between border-b border-gray-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-blue-500 flex items-center justify-center text-white font-extrabold text-xl shadow-neon-blue">
+                        D
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-black tracking-wider text-white">DESPAG</h1>
+                        <p class="text-xs text-sky-400 font-medium">Gestão Financeira</p>
+                    </div>
+                </div>
+                <button onclick="toggleSidebar()" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-gray-800 transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <nav class="p-4 space-y-2">
+                <a href="#" onclick="showSection('dashboard')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-medium group active-nav">
+                    <i class="fa-solid fa-chart-pie text-sky-400"></i> Dashboard
+                </a>
+                <a href="#" onclick="showSection('lancamentos')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-medium group">
+                    <i class="fa-solid fa-plus-circle text-sky-400"></i> Lançar / Importar Fatura
+                </a>
+                <a href="#" onclick="showSection('receitas')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-medium group">
+                    <i class="fa-solid fa-hand-holding-dollar text-sky-400"></i> Receitas & Terceiros
+                </a>
+                <a href="#" onclick="showSection('admin-cartoes')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-medium group">
+                    <i class="fa-solid fa-credit-card text-sky-400"></i> Admin de Cartões
+                </a>
+                <a href="#" onclick="showSection('base-dados')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-medium group">
+                    <i class="fa-solid fa-database text-sky-400"></i> Base de Dados
+                </a>
+            </nav>
+        </div>
+
+        <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
+            <span>DESPAG v2.7 Neon Blue</span>
+            <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold">
+                <i class="fa-solid fa-right-from-bracket"></i> Sair
+            </button>
+        </div>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+
+        <!-- BARRA SUPERIOR / TOPBAR -->
+        <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-darkcard/80 p-4 rounded-2xl border border-gray-800 backdrop-blur-md">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="p-2.5 rounded-xl bg-gray-800/80 text-sky-400 hover:bg-sky-600 hover:text-white transition shadow-lg">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <div>
+                    <h2 class="text-xl font-bold text-white tracking-wide">Painel de Controle 2026 <span class="text-xs text-sky-400 font-normal px-2 py-0.5 rounded-full bg-sky-950 border border-sky-800/50">Mês Ativo</span></h2>
+                    <p class="text-xs text-gray-400">Gerenciamento Unificado de Cartões & Finanças</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+                <i class="fa-regular fa-calendar text-sky-400"></i>
+                <select id="selectMes" onchange="renderDashboard()" class="bg-gray-900 text-sky-300 font-bold border border-sky-950 focus:border-sky-500 rounded-xl px-4 py-2 text-sm focus:outline-none cursor-pointer">
+                    <option value="JAN">Janeiro</option>
+                    <option value="FEV">Fevereiro</option>
+                    <option value="MAR">Março</option>
+                    <option value="ABR">Abril</option>
+                    <option value="MAI">Maio</option>
+                    <option value="JUN">Junho</option>
+                    <option value="JUL">Julho</option>
+                    <option value="AGO">Agosto</option>
+                    <option value="SET">Setembro</option>
+                    <option value="OUT" selected>Outubro</option>
+                    <option value="NOV">Novembro</option>
+                    <option value="DEZ">Dezembro</option>
+                </select>
+            </div>
+        </header>
+
+        <!-- DASHBOARD -->
+        <main id="section-dashboard" class="app-section space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="neon-card p-6 rounded-2xl">
+                    <span class="text-xs font-semibold text-gray-400 uppercase">Total Receitas do Mês</span>
+                    <h3 class="text-3xl font-extrabold text-emerald-400 mt-2" id="dashTotalReceita">R$ 0,00</h3>
+                    <p class="text-xs text-gray-500 mt-3">Receitas Próprias + Reembolsos Terceiros</p>
+                </div>
+
+                <div class="neon-card p-6 rounded-2xl">
+                    <span class="text-xs font-semibold text-gray-400 uppercase">Débitos & Faturas PENDENTES</span>
+                    <h3 class="text-3xl font-extrabold text-rose-500 mt-2" id="dashTotalDebitos">R$ 0,00</h3>
+                    <p class="text-xs text-gray-500 mt-3">Subtrai dinamicamente ao dar check nas contas pagas</p>
+                </div>
+
+                <div class="neon-card p-6 rounded-2xl">
+                    <span class="text-xs font-semibold text-gray-400 uppercase">Saldo Líquido Projetado</span>
+                    <div class="d-flex align-items-center gap-2 mt-2">
+                        <h3 class="text-3xl font-extrabold mt-2 text-emerald-400" id="dashSaldo">R$ 0,00</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3">Balanço do mês selecionado</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 neon-card p-6 rounded-2xl space-y-4">
+                    <div class="flex justify-between items-center border-b border-gray-800 pb-4">
+                        <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-sky-400"></i> Faturas e Contas do Mês
+                        </h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-gray-300">
+                            <thead class="bg-gray-900/80 text-xs uppercase text-gray-400 border-b border-gray-800">
+                                <tr>
+                                    <th class="py-3 px-4">Cartão / Conta</th>
+                                    <th class="py-3 px-4">Valor A Pagar</th>
+                                    <th class="py-3 px-4">Vencimento</th>
+                                    <th class="py-3 px-4 text-center">Status (Pago)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyDashboard" class="divide-y divide-gray-800"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="neon-card p-6 rounded-2xl space-y-4">
+                    <h3 class="font-bold text-white text-lg border-b border-gray-800 pb-4">Projeção Mensal de Débitos</h3>
+                    <div class="space-y-2 max-h-[380px] overflow-y-auto" id="listProjecaoAnual"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- LANÇAR COMPRA -->
+        <section id="section-lancamentos" class="app-section space-y-6 hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="neon-card p-6 rounded-2xl space-y-4">
+                    <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Lançar Compra / Despesa Manual</h3>
+                    <form id="formNovaCompra" onsubmit="salvarCompra(event)" class="space-y-4">
+                        <input type="text" id="compraDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Descrição da Compra" required>
+                        <div class="grid grid-cols-2 gap-4">
+                            <select id="compraCartao" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required></select>
+                            <input type="date" id="compraData" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="number" step="0.01" id="compraValor" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Valor Total R$" required>
+                            <input type="number" id="compraParcelas" min="1" value="1" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold rounded-xl shadow-neon-blue">Registrar Compra</button>
+                    </form>
+                </div>
+
+                <div class="neon-card p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Carregar Fatura (PDF)</h3>
+                        <div class="mt-6 border-2 border-dashed border-gray-800 rounded-2xl p-8 text-center bg-gray-900/40 cursor-pointer" onclick="document.getElementById('pdfFileInput').click()">
+                            <i class="fa-solid fa-cloud-arrow-up text-4xl text-sky-400"></i>
+                            <p class="text-sm font-semibold text-gray-200 mt-3">Clique para selecionar o PDF da Fatura</p>
+                            <input type="file" id="pdfFileInput" accept="application/pdf" class="hidden" onchange="processarPDF(event)">
+                        </div>
+                    </div>
+                    <div id="pdfStatus" class="hidden p-3 rounded-xl bg-sky-950 text-sky-200 text-xs mt-4">Processando extrato em PDF...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECEITAS & TERCEIROS -->
+        <section id="section-receitas" class="app-section space-y-6 hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Receitas Próprias -->
+                <div class="neon-card p-6 rounded-2xl space-y-4">
+                    <h3 class="text-lg font-bold text-emerald-400 border-b border-gray-800 pb-3">Receitas Próprias & Rendimentos</h3>
+                    
+                    <form onsubmit="adicionarReceita(event)" class="flex gap-2">
+                        <input type="text" id="recDesc" placeholder="Descrição (Ex: Salário Base)" class="flex-1 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                        <input type="number" step="0.01" id="recValor" placeholder="Valor R$" class="w-32 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-xl font-bold"><i class="fa-solid fa-plus"></i></button>
+                    </form>
+
+                    <div class="space-y-2 mt-4" id="listReceitasProprias"></div>
+                </div>
+
+                <!-- Receita de Terceiros -->
+                <div class="neon-card p-6 rounded-2xl space-y-4">
+                    <h3 class="text-lg font-bold text-sky-400 border-b border-gray-800 pb-3">Receita de Terceiros (Cartão Compartilhado)</h3>
+                    
+                    <form onsubmit="adicionarTerceiro(event)" class="space-y-3">
+                        <input type="text" id="tercNome" placeholder="Nome da Pessoa (Ex: Andrielly)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                        <input type="text" id="tercDesc" placeholder="Descrição da Despesa" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="number" step="0.01" id="tercValor" placeholder="Valor R$" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                            <select id="tercCartao" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required></select>
+                        </div>
+                        <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white py-3 rounded-xl font-bold text-sm">Adicionar Cobrança</button>
+                    </form>
+
+                    <div id="containerTerceiros" class="space-y-3 mt-4"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMIN DE CARTÕES -->
+        <section id="section-admin-cartoes" class="app-section space-y-6 hidden">
+            <div class="neon-card p-6 rounded-2xl space-y-6">
+                <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Admin de Cartões & Dias de Fechamento</h3>
+                
+                <form onsubmit="cadastrarCartao(event)" class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                    <input type="text" id="cardNome" class="sm:col-span-2 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Nome do Cartão" required>
+                    <input type="number" id="cardFechamento" min="1" max="31" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Dia Fechamento" required>
+                    <input type="number" id="cardVencimento" min="1" max="31" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Dia Vencimento" required>
+                    <button type="submit" class="sm:col-span-4 py-3 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl">Cadastrar Cartão</button>
+                </form>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-gray-300">
+                        <thead class="bg-gray-900 text-xs uppercase text-gray-400 border-b border-gray-800">
+                            <tr>
+                                <th class="py-3 px-4">Cartão</th>
+                                <th class="py-3 px-4">Fechamento</th>
+                                <th class="py-3 px-4">Vencimento</th>
+                                <th class="py-3 px-4 text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyAdminCartoes" class="divide-y divide-gray-800"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- BASE DE DADOS -->
+        <section id="section-base-dados" class="app-section space-y-6 hidden">
+            <div class="neon-card p-6 rounded-2xl space-y-4">
+                <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Base de Dados Geral</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-gray-300">
+                        <thead class="bg-gray-900 uppercase text-gray-400 border-b border-gray-800">
+                            <tr>
+                                <th class="py-3 px-3">Data</th>
+                                <th class="py-3 px-3">Descrição</th>
+                                <th class="py-3 px-3">Cartão</th>
+                                <th class="py-3 px-3">Valor Total</th>
+                                <th class="py-3 px-3">Parc.</th>
+                                <th class="py-3 px-3">Valor Parc.</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyBaseDados" class="divide-y divide-gray-800"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- MODAL DE EDIÇÃO DE RECEITA PRÓPRIA -->
+    <div id="modalEditReceita" class="fixed inset-0 bg-black/80 z-[90] hidden flex items-center justify-center p-4">
+        <div class="neon-card w-full max-w-md p-6 rounded-2xl space-y-4 border border-sky-800">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+                <h4 class="font-bold text-white text-lg"><i class="fa-solid fa-pen-to-square text-sky-400"></i> Editar Receita Própria</h4>
+                <button onclick="fecharModalEditReceita()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            
+            <form onsubmit="salvarEdicaoReceita(event)" class="space-y-4">
+                <input type="hidden" id="editRecId">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Descrição</label>
+                    <input type="text" id="editRecDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Valor (R$)</label>
+                    <input type="number" step="0.01" id="editRecValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                </div>
+                <div class="flex gap-2">
+                    <button type="button" onclick="fecharModalEditReceita()" class="w-1/2 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold rounded-xl">Cancelar</button>
+                    <button type="submit" class="w-1/2 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-neon-blue">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE LÓGICA E REGRAS -->
+    <script>
+        const MESES = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
+
+        let appState = {
+            mesAtivo: "OUT",
+            cartoes: [
+                { id: 1, nome: "Nubank Neudson", fechamento: 25, vencimento: 5 },
+                { id: 2, nome: "Nubank Edilene", fechamento: 23, vencimento: 3 },
+                { id: 3, nome: "Visa Bradesco", fechamento: 15, vencimento: 25 },
+                { id: 4, nome: "99Pay", fechamento: 20, vencimento: 1 },
+                { id: 5, nome: "Cartão Recarga PAY", fechamento: 28, vencimento: 6 },
+                { id: 6, nome: "CMT I Andrielly", fechamento: 25, vencimento: 5 },
+                { id: 7, nome: "CMT I Guilherme", fechamento: 25, vencimento: 5 }
+            ],
+            faturasIniciais: {
+                "OUT": {
+                    "Nubank Neudson": { valor: 613.89, pago: false },
+                    "Nubank Edilene": { valor: 4538.91, pago: false },
+                    "Visa Bradesco": { valor: 51.86, pago: false },
+                    "99Pay": { valor: 1092.81, pago: false },
+                    "CMT I Andrielly": { valor: 126.00, pago: false },
+                    "CMT I Guilherme": { valor: 316.00, pago: false },
+                    "Cartão Recarga PAY": { valor: 1384.19, pago: false }
+                }
+            },
+            receitasProprias: [
+                { id: 1, desc: "Salário Base", valor: 3600.00 },
+                { id: 2, desc: "Renda Extra / Proventos", valor: 3739.05 }
+            ],
+            terceiros: [
+                { id: 1, nome: "Andrielly", desc: "Mensalidade CMT", valor: 126.00, cartao: "CMT I Andrielly", pago: false, mes: "OUT" },
+                { id: 2, nome: "Guilherme", desc: "Mensalidade CMT", valor: 316.00, cartao: "CMT I Guilherme", pago: false, mes: "OUT" }
+            ],
+            comprasBase: []
+        };
+
+        // AUTENTICAÇÃO
+        function autenticarLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('loginUser').value;
+            const p = document.getElementById('loginPass').value;
+            const err = document.getElementById('loginError');
+
+            if (u === "Administrador" && p === "Meusapps") {
+                document.getElementById('loginOverlay').classList.add('hidden');
+            } else {
+                err.classList.remove('hidden');
+            }
+        }
+
+        function logout() {
+            document.getElementById('loginOverlay').classList.remove('hidden');
+            document.getElementById('loginUser').value = '';
+            document.getElementById('loginPass').value = '';
+        }
+
+        // NAVEGAÇÃO & SIDEBAR
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('sidebar-closed');
+            sidebar.classList.toggle('sidebar-open');
+            overlay.classList.toggle('hidden');
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.app-section').forEach(sec => sec.classList.add('hidden'));
+            document.getElementById(`section-${sectionId}`).classList.remove('hidden');
+            toggleSidebar();
+        }
+
+        function atualizarDropdownsCartoes() {
+            const selects = [document.getElementById('compraCartao'), document.getElementById('tercCartao')];
+            selects.forEach(select => {
+                if (!select) return;
+                select.innerHTML = '';
+                appState.cartoes.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.nome;
+                    opt.textContent = `${c.nome} (Fechamento dia ${c.fechamento})`;
+                    select.appendChild(opt);
+                });
+            });
+        }
+
+        // DASHBOARD & REGRAS FINANCEIRAS
+        function renderDashboard() {
+            const mes = document.getElementById('selectMes').value;
+            appState.mesAtivo = mes;
+
+            let totalReceitasProprias = appState.receitasProprias.reduce((a, b) => a + b.valor, 0);
+            let totalTerceirosMes = appState.terceiros.filter(t => t.mes === mes).reduce((a, b) => a + b.valor, 0);
+            let totalReceitaGeral = totalReceitasProprias + totalTerceirosMes;
+
+            let dadosFaturas = appState.faturasIniciais[mes] || {};
+            let tbody = document.getElementById('tbodyDashboard');
+            tbody.innerHTML = '';
+
+            let totalDebitosPendentes = 0;
+
+            appState.cartoes.forEach(cartao => {
+                let info = dadosFaturas[cartao.nome] || { valor: 0, pago: false };
+                let valorFatura = info.valor;
+
+                if (!info.pago) {
+                    totalDebitosPendentes += valorFatura;
+                }
+
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-800/40 transition";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-semibold text-white">${cartao.nome}</td>
+                    <td class="py-3 px-4 ${info.pago ? 'line-through text-gray-500' : 'font-bold text-white'}">
+                        R$ ${valorFatura.toFixed(2)}
+                    </td>
+                    <td class="py-3 px-4 text-xs text-gray-400">Dia ${cartao.vencimento}</td>
+                    <td class="py-3 px-4 text-center">
+                        <input type="checkbox" class="w-5 h-5 rounded bg-gray-900 border-gray-700 text-sky-600 cursor-pointer" ${info.pago ? 'checked' : ''} onchange="toggleStatusPagoConta('${cartao.nome}')">
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            let saldoFinal = totalReceitaGeral - totalDebitosPendentes;
+
+            document.getElementById('dashTotalReceita').textContent = `R$ ${totalReceitaGeral.toFixed(2)}`;
+            document.getElementById('dashTotalDebitos').textContent = `R$ ${totalDebitosPendentes.toFixed(2)}`;
+            document.getElementById('dashSaldo').textContent = `R$ ${saldoFinal.toFixed(2)}`;
+
+            renderProjecaoAnual();
+            renderReceitasETerceiros();
+            renderAdminCartoes();
+            renderBaseDados();
+        }
+
+        function toggleStatusPagoConta(nomeCartao) {
+            let mes = appState.mesAtivo;
+            if (!appState.faturasIniciais[mes]) appState.faturasIniciais[mes] = {};
+            if (!appState.faturasIniciais[mes][nomeCartao]) {
+                appState.faturasIniciais[mes][nomeCartao] = { valor: 0, pago: false };
+            }
+            appState.faturasIniciais[mes][nomeCartao].pago = !appState.faturasIniciais[mes][nomeCartao].pago;
+            renderDashboard();
+        }
+
+        // OPERAÇÕES DE RECEITAS PRÓPRIAS (ADICIONAR, EDITAR, EXCLUIR)
+        function renderReceitasETerceiros() {
+            const listP = document.getElementById('listReceitasProprias');
+            listP.innerHTML = '';
+            appState.receitasProprias.forEach(r => {
+                listP.innerHTML += `
+                    <div class="flex justify-between items-center p-3 rounded-xl bg-gray-900 border border-gray-800">
+                        <span class="text-sm font-medium text-gray-200">${r.desc}</span>
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-emerald-400 text-sm">R$ ${r.valor.toFixed(2)}</span>
+                            <button onclick="abrirEditReceita(${r.id})" class="text-xs text-sky-400 hover:text-sky-300 p-1"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="excluirReceita(${r.id})" class="text-xs text-rose-500 hover:text-rose-400 p-1"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // TERCEIROS AGRUPADOS
+            const container = document.getElementById('containerTerceiros');
+            container.innerHTML = '';
+            let mes = appState.mesAtivo;
+            let cobrancasMes = appState.terceiros.filter(t => t.mes === mes);
+            let pessoasMap = {};
+
+            cobrancasMes.forEach(c => {
+                if (!pessoasMap[c.nome]) pessoasMap[c.nome] = [];
+                pessoasMap[c.nome].push(c);
+            });
+
+            if (Object.keys(pessoasMap).length === 0) {
+                container.innerHTML = `<p class="text-xs text-gray-500">Nenhuma cobrança de terceiro para este mês.</p>`;
+                return;
+            }
+
+            for (let pessoa in pessoasMap) {
+                let lista = pessoasMap[pessoa];
+                let totalPessoa = lista.reduce((sum, item) => sum + item.valor, 0);
+
+                let cardHtml = `
+                    <div class="p-4 rounded-xl bg-gray-900 border border-gray-800 space-y-3">
+                        <div class="flex justify-between items-center border-b border-gray-800 pb-2">
+                            <h4 class="font-bold text-white text-sm"><i class="fa-solid fa-user text-sky-400 mr-1"></i> ${pessoa}</h4>
+                            <span class="text-xs bg-sky-950 text-sky-300 px-2.5 py-1 rounded-md font-bold border border-sky-800/50">TOTAL: R$ ${totalPessoa.toFixed(2)}</span>
+                        </div>
+                `;
+
+                lista.forEach(item => {
+                    cardHtml += `
+                        <div class="flex justify-between items-center p-2 rounded-lg bg-gray-950/80 text-xs">
+                            <div>
+                                <p class="font-semibold text-white">${item.desc}</p>
+                                <p class="text-gray-400">${item.cartao} - R$ ${item.valor.toFixed(2)}</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <label class="flex items-center gap-1.5 cursor-pointer">
+                                    <input type="checkbox" ${item.pago ? 'checked' : ''} onchange="toggleTerceiroPago(${item.id})" class="rounded bg-gray-900 border-gray-700 text-sky-500">
+                                    <span class="text-gray-400">${item.pago ? 'Reembolsado' : 'Pendente'}</span>
+                                </label>
+                                <button onclick="excluirTerceiro(${item.id})" class="text-rose-500 hover:text-rose-400"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                cardHtml += `</div>`;
+                container.innerHTML += cardHtml;
+            }
+        }
+
+        function adicionarReceita(e) {
+            e.preventDefault();
+            const desc = document.getElementById('recDesc').value;
+            const valor = parseFloat(document.getElementById('recValor').value);
+            appState.receitasProprias.push({ id: Date.now(), desc, valor });
+            e.target.reset();
+            renderDashboard();
+        }
+
+        function abrirEditReceita(id) {
+            const rec = appState.receitasProprias.find(r => r.id === id);
+            if (rec) {
+                document.getElementById('editRecId').value = rec.id;
+                document.getElementById('editRecDesc').value = rec.desc;
+                document.getElementById('editRecValor').value = rec.valor;
+                document.getElementById('modalEditReceita').classList.remove('hidden');
+            }
+        }
+
+        function fecharModalEditReceita() {
+            document.getElementById('modalEditReceita').classList.add('hidden');
+        }
+
+        function salvarEdicaoReceita(e) {
+            e.preventDefault();
+            const id = parseInt(document.getElementById('editRecId').value);
+            const desc = document.getElementById('editRecDesc').value;
+            const valor = parseFloat(document.getElementById('editRecValor').value);
+
+            let rec = appState.receitasProprias.find(r => r.id === id);
+            if (rec) {
+                rec.desc = desc;
+                rec.valor = valor;
+            }
+
+            fecharModalEditReceita();
+            renderDashboard();
+        }
+
+        function excluirReceita(id) {
+            appState.receitasProprias = appState.receitasProprias.filter(r => r.id !== id);
+            renderDashboard();
+        }
+
+        function adicionarTerceiro(e) {
+            e.preventDefault();
+            const nome = document.getElementById('tercNome').value;
+            const desc = document.getElementById('tercDesc').value;
+            const valor = parseFloat(document.getElementById('tercValor').value);
+            const cartao = document.getElementById('tercCartao').value;
+            appState.terceiros.push({ id: Date.now(), nome, desc, valor, cartao, pago: false, mes: appState.mesAtivo });
+            e.target.reset();
+            renderDashboard();
+        }
+
+        function toggleTerceiroPago(id) {
+            let terc = appState.terceiros.find(t => t.id === id);
+            if (terc) {
+                terc.pago = !terc.pago;
+                renderDashboard();
+            }
+        }
+
+        function excluirTerceiro(id) {
+            appState.terceiros = appState.terceiros.filter(t => t.id !== id);
+            renderDashboard();
+        }
+
+        // LANÇAMENTOS E REGRAS DE FECHAMENTO
+        function salvarCompra(e) {
+            e.preventDefault();
+            const desc = document.getElementById('compraDesc').value;
+            const cartaoNome = document.getElementById('compraCartao').value;
+            const dataStr = document.getElementById('compraData').value;
+            const valorTotal = parseFloat(document.getElementById('compraValor').value);
+            const numParcelas = parseInt(document.getElementById('compraParcelas').value);
+
+            const cartaoObj = appState.cartoes.find(c => c.nome === cartaoNome);
+            const diaFechamento = cartaoObj ? cartaoObj.fechamento : 25;
+
+            const partesData = dataStr.split('-');
+            const diaCompra = parseInt(partesData[2]);
+            const mesCompraIdx = parseInt(partesData[1]) - 1;
+
+            let mesInicioIdx = (diaCompra > diaFechamento) ? (mesCompraIdx + 2) % 12 : (mesCompraIdx + 1) % 12;
+            const valorParcela = valorTotal / numParcelas;
+
+            for (let i = 0; i < numParcelas; i++) {
+                let targetMesSigla = MESES[(mesInicioIdx + i) % 12];
+                if (!appState.faturasIniciais[targetMesSigla]) appState.faturasIniciais[targetMesSigla] = {};
+                if (!appState.faturasIniciais[targetMesSigla][cartaoNome]) {
+                    appState.faturasIniciais[targetMesSigla][cartaoNome] = { valor: 0, pago: false };
+                }
+                appState.faturasIniciais[targetMesSigla][cartaoNome].valor += valorParcela;
+            }
+
+            appState.comprasBase.push({
+                data: dataStr, desc, cartao: cartaoNome, valor: valorTotal, parcelas: numParcelas, parceladoValor: valorParcela
+            });
+
+            alert(`Compra cadastrada! Fechamento do cartão no dia ${diaFechamento}.`);
+            e.target.reset();
+            renderDashboard();
+            showSection('dashboard');
+        }
+
+        function cadastrarCartao(e) {
+            e.preventDefault();
+            const nome = document.getElementById('cardNome').value;
+            const fechamento = parseInt(document.getElementById('cardFechamento').value);
+            const vencimento = parseInt(document.getElementById('cardVencimento').value);
+
+            appState.cartoes.push({ id: Date.now(), nome, fechamento, vencimento });
+            e.target.reset();
+            atualizarDropdownsCartoes();
+            renderDashboard();
+        }
+
+        function renderAdminCartoes() {
+            const tbody = document.getElementById('tbodyAdminCartoes');
+            tbody.innerHTML = '';
+            appState.cartoes.forEach(c => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-800/40 transition">
+                        <td class="py-3 px-4 font-bold text-white">${c.nome}</td>
+                        <td class="py-3 px-4 text-sky-400">Dia ${c.fechamento}</td>
+                        <td class="py-3 px-4 text-gray-300">Dia ${c.vencimento}</td>
+                        <td class="py-3 px-4 text-center">
+                            <button onclick="removerCartao(${c.id})" class="text-xs bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 px-3 py-1 rounded-lg">Excluir</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function removerCartao(id) {
+            appState.cartoes = appState.cartoes.filter(c => c.id !== id);
+            atualizarDropdownsCartoes();
+            renderDashboard();
+        }
+
+        function renderBaseDados() {
+            const tbody = document.getElementById('tbodyBaseDados');
+            tbody.innerHTML = '';
+            appState.comprasBase.forEach(c => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-800/40 transition">
+                        <td class="py-2.5 px-3">${c.data}</td>
+                        <td class="py-2.5 px-3 font-medium text-white">${c.desc}</td>
+                        <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800/50">${c.cartao}</span></td>
+                        <td class="py-2.5 px-3 font-semibold">R$ ${c.valor.toFixed(2)}</td>
+                        <td class="py-2.5 px-3">${c.parcelas}x</td>
+                        <td class="py-2.5 px-3 text-emerald-400">R$ ${c.parceladoValor.toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function renderProjecaoAnual() {
+            const list = document.getElementById('listProjecaoAnual');
+            list.innerHTML = '';
+            MESES.forEach(m => {
+                let faturas = appState.faturasIniciais[m] || {};
+                let totalM = Object.values(faturas).reduce((acc, curr) => acc + curr.valor, 0);
+                const isCurrent = m === appState.mesAtivo;
+                list.innerHTML += `
+                    <div class="flex justify-between items-center p-3 rounded-xl ${isCurrent ? 'bg-sky-950/60 border border-sky-700/60' : 'bg-gray-900 border border-gray-800/60'}">
+                        <span class="text-sm font-bold ${isCurrent ? 'text-sky-300' : 'text-gray-400'}">${m}</span>
+                        <span class="text-sm font-extrabold ${isCurrent ? 'text-sky-200' : 'text-gray-200'}">R$ ${totalM.toFixed(2)}</span>
+                    </div>
+                `;
+            });
+        }
+
+        function processarPDF(e) {
+            const status = document.getElementById('pdfStatus');
+            status.classList.remove('hidden');
+            setTimeout(() => {
+                status.textContent = "Fatura em PDF lida e processada com sucesso!";
+                renderDashboard();
+            }, 1200);
+        }
+
+        window.onload = function() {
+            atualizarDropdownsCartoes();
+            renderDashboard();
+        };
+    </script>
+</body>
+</html>
