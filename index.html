@@ -81,7 +81,7 @@
             <div class="text-center space-y-2">
                 <!-- Imagem no lugar do D no Login -->
                 <div class="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center overflow-hidden shadow-neon-blue bg-gray-900 border border-sky-800">
-                    <img src="icon.png" alt="DESPAG" class="w-full h-full object-cover">
+                    <img src="icon.png" alt="DESPAG" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%230284c7\'/><text x=\'50\' y=\'68\' font-size=\'55\' font-weight=\'900\' fill=\'white\' text-anchor=\'middle\'>D</text></svg>'">
                 </div>
                 <h2 class="text-2xl font-black text-white tracking-wider">DESPAG</h2>
                 <p class="text-xs text-sky-400">Acesso Restrito ao Sistema Financeiro</p>
@@ -117,9 +117,9 @@
         <div>
             <div class="p-5 flex items-center justify-between border-b border-gray-800">
                 <div class="flex items-center gap-3">
-                    <!-- Imagem no lugar do D na Sidebar -->
+                    <!-- Imagem na Sidebar -->
                     <div class="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center shadow-neon-blue bg-gray-900 border border-sky-800">
-                        <img src="icon.png" alt="DESPAG" class="w-full h-full object-cover">
+                        <img src="icon.png" alt="DESPAG" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%230284c7\'/><text x=\'50\' y=\'68\' font-size=\'55\' font-weight=\'900\' fill=\'white\' text-anchor=\'middle\'>D</text></svg>'">
                     </div>
                     <div>
                         <h1 class="text-2xl font-black tracking-wider text-white">DESPAG</h1>
@@ -151,7 +151,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v2.9</span>
+            <span>DESPAG v3.0</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -294,18 +294,46 @@
                     <div class="space-y-2 mt-4" id="listReceitasProprias"></div>
                 </div>
 
-                <!-- Receita de Terceiros -->
+                <!-- Receita de Terceiros (Cartão Compartilhado - Parcelado) -->
                 <div class="neon-card p-6 rounded-2xl space-y-4">
                     <h3 class="text-lg font-bold text-sky-400 border-b border-gray-800 pb-3">Receita de Terceiros (Cartão Compartilhado)</h3>
                     
                     <form onsubmit="adicionarTerceiro(event)" class="space-y-3">
-                        <input type="text" id="tercNome" placeholder="Nome da Pessoa (Ex: Andrielly)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
-                        <input type="text" id="tercDesc" placeholder="Descrição da Despesa" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                        <input type="text" id="tercNome" placeholder="Nome da Pessoa (Ex: Ivo)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                        <input type="text" id="tercDesc" placeholder="Descrição da Despesa (Ex: Compra de Eletrônicos)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                        
                         <div class="grid grid-cols-2 gap-3">
-                            <input type="number" step="0.01" id="tercValor" placeholder="Valor R$" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                            <input type="number" step="0.01" id="tercValorTotal" placeholder="Valor Total (R$)" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
                             <select id="tercCartao" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required></select>
                         </div>
-                        <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white py-3 rounded-xl font-bold text-sm">Adicionar Cobrança</button>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-400 mb-1">Nº de Parcelas</label>
+                                <input type="number" id="tercParcelas" min="1" value="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-400 mb-1">Mês de Início</label>
+                                <select id="tercMesInicio" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                                    <option value="JAN">Janeiro</option>
+                                    <option value="FEV">Fevereiro</option>
+                                    <option value="MAR">Março</option>
+                                    <option value="ABR">Abril</option>
+                                    <option value="MAI">Maio</option>
+                                    <option value="JUN">Junho</option>
+                                    <option value="JUL">Julho</option>
+                                    <option value="AGO">Agosto</option>
+                                    <option value="SET">Setembro</option>
+                                    <option value="OUT" selected>Outubro</option>
+                                    <option value="NOV">Novembro</option>
+                                    <option value="DEZ">Dezembro</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white py-3.5 rounded-xl font-bold text-sm shadow-neon-blue transition">
+                            Adicionar Cobrança
+                        </button>
                     </form>
 
                     <div id="containerTerceiros" class="space-y-3 mt-4"></div>
@@ -419,11 +447,25 @@
             },
             receitasProprias: [
                 { id: 1, desc: "Salário Base", valor: 3600.00 },
-                { id: 2, desc: "Renda Extra / Proventos", valor: 3739.05 }
+                { id: 2, desc: "Renda Extra / Aluguel Garagem", valor: 100.00 }
             ],
-            terceiros: [
-                { id: 1, nome: "Andrielly", desc: "Mensalidade CMT", valor: 126.00, cartao: "CMT I Andrielly", pago: false, mes: "OUT" },
-                { id: 2, nome: "Guilherme", desc: "Mensalidade CMT", valor: 316.00, cartao: "CMT I Guilherme", pago: false, mes: "OUT" }
+            terceirosGrupos: [
+                {
+                    id: 1,
+                    nome: "Ivo",
+                    desc: "Parcelamento 5X",
+                    cartao: "Nubank Neudson",
+                    valorTotal: 2800.00,
+                    numParcelas: 5,
+                    mesInicio: "OUT",
+                    parcelas: [
+                        { mes: "OUT", numero: 1, valor: 560.00, pago: false },
+                        { mes: "NOV", numero: 2, valor: 560.00, pago: false },
+                        { mes: "DEZ", numero: 3, valor: 560.00, pago: false },
+                        { mes: "JAN", numero: 4, valor: 560.00, pago: false },
+                        { mes: "FEV", numero: 5, valor: 560.00, pago: false }
+                    ]
+                }
             ],
             comprasBase: []
         };
@@ -505,7 +547,16 @@
             appState.mesAtivo = mes;
 
             let totalReceitasProprias = appState.receitasProprias.reduce((a, b) => a + b.valor, 0);
-            let totalTerceirosMes = appState.terceiros.filter(t => t.mes === mes).reduce((a, b) => a + b.valor, 0);
+            
+            // Somar parcelas de terceiros para o mês ativo
+            let totalTerceirosMes = 0;
+            if (appState.terceirosGrupos) {
+                appState.terceirosGrupos.forEach(grupo => {
+                    let parcMes = grupo.parcelas.find(p => p.mes === mes);
+                    if (parcMes) totalTerceirosMes += parcMes.valor;
+                });
+            }
+
             let totalReceitaGeral = totalReceitasProprias + totalTerceirosMes;
 
             let dadosFaturas = appState.faturasIniciais[mes] || {};
@@ -560,7 +611,7 @@
             renderDashboard();
         }
 
-        // OPERAÇÕES DE RECEITAS PRÓPRIAS (ADICIONAR, EDITAR, EXCLUIR)
+        // OPERAÇÕES DE RECEITAS PRÓPRIAS
         function renderReceitasETerceiros() {
             const listP = document.getElementById('listReceitasProprias');
             listP.innerHTML = '';
@@ -577,48 +628,62 @@
                 `;
             });
 
-            // TERCEIROS AGRUPADOS
+            // TERCEIROS AGRUPADOS (PARCELADO POR MÊS ATIVO)
             const container = document.getElementById('containerTerceiros');
             container.innerHTML = '';
             let mes = appState.mesAtivo;
-            let cobrancasMes = appState.terceiros.filter(t => t.mes === mes);
-            let pessoasMap = {};
 
-            cobrancasMes.forEach(c => {
-                if (!pessoasMap[c.nome]) pessoasMap[c.nome] = [];
-                pessoasMap[c.nome].push(c);
-            });
+            if (!appState.terceirosGrupos) appState.terceirosGrupos = [];
 
-            if (Object.keys(pessoasMap).length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-500">Nenhuma cobrança de terceiro para este mês.</p>`;
+            // Filtrar grupos que possuem parcela no mês selecionado
+            let gruposDoMes = appState.terceirosGrupos.filter(g => g.parcelas.some(p => p.mes === mes));
+
+            if (gruposDoMes.length === 0) {
+                container.innerHTML = `<p class="text-xs text-gray-500">Nenhuma cobrança de terceiro registrada para ${mes}.</p>`;
                 return;
             }
 
+            // Agrupar por Nome da Pessoa para o mês selecionado
+            let pessoasMap = {};
+            gruposDoMes.forEach(g => {
+                if (!pessoasMap[g.nome]) pessoasMap[g.nome] = [];
+                let parcelaDoMes = g.parcelas.find(p => p.mes === mes);
+                pessoasMap[g.nome].push({ grupo: g, parcela: parcelaDoMes });
+            });
+
             for (let pessoa in pessoasMap) {
-                let lista = pessoasMap[pessoa];
-                let totalPessoa = lista.reduce((sum, item) => sum + item.valor, 0);
+                let itensPessoa = pessoasMap[pessoa];
+                let totalPessoaMes = itensPessoa.reduce((sum, item) => sum + item.parcela.valor, 0);
 
                 let cardHtml = `
                     <div class="p-4 rounded-xl bg-gray-900 border border-gray-800 space-y-3">
                         <div class="flex justify-between items-center border-b border-gray-800 pb-2">
-                            <h4 class="font-bold text-white text-sm"><i class="fa-solid fa-user text-sky-400 mr-1"></i> ${pessoa}</h4>
-                            <span class="text-xs bg-sky-950 text-sky-300 px-2.5 py-1 rounded-md font-bold border border-sky-800/50">TOTAL: R$ ${totalPessoa.toFixed(2)}</span>
+                            <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-user text-sky-400"></i> ${pessoa}
+                            </h4>
+                            <span class="text-xs bg-sky-950 text-sky-300 px-2.5 py-1 rounded-md font-bold border border-sky-800/50">
+                                TOTAL MÊS (${mes}): R$ ${totalPessoaMes.toFixed(2)}
+                            </span>
                         </div>
                 `;
 
-                lista.forEach(item => {
+                itensPessoa.forEach(item => {
+                    let g = item.grupo;
+                    let p = item.parcela;
+                    let infoParcela = g.numParcelas > 1 ? ` (Parc. ${p.numero}/${g.numParcelas})` : '';
+
                     cardHtml += `
-                        <div class="flex justify-between items-center p-2 rounded-lg bg-gray-950/80 text-xs">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 rounded-lg bg-gray-950/80 text-xs gap-2">
                             <div>
-                                <p class="font-semibold text-white">${item.desc}</p>
-                                <p class="text-gray-400">${item.cartao} - R$ ${item.valor.toFixed(2)}</p>
+                                <p class="font-bold text-white">${g.desc}${infoParcela}</p>
+                                <p class="text-gray-400">${g.cartao} - Total R$ ${g.valorTotal.toFixed(2)} | Parcela: <span class="text-emerald-400 font-semibold">R$ ${p.valor.toFixed(2)}</span></p>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <label class="flex items-center gap-1.5 cursor-pointer">
-                                    <input type="checkbox" ${item.pago ? 'checked' : ''} onchange="toggleTerceiroPago(${item.id})" class="rounded bg-gray-900 border-gray-700 text-sky-500">
-                                    <span class="text-gray-400">${item.pago ? 'Reembolsado' : 'Pendente'}</span>
+                            <div class="flex items-center gap-3 self-end sm:self-center">
+                                <label class="flex items-center gap-1.5 cursor-pointer bg-gray-900 px-2.5 py-1 rounded-md border border-gray-800">
+                                    <input type="checkbox" ${p.pago ? 'checked' : ''} onchange="toggleTerceiroParcelaPago(${g.id}, '${mes}')" class="rounded bg-gray-900 border-gray-700 text-sky-500 cursor-pointer">
+                                    <span class="${p.pago ? 'text-emerald-400 font-bold' : 'text-gray-400'}">${p.pago ? 'Reembolsado' : 'Pendente'}</span>
                                 </label>
-                                <button onclick="excluirTerceiro(${item.id})" class="text-rose-500 hover:text-rose-400"><i class="fa-solid fa-trash"></i></button>
+                                <button onclick="excluirTerceiroGrupo(${g.id})" class="text-rose-500 hover:text-rose-400 p-1" title="Excluir cobrança inteira"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </div>
                     `;
@@ -673,31 +738,67 @@
             renderDashboard();
         }
 
+        // LANÇAR / GERENCIAR RECEITA DE TERCEIROS (PARCELADO)
         function adicionarTerceiro(e) {
             e.preventDefault();
             const nome = document.getElementById('tercNome').value;
             const desc = document.getElementById('tercDesc').value;
-            const valor = parseFloat(document.getElementById('tercValor').value);
+            const valorTotal = parseFloat(document.getElementById('tercValorTotal').value);
             const cartao = document.getElementById('tercCartao').value;
-            appState.terceiros.push({ id: Date.now(), nome, desc, valor, cartao, pago: false, mes: appState.mesAtivo });
+            const numParcelas = parseInt(document.getElementById('tercParcelas').value) || 1;
+            const mesInicio = document.getElementById('tercMesInicio').value;
+
+            const valorParcela = valorTotal / numParcelas;
+            const idxInicio = MESES.indexOf(mesInicio);
+
+            let parcelas = [];
+            for (let i = 0; i < numParcelas; i++) {
+                let mesTarget = MESES[(idxInicio + i) % 12];
+                parcelas.push({
+                    mes: mesTarget,
+                    numero: i + 1,
+                    valor: valorParcela,
+                    pago: false
+                });
+            }
+
+            if (!appState.terceirosGrupos) appState.terceirosGrupos = [];
+
+            appState.terceirosGrupos.push({
+                id: Date.now(),
+                nome,
+                desc,
+                cartao,
+                valorTotal,
+                numParcelas,
+                mesInicio,
+                parcelas
+            });
+
             e.target.reset();
+            document.getElementById('tercParcelas').value = 1;
             renderDashboard();
         }
 
-        function toggleTerceiroPago(id) {
-            let terc = appState.terceiros.find(t => t.id === id);
-            if (terc) {
-                terc.pago = !terc.pago;
+        function toggleTerceiroParcelaPago(grupoId, mes) {
+            let grupo = appState.terceirosGrupos.find(g => g.id === grupoId);
+            if (grupo) {
+                let parc = grupo.parcelas.find(p => p.mes === mes);
+                if (parc) {
+                    parc.pago = !parc.pago;
+                    renderDashboard();
+                }
+            }
+        }
+
+        function excluirTerceiroGrupo(id) {
+            if (confirm("Deseja realmente excluir esta cobrança de terceiro e todas as suas parcelas?")) {
+                appState.terceirosGrupos = appState.terceirosGrupos.filter(g => g.id !== id);
                 renderDashboard();
             }
         }
 
-        function excluirTerceiro(id) {
-            appState.terceiros = appState.terceiros.filter(t => t.id !== id);
-            renderDashboard();
-        }
-
-        // LANÇAMENTOS E REGRAS DE FECHAMENTO
+        // LANÇAMENTOS DE COMPRAS E REGRAS DE FECHAMENTO
         function salvarCompra(e) {
             e.preventDefault();
             const desc = document.getElementById('compraDesc').value;
