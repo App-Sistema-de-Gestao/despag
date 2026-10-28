@@ -79,7 +79,6 @@
     <div id="loginOverlay" class="fixed inset-0 bg-darkbg z-[100] flex items-center justify-center p-4 hidden">
         <div class="neon-card w-full max-w-md p-8 rounded-2xl space-y-6 border border-sky-900/50 shadow-neon-blue">
             <div class="text-center space-y-2">
-                <!-- Imagem no lugar do D no Login -->
                 <div class="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center overflow-hidden shadow-neon-blue bg-gray-900 border border-sky-800">
                     <img src="icon.png" alt="DESPAG" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%230284c7\'/><text x=\'50\' y=\'68\' font-size=\'55\' font-weight=\'900\' fill=\'white\' text-anchor=\'middle\'>D</text></svg>'">
                 </div>
@@ -117,7 +116,6 @@
         <div>
             <div class="p-5 flex items-center justify-between border-b border-gray-800">
                 <div class="flex items-center gap-3">
-                    <!-- Imagem na Sidebar -->
                     <div class="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center shadow-neon-blue bg-gray-900 border border-sky-800">
                         <img src="icon.png" alt="DESPAG" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%230284c7\'/><text x=\'50\' y=\'68\' font-size=\'55\' font-weight=\'900\' fill=\'white\' text-anchor=\'middle\'>D</text></svg>'">
                     </div>
@@ -142,7 +140,7 @@
                     <i class="fa-solid fa-hand-holding-dollar text-sky-400"></i> Receitas & Terceiros
                 </a>
                 <a href="#" onclick="showSection('admin-cartoes')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-medium group">
-                    <i class="fa-solid fa-credit-card text-sky-400"></i> Admin de Cartões
+                    <i class="fa-solid fa-credit-card text-sky-400"></i> Admin Cartões/Despesas
                 </a>
                 <a href="#" onclick="showSection('base-dados')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-medium group">
                     <i class="fa-solid fa-database text-sky-400"></i> Base de Dados
@@ -151,7 +149,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v3.0</span>
+            <span>DESPAG v3.1</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -198,7 +196,7 @@
                 <div class="neon-card p-6 rounded-2xl">
                     <span class="text-xs font-semibold text-gray-400 uppercase">Total Receitas do Mês</span>
                     <h3 class="text-3xl font-extrabold text-emerald-400 mt-2" id="dashTotalReceita">R$ 0,00</h3>
-                    <p class="text-xs text-gray-500 mt-3">Receitas Próprias + Reembolsos Terceiros</p>
+                    <p class="text-xs text-gray-500 mt-3">Somente Receitas Próprias</p>
                 </div>
 
                 <div class="neon-card p-6 rounded-2xl">
@@ -294,13 +292,13 @@
                     <div class="space-y-2 mt-4" id="listReceitasProprias"></div>
                 </div>
 
-                <!-- Receita de Terceiros (Cartão Compartilhado - Parcelado) -->
+                <!-- Receita de Terceiros (Cartão Compartilhado) -->
                 <div class="neon-card p-6 rounded-2xl space-y-4">
                     <h3 class="text-lg font-bold text-sky-400 border-b border-gray-800 pb-3">Receita de Terceiros (Cartão Compartilhado)</h3>
                     
                     <form onsubmit="adicionarTerceiro(event)" class="space-y-3">
                         <input type="text" id="tercNome" placeholder="Nome da Pessoa (Ex: Ivo)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
-                        <input type="text" id="tercDesc" placeholder="Descrição da Despesa (Ex: Compra de Eletrônicos)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                        <input type="text" id="tercDesc" placeholder="Descrição da Despesa" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
                         
                         <div class="grid grid-cols-2 gap-3">
                             <input type="number" step="0.01" id="tercValorTotal" placeholder="Valor Total (R$)" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
@@ -341,23 +339,23 @@
             </div>
         </section>
 
-        <!-- ADMIN DE CARTÕES -->
+        <!-- ADMIN DE CARTÕES / DESPESAS FIXAS -->
         <section id="section-admin-cartoes" class="app-section space-y-6 hidden">
             <div class="neon-card p-6 rounded-2xl space-y-6">
-                <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Admin de Cartões & Dias de Fechamento</h3>
+                <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Admin de Cartões/Despesas Fixas & Dias de Fechamento</h3>
                 
                 <form onsubmit="cadastrarCartao(event)" class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                    <input type="text" id="cardNome" class="sm:col-span-2 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Nome do Cartão" required>
+                    <input type="text" id="cardNome" class="sm:col-span-2 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Nome do Cartão ou Despesa Fixa" required>
                     <input type="number" id="cardFechamento" min="1" max="31" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Dia Fechamento" required>
                     <input type="number" id="cardVencimento" min="1" max="31" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Dia Vencimento" required>
-                    <button type="submit" class="sm:col-span-4 py-3 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl">Cadastrar Cartão</button>
+                    <button type="submit" class="sm:col-span-4 py-3 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-neon-blue">Cadastrar Cartões/Despesas Fixas</button>
                 </form>
 
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm text-gray-300">
                         <thead class="bg-gray-900 text-xs uppercase text-gray-400 border-b border-gray-800">
                             <tr>
-                                <th class="py-3 px-4">Cartão</th>
+                                <th class="py-3 px-4">Cartão / Despesa</th>
                                 <th class="py-3 px-4">Fechamento</th>
                                 <th class="py-3 px-4">Vencimento</th>
                                 <th class="py-3 px-4 text-center">Ações</th>
@@ -369,7 +367,7 @@
             </div>
         </section>
 
-        <!-- BASE DE DADOS -->
+        <!-- BASE DE DADOS GERAL (COM BOTÕES DE EDITAR E EXCLUIR) -->
         <section id="section-base-dados" class="app-section space-y-6 hidden">
             <div class="neon-card p-6 rounded-2xl space-y-4">
                 <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Base de Dados Geral</h3>
@@ -379,10 +377,11 @@
                             <tr>
                                 <th class="py-3 px-3">Data</th>
                                 <th class="py-3 px-3">Descrição</th>
-                                <th class="py-3 px-3">Cartão</th>
+                                <th class="py-3 px-3">Cartão / Conta</th>
                                 <th class="py-3 px-3">Valor Total</th>
                                 <th class="py-3 px-3">Parc.</th>
                                 <th class="py-3 px-3">Valor Parc.</th>
+                                <th class="py-3 px-3 text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody id="tbodyBaseDados" class="divide-y divide-gray-800"></tbody>
@@ -391,6 +390,48 @@
             </div>
         </section>
 
+    </div>
+
+    <!-- MODAL DE EDIÇÃO DE COMPRA DA BASE DE DADOS -->
+    <div id="modalEditCompra" class="fixed inset-0 bg-black/80 z-[90] hidden flex items-center justify-center p-4">
+        <div class="neon-card w-full max-w-md p-6 rounded-2xl space-y-4 border border-sky-800 shadow-neon-blue">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+                <h4 class="font-bold text-white text-lg"><i class="fa-solid fa-pen-to-square text-sky-400"></i> Editar Compra Registrada</h4>
+                <button onclick="fecharModalEditCompra()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            
+            <form onsubmit="salvarEdicaoCompra(event)" class="space-y-4">
+                <input type="hidden" id="editCompraId">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Descrição</label>
+                    <input type="text" id="editCompraDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1">Cartão / Conta</label>
+                        <select id="editCompraCartao" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required></select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1">Data</label>
+                        <input type="date" id="editCompraData" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1">Valor Total (R$)</label>
+                        <input type="number" step="0.01" id="editCompraValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1">Parcelas</label>
+                        <input type="number" id="editCompraParcelas" min="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button type="button" onclick="fecharModalEditCompra()" class="w-1/2 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold rounded-xl">Cancelar</button>
+                    <button type="submit" class="w-1/2 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-neon-blue">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- MODAL DE EDIÇÃO DE RECEITA PRÓPRIA -->
@@ -432,19 +473,10 @@
                 { id: 4, nome: "99Pay", fechamento: 20, vencimento: 1 },
                 { id: 5, nome: "Cartão Recarga PAY", fechamento: 28, vencimento: 6 },
                 { id: 6, nome: "CMT I Andrielly", fechamento: 25, vencimento: 5 },
-                { id: 7, nome: "CMT I Guilherme", fechamento: 25, vencimento: 5 }
+                { id: 7, nome: "CMT I Guilherme", fechamento: 25, vencimento: 5 },
+                { id: 8, nome: "Natação", fechamento: 10, vencimento: 10 }
             ],
-            faturasIniciais: {
-                "OUT": {
-                    "Nubank Neudson": { valor: 613.89, pago: false },
-                    "Nubank Edilene": { valor: 4538.91, pago: false },
-                    "Visa Bradesco": { valor: 51.86, pago: false },
-                    "99Pay": { valor: 1092.81, pago: false },
-                    "CMT I Andrielly": { valor: 126.00, pago: false },
-                    "CMT I Guilherme": { valor: 316.00, pago: false },
-                    "Cartão Recarga PAY": { valor: 1384.19, pago: false }
-                }
-            },
+            faturasIniciais: {},
             receitasProprias: [
                 { id: 1, desc: "Salário Base", valor: 3600.00 },
                 { id: 2, desc: "Renda Extra / Aluguel Garagem", valor: 100.00 }
@@ -467,13 +499,55 @@
                     ]
                 }
             ],
-            comprasBase: []
+            comprasBase: [
+                { id: 1700000000001, data: "2026-08-10", desc: "Pix para o professor Durval", cartao: "Natação", valor: 120.00, parcelas: 12, parceladoValor: 10.00 }
+            ]
         };
 
         let appState = JSON.parse(localStorage.getItem('DESPAG_STATE')) || estadoPadrao;
 
         function salvarEstado() {
             localStorage.setItem('DESPAG_STATE', JSON.stringify(appState));
+        }
+
+        // RECALCULAR FATURAS COM BASE NAS COMPRAS REGISTRADAS
+        function recalcularFaturasGerais() {
+            let faturasCalculadas = {};
+
+            if (appState.comprasBase) {
+                appState.comprasBase.forEach(compra => {
+                    const cartaoObj = appState.cartoes.find(c => c.nome === compra.cartao);
+                    const diaFechamento = cartaoObj ? cartaoObj.fechamento : 25;
+
+                    const partesData = compra.data.split('-');
+                    const diaCompra = parseInt(partesData[2]);
+                    const mesCompraIdx = parseInt(partesData[1]) - 1;
+
+                    let mesInicioIdx = (diaCompra > diaFechamento) ? (mesCompraIdx + 2) % 12 : (mesCompraIdx + 1) % 12;
+                    const valorParcela = compra.valor / compra.parcelas;
+
+                    for (let i = 0; i < compra.parcelas; i++) {
+                        let targetMesSigla = MESES[(mesInicioIdx + i) % 12];
+                        if (!faturasCalculadas[targetMesSigla]) faturasCalculadas[targetMesSigla] = {};
+                        if (!faturasCalculadas[targetMesSigla][compra.cartao]) {
+                            faturasCalculadas[targetMesSigla][compra.cartao] = { valor: 0, pago: false };
+                        }
+                        faturasCalculadas[targetMesSigla][compra.cartao].valor += valorParcela;
+                    }
+                });
+            }
+
+            // Preservar o status "pago" que o usuário já tenha marcado anteriormente
+            for (let m in faturasCalculadas) {
+                if (!appState.faturasIniciais[m]) appState.faturasIniciais[m] = {};
+                for (let c in faturasCalculadas[m]) {
+                    let foiPago = (appState.faturasIniciais[m][c] && appState.faturasIniciais[m][c].pago) || false;
+                    appState.faturasIniciais[m][c] = {
+                        valor: faturasCalculadas[m][c].valor,
+                        pago: foiPago
+                    };
+                }
+            }
         }
 
         // VERIFICAR SESSÃO AO CARREGAR A PÁGINA
@@ -528,7 +602,11 @@
         }
 
         function atualizarDropdownsCartoes() {
-            const selects = [document.getElementById('compraCartao'), document.getElementById('tercCartao')];
+            const selects = [
+                document.getElementById('compraCartao'), 
+                document.getElementById('tercCartao'),
+                document.getElementById('editCompraCartao')
+            ];
             selects.forEach(select => {
                 if (!select) return;
                 select.innerHTML = '';
@@ -543,21 +621,13 @@
 
         // DASHBOARD & REGRAS FINANCEIRAS
         function renderDashboard() {
+            recalcularFaturasGerais();
+
             const mes = document.getElementById('selectMes').value;
             appState.mesAtivo = mes;
 
+            // REGRA ATUALIZADA: Somente receitas próprias (sem adicionais de terceiros)
             let totalReceitasProprias = appState.receitasProprias.reduce((a, b) => a + b.valor, 0);
-            
-            // Somar parcelas de terceiros para o mês ativo
-            let totalTerceirosMes = 0;
-            if (appState.terceirosGrupos) {
-                appState.terceirosGrupos.forEach(grupo => {
-                    let parcMes = grupo.parcelas.find(p => p.mes === mes);
-                    if (parcMes) totalTerceirosMes += parcMes.valor;
-                });
-            }
-
-            let totalReceitaGeral = totalReceitasProprias + totalTerceirosMes;
 
             let dadosFaturas = appState.faturasIniciais[mes] || {};
             let tbody = document.getElementById('tbodyDashboard');
@@ -588,9 +658,9 @@
                 tbody.appendChild(tr);
             });
 
-            let saldoFinal = totalReceitaGeral - totalDebitosPendentes;
+            let saldoFinal = totalReceitasProprias - totalDebitosPendentes;
 
-            document.getElementById('dashTotalReceita').textContent = `R$ ${totalReceitaGeral.toFixed(2)}`;
+            document.getElementById('dashTotalReceita').textContent = `R$ ${totalReceitasProprias.toFixed(2)}`;
             document.getElementById('dashTotalDebitos').textContent = `R$ ${totalDebitosPendentes.toFixed(2)}`;
             document.getElementById('dashSaldo').textContent = `R$ ${saldoFinal.toFixed(2)}`;
 
@@ -628,14 +698,13 @@
                 `;
             });
 
-            // TERCEIROS AGRUPADOS (PARCELADO POR MÊS ATIVO)
+            // TERCEIROS AGRUPADOS
             const container = document.getElementById('containerTerceiros');
             container.innerHTML = '';
             let mes = appState.mesAtivo;
 
             if (!appState.terceirosGrupos) appState.terceirosGrupos = [];
 
-            // Filtrar grupos que possuem parcela no mês selecionado
             let gruposDoMes = appState.terceirosGrupos.filter(g => g.parcelas.some(p => p.mes === mes));
 
             if (gruposDoMes.length === 0) {
@@ -643,7 +712,6 @@
                 return;
             }
 
-            // Agrupar por Nome da Pessoa para o mês selecionado
             let pessoasMap = {};
             gruposDoMes.forEach(g => {
                 if (!pessoasMap[g.nome]) pessoasMap[g.nome] = [];
@@ -738,7 +806,6 @@
             renderDashboard();
         }
 
-        // LANÇAR / GERENCIAR RECEITA DE TERCEIROS (PARCELADO)
         function adicionarTerceiro(e) {
             e.preventDefault();
             const nome = document.getElementById('tercNome').value;
@@ -792,13 +859,13 @@
         }
 
         function excluirTerceiroGrupo(id) {
-            if (confirm("Deseja realmente excluir esta cobrança de terceiro e todas as suas parcelas?")) {
+            if (confirm("Deseja realmente excluir esta cobrança de terceiro?")) {
                 appState.terceirosGrupos = appState.terceirosGrupos.filter(g => g.id !== id);
                 renderDashboard();
             }
         }
 
-        // LANÇAMENTOS DE COMPRAS E REGRAS DE FECHAMENTO
+        // LANÇAMENTOS DE COMPRAS
         function salvarCompra(e) {
             e.preventDefault();
             const desc = document.getElementById('compraDesc').value;
@@ -807,30 +874,20 @@
             const valorTotal = parseFloat(document.getElementById('compraValor').value);
             const numParcelas = parseInt(document.getElementById('compraParcelas').value);
 
-            const cartaoObj = appState.cartoes.find(c => c.nome === cartaoNome);
-            const diaFechamento = cartaoObj ? cartaoObj.fechamento : 25;
-
-            const partesData = dataStr.split('-');
-            const diaCompra = parseInt(partesData[2]);
-            const mesCompraIdx = parseInt(partesData[1]) - 1;
-
-            let mesInicioIdx = (diaCompra > diaFechamento) ? (mesCompraIdx + 2) % 12 : (mesCompraIdx + 1) % 12;
             const valorParcela = valorTotal / numParcelas;
 
-            for (let i = 0; i < numParcelas; i++) {
-                let targetMesSigla = MESES[(mesInicioIdx + i) % 12];
-                if (!appState.faturasIniciais[targetMesSigla]) appState.faturasIniciais[targetMesSigla] = {};
-                if (!appState.faturasIniciais[targetMesSigla][cartaoNome]) {
-                    appState.faturasIniciais[targetMesSigla][cartaoNome] = { valor: 0, pago: false };
-                }
-                appState.faturasIniciais[targetMesSigla][cartaoNome].valor += valorParcela;
-            }
+            if (!appState.comprasBase) appState.comprasBase = [];
 
             appState.comprasBase.push({
-                data: dataStr, desc, cartao: cartaoNome, valor: valorTotal, parcelas: numParcelas, parceladoValor: valorParcela
+                id: Date.now(),
+                data: dataStr,
+                desc,
+                cartao: cartaoNome,
+                valor: valorTotal,
+                parcelas: numParcelas,
+                parceladoValor: valorParcela
             });
 
-            alert(`Compra cadastrada! Fechamento do cartão no dia ${diaFechamento}.`);
             e.target.reset();
             renderDashboard();
             showSection('dashboard');
@@ -858,7 +915,7 @@
                         <td class="py-3 px-4 text-sky-400">Dia ${c.fechamento}</td>
                         <td class="py-3 px-4 text-gray-300">Dia ${c.vencimento}</td>
                         <td class="py-3 px-4 text-center">
-                            <button onclick="removerCartao(${c.id})" class="text-xs bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 px-3 py-1 rounded-lg">Excluir</button>
+                            <button onclick="removerCartao(${c.id})" class="text-xs bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 px-3 py-1 rounded-lg transition">Excluir</button>
                         </td>
                     </tr>
                 `;
@@ -866,26 +923,90 @@
         }
 
         function removerCartao(id) {
-            appState.cartoes = appState.cartoes.filter(c => c.id !== id);
-            atualizarDropdownsCartoes();
-            renderDashboard();
+            if (confirm("Deseja realmente excluir este cartão / despesa fixa?")) {
+                appState.cartoes = appState.cartoes.filter(c => c.id !== id);
+                atualizarDropdownsCartoes();
+                renderDashboard();
+            }
         }
 
+        // RENDEREIZAÇÃO DA BASE DE DADOS GERAL COM BOTÕES DE EDITAR E EXCLUIR
         function renderBaseDados() {
             const tbody = document.getElementById('tbodyBaseDados');
             tbody.innerHTML = '';
+
+            if (!appState.comprasBase || appState.comprasBase.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="py-4 text-center text-gray-500">Nenhuma compra lançada na base de dados.</td></tr>`;
+                return;
+            }
+
             appState.comprasBase.forEach(c => {
                 tbody.innerHTML += `
                     <tr class="hover:bg-gray-800/40 transition">
-                        <td class="py-2.5 px-3">${c.data}</td>
-                        <td class="py-2.5 px-3 font-medium text-white">${c.desc}</td>
-                        <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800/50">${c.cartao}</span></td>
-                        <td class="py-2.5 px-3 font-semibold">R$ ${c.valor.toFixed(2)}</td>
-                        <td class="py-2.5 px-3">${c.parcelas}x</td>
-                        <td class="py-2.5 px-3 text-emerald-400">R$ ${c.parceladoValor.toFixed(2)}</td>
+                        <td class="py-3 px-3 text-gray-300 font-mono">${c.data}</td>
+                        <td class="py-3 px-3 font-semibold text-white">${c.desc}</td>
+                        <td class="py-3 px-3"><span class="px-2.5 py-1 rounded-md bg-sky-950 text-sky-300 border border-sky-800/50 font-medium">${c.cartao}</span></td>
+                        <td class="py-3 px-3 font-bold text-white">R$ ${c.valor.toFixed(2)}</td>
+                        <td class="py-3 px-3 text-gray-400">${c.parcelas}x</td>
+                        <td class="py-3 px-3 text-emerald-400 font-semibold">R$ ${c.parceladoValor.toFixed(2)}</td>
+                        <td class="py-3 px-3 text-center">
+                            <div class="flex items-center justify-center gap-2">
+                                <button onclick="abrirEditCompra(${c.id})" class="text-xs bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-800 px-2.5 py-1 rounded-lg transition" title="Editar Compra"><i class="fa-solid fa-pen"></i></button>
+                                <button onclick="excluirCompra(${c.id})" class="text-xs bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 px-2.5 py-1 rounded-lg transition" title="Excluir Compra"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </td>
                     </tr>
                 `;
             });
+        }
+
+        // EDIÇÃO E EXCLUSÃO DA BASE DE DADOS GERAL
+        function abrirEditCompra(id) {
+            const compra = appState.comprasBase.find(c => c.id === id);
+            if (compra) {
+                atualizarDropdownsCartoes();
+                document.getElementById('editCompraId').value = compra.id;
+                document.getElementById('editCompraDesc').value = compra.desc;
+                document.getElementById('editCompraCartao').value = compra.cartao;
+                document.getElementById('editCompraData').value = compra.data;
+                document.getElementById('editCompraValor').value = compra.valor;
+                document.getElementById('editCompraParcelas').value = compra.parcelas;
+                document.getElementById('modalEditCompra').classList.remove('hidden');
+            }
+        }
+
+        function fecharModalEditCompra() {
+            document.getElementById('modalEditCompra').classList.add('hidden');
+        }
+
+        function salvarEdicaoCompra(e) {
+            e.preventDefault();
+            const id = parseInt(document.getElementById('editCompraId').value);
+            const desc = document.getElementById('editCompraDesc').value;
+            const cartao = document.getElementById('editCompraCartao').value;
+            const data = document.getElementById('editCompraData').value;
+            const valor = parseFloat(document.getElementById('editCompraValor').value);
+            const parcelas = parseInt(document.getElementById('editCompraParcelas').value);
+
+            let compra = appState.comprasBase.find(c => c.id === id);
+            if (compra) {
+                compra.desc = desc;
+                compra.cartao = cartao;
+                compra.data = data;
+                compra.valor = valor;
+                compra.parcelas = parcelas;
+                compra.parceladoValor = valor / parcelas;
+            }
+
+            fecharModalEditCompra();
+            renderDashboard();
+        }
+
+        function excluirCompra(id) {
+            if (confirm("Deseja realmente excluir este lançamento da Base de Dados?")) {
+                appState.comprasBase = appState.comprasBase.filter(c => c.id !== id);
+                renderDashboard();
+            }
         }
 
         function renderProjecaoAnual() {
