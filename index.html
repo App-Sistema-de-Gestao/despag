@@ -41,6 +41,12 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- PDF.js para leitura automática de faturas PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+    
     <style>
         body {
             background-color: #090d16;
@@ -149,7 +155,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v3.1</span>
+            <span>DESPAG v3.2</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -243,7 +249,7 @@
             </div>
         </main>
 
-        <!-- LANÇAR COMPRA -->
+        <!-- LANÇAR COMPRA / IMPORTAR FATURA PDF -->
         <section id="section-lancamentos" class="app-section space-y-6 hidden">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="neon-card p-6 rounded-2xl space-y-4">
@@ -255,23 +261,32 @@
                             <input type="date" id="compraData" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            <input type="number" step="0.01" id="compraValor" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Valor Total R$" required>
-                            <input type="number" id="compraParcelas" min="1" value="1" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                            <input type="number" step="0.01" id="compraValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Valor Total R$" required>
+                            <input type="number" id="compraParcelas" min="1" value="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
                         </div>
                         <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold rounded-xl shadow-neon-blue">Registrar Compra</button>
                     </form>
                 </div>
 
-                <div class="neon-card p-6 rounded-2xl flex flex-col justify-between">
+                <div class="neon-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
                     <div>
-                        <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Carregar Fatura (PDF)</h3>
-                        <div class="mt-6 border-2 border-dashed border-gray-800 rounded-2xl p-8 text-center bg-gray-900/40 cursor-pointer" onclick="document.getElementById('pdfFileInput').click()">
-                            <i class="fa-solid fa-cloud-arrow-up text-4xl text-sky-400"></i>
-                            <p class="text-sm font-semibold text-gray-200 mt-3">Clique para selecionar o PDF da Fatura</p>
-                            <input type="file" id="pdfFileInput" accept="application/pdf" class="hidden" onchange="processarPDF(event)">
+                        <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Importar e Ler Fatura (PDF)</h3>
+                        <p class="text-xs text-gray-400 mt-2">Selecione o cartão e envie o extrato em PDF da sua fatura para cadastrar todas as compras automaticamente.</p>
+                        
+                        <div class="mt-4 space-y-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-400 mb-1">Selecionar Cartão de Destino</label>
+                                <select id="pdfCartaoDestino" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required></select>
+                            </div>
+
+                            <div class="border-2 border-dashed border-gray-800 rounded-2xl p-6 text-center bg-gray-900/40 cursor-pointer hover:border-sky-500 transition" onclick="document.getElementById('pdfFileInput').click()">
+                                <i class="fa-solid fa-cloud-arrow-up text-3xl text-sky-400"></i>
+                                <p class="text-sm font-semibold text-gray-200 mt-2">Clique para selecionar a Fatura em PDF</p>
+                                <input type="file" id="pdfFileInput" accept="application/pdf" class="hidden" onchange="processarPDFExtrato(event)">
+                            </div>
                         </div>
                     </div>
-                    <div id="pdfStatus" class="hidden p-3 rounded-xl bg-sky-950 text-sky-200 text-xs mt-4">Processando extrato em PDF...</div>
+                    <div id="pdfStatus" class="hidden p-3 rounded-xl bg-sky-950 text-sky-200 text-xs mt-2">Processando PDF...</div>
                 </div>
             </div>
         </section>
@@ -367,7 +382,7 @@
             </div>
         </section>
 
-        <!-- BASE DE DADOS GERAL (COM BOTÕES DE EDITAR E EXCLUIR) -->
+        <!-- BASE DE DADOS GERAL -->
         <section id="section-base-dados" class="app-section space-y-6 hidden">
             <div class="neon-card p-6 rounded-2xl space-y-4">
                 <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Base de Dados Geral</h3>
@@ -392,7 +407,7 @@
 
     </div>
 
-    <!-- MODAL DE EDIÇÃO DE COMPRA DA BASE DE DADOS -->
+    <!-- MODAL DE EDIÇÃO DE COMPRA -->
     <div id="modalEditCompra" class="fixed inset-0 bg-black/80 z-[90] hidden flex items-center justify-center p-4">
         <div class="neon-card w-full max-w-md p-6 rounded-2xl space-y-4 border border-sky-800 shadow-neon-blue">
             <div class="flex justify-between items-center border-b border-gray-800 pb-3">
@@ -481,27 +496,8 @@
                 { id: 1, desc: "Salário Base", valor: 3600.00 },
                 { id: 2, desc: "Renda Extra / Aluguel Garagem", valor: 100.00 }
             ],
-            terceirosGrupos: [
-                {
-                    id: 1,
-                    nome: "Ivo",
-                    desc: "Parcelamento 5X",
-                    cartao: "Nubank Neudson",
-                    valorTotal: 2800.00,
-                    numParcelas: 5,
-                    mesInicio: "OUT",
-                    parcelas: [
-                        { mes: "OUT", numero: 1, valor: 560.00, pago: false },
-                        { mes: "NOV", numero: 2, valor: 560.00, pago: false },
-                        { mes: "DEZ", numero: 3, valor: 560.00, pago: false },
-                        { mes: "JAN", numero: 4, valor: 560.00, pago: false },
-                        { mes: "FEV", numero: 5, valor: 560.00, pago: false }
-                    ]
-                }
-            ],
-            comprasBase: [
-                { id: 1700000000001, data: "2026-08-10", desc: "Pix para o professor Durval", cartao: "Natação", valor: 120.00, parcelas: 12, parceladoValor: 10.00 }
-            ]
+            terceirosGrupos: [],
+            comprasBase: []
         };
 
         let appState = JSON.parse(localStorage.getItem('DESPAG_STATE')) || estadoPadrao;
@@ -519,7 +515,10 @@
                     const cartaoObj = appState.cartoes.find(c => c.nome === compra.cartao);
                     const diaFechamento = cartaoObj ? cartaoObj.fechamento : 25;
 
+                    if (!compra.data) return;
                     const partesData = compra.data.split('-');
+                    if (partesData.length < 3) return;
+
                     const diaCompra = parseInt(partesData[2]);
                     const mesCompraIdx = parseInt(partesData[1]) - 1;
 
@@ -537,7 +536,6 @@
                 });
             }
 
-            // Preservar o status "pago" que o usuário já tenha marcado anteriormente
             for (let m in faturasCalculadas) {
                 if (!appState.faturasIniciais[m]) appState.faturasIniciais[m] = {};
                 for (let c in faturasCalculadas[m]) {
@@ -550,7 +548,6 @@
             }
         }
 
-        // VERIFICAR SESSÃO AO CARREGAR A PÁGINA
         window.addEventListener('DOMContentLoaded', () => {
             const logado = localStorage.getItem('DESPAG_LOGADO');
             if (logado === 'true') {
@@ -562,7 +559,6 @@
             renderDashboard();
         });
 
-        // AUTENTICAÇÃO
         function autenticarLogin(e) {
             e.preventDefault();
             const u = document.getElementById('loginUser').value;
@@ -586,7 +582,6 @@
             toggleSidebar();
         }
 
-        // NAVEGAÇÃO & SIDEBAR
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
@@ -605,10 +600,12 @@
             const selects = [
                 document.getElementById('compraCartao'), 
                 document.getElementById('tercCartao'),
-                document.getElementById('editCompraCartao')
+                document.getElementById('editCompraCartao'),
+                document.getElementById('pdfCartaoDestino')
             ];
             selects.forEach(select => {
                 if (!select) return;
+                const valorAtual = select.value;
                 select.innerHTML = '';
                 appState.cartoes.forEach(c => {
                     const opt = document.createElement('option');
@@ -616,19 +613,17 @@
                     opt.textContent = `${c.nome} (Fechamento dia ${c.fechamento})`;
                     select.appendChild(opt);
                 });
+                if (valorAtual) select.value = valorAtual;
             });
         }
 
-        // DASHBOARD & REGRAS FINANCEIRAS
         function renderDashboard() {
             recalcularFaturasGerais();
 
             const mes = document.getElementById('selectMes').value;
             appState.mesAtivo = mes;
 
-            // REGRA ATUALIZADA: Somente receitas próprias (sem adicionais de terceiros)
             let totalReceitasProprias = appState.receitasProprias.reduce((a, b) => a + b.valor, 0);
-
             let dadosFaturas = appState.faturasIniciais[mes] || {};
             let tbody = document.getElementById('tbodyDashboard');
             tbody.innerHTML = '';
@@ -681,7 +676,6 @@
             renderDashboard();
         }
 
-        // OPERAÇÕES DE RECEITAS PRÓPRIAS
         function renderReceitasETerceiros() {
             const listP = document.getElementById('listReceitasProprias');
             listP.innerHTML = '';
@@ -698,13 +692,11 @@
                 `;
             });
 
-            // TERCEIROS AGRUPADOS
             const container = document.getElementById('containerTerceiros');
             container.innerHTML = '';
             let mes = appState.mesAtivo;
 
             if (!appState.terceirosGrupos) appState.terceirosGrupos = [];
-
             let gruposDoMes = appState.terceirosGrupos.filter(g => g.parcelas.some(p => p.mes === mes));
 
             if (gruposDoMes.length === 0) {
@@ -751,7 +743,7 @@
                                     <input type="checkbox" ${p.pago ? 'checked' : ''} onchange="toggleTerceiroParcelaPago(${g.id}, '${mes}')" class="rounded bg-gray-900 border-gray-700 text-sky-500 cursor-pointer">
                                     <span class="${p.pago ? 'text-emerald-400 font-bold' : 'text-gray-400'}">${p.pago ? 'Reembolsado' : 'Pendente'}</span>
                                 </label>
-                                <button onclick="excluirTerceiroGrupo(${g.id})" class="text-rose-500 hover:text-rose-400 p-1" title="Excluir cobrança inteira"><i class="fa-solid fa-trash"></i></button>
+                                <button onclick="excluirTerceiroGrupo(${g.id})" class="text-rose-500 hover:text-rose-400 p-1"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </div>
                     `;
@@ -821,26 +813,11 @@
             let parcelas = [];
             for (let i = 0; i < numParcelas; i++) {
                 let mesTarget = MESES[(idxInicio + i) % 12];
-                parcelas.push({
-                    mes: mesTarget,
-                    numero: i + 1,
-                    valor: valorParcela,
-                    pago: false
-                });
+                parcelas.push({ mes: mesTarget, numero: i + 1, valor: valorParcela, pago: false });
             }
 
             if (!appState.terceirosGrupos) appState.terceirosGrupos = [];
-
-            appState.terceirosGrupos.push({
-                id: Date.now(),
-                nome,
-                desc,
-                cartao,
-                valorTotal,
-                numParcelas,
-                mesInicio,
-                parcelas
-            });
+            appState.terceirosGrupos.push({ id: Date.now(), nome, desc, cartao, valorTotal, numParcelas, mesInicio, parcelas });
 
             e.target.reset();
             document.getElementById('tercParcelas').value = 1;
@@ -859,13 +836,12 @@
         }
 
         function excluirTerceiroGrupo(id) {
-            if (confirm("Deseja realmente excluir esta cobrança de terceiro?")) {
+            if (confirm("Deseja realmente excluir esta cobrança?")) {
                 appState.terceirosGrupos = appState.terceirosGrupos.filter(g => g.id !== id);
                 renderDashboard();
             }
         }
 
-        // LANÇAMENTOS DE COMPRAS
         function salvarCompra(e) {
             e.preventDefault();
             const desc = document.getElementById('compraDesc').value;
@@ -923,14 +899,13 @@
         }
 
         function removerCartao(id) {
-            if (confirm("Deseja realmente excluir este cartão / despesa fixa?")) {
+            if (confirm("Deseja realmente excluir este cartão / despesa?")) {
                 appState.cartoes = appState.cartoes.filter(c => c.id !== id);
                 atualizarDropdownsCartoes();
                 renderDashboard();
             }
         }
 
-        // RENDEREIZAÇÃO DA BASE DE DADOS GERAL COM BOTÕES DE EDITAR E EXCLUIR
         function renderBaseDados() {
             const tbody = document.getElementById('tbodyBaseDados');
             tbody.innerHTML = '';
@@ -960,7 +935,6 @@
             });
         }
 
-        // EDIÇÃO E EXCLUSÃO DA BASE DE DADOS GERAL
         function abrirEditCompra(id) {
             const compra = appState.comprasBase.find(c => c.id === id);
             if (compra) {
@@ -1003,10 +977,111 @@
         }
 
         function excluirCompra(id) {
-            if (confirm("Deseja realmente excluir este lançamento da Base de Dados?")) {
+            if (confirm("Deseja realmente excluir este lançamento?")) {
                 appState.comprasBase = appState.comprasBase.filter(c => c.id !== id);
                 renderDashboard();
             }
+        }
+
+        // ==========================================
+        // LEITOR AUTOMÁTICO DE FATURA EM PDF (NUBANK / ETC)
+        // ==========================================
+        async function processarPDFExtrato(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const cartaoDestino = document.getElementById('pdfCartaoDestino').value;
+            const statusDiv = document.getElementById('pdfStatus');
+            statusDiv.classList.remove('hidden');
+            statusDiv.textContent = "Lendo arquivo PDF e extraindo transações...";
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                let textoCompleto = "";
+
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const textContent = await page.getTextContent();
+                    const textItems = textContent.items.map(item => item.str);
+                    textoCompleto += textItems.join(" ") + "\n";
+                }
+
+                // Parser inteligente para faturas do Nubank (Ex: "26 SET •••• 2219 Mix Mateus - Parcela 2/3 R$ 140,00")
+                // Regex adaptada para capturar Data, Descrição e Valor
+                const regexTransacao = /(\d{2}\s+(?:JAN|FEV|MAR|ABR|MAI|JUN|JUL|AGO|SET|OUT|NOV|DEZ))\s+(?:•+\s*\d+\s+)?(.*?)\s+R\$\s*([\d\.]+,\d{2})/gi;
+                
+                let match;
+                let contadorImportadas = 0;
+                let anoAtual = new Date().getFullYear();
+
+                const mesesMap = {
+                    'JAN': '01', 'FEV': '02', 'MAR': '03', 'ABR': '04', 'MAI': '05', 'JUN': '06',
+                    'JUL': '07', 'AGO': '08', 'SET': '09', 'OUT': '10', 'NOV': '11', 'DEZ': '12'
+                };
+
+                if (!appState.comprasBase) appState.comprasBase = [];
+
+                while ((match = regexTransacao.exec(textoCompleto)) !== null) {
+                    let strData = match[1].trim().toUpperCase(); // Ex: "26 SET"
+                    let descOriginal = match[2].trim();          // Ex: "Mix Mateus - Parcela 2/3"
+                    let strValorParc = match[3].trim();          // Ex: "140,00"
+
+                    // Limpar termos indesejados da descrição capturada
+                    if (descOriginal.includes("Pagamento em") || descOriginal.includes("Saldo restante") || descOriginal.includes("Estorno de")) {
+                        continue;
+                    }
+
+                    // Converter data "26 SET" para "2026-09-26"
+                    let partesData = strData.split(/\s+/);
+                    let dia = partesData[0];
+                    let mesStr = partesData[1];
+                    let mesNum = mesesMap[mesStr] || '10';
+                    let dataIso = `${anoAtual}-${mesNum}-${dia}`;
+
+                    let valorParcela = parseFloat(strValorParc.replace('.', '').replace(',', '.'));
+                    let numParcelas = 1;
+
+                    // Verificar se tem indicação de parcelamento na descrição (ex: "Parcela 2/3" ou "2/3")
+                    let matchParcela = descOriginal.match(/(?:parcela\s*)?(\d+)\/(\d+)/i);
+                    if (matchParcela) {
+                        let atual = parseInt(matchParcela[1]);
+                        let total = parseInt(matchParcela[2]);
+                        numParcelas = total;
+                    } else if (descOriginal.toLowerCase().includes("parcela")) {
+                        // Tenta capturar caso venha outro formato
+                        numParcelas = 1;
+                    }
+
+                    let valorTotal = valorParcela * numParcelas;
+
+                    // Adicionar à base de dados
+                    appState.comprasBase.push({
+                        id: Date.now() + Math.random(),
+                        data: dataIso,
+                        desc: descOriginal,
+                        cartao: cartaoDestino,
+                        valor: valorTotal,
+                        parcelas: numParcelas,
+                        parceladoValor: valorParcela
+                    });
+
+                    contadorImportadas++;
+                }
+
+                if (contadorImportadas > 0) {
+                    statusDiv.textContent = `Sucesso! ${contadorImportadas} transações foram importadas para o cartão ${cartaoDestino}.`;
+                    renderDashboard();
+                } else {
+                    statusDiv.textContent = "Nenhuma transação padrão foi identificada automaticamente neste PDF. Verifique se é uma fatura compatível.";
+                }
+
+            } catch (error) {
+                console.error(error);
+                statusDiv.textContent = "Erro ao ler o arquivo PDF. Certifique-se de que é um PDF de fatura válido.";
+            }
+
+            event.target.value = '';
         }
 
         function renderProjecaoAnual() {
@@ -1023,15 +1098,6 @@
                     </div>
                 `;
             });
-        }
-
-        function processarPDF(e) {
-            const status = document.getElementById('pdfStatus');
-            status.classList.remove('hidden');
-            setTimeout(() => {
-                status.textContent = "Fatura em PDF lida e processada com sucesso!";
-                renderDashboard();
-            }, 1200);
         }
     </script>
 </body>
