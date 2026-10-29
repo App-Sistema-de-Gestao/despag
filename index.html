@@ -149,7 +149,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v3.5</span>
+            <span>DESPAG v3.6</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -266,7 +266,7 @@
                     <div>
                         <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Sincronização da Base de Dados</h3>
                         <p class="text-xs text-gray-400 mt-4 leading-relaxed">
-                            Se as compras não aparecerem no seu dispositivo ou você atualizar o código no GitHub, clique no botão abaixo para restaurar o estado inicial com os dados completos das faturas.
+                            Caso queira restaurar instantaneamente todos os lançamentos oficiais das faturas e terceiros cadastrados, clique no botão abaixo.
                         </p>
                         <button onclick="forcarResetEstado()" class="mt-6 w-full py-3 bg-gray-800 hover:bg-sky-600 text-white font-bold text-xs rounded-xl border border-gray-700 transition">
                             <i class="fa-solid fa-arrows-rotate mr-1"></i> Sincronizar Base Oficial
@@ -481,7 +481,162 @@
                 { id: 1, desc: "Salário Base", valor: 3600.00 },
                 { id: 2, desc: "Renda Extra / Aluguel Garagem", valor: 100.00 }
             ],
-            terceirosGrupos: [],
+            terceirosGrupos: [
+                {
+                    id: 301,
+                    nome: "Edmilson",
+                    desc: "Reembolso Cartão / Despesa",
+                    cartao: "Nubank Neudson",
+                    valorTotal: 200.00,
+                    numParcelas: 2,
+                    mesInicio: "NOV",
+                    parcelas: [
+                        { mes: "NOV", numero: 1, valor: 100.00, pago: false },
+                        { mes: "DEZ", numero: 2, valor: 100.00, pago: false }
+                    ]
+                },
+                {
+                    id: 302,
+                    nome: "Marques",
+                    desc: "Despesa Compartilhada 1",
+                    cartao: "Nubank Neudson",
+                    valorTotal: 203.88,
+                    numParcelas: 1,
+                    mesInicio: "NOV",
+                    parcelas: [
+                        { mes: "NOV", numero: 1, valor: 203.88, pago: false }
+                    ]
+                },
+                {
+                    id: 303,
+                    nome: "Marques",
+                    desc: "Despesa Compartilhada 2",
+                    cartao: "Nubank Neudson",
+                    valorTotal: 387.50,
+                    numParcelas: 2,
+                    mesInicio: "NOV",
+                    parcelas: [
+                        { mes: "NOV", numero: 1, valor: 193.75, pago: false },
+                        { mes: "DEZ", numero: 2, valor: 193.75, pago: false }
+                    ]
+                },
+                {
+                    id: 304,
+                    nome: "Marques",
+                    desc: "Despesa Longo Prazo",
+                    cartao: "Nubank Neudson",
+                    valorTotal: 1283.34,
+                    numParcelas: 6,
+                    mesInicio: "NOV",
+                    parcelas: [
+                        { mes: "NOV", numero: 1, valor: 213.89, pago: false },
+                        { mes: "DEZ", numero: 2, valor: 213.89, pago: false },
+                        { mes: "JAN", numero: 3, valor: 213.89, pago: false },
+                        { mes: "FEV", numero: 4, valor: 213.89, pago: false },
+                        { mes: "MAR", numero: 5, valor: 213.89, pago: false },
+                        { mes: "ABR", numero: 6, valor: 213.89, pago: false }
+                    ]
+                },
+                {
+                    id: 305,
+                    nome: "Ivo",
+                    desc: "Repasse / Despesa Compartilhada",
+                    cartao: "Nubank Neudson",
+                    valorTotal: 2800.00,
+                    numParcelas: 5,
+                    mesInicio: "NOV",
+                    parcelas: [
+                        { mes: "NOV", numero: 1, valor: 560.00, pago: false },
+                        { mes: "DEZ", numero: 2, valor: 560.00, pago: false },
+                        { mes: "JAN", numero: 3, valor: 560.00, pago: false },
+                        { mes: "FEV", numero: 4, valor: 560.00, pago: false },
+                        { mes: "MAR", numero: 5, valor: 560.00, pago: false }
+                    ]
+                },
+                {
+                    id: 306,
+                    nome: "Thiago Borges",
+                    desc: "Acordo / Fatura Compartilhada",
+                    cartao: "Nubank Neudson",
+                    valorTotal: 1520.00,
+                    numParcelas: 6,
+                    mesInicio: "NOV",
+                    parcelas: [
+                        { mes: "NOV", numero: 1, valor: 570.00, pago: false },
+                        { mes: "DEZ", numero: 2, valor: 190.00, pago: false },
+                        { mes: "JAN", numero: 3, valor: 190.00, pago: false },
+                        { mes: "FEV", numero: 4, valor: 190.00, pago: false },
+                        { mes: "MAR", numero: 5, valor: 190.00, pago: false },
+                        { mes: "ABR", numero: 6, valor: 190.00, pago: false },
+                        { mes: "MAI", numero: 7, valor: 190.00, pago: false }
+                    ]
+                },
+                {
+                    id: 307,
+                    nome: "Gilmar",
+                    desc: "Reembolso Despesa",
+                    cartao: "Nubank Neudson",
+                    valorTotal: 287.96,
+                    numParcelas: 2,
+                    mesInicio: "NOV",
+                    parcelas: [
+                        { mes: "NOV", numero: 1, valor: 143.98, pago: false },
+                        { mes: "DEZ", numero: 2, valor: 143.98, pago: false }
+                    ]
+                },
+                {
+                    id: 308,
+                    nome: "Deuzelina",
+                    desc: "Despesa 1",
+                    cartao: "Nubank Neudson",
+                    valorTotal: 118.06,
+                    numParcelas: 2,
+                    mesInicio: "NOV",
+                    parcelas: [
+                        { mes: "NOV", numero: 1, valor: 59.03, pago: false },
+                        { mes: "DEZ", numero: 2, valor: 59.03, pago: false }
+                    ]
+                },
+                {
+                    id: 309,
+                    nome: "Deuzelina",
+                    desc: "Despesa 2",
+                    cartao: "Nubank Neudson",
+                    valorTotal: 222.52,
+                    numParcelas: 2,
+                    mesInicio: "NOV",
+                    parcelas: [
+                        { mes: "NOV", numero: 1, valor: 111.26, pago: false },
+                        { mes: "DEZ", numero: 2, valor: 111.26, pago: false }
+                    ]
+                },
+                {
+                    id: 310,
+                    nome: "Deuzelina",
+                    desc: "Despesa 3",
+                    cartao: "Nubank Neudson",
+                    valorTotal: 38.00,
+                    numParcelas: 1,
+                    mesInicio: "NOV",
+                    parcelas: [
+                        { mes: "NOV", numero: 1, valor: 38.00, pago: false }
+                    ]
+                },
+                {
+                    id: 311,
+                    nome: "Deuzelina",
+                    desc: "Despesa 4",
+                    cartao: "Nubank Neudson",
+                    valorTotal: 178.56,
+                    numParcelas: 3,
+                    mesInicio: "NOV",
+                    parcelas: [
+                        { mes: "NOV", numero: 1, valor: 59.52, pago: false },
+                        { mes: "DEZ", numero: 2, valor: 59.52, pago: false },
+                        { mes: "JAN", numero: 3, valor: 59.52, pago: false }
+                    ]
+                }
+            ],
             comprasBase: [
                 // COMPRAS NUBANK EDILENE
                 { id: 101, data: "2026-09-26", desc: "Mix Mateus - Parcela 2/3", cartao: "Nubank Edilene", valor: 420.00, parcelas: 3, parceladoValor: 140.00 },
@@ -577,7 +732,7 @@
         }
 
         function forcarResetEstado() {
-            if (confirm("Isso atualizará a Base de Dados com os lançamentos oficiais dos cartões (Nubank Edilene e Neudson). Continuar?")) {
+            if (confirm("Isso atualizará a Base de Dados com os lançamentos oficiais das faturas e terceiros. Continuar?")) {
                 appState = JSON.parse(JSON.stringify(estadoPadrao));
                 salvarEstado();
                 renderDashboard();
