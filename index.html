@@ -155,7 +155,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v3.2</span>
+            <span>DESPAG v3.3</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -271,7 +271,7 @@
                 <div class="neon-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
                     <div>
                         <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Importar e Ler Fatura (PDF)</h3>
-                        <p class="text-xs text-gray-400 mt-2">Selecione o cartão e envie o extrato em PDF da sua fatura para cadastrar todas as compras automaticamente.</p>
+                        <p class="text-xs text-gray-400 mt-2">Selecione o cartão de destino e envie o PDF da fatura do Nubank para cadastrar todas as compras automaticamente.</p>
                         
                         <div class="mt-4 space-y-3">
                             <div>
@@ -984,7 +984,7 @@
         }
 
         // ==========================================
-        // LEITOR AUTOMÁTICO DE FATURA EM PDF (NUBANK / ETC)
+        // LEITOR ROBUSTO DE FATURA PDF (NUBANK)
         // ==========================================
         async function processarPDFExtrato(event) {
             const file = event.target.files[0];
@@ -993,22 +993,30 @@
             const cartaoDestino = document.getElementById('pdfCartaoDestino').value;
             const statusDiv = document.getElementById('pdfStatus');
             statusDiv.classList.remove('hidden');
-            statusDiv.textContent = "Lendo arquivo PDF e extraindo transações...";
+            statusDiv.textContent = "Lendo extrato PDF e processando transações...";
 
             try {
                 const arrayBuffer = await file.arrayBuffer();
                 const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-                let textoCompleto = "";
+                let linhasTexto = [];
 
                 for (let i = 1; i <= pdf.numPages; i++) {
                     const page = await pdf.getPage(i);
                     const textContent = await page.getTextContent();
-                    const textItems = textContent.items.map(item => item.str);
-                    textoCompleto += textItems.join(" ") + "\n";
+                    
+                    // Organizar itens por posição vertical (y) e horizontal (x) se necessário, 
+                    // mas aqui juntaremos as strings por proximidade ou linha a linha.
+                    let textoPagina = textContent.items.map(item => item.str).join(" ");
+                    
+                    // Normalizar espaços múltiplos
+                    textoPagina = textoPagina.replace(/\s+/g, ' ');
+                    linhasTexto.push(textoPagina);
                 }
 
-                // Parser inteligente para faturas do Nubank (Ex: "26 SET •••• 2219 Mix Mateus - Parcela 2/3 R$ 140,00")
-                // Regex adaptada para capturar Data, Descrição e Valor
+                let textoCompleto = linhasTexto.join("\n");
+
+                // Expressão regular robusta para capturar transações do padrão Nubank
+                // Exemplo capturado: "26 SET •••• 2219 Mix Mateus - Parcela 2/3 R$ 140,00" ou sem cartão mascarado
                 const regexTransacao = /(\d{2}\s+(?:JAN|FEV|MAR|ABR|MAI|JUN|JUL|AGO|SET|OUT|NOV|DEZ))\s+(?:•+\s*\d+\s+)?(.*?)\s+R\$\s*([\d\.]+,\d{2})/gi;
                 
                 let match;
@@ -1023,16 +1031,16 @@
                 if (!appState.comprasBase) appState.comprasBase = [];
 
                 while ((match = regexTransacao.exec(textoCompleto)) !== null) {
-                    let strData = match[1].trim().toUpperCase(); // Ex: "26 SET"
-                    let descOriginal = match[2].trim();          // Ex: "Mix Mateus - Parcela 2/3"
-                    let strValorParc = match[3].trim();          // Ex: "140,00"
+                    let strData = match[1].trim().toUpperCase(); 
+                    let descOriginal = match[2].trim();          
+                    let strValorParc = match[3].trim();          
 
-                    // Limpar termos indesejados da descrição capturada
+                    // Ignorar linhas de pagamento de fatura, estornos ou saldo anterior
                     if (descOriginal.includes("Pagamento em") || descOriginal.includes("Saldo restante") || descOriginal.includes("Estorno de")) {
                         continue;
                     }
 
-                    // Converter data "26 SET" para "2026-09-26"
+                    // Converter data "26 SET" para formato "2026-09-26"
                     let partesData = strData.split(/\s+/);
                     let dia = partesData[0];
                     let mesStr = partesData[1];
@@ -1042,43 +1050,40 @@
                     let valorParcela = parseFloat(strValorParc.replace('.', '').replace(',', '.'));
                     let numParcelas = 1;
 
-                    // Verificar se tem indicação de parcelamento na descrição (ex: "Parcela 2/3" ou "2/3")
+                    // Identificar parcelas (ex: "Parcela 2/3" ou "2/3")
                     let matchParcela = descOriginal.match(/(?:parcela\s*)?(\d+)\/(\d+)/i);
                     if (matchParcela) {
-                        let atual = parseInt(matchParcela[1]);
-                        let total = parseInt(matchParcela[2]);
-                        numParcelas = total;
-                    } else if (descOriginal.toLowerCase().includes("parcela")) {
-                        // Tenta capturar caso venha outro formato
-                        numParcelas = 1;
+                        numParcelas = parseInt(matchParcela[2]);
                     }
 
                     let valorTotal = valorParcela * numParcelas;
 
-                    // Adicionar à base de dados
-                    appState.comprasBase.push({
-                        id: Date.now() + Math.random(),
-                        data: dataIso,
-                        desc: descOriginal,
-                        cartao: cartaoDestino,
-                        valor: valorTotal,
-                        parcelas: numParcelas,
-                        parceladoValor: valorParcela
-                    });
-
-                    contadorImportadas++;
+                    // Evitar duplicatas exatas na mesma importação
+                    let jaExiste = appState.comprasBase.some(c => c.data === dataIso && c.desc === descOriginal && c.cartao === cartaoDestino && c.valor === valorTotal);
+                    if (!jaExiste) {
+                        appState.comprasBase.push({
+                            id: Date.now() + Math.random(),
+                            data: dataIso,
+                            desc: descOriginal,
+                            cartao: cartaoDestino,
+                            valor: valorTotal,
+                            parcelas: numParcelas,
+                            parceladoValor: valorParcela
+                        });
+                        contadorImportadas++;
+                    }
                 }
 
                 if (contadorImportadas > 0) {
-                    statusDiv.textContent = `Sucesso! ${contadorImportadas} transações foram importadas para o cartão ${cartaoDestino}.`;
+                    statusDiv.textContent = `Sucesso! ${contadorImportadas} compras foram importadas para o cartão ${cartaoDestino}.`;
                     renderDashboard();
                 } else {
-                    statusDiv.textContent = "Nenhuma transação padrão foi identificada automaticamente neste PDF. Verifique se é uma fatura compatível.";
+                    statusDiv.textContent = "Nenhuma compra foi identificada automaticamente. Verifique se o PDF selecionado é um extrato de fatura válido.";
                 }
 
             } catch (error) {
                 console.error(error);
-                statusDiv.textContent = "Erro ao ler o arquivo PDF. Certifique-se de que é um PDF de fatura válido.";
+                statusDiv.textContent = "Erro ao ler o arquivo PDF. Tente novamente.";
             }
 
             event.target.value = '';
