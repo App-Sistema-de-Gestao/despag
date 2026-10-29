@@ -149,7 +149,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v3.7</span>
+            <span>DESPAG v3.8</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -219,11 +219,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div class="neon-card p-6 rounded-2xl border-l-4 border-l-amber-500">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total de Débitos (<span id="lblAnoAtual">2026</span>)</span>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total de Débitos Pendentes (<span id="lblAnoAtual">2026</span>)</span>
                         <i class="fa-solid fa-calendar-check text-amber-400 text-lg"></i>
                     </div>
                     <h3 class="text-3xl font-extrabold text-amber-400 mt-2" id="dashTotalAnoAtual">R$ 0,00</h3>
-                    <p class="text-xs text-gray-500 mt-2">Soma de todos os débitos acumulados até o final do ano corrente</p>
+                    <p class="text-xs text-gray-500 mt-2">Soma dos débitos pendentes até o final do ano corrente (desconta conforme checks)</p>
                 </div>
 
                 <div class="neon-card p-6 rounded-2xl border-l-4 border-l-sky-500">
@@ -913,7 +913,7 @@
             document.getElementById('dashTotalDebitos').textContent = `R$ ${totalDebitosPendentes.toFixed(2)}`;
             document.getElementById('dashSaldo').textContent = `R$ ${saldoFinal.toFixed(2)}`;
 
-            // CÁLCULO DOS CARDS DE PROJEÇÃO (ANO ATUAL X PRÓXIMO ANO)
+            // CÁLCULO DOS CARDS DE PROJEÇÃO (ANO ATUAL X PRÓXIMO ANO COM SUPORTE A CHECKBOXES)
             let anoAtualNum = new Date().getFullYear();
             document.getElementById('lblAnoAtual').textContent = anoAtualNum;
             document.getElementById('lblAnoProximo').textContent = anoAtualNum + 1;
@@ -921,14 +921,17 @@
             let totalAnoAtual = 0;
             let totalAnoProximo = 0;
 
-            // Meses até o fim do ano (de SET até DEZ)
             const mesesAnoAtual = ["SET", "OUT", "NOV", "DEZ"];
             const mesesAnoProximo = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO"];
 
             mesesAnoAtual.forEach(m => {
                 if (appState.faturasIniciais[m]) {
                     for (let c in appState.faturasIniciais[m]) {
-                        totalAnoAtual += appState.faturasIniciais[m][c].valor || 0;
+                        let fatInfo = appState.faturasIniciais[m][c];
+                        // Soma apenas se NÃO estiver pago (respeitando os checks)
+                        if (!fatInfo.pago) {
+                            totalAnoAtual += fatInfo.valor || 0;
+                        }
                     }
                 }
             });
@@ -936,7 +939,8 @@
             mesesAnoProximo.forEach(m => {
                 if (appState.faturasIniciais[m]) {
                     for (let c in appState.faturasIniciais[m]) {
-                        totalAnoProximo += appState.faturasIniciais[m][c].valor || 0;
+                        let fatInfo = appState.faturasIniciais[m][c];
+                        totalAnoProximo += fatInfo.valor || 0;
                     }
                 }
             });
