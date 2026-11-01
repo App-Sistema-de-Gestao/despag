@@ -900,7 +900,7 @@
             }
         }
 
-        function recalcularFaturasGerais() {
+       function recalcularFaturasGerais() {
             let faturasCalculadas = {};
 
             if (appState.comprasBase) {
@@ -929,20 +929,46 @@
                 });
             }
 
-            // CORREÇÃO DIRETA: Garante os valores exatos das faturas fixas de Novembro
+            // =========================================================================
+            // CORREÇÃO DIRETA: Garante os valores exatos e consolidados para NOVEMBRO
+            // =========================================================================
             if (!faturasCalculadas["NOV"]) faturasCalculadas["NOV"] = {};
             
+            // Mercado Pago
             if (faturasCalculadas["NOV"]["Mercado Pago"]) {
                 faturasCalculadas["NOV"]["Mercado Pago"].valor = 2854.73;
             } else {
                 faturasCalculadas["NOV"]["Mercado Pago"] = { valor: 2854.73, pago: false };
             }
 
+            // Recarga PAY
             if (faturasCalculadas["NOV"]["Cartão Recarga PAY"]) {
                 faturasCalculadas["NOV"]["Cartão Recarga PAY"].valor = 1864.33;
             } else {
                 faturasCalculadas["NOV"]["Cartão Recarga PAY"] = { valor: 1864.33, pago: false };
             }
+
+            // 99Pay (Parcela de Novembro: R$ 1.092,81)
+            if (faturasCalculadas["NOV"]["99Pay"]) {
+                faturasCalculadas["NOV"]["99Pay"].valor = 1092.81;
+            } else {
+                faturasCalculadas["NOV"]["99Pay"] = { valor: 1092.81, pago: false };
+            }
+
+            // CMT I Andrielly (Mensalidade Nov: R$ 126,00)
+            if (faturasCalculadas["NOV"]["CMT I Andrielly"]) {
+                faturasCalculadas["NOV"]["CMT I Andrielly"].valor = 126.00;
+            } else {
+                faturasCalculadas["NOV"]["CMT I Andrielly"] = { valor: 126.00, pago: false };
+            }
+
+            // CMT I Guilherme (Cotas Nov: 126,00 + 190,00 = R$ 316,00)
+            if (faturasCalculadas["NOV"]["CMT I Guilherme"]) {
+                faturasCalculadas["NOV"]["CMT I Guilherme"].valor = 316.00;
+            } else {
+                faturasCalculadas["NOV"]["CMT I Guilherme"] = { valor: 316.00, pago: false };
+            }
+            // =========================================================================
 
             for (let m in faturasCalculadas) {
                 if (!appState.faturasIniciais[m]) appState.faturasIniciais[m] = {};
@@ -955,7 +981,6 @@
                 }
             }
         }
-
         window.addEventListener('DOMContentLoaded', () => {
             const logado = localStorage.getItem('DESPAG_LOGADO');
             if (logado === 'true') {
