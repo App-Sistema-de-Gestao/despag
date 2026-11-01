@@ -690,51 +690,26 @@
                         { mes: "DEZ", numero: 2, valor: 59.52, pago: false },
                         { mes: "JAN", numero: 3, valor: 59.52, pago: false }
                     ]
-                },
-                {
-                    id: 312,
-                    nome: "CMT I Andrielly",
-                    desc: "Repasse / Fatura Compartilhada",
-                    cartao: "CMT I Andrielly",
-                    valorTotal: 252.00,
-                    numParcelas: 2,
-                    mesInicio: "NOV",
-                    parcelas: [
-                        { mes: "NOV", numero: 1, valor: 126.00, pago: false },
-                        { mes: "DEZ", numero: 2, valor: 126.00, pago: false }
-                    ]
-                },
-                {
-                    id: 313,
-                    nome: "CMT I Guilherme",
-                    desc: "Repasse / Fatura Compartilhada (1)",
-                    cartao: "CMT I Guilherme",
-                    valorTotal: 252.00,
-                    numParcelas: 2,
-                    mesInicio: "NOV",
-                    parcelas: [
-                        { mes: "NOV", numero: 1, valor: 126.00, pago: false },
-                        { mes: "DEZ", numero: 2, valor: 126.00, pago: false }
-                    ]
-                },
-                {
-                    id: 314,
-                    nome: "CMT I Guilherme",
-                    desc: "Repasse / Fatura Compartilhada (2)",
-                    cartao: "CMT I Guilherme",
-                    valorTotal: 380.00,
-                    numParcelas: 2,
-                    mesInicio: "NOV",
-                    parcelas: [
-                        { mes: "NOV", numero: 1, valor: 190.00, pago: false },
-                        { mes: "DEZ", numero: 2, valor: 190.00, pago: false }
-                    ]
                 }
             ],
             comprasBase: [
-                // FINANCIAMENTO 99PAY
-                { id: 991, data: "2026-10-25", desc: "Financiamento 99Pay - Parcela Nov", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 992, data: "2026-11-25", desc: "Financiamento 99Pay - Parcela Dez", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
+                // FINANCIAMENTO 99PAY (CRONOGRAMA COMPLETO DE NOV/2026 A ABR/2027)[cite: 6]
+                { id: 991, data: "2026-11-09", desc: "Financiamento 99Pay - Parcela Nov", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
+                { id: 992, data: "2026-12-08", desc: "Financiamento 99Pay - Parcela Dez", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
+                { id: 993, data: "2027-01-08", desc: "Financiamento 99Pay - Parcela Jan", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
+                { id: 994, data: "2027-02-10", desc: "Financiamento 99Pay - Parcela Fev", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
+                { id: 995, data: "2027-03-08", desc: "Financiamento 99Pay - Parcela Mar", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
+                { id: 996, data: "2027-04-08", desc: "Financiamento 99Pay - Parcela Abr", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
+
+                // DESPESAS CMT I ANDRIELLY (MENSAL ATÉ DEZEMBRO)
+                { id: 701, data: "2026-11-05", desc: "CMT I Andrielly - Mensalidade Nov", cartao: "CMT I Andrielly", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
+                { id: 702, data: "2026-12-05", desc: "CMT I Andrielly - Mensalidade Dez", cartao: "CMT I Andrielly", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
+
+                // DESPESAS CMT I GUILHERME (DUAS COTAS MENSAIS ATÉ DEZEMBRO)
+                { id: 710, data: "2026-11-05", desc: "CMT I Guilherme (1) - Nov", cartao: "CMT I Guilherme", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
+                { id: 711, data: "2026-12-05", desc: "CMT I Guilherme (1) - Dez", cartao: "CMT I Guilherme", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
+                { id: 712, data: "2026-11-15", desc: "CMT I Guilherme (2) - Nov", cartao: "CMT I Guilherme", valor: 190.00, parcelas: 1, parceladoValor: 190.00 },
+                { id: 713, data: "2026-12-15", desc: "CMT I Guilherme (2) - Dez", cartao: "CMT I Guilherme", valor: 190.00, parcelas: 1, parceladoValor: 190.00 },
 
                 // FATURA RECARGAPAY (NOVEMBRO DE 2026 - TOTAL R$ 1.864,33)
                 { id: 501, data: "2026-10-27", desc: "RecargaPay - Recargapay Neudson Paulobra (4/9)", cartao: "Cartão Recarga PAY", valor: 213.89, parcelas: 1, parceladoValor: 213.89 },
@@ -755,7 +730,6 @@
                 { id: 516, data: "2026-09-08", desc: "RecargaPay - Parcelamento de Fatura (2/2) + Encargos", cartao: "Cartão Recarga PAY", valor: 398.90, parcelas: 1, parceladoValor: 398.90 },
 
                 // FATURA MERCADO PAGO VISA (NOVEMBRO DE 2026)
-                // FATURA MERCADO PAGO VISA (NOVEMBRO DE 2026 - TOTAL CORRIGIDO)
                 { id: 601, data: "2026-09-11", desc: "Mercado Pago - Assaí Atacadista (2/2)", cartao: "Mercado Pago", valor: 20.95, parcelas: 1, parceladoValor: 20.95 },
                 { id: 602, data: "2026-09-13", desc: "Mercado Pago - Drogasil (2/2)", cartao: "Mercado Pago", valor: 49.63, parcelas: 1, parceladoValor: 49.63 },
                 { id: 603, data: "2026-09-13", desc: "Mercado Pago - Extra Farma (2/4)", cartao: "Mercado Pago", valor: 61.24, parcelas: 1, parceladoValor: 61.24 },
@@ -807,7 +781,7 @@
                 { id: 649, data: "2026-10-22", desc: "Mercado Pago - MP Manda Burger SLZ", cartao: "Mercado Pago", valor: 75.00, parcelas: 1, parceladoValor: 75.00 },
                 { id: 650, data: "2026-10-23", desc: "Mercado Pago - MP Pizza Sanx", cartao: "Mercado Pago", valor: 91.00, parcelas: 1, parceladoValor: 91.00 },
                 { id: 651, data: "2026-10-23", desc: "Mercado Pago - MP Pão da Ilha", cartao: "Mercado Pago", valor: 4.80, parcelas: 1, parceladoValor: 4.80 },
-                { id: 652, data: "2026-10-25", desc: "Mercado Pago / MP Pão da Ilha", cartao: "Mercado Pago", valor: 7.00, parcelas: 1, parceladoValor: 7.00 },
+                { id: 652, data: "2026-10-25", desc: "Mercado Pago - MP Pão da Ilha", cartao: "Mercado Pago", valor: 7.00, parcelas: 1, parceladoValor: 7.00 },
                 { id: 653, data: "2026-10-25", desc: "Mercado Pago - Mateus Supermercados", cartao: "Mercado Pago", valor: 19.12, parcelas: 1, parceladoValor: 19.12 },
                 { id: 654, data: "2026-10-27", desc: "Mercado Pago - MP Pão da Ilha", cartao: "Mercado Pago", valor: 7.00, parcelas: 1, parceladoValor: 7.00 },
                 { id: 655, data: "2026-10-28", desc: "Mercado Pago - Mercadinho do Neto", cartao: "Mercado Pago", valor: 4.60, parcelas: 1, parceladoValor: 4.60 },
@@ -817,8 +791,8 @@
                 { id: 659, data: "2026-08-29", desc: "Mercado Pago - Mateus Supermercados (2/2)", cartao: "Mercado Pago", valor: 24.54, parcelas: 1, parceladoValor: 24.54 },
                 { id: 660, data: "2025-12-12", desc: "Mercado Pago - Mercado Livre (11/18)", cartao: "Mercado Pago", valor: 29.27, parcelas: 1, parceladoValor: 29.27 },
                 { id: 661, data: "2026-06-20", desc: "Mercado Pago - Mercado Livre (5/8)", cartao: "Mercado Pago", valor: 26.23, parcelas: 1, parceladoValor: 26.23 },
-    { id: 662, data: "2026-08-06", desc: "Mercado Pago - Extra Farma Paguemenos (3/5)", cartao: "Mercado Pago", valor: 59.03, parcelas: 1, parceladoValor: 59.03 },
-                
+                { id: 662, data: "2026-08-06", desc: "Mercado Pago - Extra Farma Paguemenos (3/5)", cartao: "Mercado Pago", valor: 59.03, parcelas: 1, parceladoValor: 59.03 },
+
                 // COMPRAS NUBANK EDILENE
                 { id: 101, data: "2026-09-26", desc: "Mix Mateus - Parcela 2/3", cartao: "Nubank Edilene", valor: 420.00, parcelas: 3, parceladoValor: 140.00 },
                 { id: 102, data: "2026-09-26", desc: "Shopee *Shpstecnologia - Parcela 2/2", cartao: "Nubank Edilene", valor: 19.88, parcelas: 2, parceladoValor: 9.94 },
@@ -955,17 +929,15 @@
                 });
             }
 
-            // CORREÇÃO DIRETA: Garante os valores exatos das faturas de Novembro
+            // CORREÇÃO DIRETA: Garante os valores exatos das faturas fixas de Novembro
             if (!faturasCalculadas["NOV"]) faturasCalculadas["NOV"] = {};
             
-            // Força o valor exato do Mercado Pago em Novembro
             if (faturasCalculadas["NOV"]["Mercado Pago"]) {
                 faturasCalculadas["NOV"]["Mercado Pago"].valor = 2854.73;
             } else {
                 faturasCalculadas["NOV"]["Mercado Pago"] = { valor: 2854.73, pago: false };
             }
 
-            // Força o valor exato do Recarga PAY em Novembro (conforme fechamos antes)
             if (faturasCalculadas["NOV"]["Cartão Recarga PAY"]) {
                 faturasCalculadas["NOV"]["Cartão Recarga PAY"].valor = 1864.33;
             } else {
@@ -983,6 +955,7 @@
                 }
             }
         }
+
         window.addEventListener('DOMContentLoaded', () => {
             const logado = localStorage.getItem('DESPAG_LOGADO');
             if (logado === 'true') {
