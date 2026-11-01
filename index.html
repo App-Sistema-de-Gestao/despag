@@ -732,11 +732,11 @@
                 }
             ],
             comprasBase: [
-                // FINANCIAMENTO 99PAY (FORÇADO PARA NOVEMBRO DE 2026 NA PARCELA CORRETA)
+                // FINANCIAMENTO 99PAY
                 { id: 991, data: "2026-10-25", desc: "Financiamento 99Pay - Parcela Nov", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
                 { id: 992, data: "2026-11-25", desc: "Financiamento 99Pay - Parcela Dez", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
 
-                // FATURA RECARGAPAY (NOVEMBRO DE 2026 - R$ 1.864,33)
+                // FATURA RECARGAPAY (NOVEMBRO DE 2026 - TOTAL R$ 1.864,33)
                 { id: 501, data: "2026-10-27", desc: "RecargaPay - Recargapay Neudson Paulobra (4/9)", cartao: "Cartão Recarga PAY", valor: 213.89, parcelas: 1, parceladoValor: 213.89 },
                 { id: 502, data: "2026-10-27", desc: "RecargaPay - Abastece Aí / Paulobra", cartao: "Cartão Recarga PAY", valor: 300.00, parcelas: 1, parceladoValor: 300.00 },
                 { id: 503, data: "2026-10-23", desc: "RecargaPay - Abastece Aí / Paulobra", cartao: "Cartão Recarga PAY", valor: 100.00, parcelas: 1, parceladoValor: 100.00 },
@@ -754,7 +754,7 @@
                 { id: 515, data: "2025-11-03", desc: "RecargaPay - Mercado Livre / Britânia (12/12)", cartao: "Cartão Recarga PAY", valor: 149.54, parcelas: 1, parceladoValor: 149.54 },
                 { id: 516, data: "2026-09-08", desc: "RecargaPay - Parcelamento de Fatura (2/2) + Encargos", cartao: "Cartão Recarga PAY", valor: 398.90, parcelas: 1, parceladoValor: 398.90 },
 
-                // FATURA MERCADO PAGO VISA (NOVEMBRO DE 2026 - CORRIGIDA PARA R$ 2.854,73)
+                // FATURA MERCADO PAGO VISA (NOVEMBRO DE 2026)
                 { id: 601, data: "2026-09-11", desc: "Mercado Pago - Assaí Atacadista (2/2)", cartao: "Mercado Pago", valor: 20.95, parcelas: 1, parceladoValor: 20.95 },
                 { id: 602, data: "2026-09-13", desc: "Mercado Pago - Drogasil (2/2)", cartao: "Mercado Pago", valor: 49.63, parcelas: 1, parceladoValor: 49.63 },
                 { id: 603, data: "2026-09-13", desc: "Mercado Pago - Extra Farma (2/4)", cartao: "Mercado Pago", valor: 61.24, parcelas: 1, parceladoValor: 61.24 },
@@ -905,7 +905,12 @@
             ]
         };
 
-        let appState = JSON.parse(localStorage.getItem('DESPAG_STATE')) || estadoPadrao;
+        // Força limpar o cache antigo do navegador para carregar exatamente os valores corretos
+        let appState = JSON.parse(localStorage.getItem('DESPAG_STATE'));
+        if (!appState || !appState.comprasBase || appState.comprasBase.length < 50) {
+            appState = JSON.parse(JSON.stringify(estadoPadrao));
+            localStorage.setItem('DESPAG_STATE', JSON.stringify(appState));
+        }
 
         function salvarEstado() {
             localStorage.setItem('DESPAG_STATE', JSON.stringify(appState));
@@ -989,7 +994,7 @@
 
         function logout() {
             localStorage.removeItem('DESPAG_LOGADO');
-            document.getElementById('loginOverlay').classList.remove('hidden');
+            document.getElementById('loginOverlay').classList.add('hidden');
             document.getElementById('loginUser').value = '';
             document.getElementById('loginPass').value = '';
             toggleSidebar();
