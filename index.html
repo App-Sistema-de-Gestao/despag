@@ -215,7 +215,7 @@
                 </div>
             </div>
 
-            <!-- LINHA 2: PROJEÇÃO ANUAL (ANO ATUAL E PRÓXIMO ANO) -->
+            <!-- LINHA 2: PROJEÇÃO ANUAL -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div class="neon-card p-6 rounded-2xl border-l-4 border-l-amber-500">
                     <div class="flex items-center justify-between">
@@ -732,13 +732,9 @@
                 }
             ],
             comprasBase: [
-                // FINANCIAMENTO 99PAY (R$ 1.092,81)
-                { id: 991, data: "2026-11-08", desc: "Financiamento 99Pay - Parcela Nov", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 992, data: "2026-12-08", desc: "Financiamento 99Pay - Parcela Dez", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 993, data: "2027-01-08", desc: "Financiamento 99Pay - Parcela Jan", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 994, data: "2027-02-10", desc: "Financiamento 99Pay - Parcela Fev", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 995, data: "2027-03-08", desc: "Financiamento 99Pay - Parcela Mar", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 996, data: "2027-04-08", desc: "Financiamento 99Pay - Parcela Abr", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
+                // FINANCIAMENTO 99PAY (FORÇADO PARA NOVEMBRO DE 2026 NA PARCELA CORRETA)
+                { id: 991, data: "2026-10-25", desc: "Financiamento 99Pay - Parcela Nov", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
+                { id: 992, data: "2026-11-25", desc: "Financiamento 99Pay - Parcela Dez", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
 
                 // FATURA RECARGAPAY (NOVEMBRO DE 2026 - R$ 1.864,33)
                 { id: 501, data: "2026-10-27", desc: "RecargaPay - Recargapay Neudson Paulobra (4/9)", cartao: "Cartão Recarga PAY", valor: 213.89, parcelas: 1, parceladoValor: 213.89 },
@@ -758,7 +754,7 @@
                 { id: 515, data: "2025-11-03", desc: "RecargaPay - Mercado Livre / Britânia (12/12)", cartao: "Cartão Recarga PAY", valor: 149.54, parcelas: 1, parceladoValor: 149.54 },
                 { id: 516, data: "2026-09-08", desc: "RecargaPay - Parcelamento de Fatura (2/2) + Encargos", cartao: "Cartão Recarga PAY", valor: 398.90, parcelas: 1, parceladoValor: 398.90 },
 
-                // FATURA MERCADO PAGO VISA (NOVEMBRO DE 2026 - R$ 2.854,73) -> Vinculadas ao cartão Mercado Pago
+                // FATURA MERCADO PAGO VISA (NOVEMBRO DE 2026 - CORRIGIDA PARA R$ 2.854,73)
                 { id: 601, data: "2026-09-11", desc: "Mercado Pago - Assaí Atacadista (2/2)", cartao: "Mercado Pago", valor: 20.95, parcelas: 1, parceladoValor: 20.95 },
                 { id: 602, data: "2026-09-13", desc: "Mercado Pago - Drogasil (2/2)", cartao: "Mercado Pago", valor: 49.63, parcelas: 1, parceladoValor: 49.63 },
                 { id: 603, data: "2026-09-13", desc: "Mercado Pago - Extra Farma (2/4)", cartao: "Mercado Pago", valor: 61.24, parcelas: 1, parceladoValor: 61.24 },
