@@ -986,28 +986,33 @@
         }
 
         function importarBackupJSON(event) {
-            const fileReader = new FileReader();
-            const file = event.target.files[0];
+    const fileReader = new FileReader();
+    const file = event.target.files[0];
 
-            if (!file) return;
+    if (!file) return;
 
-            fileReader.onload = function(e) {
-                try {
-                    const parsedState = JSON.parse(e.target.result);
-                    if (parsedState && parsedState.cartoes && parsedState.comprasBase) {
-                        appState = parsedState;
-                        salvarEstado();
-                        renderDashboard();
-                        alert("Backup importado com sucesso! Seus dados foram 100% atualizados neste dispositivo.");
-                    } else {
-                        alert("Arquivo de backup inválido.");
-                    }
-                } catch (err) {
-                    alert("Erro ao ler o arquivo de backup JSON.");
-                }
-            };
-            fileReader.readAsText(file);
+    fileReader.onload = function(e) {
+        try {
+            const parsedState = JSON.parse(e.target.result);
+            if (parsedState && parsedState.cartoes && parsedState.comprasBase) {
+                appState = parsedState;
+                salvarEstado();
+                
+                // Força o recálculo das faturas e redesenha a tela inteira
+                recalcularFaturasGerais();
+                renderDashboard();
+                renderBaseDados();
+                
+                alert("Backup importado e sincronizado com sucesso! Os dados foram atualizados no celular.");
+            } else {
+                alert("Arquivo de backup inválido.");
+            }
+        } catch (err) {
+            alert("Erro ao ler o arquivo de backup JSON.");
         }
+    };
+    fileReader.readAsText(file);
+}
 
         function forcarResetEstado() {
             if (confirm("Deseja sincronizar a base oficial? Suas edições, novas receitas, cobranças de terceiros e cartões cadastrados serão 100% preservados!")) {
