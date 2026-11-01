@@ -256,14 +256,14 @@
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-sm text-gray-300">
-                            <thead class="bg-gray-900/80 text-xs uppercase text-gray-400 border-b border-gray-800">
-                                <tr>
-                                    <th class="py-3 px-4">Cartão / Conta</th>
-                                    <th class="py-3 px-4">Valor A Pagar</th>
-                                    <th class="py-3 px-4">Vencimento</th>
-                                    <th class="py-3 px-4 text-center">Status (Pago)</th>
-                                </tr>
-                            </thead>
+                            <thead class="bg-gray-900/80 text-[10px] sm:text-xs uppercase text-gray-400 border-b border-gray-800">
+    <tr>
+        <th class="py-2 px-2 sm:py-3 sm:px-4">Cartão / Conta</th>
+        <th class="py-2 px-2 sm:py-3 sm:px-4">Valor A Pagar</th>
+        <th class="py-2 px-2 sm:py-3 sm:px-4">Venc.</th>
+        <th class="py-2 px-1 sm:py-3 sm:px-4 text-center">Status</th>
+    </tr>
+</thead>
                             <tbody id="tbodyDashboard" class="divide-y divide-gray-800"></tbody>
                         </table>
                     </div>
@@ -1283,19 +1283,19 @@
                     totalDebitosPendentes += valorFatura;
                 }
 
-                let tr = document.createElement('tr');
-                tr.className = "hover:bg-gray-800/40 transition";
-                tr.innerHTML = `
-                    <td class="py-3 px-4 font-semibold text-white">${cartao.nome}</td>
-                    <td class="py-3 px-4 ${info.pago ? 'line-through text-gray-500' : 'font-bold text-white'}">
-                        R$ ${valorFatura.toFixed(2)}
-                    </td>
-                    <td class="py-3 px-4 text-xs text-gray-400">Dia ${cartao.vencimento}</td>
-                    <td class="py-3 px-4 text-center">
-                        <input type="checkbox" class="w-5 h-5 rounded bg-gray-900 border-gray-700 text-sky-600 cursor-pointer" ${info.pago ? 'checked' : ''} onchange="toggleStatusPagoConta('${cartao.nome}')">
-                    </td>
-                `;
-                tbody.appendChild(tr);
+               let tr = document.createElement('tr');
+tr.className = "hover:bg-gray-800/40 transition text-xs sm:text-sm";
+tr.innerHTML = `
+    <td class="py-2 px-2 sm:py-3 sm:px-4 font-normal text-white leading-tight">${cartao.nome}</td>
+    <td class="py-2 px-2 sm:py-3 sm:px-4 font-normal ${info.pago ? 'line-through text-gray-500' : 'text-white'} whitespace-nowrap">
+        R$ ${valorFatura.toFixed(2)}
+    </td>
+    <td class="py-2 px-2 sm:py-3 sm:px-4 text-[11px] sm:text-xs text-gray-400 whitespace-nowrap">Dia ${cartao.vencimento}</td>
+    <td class="py-2 px-1 sm:py-3 sm:px-4 text-center">
+        <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 rounded bg-gray-900 border-gray-700 text-sky-600 cursor-pointer" ${info.pago ? 'checked' : ''} onchange="toggleStatusPagoConta('${cartao.nome}')">
+    </td>
+`;
+tbody.appendChild(tr);
             });
 
             let saldoFinal = totalReceitasGeral - totalDebitosPendentes;
