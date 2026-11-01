@@ -158,7 +158,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v4.7</span>
+            <span>DESPAG v4.8</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -295,14 +295,29 @@
                     </form>
                 </div>
 
-                <div class="neon-card p-6 rounded-2xl flex flex-col justify-between">
+                <!-- CARD DE SINCRONIZAÇÃO E BACKUP ENTRE DISPOSITIVOS -->
+                <div class="neon-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
                     <div>
-                        <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Sincronização da Base de Dados</h3>
-                        <p class="text-xs text-gray-400 mt-4 leading-relaxed">
-                            Caso queira restaurar instantaneamente todos os lançamentos oficiais das faturas, contas e terceiros cadastrados, clique no botão abaixo.
+                        <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Sincronização & Backup de Dados</h3>
+                        <p class="text-xs text-gray-400 mt-3 leading-relaxed">
+                            Use os botões de <b>Backup</b> para transferir seus lançamentos entre o PC e o Celular. Ou use a <b>Sincronização</b> para fundir com o código base oficial.
                         </p>
-                        <button onclick="forcarResetEstado()" class="mt-6 w-full py-3 bg-gray-800 hover:bg-sky-600 text-white font-bold text-xs rounded-xl border border-gray-700 transition">
-                            <i class="fa-solid fa-arrows-rotate mr-1"></i> Sincronizar Base Oficial
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                            <button onclick="exportarBackupJSON()" class="py-3 px-4 bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+                                <i class="fa-solid fa-file-export text-sm"></i> Exportar Backup (PC)
+                            </button>
+                            <button onclick="document.getElementById('fileInputBackup').click()" class="py-3 px-4 bg-sky-700 hover:bg-sky-600 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+                                <i class="fa-solid fa-file-import text-sm"></i> Importar Backup (Celular)
+                            </button>
+                            <!-- Input File Oculto -->
+                            <input type="file" id="fileInputBackup" accept=".json" onchange="importarBackupJSON(event)" class="hidden">
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-800 pt-4">
+                        <button onclick="forcarResetEstado()" class="w-full py-3 bg-gray-800 hover:bg-sky-600 text-white font-bold text-xs rounded-xl border border-gray-700 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-arrows-rotate"></i> Sincronizar Base Oficial
                         </button>
                     </div>
                 </div>
@@ -958,57 +973,93 @@
             localStorage.setItem('DESPAG_STATE', JSON.stringify(appState));
         }
 
-      function forcarResetEstado() {
-    if (confirm("Deseja sincronizar a base oficial? Suas edições, novas receitas, cobranças de terceiros e cartões cadastrados serão 100% preservados!")) {
-        let estadoOficial = JSON.parse(JSON.stringify(estadoPadrao));
+        // --- NOVAS FUNÇÕES DE EXPORTAR E IMPORTAR BACKUP JSON ---
+        function exportarBackupJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+            const downloadAnchor = document.createElement('a');
+            const dataAtual = new Date().toISOString().split('T')[0];
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `despag_backup_${dataAtual}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
 
-        if (appState) {
-            if (appState.receitasProprias && appState.receitasProprias.length > 0) {
-                estadoOficial.receitasProprias = appState.receitasProprias;
-            }
+        function importarBackupJSON(event) {
+            const fileReader = new FileReader();
+            const file = event.target.files[0];
 
-            if (appState.terceirosGrupos && appState.terceirosGrupos.length > 0) {
-                estadoOficial.terceirosGrupos = appState.terceirosGrupos;
-            }
+            if (!file) return;
 
-            if (appState.cartoes && appState.cartoes.length > 0) {
-                let cartoesMap = new Map();
-                estadoOficial.cartoes.forEach(c => cartoesMap.set(c.id, c));
-                appState.cartoes.forEach(c => cartoesMap.set(c.id, c));
-                estadoOficial.cartoes = Array.from(cartoesMap.values());
-            }
-
-            if (appState.comprasBase && appState.comprasBase.length > 0) {
-                let comprasMap = new Map();
-                estadoOficial.comprasBase.forEach(c => comprasMap.set(c.id, c));
-                appState.comprasBase.forEach(c => comprasMap.set(c.id, c));
-                estadoOficial.comprasBase = Array.from(comprasMap.values());
-            }
-
-            if (appState.faturasIniciais) {
-                for (let mes in appState.faturasIniciais) {
-                    if (!estadoOficial.faturasIniciais[mes]) {
-                        estadoOficial.faturasIniciais[mes] = {};
+            fileReader.onload = function(e) {
+                try {
+                    const parsedState = JSON.parse(e.target.result);
+                    if (parsedState && parsedState.cartoes && parsedState.comprasBase) {
+                        appState = parsedState;
+                        salvarEstado();
+                        renderDashboard();
+                        alert("Backup importado com sucesso! Seus dados foram 100% atualizados neste dispositivo.");
+                    } else {
+                        alert("Arquivo de backup inválido.");
                     }
-                    for (let cNome in appState.faturasIniciais[mes]) {
-                        if (appState.faturasIniciais[mes][cNome].pago) {
-                            if (!estadoOficial.faturasIniciais[mes][cNome]) {
-                                estadoOficial.faturasIniciais[mes][cNome] = { valor: 0, pago: true };
-                            } else {
-                                estadoOficial.faturasIniciais[mes][cNome].pago = true;
+                } catch (err) {
+                    alert("Erro ao ler o arquivo de backup JSON.");
+                }
+            };
+            fileReader.readAsText(file);
+        }
+
+        function forcarResetEstado() {
+            if (confirm("Deseja sincronizar a base oficial? Suas edições, novas receitas, cobranças de terceiros e cartões cadastrados serão 100% preservados!")) {
+                let estadoOficial = JSON.parse(JSON.stringify(estadoPadrao));
+
+                if (appState) {
+                    if (appState.receitasProprias && appState.receitasProprias.length > 0) {
+                        estadoOficial.receitasProprias = appState.receitasProprias;
+                    }
+
+                    if (appState.terceirosGrupos && appState.terceirosGrupos.length > 0) {
+                        estadoOficial.terceirosGrupos = appState.terceirosGrupos;
+                    }
+
+                    if (appState.cartoes && appState.cartoes.length > 0) {
+                        let cartoesMap = new Map();
+                        estadoOficial.cartoes.forEach(c => cartoesMap.set(c.id, c));
+                        appState.cartoes.forEach(c => cartoesMap.set(c.id, c));
+                        estadoOficial.cartoes = Array.from(cartoesMap.values());
+                    }
+
+                    if (appState.comprasBase && appState.comprasBase.length > 0) {
+                        let comprasMap = new Map();
+                        estadoOficial.comprasBase.forEach(c => comprasMap.set(c.id, c));
+                        appState.comprasBase.forEach(c => comprasMap.set(c.id, c));
+                        estadoOficial.comprasBase = Array.from(comprasMap.values());
+                    }
+
+                    if (appState.faturasIniciais) {
+                        for (let mes in appState.faturasIniciais) {
+                            if (!estadoOficial.faturasIniciais[mes]) {
+                                estadoOficial.faturasIniciais[mes] = {};
+                            }
+                            for (let cNome in appState.faturasIniciais[mes]) {
+                                if (appState.faturasIniciais[mes][cNome].pago) {
+                                    if (!estadoOficial.faturasIniciais[mes][cNome]) {
+                                        estadoOficial.faturasIniciais[mes][cNome] = { valor: 0, pago: true };
+                                    } else {
+                                        estadoOficial.faturasIniciais[mes][cNome].pago = true;
+                                    }
+                                }
                             }
                         }
                     }
                 }
+
+                appState = estadoOficial;
+                salvarEstado();
+                renderDashboard();
+                alert("Base sincronizada com sucesso! Todos os seus dados, lançamentos e edições foram preservados.");
             }
         }
-
-        appState = estadoOficial;
-        salvarEstado();
-        renderDashboard();
-        alert("Base sincronizada com sucesso! Todos os seus dados, lançamentos e edições foram preservados.");
-    }
-}
 
         function recalcularFaturasGerais() {
             let faturasCalculadas = {};
