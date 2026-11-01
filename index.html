@@ -14,6 +14,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="DESPAG">
 
+    <!-- Google Fonts - Share Tech Mono (Estilo Terminal / Cripto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -21,6 +26,10 @@
             darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['"Share Tech Mono"', 'monospace'],
+                        mono: ['"Share Tech Mono"', 'monospace'],
+                    },
                     colors: {
                         darkbg: '#090d16',
                         darkcard: '#111827',
@@ -45,7 +54,7 @@
         body {
             background-color: #090d16;
             color: #f1f5f9;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Share Tech Mono', monospace;
         }
 
         .neon-card {
@@ -89,12 +98,12 @@
             <form onsubmit="autenticarLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-gray-400 mb-1">Usuário Administrador</label>
-                    <input type="text" id="loginUser" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" placeholder="Digite o usuário" required>
+                    <input type="text" id="loginUser" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" placeholder="Digite o usuário" required>
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-gray-400 mb-1">Senha de Acesso</label>
-                    <input type="password" id="loginPass" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" placeholder="Digite a senha" required>
+                    <input type="password" id="loginPass" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" placeholder="Digite a senha" required>
                 </div>
 
                 <div id="loginError" class="hidden text-xs text-rose-500 bg-rose-950/50 p-2.5 rounded-lg border border-rose-800 text-center">
@@ -149,7 +158,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v4.5</span>
+            <span>DESPAG v4.7</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -173,7 +182,7 @@
 
             <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
                 <i class="fa-regular fa-calendar text-sky-400"></i>
-                <select id="selectMes" onchange="renderDashboard()" class="bg-gray-900 text-sky-300 font-bold border border-sky-950 focus:border-sky-500 rounded-xl px-4 py-2 text-sm focus:outline-none cursor-pointer">
+                <select id="selectMes" onchange="renderDashboard()" class="bg-gray-900 text-sky-300 font-bold border border-sky-950 focus:border-sky-500 rounded-xl px-4 py-2 text-sm focus:outline-none cursor-pointer font-mono">
                     <option value="2026-NOV" selected>2026 - Novembro</option>
                     <option value="2026-DEZ">2026 - Dezembro</option>
                     <option value="2027-JAN">2027 - Janeiro</option>
@@ -199,7 +208,7 @@
                 <div class="neon-card p-6 rounded-2xl">
                     <span class="text-xs font-semibold text-gray-400 uppercase">Total Receitas do Mês</span>
                     <h3 class="text-3xl font-extrabold text-emerald-400 mt-2" id="dashTotalReceita">R$ 0,00</h3>
-                    <p class="text-xs text-gray-500 mt-3">Somente Receitas Próprias</p>
+                    <p class="text-xs text-gray-500 mt-3">Receitas Próprias + Repasses de Terceiros</p>
                 </div>
 
                 <div class="neon-card p-6 rounded-2xl">
@@ -273,14 +282,14 @@
                 <div class="neon-card p-6 rounded-2xl space-y-4">
                     <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Lançar Compra / Despesa Manual</h3>
                     <form id="formNovaCompra" onsubmit="salvarCompra(event)" class="space-y-4">
-                        <input type="text" id="compraDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Descrição da Compra" required>
+                        <input type="text" id="compraDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" placeholder="Descrição da Compra" required>
                         <div class="grid grid-cols-2 gap-4">
-                            <select id="compraCartao" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required></select>
-                            <input type="date" id="compraData" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                            <select id="compraCartao" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required></select>
+                            <input type="date" id="compraData" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            <input type="number" step="0.01" id="compraValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Valor Total R$" required>
-                            <input type="number" id="compraParcelas" min="1" value="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                            <input type="number" step="0.01" id="compraValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" placeholder="Valor Total R$" required>
+                            <input type="number" id="compraParcelas" min="1" value="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
                         </div>
                         <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold rounded-xl shadow-neon-blue">Registrar Compra</button>
                     </form>
@@ -290,7 +299,7 @@
                     <div>
                         <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Sincronização da Base de Dados</h3>
                         <p class="text-xs text-gray-400 mt-4 leading-relaxed">
-                            Caso queira restaurar instantaneamente todos os lançamentos oficiais das faturas e terceiros cadastrados, clique no botão abaixo.
+                            Caso queira restaurar instantaneamente todos os lançamentos oficiais das faturas, contas e terceiros cadastrados, clique no botão abaixo.
                         </p>
                         <button onclick="forcarResetEstado()" class="mt-6 w-full py-3 bg-gray-800 hover:bg-sky-600 text-white font-bold text-xs rounded-xl border border-gray-700 transition">
                             <i class="fa-solid fa-arrows-rotate mr-1"></i> Sincronizar Base Oficial
@@ -308,8 +317,8 @@
                     <h3 class="text-lg font-bold text-emerald-400 border-b border-gray-800 pb-3">Receitas Próprias & Rendimentos</h3>
                     
                     <form onsubmit="adicionarReceita(event)" class="flex gap-2">
-                        <input type="text" id="recDesc" placeholder="Descrição (Ex: Salário Base)" class="flex-1 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
-                        <input type="number" step="0.01" id="recValor" placeholder="Valor R$" class="w-32 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                        <input type="text" id="recDesc" placeholder="Descrição (Ex: Salário Base)" class="flex-1 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
+                        <input type="number" step="0.01" id="recValor" placeholder="Valor R$" class="w-32 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
                         <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-xl font-bold"><i class="fa-solid fa-plus"></i></button>
                     </form>
 
@@ -321,22 +330,22 @@
                     <h3 class="text-lg font-bold text-sky-400 border-b border-gray-800 pb-3">Receita de Terceiros (Cartão Compartilhado)</h3>
                     
                     <form onsubmit="adicionarTerceiro(event)" class="space-y-3">
-                        <input type="text" id="tercNome" placeholder="Nome da Pessoa (Ex: Ivo)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
-                        <input type="text" id="tercDesc" placeholder="Descrição da Despesa" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                        <input type="text" id="tercNome" placeholder="Nome da Pessoa (Ex: Ivo)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
+                        <input type="text" id="tercDesc" placeholder="Descrição da Despesa" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
                         
                         <div class="grid grid-cols-2 gap-3">
-                            <input type="number" step="0.01" id="tercValorTotal" placeholder="Valor Total (R$)" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
-                            <select id="tercCartao" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required></select>
+                            <input type="number" step="0.01" id="tercValorTotal" placeholder="Valor Total (R$)" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
+                            <select id="tercCartao" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required></select>
                         </div>
 
                         <div class="grid grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-xs font-semibold text-gray-400 mb-1">Nº de Parcelas</label>
-                                <input type="number" id="tercParcelas" min="1" value="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                                <input type="number" id="tercParcelas" min="1" value="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-gray-400 mb-1">Mês de Início</label>
-                                <select id="tercMesInicio" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
+                                <select id="tercMesInicio" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
                                     <option value="2026-NOV" selected>2026 - Novembro</option>
                                     <option value="2026-DEZ">2026 - Dezembro</option>
                                     <option value="2027-JAN">2027 - Janeiro</option>
@@ -371,9 +380,9 @@
                 <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Admin de Cartões/Despesas Fixas & Dias de Fechamento</h3>
                 
                 <form onsubmit="cadastrarCartao(event)" class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                    <input type="text" id="cardNome" class="sm:col-span-2 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Nome do Cartão ou Despesa Fixa" required>
-                    <input type="number" id="cardFechamento" min="1" max="31" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Dia Fechamento" required>
-                    <input type="number" id="cardVencimento" min="1" max="31" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" placeholder="Dia Vencimento" required>
+                    <input type="text" id="cardNome" class="sm:col-span-2 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" placeholder="Nome do Cartão ou Despesa Fixa" required>
+                    <input type="number" id="cardFechamento" min="1" max="31" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" placeholder="Dia Fechamento" required>
+                    <input type="number" id="cardVencimento" min="1" max="31" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" placeholder="Dia Vencimento" required>
                     <button type="submit" class="sm:col-span-4 py-3 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-neon-blue">Cadastrar Cartões/Despesas Fixas</button>
                 </form>
 
@@ -409,17 +418,17 @@
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-gray-900/60 p-3 rounded-xl border border-gray-800">
                     <div>
                         <label class="block text-[10px] uppercase font-semibold text-gray-400 mb-1">Filtrar por Descrição</label>
-                        <input type="text" id="filtroDesc" oninput="renderBaseDados()" placeholder="Digite para filtrar..." class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-xs text-white focus:border-sky-500 focus:outline-none">
+                        <input type="text" id="filtroDesc" oninput="renderBaseDados()" placeholder="Digite para filtrar..." class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-xs text-white focus:border-sky-500 focus:outline-none font-mono">
                     </div>
                     <div>
                         <label class="block text-[10px] uppercase font-semibold text-gray-400 mb-1">Filtrar por Cartão / Conta</label>
-                        <select id="filtroCartao" onchange="renderBaseDados()" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-xs text-white focus:border-sky-500 focus:outline-none">
+                        <select id="filtroCartao" onchange="renderBaseDados()" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-xs text-white focus:border-sky-500 focus:outline-none font-mono">
                             <option value="">Todos os Cartões</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-[10px] uppercase font-semibold text-gray-400 mb-1">Filtrar por Ano / Mês (Data)</label>
-                        <input type="text" id="filtroData" oninput="renderBaseDados()" placeholder="Ex: 2026-11" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-xs text-white focus:border-sky-500 focus:outline-none">
+                        <input type="text" id="filtroData" oninput="renderBaseDados()" placeholder="Ex: 2026-11" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-xs text-white focus:border-sky-500 focus:outline-none font-mono">
                     </div>
                 </div>
 
@@ -457,26 +466,26 @@
                 <input type="hidden" id="editCompraId">
                 <div>
                     <label class="block text-xs font-semibold text-gray-400 mb-1">Descrição</label>
-                    <input type="text" id="editCompraDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                    <input type="text" id="editCompraDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-gray-400 mb-1">Cartão / Conta</label>
-                        <select id="editCompraCartao" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required></select>
+                        <select id="editCompraCartao" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required></select>
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-400 mb-1">Data</label>
-                        <input type="date" id="editCompraData" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                        <input type="date" id="editCompraData" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-gray-400 mb-1">Valor Total (R$)</label>
-                        <input type="number" step="0.01" id="editCompraValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                        <input type="number" step="0.01" id="editCompraValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-400 mb-1">Parcelas</label>
-                        <input type="number" id="editCompraParcelas" min="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                        <input type="number" id="editCompraParcelas" min="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
                     </div>
                 </div>
                 <div class="flex gap-2">
@@ -499,16 +508,16 @@
                 <input type="hidden" id="editCartaoId">
                 <div>
                     <label class="block text-xs font-semibold text-gray-400 mb-1">Nome do Cartão ou Despesa Fixa</label>
-                    <input type="text" id="editCartaoNome" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                    <input type="text" id="editCartaoNome" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-gray-400 mb-1">Dia Fechamento</label>
-                        <input type="number" id="editCartaoFechamento" min="1" max="31" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                        <input type="number" id="editCartaoFechamento" min="1" max="31" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-400 mb-1">Dia Vencimento</label>
-                        <input type="number" id="editCartaoVencimento" min="1" max="31" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                        <input type="number" id="editCartaoVencimento" min="1" max="31" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
                     </div>
                 </div>
                 <div class="flex gap-2">
@@ -531,11 +540,11 @@
                 <input type="hidden" id="editRecId">
                 <div>
                     <label class="block text-xs font-semibold text-gray-400 mb-1">Descrição</label>
-                    <input type="text" id="editRecDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                    <input type="text" id="editRecDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-gray-400 mb-1">Valor (R$)</label>
-                    <input type="number" step="0.01" id="editRecValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none" required>
+                    <input type="number" step="0.01" id="editRecValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
                 </div>
                 <div class="flex gap-2">
                     <button type="button" onclick="fecharModalEditReceita()" class="w-1/2 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold rounded-xl">Cancelar</button>
@@ -565,7 +574,11 @@
                 { id: 6, nome: "CMT I Andrielly", fechamento: 25, vencimento: 5 },
                 { id: 7, nome: "CMT I Guilherme", fechamento: 25, vencimento: 5 },
                 { id: 8, nome: "Natação", fechamento: 10, vencimento: 10 },
-                { id: 9, nome: "Mercado Pago", fechamento: 29, vencimento: 4 }
+                { id: 9, nome: "Mercado Pago", fechamento: 29, vencimento: 4 },
+                { id: 10, nome: "Equatorial i", fechamento: 16, vencimento: 6 },
+                { id: 11, nome: "Equatorial ii", fechamento: 15, vencimento: 11 },
+                { id: 12, nome: "Escola | Theodoro", fechamento: 20, vencimento: 5 },
+                { id: 13, nome: "Mercado Pago Edilene", fechamento: 20, vencimento: 17 }
             ],
             faturasIniciais: {},
             receitasProprias: [
@@ -729,6 +742,14 @@
                 }
             ],
             comprasBase: [
+                // EQUATORIAL I (NOVEMBRO 2026)
+                { id: 951, data: "2026-11-06", desc: "Equatorial I - Vencimento Nov", cartao: "Equatorial i", valor: 761.79, parcelas: 1, parceladoValor: 761.79 },
+                // EQUATORIAL II (NOVEMBRO 2026)
+                { id: 952, data: "2026-11-11", desc: "Equatorial II - Vencimento Nov", cartao: "Equatorial ii", valor: 29.37, parcelas: 1, parceladoValor: 29.37 },
+                // ESCOLA | THEODORO (NOV E DEZ 2026)
+                { id: 953, data: "2026-11-05", desc: "Escola | Theodoro - Novembro", cartao: "Escola | Theodoro", valor: 382.50, parcelas: 1, parceladoValor: 382.50 },
+                { id: 954, data: "2026-12-05", desc: "Escola | Theodoro - Dezembro", cartao: "Escola | Theodoro", valor: 382.50, parcelas: 1, parceladoValor: 382.50 },
+
                 // FINANCIAMENTO 99PAY (NOV/2026 A ABR/2027)
                 { id: 991, data: "2026-11-09", desc: "Financiamento 99Pay - Parcela Nov", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
                 { id: 992, data: "2026-12-08", desc: "Financiamento 99Pay - Parcela Dez", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
@@ -928,7 +949,7 @@
 
         // Força limpar o cache antigo para carregar a nova estrutura
         let appState = JSON.parse(localStorage.getItem('DESPAG_STATE'));
-        if (!appState || !appState.comprasBase || appState.comprasBase.length < 55) {
+        if (!appState || !appState.comprasBase || appState.comprasBase.length < 58) {
             appState = JSON.parse(JSON.stringify(estadoPadrao));
             localStorage.setItem('DESPAG_STATE', JSON.stringify(appState));
         }
@@ -949,7 +970,6 @@
         function recalcularFaturasGerais() {
             let faturasCalculadas = {};
 
-            // Inicializa a estrutura para todos os meses cronológicos e cartões cadastrados
             MESES_CHRONO.forEach(m => {
                 faturasCalculadas[m] = {};
                 appState.cartoes.forEach(cartao => {
@@ -957,7 +977,6 @@
                 });
             });
 
-            // 1. Processa todas as compras da base distribuindo pelas parcelas corretas
             if (appState.comprasBase) {
                 appState.comprasBase.forEach(compra => {
                     const cartaoObj = appState.cartoes.find(c => c.nome === compra.cartao);
@@ -1002,7 +1021,6 @@
                 });
             }
 
-            // 2. Ajustes e sobrescritas específicas oficiais para Novembro de 2026
             if (faturasCalculadas["2026-NOV"]) {
                 if (faturasCalculadas["2026-NOV"]["Mercado Pago"]) {
                     faturasCalculadas["2026-NOV"]["Mercado Pago"].valor = 2854.73;
@@ -1136,6 +1154,22 @@
             appState.mesAtivo = mes;
 
             let totalReceitasProprias = appState.receitasProprias.reduce((a, b) => a + b.valor, 0);
+
+            let totalTerceirosMes = 0;
+            if (appState.terceirosGrupos) {
+                appState.terceirosGrupos.forEach(g => {
+                    if (g.parcelas) {
+                        g.parcelas.forEach(p => {
+                            if (p.mes === mes) {
+                                totalTerceirosMes += p.valor;
+                            }
+                        });
+                    }
+                });
+            }
+
+            let totalReceitasGeral = totalReceitasProprias + totalTerceirosMes;
+
             let dadosFaturas = appState.faturasIniciais[mes] || {};
             let tbody = document.getElementById('tbodyDashboard');
             tbody.innerHTML = '';
@@ -1165,9 +1199,9 @@
                 tbody.appendChild(tr);
             });
 
-            let saldoFinal = totalReceitasProprias - totalDebitosPendentes;
+            let saldoFinal = totalReceitasGeral - totalDebitosPendentes;
 
-            document.getElementById('dashTotalReceita').textContent = `R$ ${totalReceitasProprias.toFixed(2)}`;
+            document.getElementById('dashTotalReceita').textContent = `R$ ${totalReceitasGeral.toFixed(2)}`;
             document.getElementById('dashTotalDebitos').textContent = `R$ ${totalDebitosPendentes.toFixed(2)}`;
             document.getElementById('dashSaldo').textContent = `R$ ${saldoFinal.toFixed(2)}`;
 
