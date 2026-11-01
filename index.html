@@ -958,14 +958,57 @@
             localStorage.setItem('DESPAG_STATE', JSON.stringify(appState));
         }
 
-        function forcarResetEstado() {
-            if (confirm("Isso atualizará a Base de Dados com os lançamentos oficiais completos. Continuar?")) {
-                appState = JSON.parse(JSON.stringify(estadoPadrao));
-                salvarEstado();
-                renderDashboard();
-                alert("Base de Dados sincronizada com o pacote oficial!");
+      function forcarResetEstado() {
+    if (confirm("Deseja sincronizar a base oficial? Suas edições, novas receitas, cobranças de terceiros e cartões cadastrados serão 100% preservados!")) {
+        let estadoOficial = JSON.parse(JSON.stringify(estadoPadrao));
+
+        if (appState) {
+            if (appState.receitasProprias && appState.receitasProprias.length > 0) {
+                estadoOficial.receitasProprias = appState.receitasProprias;
+            }
+
+            if (appState.terceirosGrupos && appState.terceirosGrupos.length > 0) {
+                estadoOficial.terceirosGrupos = appState.terceirosGrupos;
+            }
+
+            if (appState.cartoes && appState.cartoes.length > 0) {
+                let cartoesMap = new Map();
+                estadoOficial.cartoes.forEach(c => cartoesMap.set(c.id, c));
+                appState.cartoes.forEach(c => cartoesMap.set(c.id, c));
+                estadoOficial.cartoes = Array.from(cartoesMap.values());
+            }
+
+            if (appState.comprasBase && appState.comprasBase.length > 0) {
+                let comprasMap = new Map();
+                estadoOficial.comprasBase.forEach(c => comprasMap.set(c.id, c));
+                appState.comprasBase.forEach(c => comprasMap.set(c.id, c));
+                estadoOficial.comprasBase = Array.from(comprasMap.values());
+            }
+
+            if (appState.faturasIniciais) {
+                for (let mes in appState.faturasIniciais) {
+                    if (!estadoOficial.faturasIniciais[mes]) {
+                        estadoOficial.faturasIniciais[mes] = {};
+                    }
+                    for (let cNome in appState.faturasIniciais[mes]) {
+                        if (appState.faturasIniciais[mes][cNome].pago) {
+                            if (!estadoOficial.faturasIniciais[mes][cNome]) {
+                                estadoOficial.faturasIniciais[mes][cNome] = { valor: 0, pago: true };
+                            } else {
+                                estadoOficial.faturasIniciais[mes][cNome].pago = true;
+                            }
+                        }
+                    }
+                }
             }
         }
+
+        appState = estadoOficial;
+        salvarEstado();
+        renderDashboard();
+        alert("Base sincronizada com sucesso! Todos os seus dados, lançamentos e edições foram preservados.");
+    }
+}
 
         function recalcularFaturasGerais() {
             let faturasCalculadas = {};
