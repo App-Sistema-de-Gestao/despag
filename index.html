@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DESPAG - Painel de Controle 2026</title>
+    <title>DESPAG - Painel de Controle 2026/2027</title>
     
     <!-- Ícones do App (PWA) e Navegador -->
     <link rel="manifest" href="manifest.json">
@@ -149,7 +149,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v4.1</span>
+            <span>DESPAG v4.2</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -174,18 +174,20 @@
             <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
                 <i class="fa-regular fa-calendar text-sky-400"></i>
                 <select id="selectMes" onchange="renderDashboard()" class="bg-gray-900 text-sky-300 font-bold border border-sky-950 focus:border-sky-500 rounded-xl px-4 py-2 text-sm focus:outline-none cursor-pointer">
-                    <option value="JAN">Janeiro</option>
-                    <option value="FEV">Fevereiro</option>
-                    <option value="MAR">Março</option>
-                    <option value="ABR">Abril</option>
-                    <option value="MAI">Maio</option>
-                    <option value="JUN">Junho</option>
-                    <option value="JUL">Julho</option>
-                    <option value="AGO">Agosto</option>
-                    <option value="SET">Setembro</option>
-                    <option value="OUT">Outubro</option>
-                    <option value="NOV" selected>Novembro</option>
-                    <option value="DEZ">Dezembro</option>
+                    <option value="2026-NOV" selected>2026 - Novembro</option>
+                    <option value="2026-DEZ">2026 - Dezembro</option>
+                    <option value="2027-JAN">2027 - Janeiro</option>
+                    <option value="2027-FEV">2027 - Fevereiro</option>
+                    <option value="2027-MAR">2027 - Março</option>
+                    <option value="2027-ABR">2027 - Abril</option>
+                    <option value="2027-MAI">2027 - Maio</option>
+                    <option value="2027-JUN">2027 - Junho</option>
+                    <option value="2027-JUL">2027 - Julho</option>
+                    <option value="2027-AGO">2027 - Agosto</option>
+                    <option value="2027-SET">2027 - Setembro</option>
+                    <option value="2027-OUT">2027 - Outubro</option>
+                    <option value="2027-NOV">2027 - Novembro</option>
+                    <option value="2027-DEZ">2027 - Dezembro</option>
                 </select>
             </div>
         </header>
@@ -335,18 +337,20 @@
                             <div>
                                 <label class="block text-xs font-semibold text-gray-400 mb-1">Mês de Início</label>
                                 <select id="tercMesInicio" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white" required>
-                                    <option value="JAN">Janeiro</option>
-                                    <option value="FEV">Fevereiro</option>
-                                    <option value="MAR">Março</option>
-                                    <option value="ABR">Abril</option>
-                                    <option value="MAI">Maio</option>
-                                    <option value="JUN">Junho</option>
-                                    <option value="JUL">Julho</option>
-                                    <option value="AGO">Agosto</option>
-                                    <option value="SET">Setembro</option>
-                                    <option value="OUT">Outubro</option>
-                                    <option value="NOV" selected>Novembro</option>
-                                    <option value="DEZ">Dezembro</option>
+                                    <option value="2026-NOV" selected>2026 - Novembro</option>
+                                    <option value="2026-DEZ">2026 - Dezembro</option>
+                                    <option value="2027-JAN">2027 - Janeiro</option>
+                                    <option value="2027-FEV">2027 - Fevereiro</option>
+                                    <option value="2027-MAR">2027 - Março</option>
+                                    <option value="2027-ABR">2027 - Abril</option>
+                                    <option value="2027-MAI">2027 - Maio</option>
+                                    <option value="2027-JUN">2027 - Junho</option>
+                                    <option value="2027-JUL">2027 - Julho</option>
+                                    <option value="2027-AGO">2027 - Agosto</option>
+                                    <option value="2027-SET">2027 - Setembro</option>
+                                    <option value="2027-OUT">2027 - Outubro</option>
+                                    <option value="2027-NOV">2027 - Novembro</option>
+                                    <option value="2027-DEZ">2027 - Dezembro</option>
                                 </select>
                             </div>
                         </div>
@@ -516,10 +520,15 @@
 
     <!-- SCRIPT DE LÓGICA E REGRAS -->
     <script>
-        const MESES = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
+        const MESES_CHRONO = [
+            "2026-NOV", "2026-DEZ",
+            "2027-JAN", "2027-FEV", "2027-MAR", "2027-ABR", 
+            "2027-MAI", "2027-JUN", "2027-JUL", "2027-AGO", 
+            "2027-SET", "2027-OUT", "2027-NOV", "2027-DEZ"
+        ];
 
         const estadoPadrao = {
-            mesAtivo: "NOV",
+            mesAtivo: "2026-NOV",
             cartoes: [
                 { id: 1, nome: "Nubank Neudson", fechamento: 25, vencimento: 5 },
                 { id: 2, nome: "Nubank Edilene", fechamento: 23, vencimento: 3 },
@@ -544,10 +553,10 @@
                     cartao: "Nubank Neudson",
                     valorTotal: 200.00,
                     numParcelas: 2,
-                    mesInicio: "NOV",
+                    mesInicio: "2026-NOV",
                     parcelas: [
-                        { mes: "NOV", numero: 1, valor: 100.00, pago: false },
-                        { mes: "DEZ", numero: 2, valor: 100.00, pago: false }
+                        { mes: "2026-NOV", numero: 1, valor: 100.00, pago: false },
+                        { mes: "2026-DEZ", numero: 2, valor: 100.00, pago: false }
                     ]
                 },
                 {
@@ -557,9 +566,9 @@
                     cartao: "Nubank Neudson",
                     valorTotal: 203.88,
                     numParcelas: 1,
-                    mesInicio: "NOV",
+                    mesInicio: "2026-NOV",
                     parcelas: [
-                        { mes: "NOV", numero: 1, valor: 203.88, pago: false }
+                        { mes: "2026-NOV", numero: 1, valor: 203.88, pago: false }
                     ]
                 },
                 {
@@ -569,10 +578,10 @@
                     cartao: "Nubank Neudson",
                     valorTotal: 387.50,
                     numParcelas: 2,
-                    mesInicio: "NOV",
+                    mesInicio: "2026-NOV",
                     parcelas: [
-                        { mes: "NOV", numero: 1, valor: 193.75, pago: false },
-                        { mes: "DEZ", numero: 2, valor: 193.75, pago: false }
+                        { mes: "2026-NOV", numero: 1, valor: 193.75, pago: false },
+                        { mes: "2026-DEZ", numero: 2, valor: 193.75, pago: false }
                     ]
                 },
                 {
@@ -582,14 +591,14 @@
                     cartao: "Nubank Neudson",
                     valorTotal: 1283.34,
                     numParcelas: 6,
-                    mesInicio: "NOV",
+                    mesInicio: "2026-NOV",
                     parcelas: [
-                        { mes: "NOV", numero: 1, valor: 213.89, pago: false },
-                        { mes: "DEZ", numero: 2, valor: 213.89, pago: false },
-                        { mes: "JAN", numero: 3, valor: 213.89, pago: false },
-                        { mes: "FEV", numero: 4, valor: 213.89, pago: false },
-                        { mes: "MAR", numero: 5, valor: 213.89, pago: false },
-                        { mes: "ABR", numero: 6, valor: 213.89, pago: false }
+                        { mes: "2026-NOV", numero: 1, valor: 213.89, pago: false },
+                        { mes: "2026-DEZ", numero: 2, valor: 213.89, pago: false },
+                        { mes: "2027-JAN", numero: 3, valor: 213.89, pago: false },
+                        { mes: "2027-FEV", numero: 4, valor: 213.89, pago: false },
+                        { mes: "2027-MAR", numero: 5, valor: 213.89, pago: false },
+                        { mes: "2027-ABR", numero: 6, valor: 213.89, pago: false }
                     ]
                 },
                 {
@@ -599,13 +608,13 @@
                     cartao: "Nubank Neudson",
                     valorTotal: 2800.00,
                     numParcelas: 5,
-                    mesInicio: "NOV",
+                    mesInicio: "2026-NOV",
                     parcelas: [
-                        { mes: "NOV", numero: 1, valor: 560.00, pago: false },
-                        { mes: "DEZ", numero: 2, valor: 560.00, pago: false },
-                        { mes: "JAN", numero: 3, valor: 560.00, pago: false },
-                        { mes: "FEV", numero: 4, valor: 560.00, pago: false },
-                        { mes: "MAR", numero: 5, valor: 560.00, pago: false }
+                        { mes: "2026-NOV", numero: 1, valor: 560.00, pago: false },
+                        { mes: "2026-DEZ", numero: 2, valor: 560.00, pago: false },
+                        { mes: "2027-JAN", numero: 3, valor: 560.00, pago: false },
+                        { mes: "2027-FEV", numero: 4, valor: 560.00, pago: false },
+                        { mes: "2027-MAR", numero: 5, valor: 560.00, pago: false }
                     ]
                 },
                 {
@@ -614,16 +623,16 @@
                     desc: "Acordo / Fatura Compartilhada",
                     cartao: "Nubank Neudson",
                     valorTotal: 1520.00,
-                    numParcelas: 6,
-                    mesInicio: "NOV",
+                    numParcelas: 7,
+                    mesInicio: "2026-NOV",
                     parcelas: [
-                        { mes: "NOV", numero: 1, valor: 570.00, pago: false },
-                        { mes: "DEZ", numero: 2, valor: 190.00, pago: false },
-                        { mes: "JAN", numero: 3, valor: 190.00, pago: false },
-                        { mes: "FEV", numero: 4, valor: 190.00, pago: false },
-                        { mes: "MAR", numero: 5, valor: 190.00, pago: false },
-                        { mes: "ABR", numero: 6, valor: 190.00, pago: false },
-                        { mes: "MAI", numero: 7, valor: 190.00, pago: false }
+                        { mes: "2026-NOV", numero: 1, valor: 570.00, pago: false },
+                        { mes: "2026-DEZ", numero: 2, valor: 190.00, pago: false },
+                        { mes: "2027-JAN", numero: 3, valor: 190.00, pago: false },
+                        { mes: "2027-FEV", numero: 4, valor: 190.00, pago: false },
+                        { mes: "2027-MAR", numero: 5, valor: 190.00, pago: false },
+                        { mes: "2027-ABR", numero: 6, valor: 190.00, pago: false },
+                        { mes: "2027-MAI", numero: 7, valor: 190.00, pago: false }
                     ]
                 },
                 {
@@ -633,10 +642,10 @@
                     cartao: "Nubank Neudson",
                     valorTotal: 287.96,
                     numParcelas: 2,
-                    mesInicio: "NOV",
+                    mesInicio: "2026-NOV",
                     parcelas: [
-                        { mes: "NOV", numero: 1, valor: 143.98, pago: false },
-                        { mes: "DEZ", numero: 2, valor: 143.98, pago: false }
+                        { mes: "2026-NOV", numero: 1, valor: 143.98, pago: false },
+                        { mes: "2026-DEZ", numero: 2, valor: 143.98, pago: false }
                     ]
                 },
                 {
@@ -646,10 +655,10 @@
                     cartao: "Nubank Neudson",
                     valorTotal: 118.06,
                     numParcelas: 2,
-                    mesInicio: "NOV",
+                    mesInicio: "2026-NOV",
                     parcelas: [
-                        { mes: "NOV", numero: 1, valor: 59.03, pago: false },
-                        { mes: "DEZ", numero: 2, valor: 59.03, pago: false }
+                        { mes: "2026-NOV", numero: 1, valor: 59.03, pago: false },
+                        { mes: "2026-DEZ", numero: 2, valor: 59.03, pago: false }
                     ]
                 },
                 {
@@ -659,10 +668,10 @@
                     cartao: "Nubank Neudson",
                     valorTotal: 222.52,
                     numParcelas: 2,
-                    mesInicio: "NOV",
+                    mesInicio: "2026-NOV",
                     parcelas: [
-                        { mes: "NOV", numero: 1, valor: 111.26, pago: false },
-                        { mes: "DEZ", numero: 2, valor: 111.26, pago: false }
+                        { mes: "2026-NOV", numero: 1, valor: 111.26, pago: false },
+                        { mes: "2026-DEZ", numero: 2, valor: 111.26, pago: false }
                     ]
                 },
                 {
@@ -672,9 +681,9 @@
                     cartao: "Nubank Neudson",
                     valorTotal: 38.00,
                     numParcelas: 1,
-                    mesInicio: "NOV",
+                    mesInicio: "2026-NOV",
                     parcelas: [
-                        { mes: "NOV", numero: 1, valor: 38.00, pago: false }
+                        { mes: "2026-NOV", numero: 1, valor: 38.00, pago: false }
                     ]
                 },
                 {
@@ -684,22 +693,32 @@
                     cartao: "Nubank Neudson",
                     valorTotal: 178.56,
                     numParcelas: 3,
-                    mesInicio: "NOV",
+                    mesInicio: "2026-NOV",
                     parcelas: [
-                        { mes: "NOV", numero: 1, valor: 59.52, pago: false },
-                        { mes: "DEZ", numero: 2, valor: 59.52, pago: false },
-                        { mes: "JAN", numero: 3, valor: 59.52, pago: false }
+                        { mes: "2026-NOV", numero: 1, valor: 59.52, pago: false },
+                        { mes: "2026-DEZ", numero: 2, valor: 59.52, pago: false },
+                        { mes: "2027-JAN", numero: 3, valor: 59.52, pago: false }
                     ]
                 }
             ],
             comprasBase: [
-                // FINANCIAMENTO 99PAY (CRONOGRAMA COMPLETO DE NOV/2026 A ABR/2027)[cite: 6]
+                // FINANCIAMENTO 99PAY (NOV/2026 A ABR/2027)
                 { id: 991, data: "2026-11-09", desc: "Financiamento 99Pay - Parcela Nov", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
                 { id: 992, data: "2026-12-08", desc: "Financiamento 99Pay - Parcela Dez", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
                 { id: 993, data: "2027-01-08", desc: "Financiamento 99Pay - Parcela Jan", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
                 { id: 994, data: "2027-02-10", desc: "Financiamento 99Pay - Parcela Fev", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
                 { id: 995, data: "2027-03-08", desc: "Financiamento 99Pay - Parcela Mar", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
                 { id: 996, data: "2027-04-08", desc: "Financiamento 99Pay - Parcela Abr", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
+
+                // NATAÇÃO (PIX PARA O PROFESSOR DURVAL - R$ 120,00 DE NOV/2026 A JUN/2027)
+                { id: 801, data: "2026-11-10", desc: "Pix para o professor Durval - Nov", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
+                { id: 802, data: "2026-12-10", desc: "Pix para o professor Durval - Dez", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
+                { id: 803, data: "2027-01-10", desc: "Pix para o professor Durval - Jan", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
+                { id: 804, data: "2027-02-10", desc: "Pix para o professor Durval - Fev", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
+                { id: 805, data: "2027-03-10", desc: "Pix para o professor Durval - Mar", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
+                { id: 806, data: "2027-04-10", desc: "Pix para o professor Durval - Abr", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
+                { id: 807, data: "2027-05-10", desc: "Pix para o professor Durval - Mai", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
+                { id: 808, data: "2027-06-10", desc: "Pix para o professor Durval - Jun", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
 
                 // DESPESAS CMT I ANDRIELLY (MENSAL ATÉ DEZEMBRO)
                 { id: 701, data: "2026-11-05", desc: "CMT I Andrielly - Mensalidade Nov", cartao: "CMT I Andrielly", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
@@ -880,9 +899,9 @@
             ]
         };
 
-        // Força limpar o cache antigo do navegador para carregar exatamente os valores corretos
+        // Força limpar o cache antigo para carregar a estrutura cronológica
         let appState = JSON.parse(localStorage.getItem('DESPAG_STATE'));
-        if (!appState || !appState.comprasBase || appState.comprasBase.length < 50) {
+        if (!appState || !appState.comprasBase || appState.comprasBase.length < 55) {
             appState = JSON.parse(JSON.stringify(estadoPadrao));
             localStorage.setItem('DESPAG_STATE', JSON.stringify(appState));
         }
@@ -900,7 +919,7 @@
             }
         }
 
-       function recalcularFaturasGerais() {
+        function recalcularFaturasGerais() {
             let faturasCalculadas = {};
 
             if (appState.comprasBase) {
@@ -912,63 +931,48 @@
                     const partesData = compra.data.split('-');
                     if (partesData.length < 3) return;
 
+                    const anoCompra = parseInt(partesData[0]);
+                    const mesCompraNum = parseInt(partesData[1]);
                     const diaCompra = parseInt(partesData[2]);
-                    const mesCompraIdx = parseInt(partesData[1]) - 1;
 
-                    let mesInicioIdx = (diaCompra > diaFechamento) ? (mesCompraIdx + 2) % 12 : (mesCompraIdx + 1) % 12;
-                    const valorParcela = compra.valor / compra.parcelas;
+                    let mesAlvoNum = mesCompraNum;
+                    let anoAlvoNum = anoCompra;
 
-                    for (let i = 0; i < compra.parcelas; i++) {
-                        let targetMesSigla = MESES[(mesInicioIdx + i) % 12];
-                        if (!faturasCalculadas[targetMesSigla]) faturasCalculadas[targetMesSigla] = {};
-                        if (!faturasCalculadas[targetMesSigla][compra.cartao]) {
-                            faturasCalculadas[targetMesSigla][compra.cartao] = { valor: 0, pago: false };
+                    if (diaCompra > diaFechamento) {
+                        mesAlvoNum++;
+                        if (mesAlvoNum > 12) {
+                            mesAlvoNum = 1;
+                            anoAlvoNum++;
                         }
-                        faturasCalculadas[targetMesSigla][compra.cartao].valor += valorParcela;
                     }
+
+                    // Formato padronizado ex: "2026-NOV"
+                    const nomesMesesSigla = ["", "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
+                    let targetMesSigla = `${anoAlvoNum}-${nomesMesesSigla[mesAlvoNum]}`;
+
+                    // Garante que se cair em um mês fora do range cronológico, ele mapeia corretamente
+                    if (!faturasCalculadas[targetMesSigla]) faturasCalculadas[targetMesSigla] = {};
+                    if (!faturasCalculadas[targetMesSigla][compra.cartao]) {
+                        faturasCalculadas[targetMesSigla][compra.cartao] = { valor: 0, pago: false };
+                    }
+                    faturasCalculadas[targetMesSigla][compra.cartao].valor += (compra.valor / compra.parcelas);
                 });
             }
 
-            // =========================================================================
-            // CORREÇÃO DIRETA: Garante os valores exatos e consolidados para NOVEMBRO
-            // =========================================================================
-            if (!faturasCalculadas["NOV"]) faturasCalculadas["NOV"] = {};
+            // CORREÇÃO DIRETA: Garante os valores exatos e consolidados para Novembro de 2026
+            if (!faturasCalculadas["2026-NOV"]) faturasCalculadas["2026-NOV"] = {};
             
-            // Mercado Pago
-            if (faturasCalculadas["NOV"]["Mercado Pago"]) {
-                faturasCalculadas["NOV"]["Mercado Pago"].valor = 2854.73;
+            if (faturasCalculadas["2026-NOV"]["Mercado Pago"]) {
+                faturasCalculadas["2026-NOV"]["Mercado Pago"].valor = 2854.73;
             } else {
-                faturasCalculadas["NOV"]["Mercado Pago"] = { valor: 2854.73, pago: false };
+                faturasCalculadas["2026-NOV"]["Mercado Pago"] = { valor: 2854.73, pago: false };
             }
 
-            // Recarga PAY
-            if (faturasCalculadas["NOV"]["Cartão Recarga PAY"]) {
-                faturasCalculadas["NOV"]["Cartão Recarga PAY"].valor = 1864.33;
+            if (faturasCalculadas["2026-NOV"]["Cartão Recarga PAY"]) {
+                faturasCalculadas["2026-NOV"]["Cartão Recarga PAY"].valor = 1864.33;
             } else {
-                faturasCalculadas["NOV"]["Cartão Recarga PAY"] = { valor: 1864.33, pago: false };
+                faturasCalculadas["2026-NOV"]["Cartão Recarga PAY"] = { valor: 1864.33, pago: false };
             }
-
-            // 99Pay (Parcela de Novembro: R$ 1.092,81)
-            if (faturasCalculadas["NOV"]["99Pay"]) {
-                faturasCalculadas["NOV"]["99Pay"].valor = 1092.81;
-            } else {
-                faturasCalculadas["NOV"]["99Pay"] = { valor: 1092.81, pago: false };
-            }
-
-            // CMT I Andrielly (Mensalidade Nov: R$ 126,00)
-            if (faturasCalculadas["NOV"]["CMT I Andrielly"]) {
-                faturasCalculadas["NOV"]["CMT I Andrielly"].valor = 126.00;
-            } else {
-                faturasCalculadas["NOV"]["CMT I Andrielly"] = { valor: 126.00, pago: false };
-            }
-
-            // CMT I Guilherme (Cotas Nov: 126,00 + 190,00 = R$ 316,00)
-            if (faturasCalculadas["NOV"]["CMT I Guilherme"]) {
-                faturasCalculadas["NOV"]["CMT I Guilherme"].valor = 316.00;
-            } else {
-                faturasCalculadas["NOV"]["CMT I Guilherme"] = { valor: 316.00, pago: false };
-            }
-            // =========================================================================
 
             for (let m in faturasCalculadas) {
                 if (!appState.faturasIniciais[m]) appState.faturasIniciais[m] = {};
@@ -981,6 +985,7 @@
                 }
             }
         }
+
         window.addEventListener('DOMContentLoaded', () => {
             const logado = localStorage.getItem('DESPAG_LOGADO');
             if (logado === 'true') {
@@ -1091,15 +1096,15 @@
             document.getElementById('dashTotalDebitos').textContent = `R$ ${totalDebitosPendentes.toFixed(2)}`;
             document.getElementById('dashSaldo').textContent = `R$ ${saldoFinal.toFixed(2)}`;
 
-            let anoAtualNum = new Date().getFullYear();
+            let anoAtualNum = 2026;
             document.getElementById('lblAnoAtual').textContent = anoAtualNum;
             document.getElementById('lblAnoProximo').textContent = anoAtualNum + 1;
 
             let totalAnoAtual = 0;
             let totalAnoProximo = 0;
 
-            const mesesAnoAtual = ["SET", "OUT", "NOV", "DEZ"];
-            const mesesAnoProximo = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO"];
+            const mesesAnoAtual = ["2026-NOV", "2026-DEZ"];
+            const mesesAnoProximo = ["2027-JAN", "2027-FEV", "2027-MAR", "2027-ABR", "2027-MAI", "2027-JUN", "2027-JUL", "2027-AGO", "2027-SET", "2027-OUT", "2027-NOV", "2027-DEZ"];
 
             mesesAnoAtual.forEach(m => {
                 if (appState.faturasIniciais[m]) {
@@ -1273,11 +1278,11 @@
             const mesInicio = document.getElementById('tercMesInicio').value;
 
             const valorParcela = valorTotal / numParcelas;
-            const idxInicio = MESES.indexOf(mesInicio);
+            const idxInicio = MESES_CHRONO.indexOf(mesInicio);
 
             let parcelas = [];
             for (let i = 0; i < numParcelas; i++) {
-                let mesTarget = MESES[(idxInicio + i) % 12];
+                let mesTarget = MESES_CHRONO[(idxInicio + i) % MESES_CHRONO.length];
                 parcelas.push({ mes: mesTarget, numero: i + 1, valor: valorParcela, pago: false });
             }
 
@@ -1488,7 +1493,7 @@
         function renderProjecaoAnual() {
             const list = document.getElementById('listProjecaoAnual');
             list.innerHTML = '';
-            MESES.forEach(m => {
+            MESES_CHRONO.forEach(m => {
                 let faturas = appState.faturasIniciais[m] || {};
                 let totalM = Object.values(faturas).reduce((acc, curr) => acc + curr.valor, 0);
                 const isCurrent = m === appState.mesAtivo;
