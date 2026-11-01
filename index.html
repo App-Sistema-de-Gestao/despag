@@ -149,7 +149,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v4.3</span>
+            <span>DESPAG v4.4</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -984,9 +984,39 @@
                 });
             }
 
-            // CORREÇÃO DIRETA: Garante os valores exatos e consolidados para Novembro de 2026 (incluindo Nubank)
+            // CORREÇÃO DIRETA: Garante os valores exatos e consolidados para Novembro de 2026 (Nubank Neudson e Edilene incluídos)
             if (!faturasCalculadas["2026-NOV"]) faturasCalculadas["2026-NOV"] = {};
             
+            // Nubank Neudson (Soma automática das faturas filtradas)
+            let totalNubankNeudson = 0;
+            if (appState.comprasBase) {
+                appState.comprasBase.forEach(c => {
+                    if (c.cartao === "Nubank Neudson") {
+                        totalNubankNeudson += c.parceladoValor;
+                    }
+                });
+            }
+            if (!faturasCalculadas["2026-NOV"]["Nubank Neudson"]) {
+                faturasCalculadas["2026-NOV"]["Nubank Neudson"] = { valor: totalNubankNeudson, pago: false };
+            } else {
+                faturasCalculadas["2026-NOV"]["Nubank Neudson"].valor = totalNubankNeudson;
+            }
+
+            // Nubank Edilene
+            let totalNubankEdilene = 0;
+            if (appState.comprasBase) {
+                appState.comprasBase.forEach(c => {
+                    if (c.cartao === "Nubank Edilene") {
+                        totalNubankEdilene += c.parceladoValor;
+                    }
+                });
+            }
+            if (!faturasCalculadas["2026-NOV"]["Nubank Edilene"]) {
+                faturasCalculadas["2026-NOV"]["Nubank Edilene"] = { valor: totalNubankEdilene, pago: false };
+            } else {
+                faturasCalculadas["2026-NOV"]["Nubank Edilene"].valor = totalNubankEdilene;
+            }
+
             // Mercado Pago
             if (faturasCalculadas["2026-NOV"]["Mercado Pago"]) {
                 faturasCalculadas["2026-NOV"]["Mercado Pago"].valor = 2854.73;
@@ -1502,7 +1532,6 @@
                 return;
             }
 
-            // Valores dos filtros
             const filtroDesc = document.getElementById('filtroDesc').value.toLowerCase();
             const filtroCartao = document.getElementById('filtroCartao').value;
             const filtroData = document.getElementById('filtroData').value.toLowerCase();
