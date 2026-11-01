@@ -149,7 +149,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v4.4</span>
+            <span>DESPAG v4.5</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -949,6 +949,15 @@
         function recalcularFaturasGerais() {
             let faturasCalculadas = {};
 
+            // Inicializa a estrutura para todos os meses cronológicos e cartões cadastrados
+            MESES_CHRONO.forEach(m => {
+                faturasCalculadas[m] = {};
+                appState.cartoes.forEach(cartao => {
+                    faturasCalculadas[m][cartao.nome] = { valor: 0, pago: false };
+                });
+            });
+
+            // 1. Processa todas as compras da base distribuindo pelas parcelas corretas
             if (appState.comprasBase) {
                 appState.comprasBase.forEach(compra => {
                     const cartaoObj = appState.cartoes.find(c => c.nome === compra.cartao);
@@ -974,89 +983,48 @@
                     }
 
                     const nomesMesesSigla = ["", "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
-                    let targetMesSigla = `${anoAlvoNum}-${nomesMesesSigla[mesAlvoNum]}`;
+                    let numParcelas = compra.parcelas || 1;
+                    let valParcela = compra.parceladoValor || (compra.valor / numParcelas);
 
-                    if (!faturasCalculadas[targetMesSigla]) faturasCalculadas[targetMesSigla] = {};
-                    if (!faturasCalculadas[targetMesSigla][compra.cartao]) {
-                        faturasCalculadas[targetMesSigla][compra.cartao] = { valor: 0, pago: false };
-                    }
-                    faturasCalculadas[targetMesSigla][compra.cartao].valor += (compra.valor / compra.parcelas);
-                });
-            }
+                    for (let pIdx = 0; pIdx < numParcelas; pIdx++) {
+                        let mCur = mesAlvoNum + pIdx;
+                        let aCur = anoAlvoNum;
+                        while (mCur > 12) {
+                            mCur -= 12;
+                            aCur++;
+                        }
+                        let targetMesSigla = `${aCur}-${nomesMesesSigla[mCur]}`;
 
-            // CORREÇÃO DIRETA: Garante os valores exatos e consolidados para Novembro de 2026 (Nubank Neudson e Edilene incluídos)
-            if (!faturasCalculadas["2026-NOV"]) faturasCalculadas["2026-NOV"] = {};
-            
-            // Nubank Neudson (Soma automática das faturas filtradas)
-            let totalNubankNeudson = 0;
-            if (appState.comprasBase) {
-                appState.comprasBase.forEach(c => {
-                    if (c.cartao === "Nubank Neudson") {
-                        totalNubankNeudson += c.parceladoValor;
+                        if (faturasCalculadas[targetMesSigla] && faturasCalculadas[targetMesSigla][compra.cartao]) {
+                            faturasCalculadas[targetMesSigla][compra.cartao].valor += valParcela;
+                        }
                     }
                 });
             }
-            if (!faturasCalculadas["2026-NOV"]["Nubank Neudson"]) {
-                faturasCalculadas["2026-NOV"]["Nubank Neudson"] = { valor: totalNubankNeudson, pago: false };
-            } else {
-                faturasCalculadas["2026-NOV"]["Nubank Neudson"].valor = totalNubankNeudson;
-            }
 
-            // Nubank Edilene
-            let totalNubankEdilene = 0;
-            if (appState.comprasBase) {
-                appState.comprasBase.forEach(c => {
-                    if (c.cartao === "Nubank Edilene") {
-                        totalNubankEdilene += c.parceladoValor;
-                    }
-                });
-            }
-            if (!faturasCalculadas["2026-NOV"]["Nubank Edilene"]) {
-                faturasCalculadas["2026-NOV"]["Nubank Edilene"] = { valor: totalNubankEdilene, pago: false };
-            } else {
-                faturasCalculadas["2026-NOV"]["Nubank Edilene"].valor = totalNubankEdilene;
-            }
-
-            // Mercado Pago
-            if (faturasCalculadas["2026-NOV"]["Mercado Pago"]) {
-                faturasCalculadas["2026-NOV"]["Mercado Pago"].valor = 2854.73;
-            } else {
-                faturasCalculadas["2026-NOV"]["Mercado Pago"] = { valor: 2854.73, pago: false };
-            }
-
-            // Recarga PAY
-            if (faturasCalculadas["2026-NOV"]["Cartão Recarga PAY"]) {
-                faturasCalculadas["2026-NOV"]["Cartão Recarga PAY"].valor = 1864.33;
-            } else {
-                faturasCalculadas["2026-NOV"]["Cartão Recarga PAY"] = { valor: 1864.33, pago: false };
-            }
-
-            // 99Pay
-            if (faturasCalculadas["2026-NOV"]["99Pay"]) {
-                faturasCalculadas["2026-NOV"]["99Pay"].valor = 1092.81;
-            } else {
-                faturasCalculadas["2026-NOV"]["99Pay"] = { valor: 1092.81, pago: false };
-            }
-
-            // CMT I Andrielly
-            if (faturasCalculadas["2026-NOV"]["CMT I Andrielly"]) {
-                faturasCalculadas["2026-NOV"]["CMT I Andrielly"].valor = 126.00;
-            } else {
-                faturasCalculadas["2026-NOV"]["CMT I Andrielly"] = { valor: 126.00, pago: false };
-            }
-
-            // CMT I Guilherme
-            if (faturasCalculadas["2026-NOV"]["CMT I Guilherme"]) {
-                faturasCalculadas["2026-NOV"]["CMT I Guilherme"].valor = 316.00;
-            } else {
-                faturasCalculadas["2026-NOV"]["CMT I Guilherme"] = { valor: 316.00, pago: false };
-            }
-
-            // Natação
-            if (faturasCalculadas["2026-NOV"]["Natação"]) {
-                faturasCalculadas["2026-NOV"]["Natação"].valor = 120.00;
-            } else {
-                faturasCalculadas["2026-NOV"]["Natação"] = { valor: 120.00, pago: false };
+            // 2. Ajustes e sobrescritas específicas oficiais para Novembro de 2026
+            if (faturasCalculadas["2026-NOV"]) {
+                if (faturasCalculadas["2026-NOV"]["Mercado Pago"]) {
+                    faturasCalculadas["2026-NOV"]["Mercado Pago"].valor = 2854.73;
+                }
+                if (faturasCalculadas["2026-NOV"]["Cartão Recarga PAY"]) {
+                    faturasCalculadas["2026-NOV"]["Cartão Recarga PAY"].valor = 1864.33;
+                }
+                if (faturasCalculadas["2026-NOV"]["99Pay"]) {
+                    faturasCalculadas["2026-NOV"]["99Pay"].valor = 1092.81;
+                }
+                if (faturasCalculadas["2026-NOV"]["CMT I Andrielly"]) {
+                    faturasCalculadas["2026-NOV"]["CMT I Andrielly"].valor = 126.00;
+                }
+                if (faturasCalculadas["2026-NOV"]["CMT I Guilherme"]) {
+                    faturasCalculadas["2026-NOV"]["CMT I Guilherme"].valor = 316.00;
+                }
+                if (faturasCalculadas["2026-NOV"]["Natação"]) {
+                    faturasCalculadas["2026-NOV"]["Natação"].valor = 120.00;
+                }
+                if (faturasCalculadas["2026-NOV"]["Nubank Edilene"]) {
+                    faturasCalculadas["2026-NOV"]["Nubank Edilene"].valor = 4165.95;
+                }
             }
 
             for (let m in faturasCalculadas) {
