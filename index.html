@@ -224,9 +224,9 @@
                 </div>
             </div>
 
-            <!-- LINHA 2: TABELA DE FATURAS E CARDS DE DEBITOS (REORGANIZADO) -->
+            <!-- LINHA 2: TABELA DE FATURAS À ESQUERDA E OS 3 CARDS DA DIREITA (INCLUINDO A PROJEÇÃO MENSAL NO RETÂNGULO) -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- COLUNA ESQUERDA (TABELA DE FATURAS) -->
+                <!-- COLUNA ESQUERDA (TABELA DE FATURAS - OCUPA 2 COLUNAS) -->
                 <div class="lg:col-span-2 neon-card p-4 sm:p-6 rounded-2xl space-y-4">
                     <div class="flex justify-between items-center border-b border-gray-800 pb-4">
                         <h3 class="font-bold text-white text-base sm:text-lg flex items-center gap-2">
@@ -248,7 +248,7 @@
                     </div>
                 </div>
 
-                <!-- COLUNA DIREITA (CARDS DE TOTAL DE DÉBITOS PENDENTES - SUBIRAM CONFORME PRINT 3) -->
+                <!-- COLUNA DIREITA (CARDS DE TOTAIS ANUAIS + PROJEÇÃO MENSAL DE DÉBITOS NO RETÂNGULO) -->
                 <div class="space-y-5">
                     <div class="neon-card p-5 sm:p-6 rounded-2xl border-l-4 border-l-amber-500">
                         <div class="flex items-center justify-between">
@@ -267,13 +267,17 @@
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-sky-400 mt-2" id="dashTotalAnoProximo">R$ 0,00</h3>
                         <p class="text-xs text-gray-500 mt-2">Comprometimento de parcelas já registradas para o próximo ano</p>
                     </div>
-                </div>
-            </div>
 
-            <!-- LINHA 3: PROJEÇÃO MENSAL DE DÉBITOS (DESCEU LOGO ABAIXO DAS FATURAS CONFORME PRINT 3) -->
-            <div class="neon-card p-4 sm:p-6 rounded-2xl space-y-4">
-                <h3 class="font-bold text-white text-base sm:text-lg border-b border-gray-800 pb-3">Projeção Mensal de Débitos</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-h-[380px] overflow-y-auto" id="listProjecaoAnual"></div>
+                    <!-- CARD DE PROJEÇÃO MENSAL DE DÉBITOS POSICIONADO NO RETÂNGULO DA DIREITA -->
+                    <div class="neon-card p-4 sm:p-5 rounded-2xl space-y-3">
+                        <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+                            <h3 class="font-bold text-white text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-calendar-days text-sky-400"></i> Projeção Mensal de Débitos
+                            </h3>
+                        </div>
+                        <div class="space-y-2 max-h-[420px] overflow-y-auto pr-1" id="listProjecaoAnual"></div>
+                    </div>
+                </div>
             </div>
         </main>
 
@@ -1730,9 +1734,9 @@
                 let totalM = Object.values(faturas).reduce((acc, curr) => acc + curr.valor, 0);
                 const isCurrent = m === appState.mesAtivo;
                 list.innerHTML += `
-                    <div class="flex justify-between items-center p-3 rounded-xl ${isCurrent ? 'bg-sky-950/60 border border-sky-700/60' : 'bg-gray-900 border border-gray-800/60'}">
-                        <span class="text-xs sm:text-sm font-bold ${isCurrent ? 'text-sky-300' : 'text-gray-400'}">${m}</span>
-                        <span class="text-xs sm:text-sm font-extrabold ${isCurrent ? 'text-sky-200' : 'text-gray-200'}">${formatarBRL(totalM)}</span>
+                    <div class="flex justify-between items-center p-2.5 rounded-lg ${isCurrent ? 'bg-sky-950/60 border border-sky-700/60' : 'bg-gray-900 border border-gray-800/60'}">
+                        <span class="text-xs font-bold ${isCurrent ? 'text-sky-300' : 'text-gray-400'}">${m}</span>
+                        <span class="text-xs font-extrabold ${isCurrent ? 'text-sky-200' : 'text-gray-200'}">${formatarBRL(totalM)}</span>
                     </div>
                 `;
             });
