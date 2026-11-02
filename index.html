@@ -158,7 +158,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v4.8</span>
+            <span>DESPAG v4.9</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -175,8 +175,8 @@
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
                 <div>
-                    <h2 class="text-xl font-bold text-white tracking-wide">Painel de Controle <span class="text-xs text-sky-400 font-normal px-2 py-0.5 rounded-full bg-sky-950 border border-sky-800/50">Mês Ativo</span></h2>
-                    <p class="text-xs text-gray-400">Gerenciamento Unificado de Cartões & Finanças</p>
+                    <h2 class="text-xl font-bold text-white tracking-wide">Painel de Controle</h2>
+                    <p class="text-xs text-gray-400 leading-tight">Gerenciamento Unificado de<br>Cartões & Finanças</p>
                 </div>
             </div>
 
@@ -203,76 +203,77 @@
 
         <!-- DASHBOARD -->
         <main id="section-dashboard" class="app-section space-y-6">
-            <!-- LINHA 1: RESUMO DO MÊS -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <div class="neon-card p-6 rounded-2xl">
-                    <span class="text-xs font-semibold text-gray-400 uppercase">Total Receitas do Mês</span>
-                    <h3 class="text-3xl font-extrabold text-emerald-400 mt-2" id="dashTotalReceita">R$ 0,00</h3>
-                    <p class="text-xs text-gray-500 mt-3">Receitas Próprias + Repasses de Terceiros</p>
+            <!-- LINHA 1: RESUMO DO MÊS (COMPACTO E LADO A LADO NO MOBILE) -->
+            <div class="grid grid-cols-3 gap-2 sm:gap-5">
+                <div class="neon-card p-3 sm:p-6 rounded-2xl flex flex-col justify-between">
+                    <span class="text-[9px] sm:text-xs font-semibold text-gray-400 uppercase leading-tight">Total Receitas do Mês</span>
+                    <h3 class="text-xs sm:text-3xl font-extrabold text-emerald-400 mt-1 sm:mt-2 truncate" id="dashTotalReceita">R$ 0,00</h3>
+                    <p class="text-[8px] sm:text-xs text-gray-500 mt-1 sm:mt-3 hidden sm:block">Receitas Próprias + Repasses de Terceiros</p>
                 </div>
 
-                <div class="neon-card p-6 rounded-2xl">
-                    <span class="text-xs font-semibold text-gray-400 uppercase">Débitos & Faturas PENDENTES</span>
-                    <h3 class="text-3xl font-extrabold text-rose-500 mt-2" id="dashTotalDebitos">R$ 0,00</h3>
-                    <p class="text-xs text-gray-500 mt-3">Subtrai dinamicamente ao dar check nas contas pagas</p>
+                <div class="neon-card p-3 sm:p-6 rounded-2xl flex flex-col justify-between">
+                    <span class="text-[9px] sm:text-xs font-semibold text-gray-400 uppercase leading-tight">Débitos & Faturas PENDENTES</span>
+                    <h3 class="text-xs sm:text-3xl font-extrabold text-rose-500 mt-1 sm:mt-2 truncate" id="dashTotalDebitos">R$ 0,00</h3>
+                    <p class="text-[8px] sm:text-xs text-gray-500 mt-1 sm:mt-3 hidden sm:block">Subtrai dinamicamente ao dar check nas contas pagas</p>
                 </div>
 
-                <div class="neon-card p-6 rounded-2xl">
-                    <span class="text-xs font-semibold text-gray-400 uppercase">Saldo Líquido Projetado</span>
-                    <div class="d-flex align-items-center gap-2 mt-2">
-                        <h3 class="text-3xl font-extrabold mt-2 text-emerald-400" id="dashSaldo">R$ 0,00</h3>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-3">Balanço do mês selecionado</p>
+                <div class="neon-card p-3 sm:p-6 rounded-2xl flex flex-col justify-between">
+                    <span class="text-[9px] sm:text-xs font-semibold text-gray-400 uppercase leading-tight">Saldo Líquido Projetado</span>
+                    <h3 class="text-xs sm:text-3xl font-extrabold mt-1 sm:mt-2 text-emerald-400 truncate" id="dashSaldo">R$ 0,00</h3>
+                    <p class="text-[8px] sm:text-xs text-gray-500 mt-1 sm:mt-3 hidden sm:block">Balanço do mês selecionado</p>
                 </div>
             </div>
 
-            <!-- LINHA 2: PROJEÇÃO ANUAL -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div class="neon-card p-6 rounded-2xl border-l-4 border-l-amber-500">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total de Débitos Pendentes (<span id="lblAnoAtual">2026</span>)</span>
-                        <i class="fa-solid fa-calendar-check text-amber-400 text-lg"></i>
-                    </div>
-                    <h3 class="text-3xl font-extrabold text-amber-400 mt-2" id="dashTotalAnoAtual">R$ 0,00</h3>
-                    <p class="text-xs text-gray-500 mt-2">Soma dos débitos pendentes até o final do ano corrente (desconta conforme checks)</p>
-                </div>
-
-                <div class="neon-card p-6 rounded-2xl border-l-4 border-l-sky-500">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Projeção de Débitos (<span id="lblAnoProximo">2027</span>)</span>
-                        <i class="fa-solid fa-chart-line text-sky-400 text-lg"></i>
-                    </div>
-                    <h3 class="text-3xl font-extrabold text-sky-400 mt-2" id="dashTotalAnoProximo">R$ 0,00</h3>
-                    <p class="text-xs text-gray-500 mt-2">Comprometimento de parcelas já registradas para o próximo ano</p>
-                </div>
-            </div>
-
+            <!-- LINHA 2: TABELA DE FATURAS E CARDS DE DEBITOS (REORGANIZADO) -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 neon-card p-6 rounded-2xl space-y-4">
+                <!-- COLUNA ESQUERDA (TABELA DE FATURAS) -->
+                <div class="lg:col-span-2 neon-card p-4 sm:p-6 rounded-2xl space-y-4">
                     <div class="flex justify-between items-center border-b border-gray-800 pb-4">
-                        <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                        <h3 class="font-bold text-white text-base sm:text-lg flex items-center gap-2">
                             <i class="fa-solid fa-list-check text-sky-400"></i> Faturas e Contas do Mês
                         </h3>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-sm text-gray-300">
                             <thead class="bg-gray-900/80 text-[10px] sm:text-xs uppercase text-gray-400 border-b border-gray-800">
-    <tr>
-        <th class="py-2 px-2 sm:py-3 sm:px-4">Cartão / Conta</th>
-        <th class="py-2 px-2 sm:py-3 sm:px-4">Valor A Pagar</th>
-        <th class="py-2 px-2 sm:py-3 sm:px-4">Venc.</th>
-        <th class="py-2 px-1 sm:py-3 sm:px-4 text-center">Status</th>
-    </tr>
-</thead>
+                                <tr>
+                                    <th class="py-2 px-2 sm:py-3 sm:px-4">Cartão / Conta</th>
+                                    <th class="py-2 px-2 sm:py-3 sm:px-4">Valor A Pagar</th>
+                                    <th class="py-2 px-2 sm:py-3 sm:px-4">Venc.</th>
+                                    <th class="py-2 px-1 sm:py-3 sm:px-4 text-center">Status</th>
+                                </tr>
+                            </thead>
                             <tbody id="tbodyDashboard" class="divide-y divide-gray-800"></tbody>
                         </table>
                     </div>
                 </div>
 
-                <div class="neon-card p-6 rounded-2xl space-y-4">
-                    <h3 class="font-bold text-white text-lg border-b border-gray-800 pb-4">Projeção Mensal de Débitos</h3>
-                    <div class="space-y-2 max-h-[380px] overflow-y-auto" id="listProjecaoAnual"></div>
+                <!-- COLUNA DIREITA (CARDS DE TOTAL DE DÉBITOS PENDENTES - SUBIRAM CONFORME PRINT 3) -->
+                <div class="space-y-5">
+                    <div class="neon-card p-5 sm:p-6 rounded-2xl border-l-4 border-l-amber-500">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total de Débitos Pendentes (<span id="lblAnoAtual">2026</span>)</span>
+                            <i class="fa-solid fa-calendar-check text-amber-400 text-lg"></i>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-amber-400 mt-2" id="dashTotalAnoAtual">R$ 0,00</h3>
+                        <p class="text-xs text-gray-500 mt-2">Soma dos débitos pendentes até o final do ano corrente (desconta conforme checks)</p>
+                    </div>
+
+                    <div class="neon-card p-5 sm:p-6 rounded-2xl border-l-4 border-l-sky-500">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Projeção de Débitos (<span id="lblAnoProximo">2027</span>)</span>
+                            <i class="fa-solid fa-chart-line text-sky-400 text-lg"></i>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-sky-400 mt-2" id="dashTotalAnoProximo">R$ 0,00</h3>
+                        <p class="text-xs text-gray-500 mt-2">Comprometimento de parcelas já registradas para o próximo ano</p>
+                    </div>
                 </div>
+            </div>
+
+            <!-- LINHA 3: PROJEÇÃO MENSAL DE DÉBITOS (DESCEU LOGO ABAIXO DAS FATURAS CONFORME PRINT 3) -->
+            <div class="neon-card p-4 sm:p-6 rounded-2xl space-y-4">
+                <h3 class="font-bold text-white text-base sm:text-lg border-b border-gray-800 pb-3">Projeção Mensal de Débitos</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-h-[380px] overflow-y-auto" id="listProjecaoAnual"></div>
             </div>
         </main>
 
@@ -571,6 +572,11 @@
 
     <!-- SCRIPT DE LÓGICA E REGRAS -->
     <script>
+        // FUNÇÃO FORMATADORA EM REAL BRASILEIRO (Ex: R$ 1.092,81)
+        function formatarBRL(valor) {
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor || 0);
+        }
+
         const MESES_CHRONO = [
             "2026-NOV", "2026-DEZ",
             "2027-JAN", "2027-FEV", "2027-MAR", "2027-ABR", 
@@ -962,7 +968,7 @@
             ]
         };
 
-        // Força limpar o cache antigo para carregar a nova estrutura
+        // Carrega estado salvo no localStorage
         let appState = JSON.parse(localStorage.getItem('DESPAG_STATE'));
         if (!appState || !appState.comprasBase || appState.comprasBase.length < 58) {
             appState = JSON.parse(JSON.stringify(estadoPadrao));
@@ -973,7 +979,7 @@
             localStorage.setItem('DESPAG_STATE', JSON.stringify(appState));
         }
 
-        // --- NOVAS FUNÇÕES DE EXPORTAR E IMPORTAR BACKUP JSON ---
+        // BACKUP JSON
         function exportarBackupJSON() {
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
             const downloadAnchor = document.createElement('a');
@@ -986,33 +992,32 @@
         }
 
         function importarBackupJSON(event) {
-    const fileReader = new FileReader();
-    const file = event.target.files[0];
+            const fileReader = new FileReader();
+            const file = event.target.files[0];
 
-    if (!file) return;
+            if (!file) return;
 
-    fileReader.onload = function(e) {
-        try {
-            const parsedState = JSON.parse(e.target.result);
-            if (parsedState && parsedState.cartoes && parsedState.comprasBase) {
-                appState = parsedState;
-                salvarEstado();
-                
-                // Força o recálculo das faturas e redesenha a tela inteira
-                recalcularFaturasGerais();
-                renderDashboard();
-                renderBaseDados();
-                
-                alert("Backup importado e sincronizado com sucesso! Os dados foram atualizados no celular.");
-            } else {
-                alert("Arquivo de backup inválido.");
-            }
-        } catch (err) {
-            alert("Erro ao ler o arquivo de backup JSON.");
+            fileReader.onload = function(e) {
+                try {
+                    const parsedState = JSON.parse(e.target.result);
+                    if (parsedState && parsedState.cartoes && parsedState.comprasBase) {
+                        appState = parsedState;
+                        salvarEstado();
+                        
+                        recalcularFaturasGerais();
+                        renderDashboard();
+                        renderBaseDados();
+                        
+                        alert("Backup importado e sincronizado com sucesso! Os dados foram atualizados no celular.");
+                    } else {
+                        alert("Arquivo de backup inválido.");
+                    }
+                } catch (err) {
+                    alert("Erro ao ler o arquivo de backup JSON.");
+                }
+            };
+            fileReader.readAsText(file);
         }
-    };
-    fileReader.readAsText(file);
-}
 
         function forcarResetEstado() {
             if (confirm("Deseja sincronizar a base oficial? Suas edições, novas receitas, cobranças de terceiros e cartões cadastrados serão 100% preservados!")) {
@@ -1283,26 +1288,26 @@
                     totalDebitosPendentes += valorFatura;
                 }
 
-               let tr = document.createElement('tr');
-tr.className = "hover:bg-gray-800/40 transition text-xs sm:text-sm";
-tr.innerHTML = `
-    <td class="py-2 px-2 sm:py-3 sm:px-4 font-normal text-white leading-tight">${cartao.nome}</td>
-    <td class="py-2 px-2 sm:py-3 sm:px-4 font-normal ${info.pago ? 'line-through text-gray-500' : 'text-white'} whitespace-nowrap">
-        R$ ${valorFatura.toFixed(2)}
-    </td>
-    <td class="py-2 px-2 sm:py-3 sm:px-4 text-[11px] sm:text-xs text-gray-400 whitespace-nowrap">Dia ${cartao.vencimento}</td>
-    <td class="py-2 px-1 sm:py-3 sm:px-4 text-center">
-        <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 rounded bg-gray-900 border-gray-700 text-sky-600 cursor-pointer" ${info.pago ? 'checked' : ''} onchange="toggleStatusPagoConta('${cartao.nome}')">
-    </td>
-`;
-tbody.appendChild(tr);
+                let tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-800/40 transition text-xs sm:text-sm";
+                tr.innerHTML = `
+                    <td class="py-2 px-2 sm:py-3 sm:px-4 font-normal text-white leading-tight">${cartao.nome}</td>
+                    <td class="py-2 px-2 sm:py-3 sm:px-4 font-normal ${info.pago ? 'line-through text-gray-500' : 'text-white'} whitespace-nowrap">
+                        ${formatarBRL(valorFatura)}
+                    </td>
+                    <td class="py-2 px-2 sm:py-3 sm:px-4 text-[11px] sm:text-xs text-gray-400 whitespace-nowrap">Dia ${cartao.vencimento}</td>
+                    <td class="py-2 px-1 sm:py-3 sm:px-4 text-center">
+                        <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 rounded bg-gray-900 border-gray-700 text-sky-600 cursor-pointer" ${info.pago ? 'checked' : ''} onchange="toggleStatusPagoConta('${cartao.nome}')">
+                    </td>
+                `;
+                tbody.appendChild(tr);
             });
 
             let saldoFinal = totalReceitasGeral - totalDebitosPendentes;
 
-            document.getElementById('dashTotalReceita').textContent = `R$ ${totalReceitasGeral.toFixed(2)}`;
-            document.getElementById('dashTotalDebitos').textContent = `R$ ${totalDebitosPendentes.toFixed(2)}`;
-            document.getElementById('dashSaldo').textContent = `R$ ${saldoFinal.toFixed(2)}`;
+            document.getElementById('dashTotalReceita').textContent = formatarBRL(totalReceitasGeral);
+            document.getElementById('dashTotalDebitos').textContent = formatarBRL(totalDebitosPendentes);
+            document.getElementById('dashSaldo').textContent = formatarBRL(saldoFinal);
 
             let anoAtualNum = 2026;
             document.getElementById('lblAnoAtual').textContent = anoAtualNum;
@@ -1334,8 +1339,8 @@ tbody.appendChild(tr);
                 }
             });
 
-            document.getElementById('dashTotalAnoAtual').textContent = `R$ ${totalAnoAtual.toFixed(2)}`;
-            document.getElementById('dashTotalAnoProximo').textContent = `R$ ${totalAnoProximo.toFixed(2)}`;
+            document.getElementById('dashTotalAnoAtual').textContent = formatarBRL(totalAnoAtual);
+            document.getElementById('dashTotalAnoProximo').textContent = formatarBRL(totalAnoProximo);
 
             salvarEstado();
             renderProjecaoAnual();
@@ -1362,7 +1367,7 @@ tbody.appendChild(tr);
                     <div class="flex justify-between items-center p-3 rounded-xl bg-gray-900 border border-gray-800">
                         <span class="text-sm font-medium text-gray-200">${r.desc}</span>
                         <div class="flex items-center gap-3">
-                            <span class="font-bold text-emerald-400 text-sm">R$ ${r.valor.toFixed(2)}</span>
+                            <span class="font-bold text-emerald-400 text-sm">${formatarBRL(r.valor)}</span>
                             <button onclick="abrirEditReceita(${r.id})" class="text-xs text-sky-400 hover:text-sky-300 p-1"><i class="fa-solid fa-pen"></i></button>
                             <button onclick="excluirReceita(${r.id})" class="text-xs text-rose-500 hover:text-rose-400 p-1"><i class="fa-solid fa-trash"></i></button>
                         </div>
@@ -1400,7 +1405,7 @@ tbody.appendChild(tr);
                                 <i class="fa-solid fa-user text-sky-400"></i> ${pessoa}
                             </h4>
                             <span class="text-xs bg-sky-950 text-sky-300 px-2.5 py-1 rounded-md font-bold border border-sky-800/50">
-                                TOTAL MÊS (${mes}): R$ ${totalPessoaMes.toFixed(2)}
+                                TOTAL MÊS (${mes}): ${formatarBRL(totalPessoaMes)}
                             </span>
                         </div>
                 `;
@@ -1414,7 +1419,7 @@ tbody.appendChild(tr);
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 rounded-lg bg-gray-950/80 text-xs gap-2">
                             <div>
                                 <p class="font-bold text-white">${g.desc}${infoParcela}</p>
-                                <p class="text-gray-400">${g.cartao} - Total R$ ${g.valorTotal.toFixed(2)} | Parcela: <span class="text-emerald-400 font-semibold">R$ ${p.valor.toFixed(2)}</span></p>
+                                <p class="text-gray-400">${g.cartao} - Total ${formatarBRL(g.valorTotal)} | Parcela: <span class="text-emerald-400 font-semibold">${formatarBRL(p.valor)}</span></p>
                             </div>
                             <div class="flex items-center gap-3 self-end sm:self-center">
                                 <label class="flex items-center gap-1.5 cursor-pointer bg-gray-900 px-2.5 py-1 rounded-md border border-gray-800">
@@ -1655,9 +1660,9 @@ tbody.appendChild(tr);
                         <td class="py-3 px-3 text-gray-300 font-mono">${c.data}</td>
                         <td class="py-3 px-3 font-semibold text-white">${c.desc}</td>
                         <td class="py-3 px-3"><span class="px-2.5 py-1 rounded-md bg-sky-950 text-sky-300 border border-sky-800/50 font-medium">${c.cartao}</span></td>
-                        <td class="py-3 px-3 font-bold text-white">R$ ${c.valor.toFixed(2)}</td>
+                        <td class="py-3 px-3 font-bold text-white">${formatarBRL(c.valor)}</td>
                         <td class="py-3 px-3 text-gray-400">${c.parcelas}x</td>
-                        <td class="py-3 px-3 text-emerald-400 font-semibold">R$ ${c.parceladoValor.toFixed(2)}</td>
+                        <td class="py-3 px-3 text-emerald-400 font-semibold">${formatarBRL(c.parceladoValor)}</td>
                         <td class="py-3 px-3 text-center">
                             <div class="flex items-center justify-center gap-2">
                                 <button onclick="abrirEditCompra(${c.id})" class="text-xs bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-800 px-2.5 py-1 rounded-lg transition" title="Editar Compra"><i class="fa-solid fa-pen"></i></button>
@@ -1726,8 +1731,8 @@ tbody.appendChild(tr);
                 const isCurrent = m === appState.mesAtivo;
                 list.innerHTML += `
                     <div class="flex justify-between items-center p-3 rounded-xl ${isCurrent ? 'bg-sky-950/60 border border-sky-700/60' : 'bg-gray-900 border border-gray-800/60'}">
-                        <span class="text-sm font-bold ${isCurrent ? 'text-sky-300' : 'text-gray-400'}">${m}</span>
-                        <span class="text-sm font-extrabold ${isCurrent ? 'text-sky-200' : 'text-gray-200'}">R$ ${totalM.toFixed(2)}</span>
+                        <span class="text-xs sm:text-sm font-bold ${isCurrent ? 'text-sky-300' : 'text-gray-400'}">${m}</span>
+                        <span class="text-xs sm:text-sm font-extrabold ${isCurrent ? 'text-sky-200' : 'text-gray-200'}">${formatarBRL(totalM)}</span>
                     </div>
                 `;
             });
