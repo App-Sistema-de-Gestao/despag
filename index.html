@@ -1061,15 +1061,19 @@
                     const mesCompraNum = parseInt(partesData[1]);
                     const diaCompra = parseInt(partesData[2]);
 
-                    let mesAlvoNum = mesCompraNum;
+                    // CORREÇÃO DE CICLO DE FECHAMENTO:
+                    // Se o dia da compra for <= fechamento, fatura vence no mês seguinte (mesCompraNum + 1)
+                    // Se o dia da compra for > fechamento, fatura vence em dois meses (mesCompraNum + 2)
+                    let mesAlvoNum = mesCompraNum + 1;
                     let anoAlvoNum = anoCompra;
 
                     if (diaCompra > diaFechamento) {
                         mesAlvoNum++;
-                        if (mesAlvoNum > 12) {
-                            mesAlvoNum = 1;
-                            anoAlvoNum++;
-                        }
+                    }
+
+                    while (mesAlvoNum > 12) {
+                        mesAlvoNum -= 12;
+                        anoAlvoNum++;
                     }
 
                     const nomesMesesSigla = ["", "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
@@ -1213,7 +1217,6 @@
             // 1. CALCULA RECEITAS CONFIRMADAS (MARCADAS COMO RECEBIDAS OU REEMBOLSADAS)
             let totalReceitasConfirmadas = 0;
 
-            // Receitas Próprias Marcadas como Recebidas
             if (appState.receitasProprias) {
                 appState.receitasProprias.forEach(r => {
                     if (r.recebido) {
@@ -1222,7 +1225,6 @@
                 });
             }
 
-            // Receitas de Terceiros Marcadas como Reembolsadas
             if (appState.terceirosGrupos) {
                 appState.terceirosGrupos.forEach(g => {
                     if (g.parcelas) {
@@ -1341,7 +1343,6 @@
         }
 
         function renderReceitasETerceiros() {
-            // RENDERIZA RECEITAS PRÓPRIAS COM CHECKBOX DE STATUS, CANETINHA E LIXEIRA
             const listP = document.getElementById('listReceitasProprias');
             listP.innerHTML = '';
             
@@ -1366,7 +1367,6 @@
                 `;
             });
 
-            // RENDERIZA RECEITAS DE TERCEIROS
             const container = document.getElementById('containerTerceiros');
             container.innerHTML = '';
             let mes = appState.mesAtivo;
