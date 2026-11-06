@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="DESPAG">
 
-    <!-- Google Fonts - Share Tech Mono (Estilo Terminal / Cripto) -->
+    <!-- Google Fonts - Share Tech Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -158,7 +158,7 @@
         </div>
 
         <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v4.9</span>
+            <span>DESPAG v5.0</span>
             <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
             </button>
@@ -575,7 +575,6 @@
 
     <!-- SCRIPT DE LÓGICA E REGRAS -->
     <script>
-        // FUNÇÃO FORMATADORA EM REAL BRASILEIRO
         function formatarBRL(valor) {
             return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor || 0);
         }
@@ -586,6 +585,15 @@
             "2027-MAI", "2027-JUN", "2027-JUL", "2027-AGO", 
             "2027-SET", "2027-OUT", "2027-NOV", "2027-DEZ"
         ];
+
+        // FUNÇÃO DE GERAR HISTÓRICO MENSAL PARA RECEITAS PRÓPRIAS
+        function gerarValoresMensaisReceita(valorInicial) {
+            let mapa = {};
+            MESES_CHRONO.forEach(m => {
+                mapa[m] = { valor: valorInicial, recebido: false };
+            });
+            return mapa;
+        }
 
         const estadoPadrao = {
             mesAtivo: "2026-NOV",
@@ -606,8 +614,9 @@
             ],
             faturasIniciais: {},
             receitasProprias: [
-                { id: 1, desc: "Salário Base", valor: 3600.00, recebido: false },
-                { id: 2, desc: "Renda Extra / Aluguel Garagem", valor: 100.00, recebido: false }
+                { id: 1, desc: "Salário Base", meses: gerarValoresMensaisReceita(3700.00) },
+                { id: 2, desc: "Renda Extra / Aluguel Garagem", meses: gerarValoresMensaisReceita(100.00) },
+                { id: 3, desc: "Edmilson", meses: gerarValoresMensaisReceita(168.25) }
             ],
             terceirosGrupos: [
                 {
@@ -765,205 +774,29 @@
                     ]
                 }
             ],
-            comprasBase: [
-                { id: 951, data: "2026-11-06", desc: "Equatorial I - Vencimento Nov", cartao: "Equatorial i", valor: 761.79, parcelas: 1, parceladoValor: 761.79 },
-                { id: 952, data: "2026-11-11", desc: "Equatorial II - Vencimento Nov", cartao: "Equatorial ii", valor: 29.37, parcelas: 1, parceladoValor: 29.37 },
-                { id: 953, data: "2026-11-05", desc: "Escola | Theodoro - Novembro", cartao: "Escola | Theodoro", valor: 382.50, parcelas: 1, parceladoValor: 382.50 },
-                { id: 954, data: "2026-12-05", desc: "Escola | Theodoro - Dezembro", cartao: "Escola | Theodoro", valor: 382.50, parcelas: 1, parceladoValor: 382.50 },
-
-                { id: 991, data: "2026-11-09", desc: "Financiamento 99Pay - Parcela Nov", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 992, data: "2026-12-08", desc: "Financiamento 99Pay - Parcela Dez", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 993, data: "2027-01-08", desc: "Financiamento 99Pay - Parcela Jan", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 994, data: "2027-02-10", desc: "Financiamento 99Pay - Parcela Fev", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 995, data: "2027-03-08", desc: "Financiamento 99Pay - Parcela Mar", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 996, data: "2027-04-08", desc: "Financiamento 99Pay - Parcela Abr", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-
-                { id: 801, data: "2026-11-10", desc: "Pix para o professor Durval - Nov", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 802, data: "2026-12-10", desc: "Pix para o professor Durval - Dez", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 803, data: "2027-01-10", desc: "Pix para o professor Durval - Jan", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 804, data: "2027-02-10", desc: "Pix para o professor Durval - Fev", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 805, data: "2027-03-10", desc: "Pix para o professor Durval - Mar", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 806, data: "2027-04-10", desc: "Pix para o professor Durval - Abr", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 807, data: "2027-05-10", desc: "Pix para o professor Durval - Mai", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 808, data: "2027-06-10", desc: "Pix para o professor Durval - Jun", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-
-                { id: 701, data: "2026-11-05", desc: "CMT I Andrielly - Mensalidade Nov", cartao: "CMT I Andrielly", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
-                { id: 702, data: "2026-12-05", desc: "CMT I Andrielly - Mensalidade Dez", cartao: "CMT I Andrielly", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
-
-                { id: 710, data: "2026-11-05", desc: "CMT I Guilherme (1) - Nov", cartao: "CMT I Guilherme", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
-                { id: 711, data: "2026-12-05", desc: "CMT I Guilherme (1) - Dez", cartao: "CMT I Guilherme", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
-                { id: 712, data: "2026-11-15", desc: "CMT I Guilherme (2) - Nov", cartao: "CMT I Guilherme", valor: 190.00, parcelas: 1, parceladoValor: 190.00 },
-                { id: 713, data: "2026-12-15", desc: "CMT I Guilherme (2) - Dez", cartao: "CMT I Guilherme", valor: 190.00, parcelas: 1, parceladoValor: 190.00 },
-
-                { id: 501, data: "2026-10-27", desc: "RecargaPay - Recargapay Neudson Paulobra (4/9)", cartao: "Cartão Recarga PAY", valor: 213.89, parcelas: 1, parceladoValor: 213.89 },
-                { id: 502, data: "2026-10-27", desc: "RecargaPay - Abastece Aí / Paulobra", cartao: "Cartão Recarga PAY", valor: 300.00, parcelas: 1, parceladoValor: 300.00 },
-                { id: 503, data: "2026-10-23", desc: "RecargaPay - Abastece Aí / Paulobra", cartao: "Cartão Recarga PAY", valor: 100.00, parcelas: 1, parceladoValor: 100.00 },
-                { id: 504, data: "2026-10-16", desc: "RecargaPay - Farmácias Pague Menos (1/3)", cartao: "Cartão Recarga PAY", valor: 59.53, parcelas: 1, parceladoValor: 59.53 },
-                { id: 505, data: "2026-10-15", desc: "RecargaPay - Google One", cartao: "Cartão Recarga PAY", valor: 9.99, parcelas: 1, parceladoValor: 9.99 },
-                { id: 506, data: "2026-10-15", desc: "RecargaPay - Claro Flex", cartao: "Cartão Recarga PAY", valor: 39.99, parcelas: 1, parceladoValor: 39.99 },
-                { id: 507, data: "2026-10-06", desc: "RecargaPay - Abastece Aí / Paulobra", cartao: "Cartão Recarga PAY", valor: 300.00, parcelas: 1, parceladoValor: 300.00 },
-                { id: 508, data: "2026-10-04", desc: "RecargaPay - Abastece Aí / Paulobra", cartao: "Cartão Recarga PAY", valor: 30.00, parcelas: 1, parceladoValor: 30.00 },
-                { id: 509, data: "2026-10-04", desc: "RecargaPay - Google Amazon Shopping", cartao: "Cartão Recarga PAY", valor: 19.90, parcelas: 1, parceladoValor: 19.90 },
-                { id: 510, data: "2026-10-03", desc: "RecargaPay - RD Saúde Online", cartao: "Cartão Recarga PAY", valor: 38.00, parcelas: 1, parceladoValor: 38.00 },
-                { id: 511, data: "2026-10-03", desc: "RecargaPay - Claro Flex", cartao: "Cartão Recarga PAY", valor: 34.99, parcelas: 1, parceladoValor: 34.99 },
-                { id: 512, data: "2026-10-02", desc: "RecargaPay - PG Nio Fibra", cartao: "Cartão Recarga PAY", valor: 89.90, parcelas: 1, parceladoValor: 89.90 },
-                { id: 513, data: "2026-07-03", desc: "RecargaPay - Amazon Mktplc (Fabio Santos - 4/5)", cartao: "Cartão Recarga PAY", valor: 33.12, parcelas: 1, parceladoValor: 33.12 },
-                { id: 514, data: "2026-01-06", desc: "RecargaPay - Casas Bahia (10/12)", cartao: "Cartão Recarga PAY", valor: 46.58, parcelas: 1, parceladoValor: 46.58 },
-                { id: 515, data: "2025-11-03", desc: "RecargaPay - Mercado Livre / Britânia (12/12)", cartao: "Cartão Recarga PAY", valor: 149.54, parcelas: 1, parceladoValor: 149.54 },
-                { id: 516, data: "2026-09-08", desc: "RecargaPay - Parcelamento de Fatura (2/2) + Encargos", cartao: "Cartão Recarga PAY", valor: 398.90, parcelas: 1, parceladoValor: 398.90 },
-
-                { id: 601, data: "2026-09-11", desc: "Mercado Pago - Assaí Atacadista (2/2)", cartao: "Mercado Pago", valor: 20.95, parcelas: 1, parceladoValor: 20.95 },
-                { id: 602, data: "2026-09-13", desc: "Mercado Pago - Drogasil (2/2)", cartao: "Mercado Pago", valor: 49.63, parcelas: 1, parceladoValor: 49.63 },
-                { id: 603, data: "2026-09-13", desc: "Mercado Pago - Extra Farma (2/4)", cartao: "Mercado Pago", valor: 61.24, parcelas: 1, parceladoValor: 61.24 },
-                { id: 604, data: "2026-09-16", desc: "Mercado Pago - Mix Mateus (2/2)", cartao: "Mercado Pago", valor: 161.46, parcelas: 1, parceladoValor: 161.46 },
-                { id: 605, data: "2026-09-22", desc: "Mercado Pago - Mateus Supermercados (2/2)", cartao: "Mercado Pago", valor: 86.68, parcelas: 1, parceladoValor: 86.68 },
-                { id: 606, data: "2026-09-23", desc: "Mercado Pago - Açougue Mathias (2/2)", cartao: "Mercado Pago", valor: 62.35, parcelas: 1, parceladoValor: 62.35 },
-                { id: 607, data: "2026-09-23", desc: "Mercado Pago - Mateus Supermercados (2/3)", cartao: "Mercado Pago", valor: 51.24, parcelas: 1, parceladoValor: 51.24 },
-                { id: 608, data: "2026-09-23", desc: "Mercado Pago - Mix Mateus (2/2)", cartao: "Mercado Pago", valor: 55.07, parcelas: 1, parceladoValor: 55.07 },
-                { id: 609, data: "2026-09-29", desc: "Mercado Pago - Galeteria Rabelo", cartao: "Mercado Pago", valor: 48.00, parcelas: 1, parceladoValor: 48.00 },
-                { id: 610, data: "2026-09-29", desc: "Mercado Pago - Extra Farma", cartao: "Mercado Pago", valor: 2.98, parcelas: 1, parceladoValor: 2.98 },
-                { id: 611, data: "2026-09-29", desc: "Mercado Pago - Delícia de Pão", cartao: "Mercado Pago", valor: 4.00, parcelas: 1, parceladoValor: 4.00 },
-                { id: 612, data: "2026-10-01", desc: "Mercado Pago - Francisco Evio", cartao: "Mercado Pago", valor: 118.53, parcelas: 1, parceladoValor: 118.53 },
-                { id: 613, data: "2026-10-01", desc: "Mercado Pago - MP Casa da Carne", cartao: "Mercado Pago", valor: 6.00, parcelas: 1, parceladoValor: 6.00 },
-                { id: 614, data: "2026-10-02", desc: "Mercado Pago - MP Casa da Carne", cartao: "Mercado Pago", valor: 4.49, parcelas: 1, parceladoValor: 4.49 },
-                { id: 615, data: "2026-10-02", desc: "Mercado Pago - G5 Distribuidora", cartao: "Mercado Pago", valor: 35.00, parcelas: 1, parceladoValor: 35.00 },
-                { id: 616, data: "2026-10-02", desc: "Mercado Pago - Cantinho Doce", cartao: "Mercado Pago", valor: 35.55, parcelas: 1, parceladoValor: 35.55 },
-                { id: 617, data: "2026-10-02", desc: "Mercado Pago - Mix Mateus (1/2)", cartao: "Mercado Pago", valor: 156.53, parcelas: 1, parceladoValor: 156.53 },
-                { id: 618, data: "2026-10-03", desc: "Mercado Pago - Raimundo Nonato", cartao: "Mercado Pago", valor: 19.49, parcelas: 1, parceladoValor: 19.49 },
-                { id: 619, data: "2026-10-03", desc: "Mercado Pago - MP Casa da Carne", cartao: "Mercado Pago", valor: 4.80, parcelas: 1, parceladoValor: 4.80 },
-                { id: 620, data: "2026-10-03", desc: "Mercado Pago - Raimundo Nonato", cartao: "Mercado Pago", valor: 61.43, parcelas: 1, parceladoValor: 61.43 },
-                { id: 621, data: "2026-10-05", desc: "Mercado Pago - Francisco Evio", cartao: "Mercado Pago", valor: 23.40, parcelas: 1, parceladoValor: 23.40 },
-                { id: 622, data: "2026-10-05", desc: "Mercado Pago - MP Casa da Carne", cartao: "Mercado Pago", valor: 4.80, parcelas: 1, parceladoValor: 4.80 },
-                { id: 623, data: "2026-10-05", desc: "Mercado Pago - MP Casa da Carne", cartao: "Mercado Pago", valor: 5.91, parcelas: 1, parceladoValor: 5.91 },
-                { id: 624, data: "2026-10-06", desc: "Mercado Pago - Tambasa Atacadistas", cartao: "Mercado Pago", valor: 28.59, parcelas: 1, parceladoValor: 28.59 },
-                { id: 625, data: "2026-10-06", desc: "Mercado Pago - Tambasa Atacadistas", cartao: "Mercado Pago", valor: 116.18, parcelas: 1, parceladoValor: 116.18 },
-                { id: 626, data: "2026-10-07", desc: "Mercado Pago - MP Pão da Ilha", cartao: "Mercado Pago", valor: 7.00, parcelas: 1, parceladoValor: 7.00 },
-                { id: 627, data: "2026-10-07", desc: "Mercado Pago - Raimundo Nonato", cartao: "Mercado Pago", valor: 137.91, parcelas: 1, parceladoValor: 137.91 },
-                { id: 628, data: "2026-10-10", desc: "Mercado Pago - Mix Mateus (1/2)", cartao: "Mercado Pago", valor: 105.42, parcelas: 1, parceladoValor: 105.42 },
-                { id: 629, data: "2026-10-10", desc: "Mercado Pago - Peixaria do Roni", cartao: "Mercado Pago", valor: 46.45, parcelas: 1, parceladoValor: 46.45 },
-                { id: 630, data: "2026-10-11", desc: "Mercado Pago - MP Pão da Ilha", cartao: "Mercado Pago", valor: 8.20, parcelas: 1, parceladoValor: 8.20 },
-                { id: 631, data: "2026-10-13", desc: "Mercado Pago - Jim.com FG Gonçalves", cartao: "Mercado Pago", valor: 35.00, parcelas: 1, parceladoValor: 35.00 },
-                { id: 632, data: "2026-10-14", desc: "Mercado Pago - Mix Mateus (1/2)", cartao: "Mercado Pago", valor: 147.13, parcelas: 1, parceladoValor: 147.13 },
-                { id: 633, data: "2026-10-14", desc: "Mercado Pago - MP Casa da Carne", cartao: "Mercado Pago", valor: 10.76, parcelas: 1, parceladoValor: 10.76 },
-                { id: 634, data: "2026-10-15", desc: "Mercado Pago - Alina Campos Silva", cartao: "Mercado Pago", valor: 64.50, parcelas: 1, parceladoValor: 64.50 },
-                { id: 635, data: "2026-10-16", desc: "Mercado Pago - Pega Bichos", cartao: "Mercado Pago", valor: 4.00, parcelas: 1, parceladoValor: 4.00 },
-                { id: 636, data: "2026-10-16", desc: "Mercado Pago - RAL Comércio e Serviços", cartao: "Mercado Pago", valor: 8.50, parcelas: 1, parceladoValor: 8.50 },
-                { id: 637, data: "2026-10-16", desc: "Mercado Pago - Guaraná Mania SLZ", cartao: "Mercado Pago", valor: 9.00, parcelas: 1, parceladoValor: 9.00 },
-                { id: 638, data: "2026-10-16", desc: "Mercado Pago - Mateus Super (1/2)", cartao: "Mercado Pago", valor: 88.07, parcelas: 1, parceladoValor: 88.07 },
-                { id: 639, data: "2026-10-16", desc: "Mercado Pago - MP Casa da Carne", cartao: "Mercado Pago", valor: 9.56, parcelas: 1, parceladoValor: 9.56 },
-                { id: 640, data: "2026-10-16", desc: "Mercado Pago - Divone Fontenele", cartao: "Mercado Pago", valor: 41.00, parcelas: 1, parceladoValor: 41.00 },
-                { id: 641, data: "2026-10-16", desc: "Mercado Pago - Divone Fontenele", cartao: "Mercado Pago", valor: 5.00, parcelas: 1, parceladoValor: 5.00 },
-                { id: 642, data: "2026-10-16", desc: "Mercado Pago - MP Treiller Lanch", cartao: "Mercado Pago", valor: 24.00, parcelas: 1, parceladoValor: 24.00 },
-                { id: 643, data: "2026-10-17", desc: "Mercado Pago - Pit Stop Burger", cartao: "Mercado Pago", valor: 40.00, parcelas: 1, parceladoValor: 40.00 },
-                { id: 644, data: "2026-10-17", desc: "Mercado Pago - Jhon Lennon Rocha", cartao: "Mercado Pago", valor: 50.00, parcelas: 1, parceladoValor: 50.00 },
-                { id: 645, data: "2026-10-20", desc: "Mercado Pago - Galeteria Rabelo", cartao: "Mercado Pago", valor: 56.00, parcelas: 1, parceladoValor: 56.00 },
-                { id: 646, data: "2026-10-20", desc: "Mercado Pago - MP Casa da Carne", cartao: "Mercado Pago", valor: 8.96, parcelas: 1, parceladoValor: 8.96 },
-                { id: 647, data: "2026-10-20", desc: "Mercado Pago - Raimundo Nonato", cartao: "Mercado Pago", valor: 93.95, parcelas: 1, parceladoValor: 93.95 },
-                { id: 648, data: "2026-10-21", desc: "Mercado Pago - Mix Mateus (1/3)", cartao: "Mercado Pago", valor: 86.85, parcelas: 1, parceladoValor: 86.85 },
-                { id: 649, data: "2026-10-22", desc: "Mercado Pago - MP Manda Burger SLZ", cartao: "Mercado Pago", valor: 75.00, parcelas: 1, parceladoValor: 75.00 },
-                { id: 650, data: "2026-10-23", desc: "Mercado Pago - MP Pizza Sanx", cartao: "Mercado Pago", valor: 91.00, parcelas: 1, parceladoValor: 91.00 },
-                { id: 651, data: "2026-10-23", desc: "Mercado Pago - MP Pão da Ilha", cartao: "Mercado Pago", valor: 4.80, parcelas: 1, parceladoValor: 4.80 },
-                { id: 652, data: "2026-10-25", desc: "Mercado Pago - MP Pão da Ilha", cartao: "Mercado Pago", valor: 7.00, parcelas: 1, parceladoValor: 7.00 },
-                { id: 653, data: "2026-10-25", desc: "Mercado Pago - Mateus Supermercados", cartao: "Mercado Pago", valor: 19.12, parcelas: 1, parceladoValor: 19.12 },
-                { id: 654, data: "2026-10-27", desc: "Mercado Pago - MP Pão da Ilha", cartao: "Mercado Pago", valor: 7.00, parcelas: 1, parceladoValor: 7.00 },
-                { id: 655, data: "2026-10-28", desc: "Mercado Pago - Mercadinho do Neto", cartao: "Mercado Pago", valor: 4.60, parcelas: 1, parceladoValor: 4.60 },
-                { id: 656, data: "2026-02-19", desc: "Mercado Pago - Propig / BMM Barbosa (9/10)", cartao: "Mercado Pago", valor: 55.00, parcelas: 1, parceladoValor: 55.00 },
-                { id: 657, data: "2026-08-04", desc: "Mercado Pago - C. Cruz Sousa (3/3)", cartao: "Mercado Pago", valor: 86.66, parcelas: 1, parceladoValor: 86.66 },
-                { id: 658, data: "2026-08-29", desc: "Mercado Pago - Mix Mateus (3/3)", cartao: "Mercado Pago", valor: 53.92, parcelas: 1, parceladoValor: 53.92 },
-                { id: 659, data: "2026-08-29", desc: "Mercado Pago - Mateus Supermercados (2/2)", cartao: "Mercado Pago", valor: 24.54, parcelas: 1, parceladoValor: 24.54 },
-                { id: 660, data: "2025-12-12", desc: "Mercado Pago - Mercado Livre (11/18)", cartao: "Mercado Pago", valor: 29.27, parcelas: 1, parceladoValor: 29.27 },
-                { id: 661, data: "2026-06-20", desc: "Mercado Pago - Mercado Livre (5/8)", cartao: "Mercado Pago", valor: 26.23, parcelas: 1, parceladoValor: 26.23 },
-                { id: 662, data: "2026-08-06", desc: "Mercado Pago - Extra Farma Paguemenos (3/5)", cartao: "Mercado Pago", valor: 59.03, parcelas: 1, parceladoValor: 59.03 },
-
-                { id: 101, data: "2026-09-26", desc: "Mix Mateus - Parcela 2/3", cartao: "Nubank Edilene", valor: 420.00, parcelas: 3, parceladoValor: 140.00 },
-                { id: 102, data: "2026-09-26", desc: "Shopee *Shpstecnologia - Parcela 2/2", cartao: "Nubank Edilene", valor: 19.88, parcelas: 2, parceladoValor: 9.94 },
-                { id: 103, data: "2026-09-26", desc: "Shopee *Gabrielecouto - Parcela 2/2", cartao: "Nubank Edilene", valor: 42.76, parcelas: 2, parceladoValor: 21.38 },
-                { id: 104, data: "2026-09-26", desc: "Mp *Oticascarol - Parcela 4/10", cartao: "Nubank Edilene", valor: 1900.00, parcelas: 10, parceladoValor: 190.00 },
-                { id: 105, data: "2026-09-26", desc: "Mix Mateus - Parcela 3/3", cartao: "Nubank Edilene", valor: 208.77, parcelas: 3, parceladoValor: 69.59 },
-                { id: 106, data: "2026-09-26", desc: "Shopee *Godivacalcados - Parcela 2/2", cartao: "Nubank Edilene", valor: 85.08, parcelas: 2, parceladoValor: 42.54 },
-                { id: 107, data: "2026-09-26", desc: "Transportes Boa Espera - Parcela 5/6", cartao: "Nubank Edilene", valor: 420.00, parcelas: 6, parceladoValor: 70.00 },
-                { id: 108, data: "2026-09-26", desc: "Bmb*Equatorial - Parcela 2/2", cartao: "Nubank Edilene", valor: 728.64, parcelas: 2, parceladoValor: 364.32 },
-                { id: 109, data: "2026-09-26", desc: "Shopee *Mundodasfralda - Parcela 2/2", cartao: "Nubank Edilene", valor: 67.68, parcelas: 2, parceladoValor: 33.84 },
-                { id: 110, data: "2026-09-26", desc: "Shopee *Modascely - Parcela 2/2", cartao: "Nubank Edilene", valor: 70.20, parcelas: 2, parceladoValor: 35.10 },
-                { id: 111, data: "2026-09-26", desc: "Tiago Marques Silva - Parcela 7/8", cartao: "Nubank Edilene", valor: 1550.00, parcelas: 8, parceladoValor: 193.75 },
-                { id: 112, data: "2026-09-26", desc: "Shopee *Britaniaoficia - Parcela 3/3", cartao: "Nubank Edilene", valor: 67.41, parcelas: 3, parceladoValor: 22.47 },
-                { id: 113, data: "2026-09-26", desc: "Mateus Supermercados - Parcela 2/2", cartao: "Nubank Edilene", valor: 124.76, parcelas: 2, parceladoValor: 62.38 },
-                { id: 114, data: "2026-09-26", desc: "Mix Mateus - Parcela 3/3", cartao: "Nubank Edilene", valor: 181.80, parcelas: 3, parceladoValor: 60.60 },
-                { id: 115, data: "2026-09-26", desc: "Shopee *Topescolha - Parcela 2/2", cartao: "Nubank Edilene", valor: 29.56, parcelas: 2, parceladoValor: 14.78 },
-                { id: 116, data: "2026-09-26", desc: "Shopee *Lojasdikasa - Parcela 2/2", cartao: "Nubank Edilene", valor: 34.94, parcelas: 2, parceladoValor: 17.47 },
-                { id: 117, data: "2026-09-26", desc: "Mp *Annymalhas - Parcela 2/2", cartao: "Nubank Edilene", valor: 120.00, parcelas: 2, parceladoValor: 60.00 },
-                { id: 118, data: "2026-09-26", desc: "Shopee *Casadona - Parcela 2/2", cartao: "Nubank Edilene", valor: 24.48, parcelas: 2, parceladoValor: 12.24 },
-                { id: 119, data: "2026-09-26", desc: "R F Pacheco Oliveira C - Parcela 4/10", cartao: "Nubank Edilene", valor: 3000.00, parcelas: 10, parceladoValor: 300.00 },
-                { id: 120, data: "2026-10-01", desc: "Shopee *Gigil", cartao: "Nubank Edilene", valor: 29.99, parcelas: 1, parceladoValor: 29.99 },
-                { id: 121, data: "2026-10-02", desc: "Shopee *Carolessenciap", cartao: "Nubank Edilene", valor: 1.99, parcelas: 1, parceladoValor: 1.99 },
-                { id: 122, data: "2026-10-06", desc: "Shopee *Jonlantty", cartao: "Nubank Edilene", valor: 19.74, parcelas: 1, parceladoValor: 19.74 },
-                { id: 123, data: "2026-10-06", desc: "Shopee *Sarawhannie - Parcela 1/2", cartao: "Nubank Edilene", valor: 36.02, parcelas: 2, parceladoValor: 18.01 },
-                { id: 124, data: "2026-10-06", desc: "Shopee *Ppfit", cartao: "Nubank Edilene", valor: 11.86, parcelas: 1, parceladoValor: 11.86 },
-                { id: 125, data: "2026-10-06", desc: "Shopee *Espacokids - Parcela 1/2", cartao: "Nubank Edilene", valor: 23.98, parcelas: 2, parceladoValor: 11.99 },
-                { id: 126, data: "2026-10-07", desc: "Shopee *Poloinfantilst - Parcela 1/2", cartao: "Nubank Edilene", valor: 19.22, parcelas: 2, parceladoValor: 9.61 },
-                { id: 127, data: "2026-10-07", desc: "Shopee *Niveaoficial", cartao: "Nubank Edilene", valor: 22.97, parcelas: 1, parceladoValor: 22.97 },
-                { id: 128, data: "2026-10-07", desc: "Shopee *Manphi - Parcela 1/2", cartao: "Nubank Edilene", valor: 21.96, parcelas: 2, parceladoValor: 10.98 },
-                { id: 129, data: "2026-10-07", desc: "Shopee *Poloinfantilst - Parcela 1/2", cartao: "Nubank Edilene", valor: 30.20, parcelas: 2, parceladoValor: 15.10 },
-                { id: 130, data: "2026-10-07", desc: "Shopee *Webmercadinho", cartao: "Nubank Edilene", valor: 43.63, parcelas: 1, parceladoValor: 43.63 },
-                { id: 131, data: "2026-10-08", desc: "Mp *Comercialns - Parcela 1/5", cartao: "Nubank Edilene", valor: 2800.00, parcelas: 5, parceladoValor: 560.00 },
-                { id: 132, data: "2026-10-08", desc: "Shopee *Ppfit", cartao: "Nubank Edilene", valor: 19.68, parcelas: 1, parceladoValor: 19.68 },
-                { id: 133, data: "2026-10-08", desc: "Shopee *Gnstore", cartao: "Nubank Edilene", valor: 18.57, parcelas: 1, parceladoValor: 18.57 },
-                { id: 134, data: "2026-10-09", desc: "Shopee *Toplojajero - Parcela 1/2", cartao: "Nubank Edilene", valor: 21.64, parcelas: 2, parceladoValor: 10.82 },
-                { id: 135, data: "2026-10-09", desc: "Shopee *Uauingleza", cartao: "Nubank Edilene", valor: 11.62, parcelas: 1, parceladoValor: 11.62 },
-                { id: 136, data: "2026-10-10", desc: "Shopee *Ppfit", cartao: "Nubank Edilene", valor: 16.71, parcelas: 1, parceladoValor: 16.71 },
-                { id: 137, data: "2026-10-11", desc: "Shopee *Dafabricasuple - Parcela 1/2", cartao: "Nubank Edilene", valor: 35.32, parcelas: 2, parceladoValor: 17.66 },
-                { id: 138, data: "2026-10-11", desc: "Shopee *Usebelladonna", cartao: "Nubank Edilene", valor: 12.94, parcelas: 1, parceladoValor: 12.94 },
-                { id: 139, data: "2026-10-11", desc: "Shopee *Bodyactionofic", cartao: "Nubank Edilene", valor: 14.70, parcelas: 1, parceladoValor: 14.70 },
-                { id: 140, data: "2026-10-12", desc: "Shopee *Darklaboficial", cartao: "Nubank Edilene", valor: 75.08, parcelas: 1, parceladoValor: 75.08 },
-                { id: 141, data: "2026-10-12", desc: "Shopee *Cafeitalle", cartao: "Nubank Edilene", valor: 24.49, parcelas: 1, parceladoValor: 24.49 },
-                { id: 142, data: "2026-10-13", desc: "Digas - Parcela 1/2", cartao: "Nubank Edilene", valor: 130.00, parcelas: 2, parceladoValor: 65.00 },
-                { id: 143, data: "2026-10-14", desc: "Shopee *Aluminionacion", cartao: "Nubank Edilene", valor: 16.83, parcelas: 1, parceladoValor: 16.83 },
-                { id: 144, data: "2026-10-14", desc: "Shopee *Poloinfantilst - Parcela 1/2", cartao: "Nubank Edilene", valor: 64.78, parcelas: 2, parceladoValor: 32.39 },
-                { id: 145, data: "2026-10-15", desc: "Shopee *Ppfit", cartao: "Nubank Edilene", valor: 7.40, parcelas: 1, parceladoValor: 7.40 },
-                { id: 146, data: "2026-10-15", desc: "Shopee *Zavydigital", cartao: "Nubank Edilene", valor: 10.00, parcelas: 1, parceladoValor: 10.00 },
-                { id: 147, data: "2026-10-17", desc: "Shopee*Ppfitltda", cartao: "Nubank Edilene", valor: 12.95, parcelas: 1, parceladoValor: 12.95 },
-                { id: 148, data: "2026-10-18", desc: "Shopee *Sellneeds", cartao: "Nubank Edilene", valor: 27.08, parcelas: 1, parceladoValor: 27.08 },
-                { id: 149, data: "2026-10-19", desc: "Shopee *Ppfit", cartao: "Nubank Edilene", valor: 6.49, parcelas: 1, parceladoValor: 6.49 },
-                { id: 150, data: "2026-10-19", desc: "Shopee *Ppfit", cartao: "Nubank Edilene", valor: 16.71, parcelas: 1, parceladoValor: 16.71 },
-                { id: 151, data: "2026-10-20", desc: "Shopee *Ppfit", cartao: "Nubank Edilene", valor: 7.99, parcelas: 1, parceladoValor: 7.99 },
-                { id: 152, data: "2026-10-21", desc: "Shopee *Belamantas", cartao: "Nubank Edilene", valor: 14.76, parcelas: 1, parceladoValor: 14.76 },
-                { id: 153, data: "2026-10-21", desc: "Shopee *Beautyon", cartao: "Nubank Edilene", valor: 13.25, parcelas: 1, parceladoValor: 13.25 },
-                { id: 154, data: "2026-10-21", desc: "Shopee *Terravitta", cartao: "Nubank Edilene", valor: 14.87, parcelas: 1, parceladoValor: 14.87 },
-                { id: 155, data: "2026-10-22", desc: "Shopee *Terravitta", cartao: "Nubank Edilene", valor: 7.00, parcelas: 1, parceladoValor: 7.00 },
-                { id: 156, data: "2026-10-23", desc: "Claro *98984067717", cartao: "Nubank Edilene", valor: 36.90, parcelas: 1, parceladoValor: 36.90 },
-                { id: 157, data: "2026-10-23", desc: "Shopee *Ppfit", cartao: "Nubank Edilene", valor: 15.98, parcelas: 1, parceladoValor: 15.98 },
-                { id: 158, data: "2026-10-23", desc: "Shopee*Jeanjacksoncord - Parcela 1/2", cartao: "Nubank Edilene", valor: 26.10, parcelas: 2, parceladoValor: 13.05 },
-                { id: 159, data: "2026-10-24", desc: "Shopee *Vitaoalimentos - Parcela 1/2", cartao: "Nubank Edilene", valor: 28.02, parcelas: 2, parceladoValor: 14.01 },
-                { id: 160, data: "2026-10-24", desc: "Shopee *Nutryximportac", cartao: "Nubank Edilene", valor: 10.00, parcelas: 1, parceladoValor: 10.00 },
-                { id: 161, data: "2026-10-24", desc: "Shopee *Mrbluemultimar", cartao: "Nubank Edilene", valor: 12.90, parcelas: 1, parceladoValor: 12.90 },
-                { id: 162, data: "2026-10-25", desc: "Shopee *Shopeevip", cartao: "Nubank Edilene", valor: 9.90, parcelas: 1, parceladoValor: 9.90 },
-                { id: 163, data: "2026-09-26", desc: "Neudson Vagno Costa - Parcela 2/2", cartao: "Nubank Edilene", valor: 2284.52, parcelas: 2, parceladoValor: 1142.26 },
-
-                { id: 201, data: "2026-09-27", desc: "Shopee *Mirandalimpmix - Parcela 2/2", cartao: "Nubank Neudson", valor: 146.90, parcelas: 2, parceladoValor: 73.45 },
-                { id: 202, data: "2026-09-27", desc: "Facial - Parcela 2/3", cartao: "Nubank Neudson", valor: 259.98, parcelas: 3, parceladoValor: 86.66 },
-                { id: 203, data: "2026-09-27", desc: "Casasbahiacom - Parcela 10/10", cartao: "Nubank Neudson", valor: 1893.60, parcelas: 10, parceladoValor: 189.36 },
-                { id: 204, data: "2026-09-27", desc: "Raia Drogasil - Parcela 2/3", cartao: "Nubank Neudson", valor: 333.78, parcelas: 3, parceladoValor: 111.26 },
-                { id: 205, data: "2026-09-27", desc: "Mlp*Magalu-Bumper Maga - Parcela 4/5", cartao: "Nubank Neudson", valor: 719.85, parcelas: 5, parceladoValor: 143.97 },
-                { id: 206, data: "2026-09-27", desc: "Shopee*Doutoras Modas - Parcela 2/2", cartao: "Nubank Neudson", valor: 24.82, parcelas: 2, parceladoValor: 12.41 },
-                { id: 207, data: "2026-09-27", desc: "Htm Vitoria Fernandes - Parcela 2/12", cartao: "Nubank Neudson", valor: 48.72, parcelas: 12, parceladoValor: 4.06 },
-                { id: 208, data: "2026-09-27", desc: "Htm Vitoria Fernandes - Parcela 2/4", cartao: "Nubank Neudson", valor: 15.60, parcelas: 4, parceladoValor: 3.90 },
-                { id: 209, data: "2026-09-27", desc: "Amazonmktplc*Ajrcomerc - Parcela 4/6", cartao: "Nubank Neudson", valor: 194.88, parcelas: 6, parceladoValor: 32.48 },
-                { id: 210, data: "2026-09-27", desc: "Shopee *Lojafigueiredo - Parcela 2/4", cartao: "Nubank Neudson", valor: 47.00, parcelas: 4, parceladoValor: 11.75 },
-                { id: 211, data: "2026-09-27", desc: "Amazon Br *Amazon - Parcela 2/2", cartao: "Nubank Neudson", valor: 97.36, parcelas: 2, parceladoValor: 48.68 },
-                { id: 212, data: "2026-09-27", desc: "Shopee *Mundodasfralda - Parcela 2/2", cartao: "Nubank Neudson", valor: 48.24, parcelas: 2, parceladoValor: 24.12 },
-                { id: 213, data: "2026-09-27", desc: "Kvn*Metodo Hftc - Parcela 8/12", cartao: "Nubank Neudson", valor: 242.28, parcelas: 12, parceladoValor: 20.19 },
-                { id: 214, data: "2026-09-27", desc: "Htm Cleisson Rocha - Parcela 11/12", cartao: "Nubank Neudson", valor: 1109.40, parcelas: 12, parceladoValor: 92.45 },
-                { id: 215, data: "2026-09-28", desc: "Amazonmktplc*Eromanovs - Parcela 1/5", cartao: "Nubank Neudson", valor: 176.00, parcelas: 5, parceladoValor: 35.20 },
-                { id: 216, data: "2026-09-30", desc: "Extrafarma C*Paguemeno - Parcela 1/5", cartao: "Nubank Neudson", valor: 326.10, parcelas: 5, parceladoValor: 65.22 },
-                { id: 217, data: "2026-10-05", desc: "Shopee *Susek - Parcela 1/2", cartao: "Nubank Neudson", valor: 30.00, parcelas: 2, parceladoValor: 15.00 },
-                { id: 218, data: "2026-10-05", desc: "Shopee *Ecommmixtudo", cartao: "Nubank Neudson", valor: 26.12, parcelas: 1, parceladoValor: 26.12 }
-            ]
+            comprasBase: []
         };
 
         let appState = JSON.parse(localStorage.getItem('DESPAG_STATE'));
-        if (!appState || !appState.comprasBase || appState.comprasBase.length < 58) {
+        if (!appState) {
             appState = JSON.parse(JSON.stringify(estadoPadrao));
             localStorage.setItem('DESPAG_STATE', JSON.stringify(appState));
+        }
+
+        // MIGRAÇÃO CASO O ESTADO ANTIGO NÃO TENHA O MAPA DE MESES
+        if (appState.receitasProprias) {
+            appState.receitasProprias.forEach(r => {
+                if (!r.meses) {
+                    let val = r.valor || 0;
+                    r.meses = gerarValoresMensaisReceita(val);
+                } else {
+                    MESES_CHRONO.forEach(m => {
+                        if (!r.meses[m]) {
+                            r.meses[m] = { valor: r.meses["2026-NOV"] ? r.meses["2026-NOV"].valor : 0, recebido: false };
+                        }
+                    });
+                }
+            });
         }
 
         function salvarEstado() {
@@ -989,13 +822,13 @@
             fileReader.onload = function(e) {
                 try {
                     const parsedState = JSON.parse(e.target.result);
-                    if (parsedState && parsedState.cartoes && parsedState.comprasBase) {
+                    if (parsedState && parsedState.cartoes) {
                         appState = parsedState;
                         salvarEstado();
                         recalcularFaturasGerais();
                         renderDashboard();
                         renderBaseDados();
-                        alert("Backup importado e sincronizado com sucesso!");
+                        alert("Backup importado com sucesso!");
                     } else {
                         alert("Arquivo de backup inválido.");
                     }
@@ -1007,31 +840,8 @@
         }
 
         function forcarResetEstado() {
-            if (confirm("Deseja sincronizar a base oficial? Suas edições e cadastros serão preservados.")) {
-                let estadoOficial = JSON.parse(JSON.stringify(estadoPadrao));
-
-                if (appState) {
-                    if (appState.receitasProprias && appState.receitasProprias.length > 0) {
-                        estadoOficial.receitasProprias = appState.receitasProprias;
-                    }
-                    if (appState.terceirosGrupos && appState.terceirosGrupos.length > 0) {
-                        estadoOficial.terceirosGrupos = appState.terceirosGrupos;
-                    }
-                    if (appState.cartoes && appState.cartoes.length > 0) {
-                        let cartoesMap = new Map();
-                        estadoOficial.cartoes.forEach(c => cartoesMap.set(c.id, c));
-                        appState.cartoes.forEach(c => cartoesMap.set(c.id, c));
-                        estadoOficial.cartoes = Array.from(cartoesMap.values());
-                    }
-                    if (appState.comprasBase && appState.comprasBase.length > 0) {
-                        let comprasMap = new Map();
-                        estadoOficial.comprasBase.forEach(c => comprasMap.set(c.id, c));
-                        appState.comprasBase.forEach(c => comprasMap.set(c.id, c));
-                        estadoOficial.comprasBase = Array.from(comprasMap.values());
-                    }
-                }
-
-                appState = estadoOficial;
+            if (confirm("Deseja redefinir as configurações e sincronizar com o padrão oficial?")) {
+                appState = JSON.parse(JSON.stringify(estadoPadrao));
                 salvarEstado();
                 renderDashboard();
                 alert("Base sincronizada com sucesso!");
@@ -1061,9 +871,6 @@
                     const mesCompraNum = parseInt(partesData[1]);
                     const diaCompra = parseInt(partesData[2]);
 
-                    // CORREÇÃO DE CICLO DE FECHAMENTO:
-                    // Se o dia da compra for <= fechamento, fatura vence no mês seguinte (mesCompraNum + 1)
-                    // Se o dia da compra for > fechamento, fatura vence em dois meses (mesCompraNum + 2)
                     let mesAlvoNum = mesCompraNum + 1;
                     let anoAlvoNum = anoCompra;
 
@@ -1201,30 +1008,24 @@
             selectFiltro.value = atual;
         }
 
-        function limparFiltrosBase() {
-            document.getElementById('filtroDesc').value = '';
-            document.getElementById('filtroCartao').value = '';
-            document.getElementById('filtroData').value = '';
-            renderBaseDados();
-        }
-
         function renderDashboard() {
             recalcularFaturasGerais();
 
             const mes = document.getElementById('selectMes').value;
             appState.mesAtivo = mes;
 
-            // 1. CALCULA RECEITAS CONFIRMADAS (MARCADAS COMO RECEBIDAS OU REEMBOLSADAS)
             let totalReceitasConfirmadas = 0;
 
+            // RECEITAS PRÓPRIAS DO MÊS SELECIONADO
             if (appState.receitasProprias) {
                 appState.receitasProprias.forEach(r => {
-                    if (r.recebido) {
-                        totalReceitasConfirmadas += r.valor;
+                    if (r.meses && r.meses[mes] && r.meses[mes].recebido) {
+                        totalReceitasConfirmadas += r.meses[mes].valor;
                     }
                 });
             }
 
+            // RECEITA DE TERCEIROS DO MÊS SELECIONADO
             if (appState.terceirosGrupos) {
                 appState.terceirosGrupos.forEach(g => {
                     if (g.parcelas) {
@@ -1237,7 +1038,6 @@
                 });
             }
 
-            // 2. MONTA TABELA DE FATURAS E SOMA O TOTAL A PAGAR GERAL E DÉBITOS PENDENTES
             let dadosFaturas = appState.faturasIniciais[mes] || {};
             let tbody = document.getElementById('tbodyDashboard');
             tbody.innerHTML = '';
@@ -1270,7 +1070,6 @@
                 tbody.appendChild(tr);
             });
 
-            // 3. CALCULA SALDO LÍQUIDO = RECEITAS CONFIRMADAS - TOTAL A PAGAR DO MÊS
             let saldoFinal = totalReceitasConfirmadas - totalAPagarMes;
             let elSaldo = document.getElementById('dashSaldo');
 
@@ -1335,9 +1134,10 @@
         }
 
         function toggleStatusReceitaPropria(id) {
+            let mes = appState.mesAtivo;
             let rec = appState.receitasProprias.find(r => r.id === id);
-            if (rec) {
-                rec.recebido = !rec.recebido;
+            if (rec && rec.meses && rec.meses[mes]) {
+                rec.meses[mes].recebido = !rec.meses[mes].recebido;
                 renderDashboard();
             }
         }
@@ -1345,20 +1145,24 @@
         function renderReceitasETerceiros() {
             const listP = document.getElementById('listReceitasProprias');
             listP.innerHTML = '';
-            
+            let mes = appState.mesAtivo;
+
             if (!appState.receitasProprias) appState.receitasProprias = [];
 
             appState.receitasProprias.forEach(r => {
+                let dadosMes = (r.meses && r.meses[mes]) ? r.meses[mes] : { valor: 0, recebido: false };
+                let foiRecebido = dadosMes.recebido;
+
                 listP.innerHTML += `
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 rounded-xl bg-gray-900 border border-gray-800 gap-2">
                         <div class="flex flex-col">
                             <span class="text-sm font-medium text-gray-200">${r.desc}</span>
-                            <span class="font-bold ${r.recebido ? 'text-emerald-400' : 'text-gray-400'} text-xs">${formatarBRL(r.valor)}</span>
+                            <span class="font-bold ${foiRecebido ? 'text-emerald-400' : 'text-gray-400'} text-xs">${formatarBRL(dadosMes.valor)}</span>
                         </div>
                         <div class="flex items-center gap-2.5 self-end sm:self-center">
                             <label class="flex items-center gap-1.5 cursor-pointer bg-gray-950 px-2.5 py-1 rounded-md border border-gray-800 text-xs">
-                                <input type="checkbox" ${r.recebido ? 'checked' : ''} onchange="toggleStatusReceitaPropria(${r.id})" class="rounded bg-gray-900 border-gray-700 text-emerald-500 cursor-pointer">
-                                <span class="${r.recebido ? 'text-emerald-400 font-bold' : 'text-gray-400'}">${r.recebido ? 'Recebido' : 'Pendente'}</span>
+                                <input type="checkbox" ${foiRecebido ? 'checked' : ''} onchange="toggleStatusReceitaPropria(${r.id})" class="rounded bg-gray-900 border-gray-700 text-emerald-500 cursor-pointer">
+                                <span class="${foiRecebido ? 'text-emerald-400 font-bold' : 'text-gray-400'}">${foiRecebido ? 'Recebido' : 'Pendente'}</span>
                             </label>
                             <button onclick="abrirEditReceita(${r.id})" class="text-xs text-sky-400 hover:text-sky-300 p-1"><i class="fa-solid fa-pen"></i></button>
                             <button onclick="excluirReceita(${r.id})" class="text-xs text-rose-500 hover:text-rose-400 p-1"><i class="fa-solid fa-trash"></i></button>
@@ -1369,7 +1173,6 @@
 
             const container = document.getElementById('containerTerceiros');
             container.innerHTML = '';
-            let mes = appState.mesAtivo;
 
             if (!appState.terceirosGrupos) appState.terceirosGrupos = [];
             let gruposDoMes = appState.terceirosGrupos.filter(g => g.parcelas.some(p => p.mes === mes));
@@ -1433,17 +1236,24 @@
             e.preventDefault();
             const desc = document.getElementById('recDesc').value;
             const valor = parseFloat(document.getElementById('recValor').value);
-            appState.receitasProprias.push({ id: Date.now(), desc, valor, recebido: false });
+
+            appState.receitasProprias.push({
+                id: Date.now(),
+                desc,
+                meses: gerarValoresMensaisReceita(valor)
+            });
+
             e.target.reset();
             renderDashboard();
         }
 
         function abrirEditReceita(id) {
             const rec = appState.receitasProprias.find(r => r.id === id);
-            if (rec) {
+            let mes = appState.mesAtivo;
+            if (rec && rec.meses && rec.meses[mes]) {
                 document.getElementById('editRecId').value = rec.id;
                 document.getElementById('editRecDesc').value = rec.desc;
-                document.getElementById('editRecValor').value = rec.valor;
+                document.getElementById('editRecValor').value = rec.meses[mes].valor;
                 document.getElementById('modalEditReceita').classList.remove('hidden');
             }
         }
@@ -1457,11 +1267,20 @@
             const id = parseInt(document.getElementById('editRecId').value);
             const desc = document.getElementById('editRecDesc').value;
             const valor = parseFloat(document.getElementById('editRecValor').value);
+            let mes = appState.mesAtivo;
 
             let rec = appState.receitasProprias.find(r => r.id === id);
             if (rec) {
                 rec.desc = desc;
-                rec.valor = valor;
+                
+                // ATUALIZA O VALOR DO MÊS ATUAL E MANTÉM OS MESES SEGUINTES REVISADOS
+                let idxAtual = MESES_CHRONO.indexOf(mes);
+                for (let i = idxAtual; i < MESES_CHRONO.length; i++) {
+                    let mTarget = MESES_CHRONO[i];
+                    if (rec.meses[mTarget]) {
+                        rec.meses[mTarget].valor = valor;
+                    }
+                }
             }
 
             fecharModalEditReceita();
@@ -1469,8 +1288,10 @@
         }
 
         function excluirReceita(id) {
-            appState.receitasProprias = appState.receitasProprias.filter(r => r.id !== id);
-            renderDashboard();
+            if (confirm("Deseja realmente excluir esta receita própria?")) {
+                appState.receitasProprias = appState.receitasProprias.filter(r => r.id !== id);
+                renderDashboard();
+            }
         }
 
         function adicionarTerceiro(e) {
