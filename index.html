@@ -91,27 +91,27 @@
                 <div class="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center overflow-hidden shadow-neon-blue bg-gray-900 border border-sky-800">
                     <img src="icon.png" alt="DESPAG" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%230284c7\'/><text x=\'50\' y=\'68\' font-size=\'55\' font-weight=\'900\' fill=\'white\' text-anchor=\'middle\'>D</text></svg>'">
                 </div>
-                <h2 class="text-2xl font-black text-white tracking-wider">DESPAG</h2>
-                <p class="text-xs text-sky-400">Acesso Restrito ao Sistema Financeiro</p>
+                <h2 class="text-3xl font-normal uppercase text-white tracking-wider">DESPAG</h2>
+                <p class="text-sm font-normal uppercase text-sky-400">ACESSO RESTRITO AO SISTEMA FINANCEIRO</p>
             </div>
 
             <form onsubmit="autenticarLogin(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-400 mb-1">Usuário Administrador</label>
-                    <input type="text" id="loginUser" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" placeholder="Digite o usuário" required>
+                    <label class="block text-sm font-normal uppercase text-gray-400 mb-1">USUÁRIO ADMINISTRADOR</label>
+                    <input type="text" id="loginUser" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" placeholder="Digite o usuário" required>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-gray-400 mb-1">Senha de Acesso</label>
-                    <input type="password" id="loginPass" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" placeholder="Digite a senha" required>
+                    <label class="block text-sm font-normal uppercase text-gray-400 mb-1">SENHA DE ACESSO</label>
+                    <input type="password" id="loginPass" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" placeholder="Digite a senha" required>
                 </div>
 
-                <div id="loginError" class="hidden text-xs text-rose-500 bg-rose-950/50 p-2.5 rounded-lg border border-rose-800 text-center">
-                    Usuário ou senha incorretos!
+                <div id="loginError" class="hidden text-sm font-normal uppercase text-rose-500 bg-rose-950/50 p-2.5 rounded-lg border border-rose-800 text-center">
+                    USUÁRIO OU SENHA INCORRETOS!
                 </div>
 
-                <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold rounded-xl shadow-neon-blue transition">
-                    Entrar no Sistema
+                <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-normal uppercase text-base rounded-xl shadow-neon-blue transition">
+                    ENTRAR NO SISTEMA
                 </button>
             </form>
         </div>
@@ -129,8 +129,8 @@
                         <img src="icon.png" alt="DESPAG" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%230284c7\'/><text x=\'50\' y=\'68\' font-size=\'55\' font-weight=\'900\' fill=\'white\' text-anchor=\'middle\'>D</text></svg>'">
                     </div>
                     <div>
-                        <h1 class="text-2xl font-black tracking-wider text-white">DESPAG</h1>
-                        <p class="text-xs text-sky-400 font-medium">Gestão Financeira</p>
+                        <h1 class="text-3xl font-normal uppercase tracking-wider text-white">DESPAG</h1>
+                        <p class="text-sm font-normal uppercase text-sky-400">GESTÃO FINANCEIRA</p>
                     </div>
                 </div>
                 <button onclick="toggleSidebar()" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-gray-800 transition">
@@ -139,28 +139,28 @@
             </div>
 
             <nav class="p-4 space-y-2">
-                <a href="#" onclick="showSection('dashboard')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-medium group active-nav">
-                    <i class="fa-solid fa-chart-pie text-sky-400"></i> Dashboard
+                <a href="#" onclick="showSection('dashboard')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-normal uppercase text-sm group active-nav">
+                    <i class="fa-solid fa-chart-pie text-sky-400"></i> DASHBOARD
                 </a>
-                <a href="#" onclick="showSection('lancamentos')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-medium group">
-                    <i class="fa-solid fa-plus-circle text-sky-400"></i> Lançar / Importar Fatura
+                <a href="#" onclick="showSection('lancamentos')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-normal uppercase text-sm group">
+                    <i class="fa-solid fa-plus-circle text-sky-400"></i> LANÇAR / IMPORTAR FATURA
                 </a>
-                <a href="#" onclick="showSection('receitas')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-medium group">
-                    <i class="fa-solid fa-hand-holding-dollar text-sky-400"></i> Receitas & Terceiros
+                <a href="#" onclick="showSection('receitas')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-normal uppercase text-sm group">
+                    <i class="fa-solid fa-hand-holding-dollar text-sky-400"></i> RECEITAS & TERCEIROS
                 </a>
-                <a href="#" onclick="showSection('admin-cartoes')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-medium group">
-                    <i class="fa-solid fa-credit-card text-sky-400"></i> Admin Cartões/Despesas
+                <a href="#" onclick="showSection('admin-cartoes')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-normal uppercase text-sm group">
+                    <i class="fa-solid fa-credit-card text-sky-400"></i> ADMIN CARTÕES/DESPESAS
                 </a>
-                <a href="#" onclick="showSection('base-dados')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-medium group">
-                    <i class="fa-solid fa-database text-sky-400"></i> Base de Dados
+                <a href="#" onclick="showSection('base-dados')" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-sky-600/20 hover:border-l-4 hover:border-sky-500 transition font-normal uppercase text-sm group">
+                    <i class="fa-solid fa-database text-sky-400"></i> BASE DE DADOS
                 </a>
             </nav>
         </div>
 
-        <div class="p-4 border-t border-gray-800 text-xs text-gray-500 flex items-center justify-between">
-            <span>DESPAG v5.1</span>
-            <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold cursor-pointer">
-                <i class="fa-solid fa-right-from-bracket"></i> Sair
+        <div class="p-4 border-t border-gray-800 text-sm font-normal uppercase text-gray-500 flex items-center justify-between">
+            <span>DESPAG V5.2</span>
+            <button onclick="logout()" class="text-rose-400 hover:text-rose-300 flex items-center gap-1 font-normal uppercase cursor-pointer">
+                <i class="fa-solid fa-right-from-bracket"></i> SAIR
             </button>
         </div>
     </aside>
@@ -175,28 +175,28 @@
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
                 <div>
-                    <h2 class="text-xl font-bold text-white tracking-wide">Painel de Controle</h2>
-                    <p class="text-xs text-gray-400 leading-tight">Gerenciamento Unificado de<br>Cartões & Finanças</p>
+                    <h2 class="text-2xl font-normal uppercase text-white tracking-wide">PAINEL DE CONTROLE</h2>
+                    <p class="text-sm font-normal uppercase text-gray-400 leading-tight">GERENCIAMENTO UNIFICADO DE<br>CARTÕES & FINANÇAS</p>
                 </div>
             </div>
 
             <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
                 <i class="fa-regular fa-calendar text-sky-400"></i>
-                <select id="selectMes" onchange="renderDashboard()" class="bg-gray-900 text-sky-300 font-bold border border-sky-950 focus:border-sky-500 rounded-xl px-4 py-2 text-sm focus:outline-none cursor-pointer font-mono">
-                    <option value="2026-NOV">2026 - Novembro</option>
-                    <option value="2026-DEZ" selected>2026 - Dezembro</option>
-                    <option value="2027-JAN">2027 - Janeiro</option>
-                    <option value="2027-FEV">2027 - Fevereiro</option>
-                    <option value="2027-MAR">2027 - Março</option>
-                    <option value="2027-ABR">2027 - Abril</option>
-                    <option value="2027-MAI">2027 - Maio</option>
-                    <option value="2027-JUN">2027 - Junho</option>
-                    <option value="2027-JUL">2027 - Julho</option>
-                    <option value="2027-AGO">2027 - Agosto</option>
-                    <option value="2027-SET">2027 - Setembro</option>
-                    <option value="2027-OUT">2027 - Outubro</option>
-                    <option value="2027-NOV">2027 - Novembro</option>
-                    <option value="2027-DEZ">2027 - Dezembro</option>
+                <select id="selectMes" onchange="renderDashboard()" class="bg-gray-900 text-sky-300 font-normal uppercase border border-sky-950 focus:border-sky-500 rounded-xl px-4 py-2 text-base focus:outline-none cursor-pointer font-mono">
+                    <option value="2026-NOV">2026 - NOVEMBRO</option>
+                    <option value="2026-DEZ" selected>2026 - DEZEMBRO</option>
+                    <option value="2027-JAN">2027 - JANEIRO</option>
+                    <option value="2027-FEV">2027 - FEVEREIRO</option>
+                    <option value="2027-MAR">2027 - MARÇO</option>
+                    <option value="2027-ABR">2027 - ABRIL</option>
+                    <option value="2027-MAI">2027 - MAIO</option>
+                    <option value="2027-JUN">2027 - JUNHO</option>
+                    <option value="2027-JUL">2027 - JULHO</option>
+                    <option value="2027-AGO">2027 - AGOSTO</option>
+                    <option value="2027-SET">2027 - SETEMBRO</option>
+                    <option value="2027-OUT">2027 - OUTUBRO</option>
+                    <option value="2027-NOV">2027 - NOVEMBRO</option>
+                    <option value="2027-DEZ">2027 - DEZEMBRO</option>
                 </select>
             </div>
         </header>
@@ -206,21 +206,21 @@
             <!-- LINHA 1: RESUMO DO MÊS -->
             <div class="grid grid-cols-3 gap-2 sm:gap-5">
                 <div class="neon-card p-3 sm:p-6 rounded-2xl flex flex-col justify-between">
-                    <span class="text-[9px] sm:text-xs font-semibold text-gray-400 uppercase leading-tight">Total Receitas do Mês</span>
+                    <span class="text-[10px] sm:text-sm font-normal uppercase text-gray-400 leading-tight">TOTAL RECEITAS DO MÊS</span>
                     <h3 class="text-xs sm:text-3xl font-extrabold text-emerald-400 mt-1 sm:mt-2 truncate" id="dashTotalReceita">R$ 0,00</h3>
-                    <p class="text-[8px] sm:text-xs text-gray-500 mt-1 sm:mt-3 hidden sm:block">Soma das Receitas & Repasses Marcados como Recebidos</p>
+                    <p class="text-[9px] sm:text-sm font-normal uppercase text-gray-500 mt-1 sm:mt-3 hidden sm:block">SOMA DAS RECEITAS & REPASSES MARCADOS COMO RECEBIDOS</p>
                 </div>
 
                 <div class="neon-card p-3 sm:p-6 rounded-2xl flex flex-col justify-between">
-                    <span class="text-[9px] sm:text-xs font-semibold text-gray-400 uppercase leading-tight">Débitos & Faturas PENDENTES</span>
+                    <span class="text-[10px] sm:text-sm font-normal uppercase text-gray-400 leading-tight">DÉBITOS & FATURAS PENDENTES</span>
                     <h3 class="text-xs sm:text-3xl font-extrabold text-rose-500 mt-1 sm:mt-2 truncate" id="dashTotalDebitos">R$ 0,00</h3>
-                    <p class="text-[8px] sm:text-xs text-gray-500 mt-1 sm:mt-3 hidden sm:block">Subtrai dinamicamente ao dar check nas contas pagas</p>
+                    <p class="text-[9px] sm:text-sm font-normal uppercase text-gray-500 mt-1 sm:mt-3 hidden sm:block">SUBTRAI DINAMICAMENTE AO DAR CHECK NAS CONTAS PAGAS</p>
                 </div>
 
                 <div class="neon-card p-3 sm:p-6 rounded-2xl flex flex-col justify-between">
-                    <span class="text-[9px] sm:text-xs font-semibold text-gray-400 uppercase leading-tight">Saldo Líquido</span>
+                    <span class="text-[10px] sm:text-sm font-normal uppercase text-gray-400 leading-tight">SALDO LÍQUIDO</span>
                     <h3 class="text-xs sm:text-3xl font-extrabold mt-1 sm:mt-2 truncate" id="dashSaldo">R$ 0,00</h3>
-                    <p class="text-[8px] sm:text-xs text-gray-500 mt-1 sm:mt-3 hidden sm:block">Receitas Confirmadas - Total a Pagar nas Faturas</p>
+                    <p class="text-[9px] sm:text-sm font-normal uppercase text-gray-500 mt-1 sm:mt-3 hidden sm:block">RECEITAS CONFIRMADAS - TOTAL A PAGAR NAS FATURAS</p>
                 </div>
             </div>
 
@@ -229,18 +229,18 @@
                 <!-- COLUNA ESQUERDA (TABELA DE FATURAS) -->
                 <div class="lg:col-span-2 neon-card p-4 sm:p-6 rounded-2xl space-y-4">
                     <div class="flex justify-between items-center border-b border-gray-800 pb-4">
-                        <h3 class="font-bold text-white text-base sm:text-lg flex items-center gap-2">
-                            <i class="fa-solid fa-list-check text-sky-400"></i> Faturas e Contas do Mês
+                        <h3 class="font-normal uppercase text-white text-lg sm:text-xl flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-sky-400"></i> FATURAS E CONTAS DO MÊS
                         </h3>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left text-sm text-gray-300">
-                            <thead class="bg-gray-900/80 text-[10px] sm:text-xs uppercase text-gray-400 border-b border-gray-800">
+                        <table class="w-full text-left text-base font-normal text-gray-300">
+                            <thead class="bg-gray-900/80 text-xs sm:text-sm font-normal uppercase text-gray-400 border-b border-gray-800">
                                 <tr>
-                                    <th class="py-2 px-2 sm:py-3 sm:px-4">Cartão / Conta</th>
-                                    <th class="py-2 px-2 sm:py-3 sm:px-4">Valor A Pagar</th>
-                                    <th class="py-2 px-2 sm:py-3 sm:px-4">Venc.</th>
-                                    <th class="py-2 px-1 sm:py-3 sm:px-4 text-center">Status</th>
+                                    <th class="py-2 px-2 sm:py-3 sm:px-4 font-normal uppercase">CARTÃO / CONTA</th>
+                                    <th class="py-2 px-2 sm:py-3 sm:px-4 font-normal uppercase">VALOR A PAGAR</th>
+                                    <th class="py-2 px-2 sm:py-3 sm:px-4 font-normal uppercase">VENC.</th>
+                                    <th class="py-2 px-1 sm:py-3 sm:px-4 font-normal uppercase text-center">STATUS</th>
                                 </tr>
                             </thead>
                             <tbody id="tbodyDashboard" class="divide-y divide-gray-800"></tbody>
@@ -252,27 +252,27 @@
                 <div class="space-y-5">
                     <div class="neon-card p-5 sm:p-6 rounded-2xl border-l-4 border-l-amber-500">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total de Débitos Pendentes (<span id="lblAnoAtual">2026</span>)</span>
+                            <span class="text-sm font-normal uppercase text-gray-400 tracking-wider">TOTAL DE DÉBITOS PENDENTES (<span id="lblAnoAtual">2026</span>)</span>
                             <i class="fa-solid fa-calendar-check text-amber-400 text-lg"></i>
                         </div>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-amber-400 mt-2" id="dashTotalAnoAtual">R$ 0,00</h3>
-                        <p class="text-xs text-gray-500 mt-2">Soma dos débitos pendentes até o final do ano corrente (desconta conforme checks)</p>
+                        <p class="text-sm font-normal uppercase text-gray-500 mt-2">SOMA DOS DÉBITOS PENDENTES ATÉ O FINAL DO ANO CORRENTE (DESCONTA CONFORME CHECKS)</p>
                     </div>
 
                     <div class="neon-card p-5 sm:p-6 rounded-2xl border-l-4 border-l-sky-500">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Projeção de Débitos (<span id="lblAnoProximo">2027</span>)</span>
+                            <span class="text-sm font-normal uppercase text-gray-400 tracking-wider">PROJEÇÃO DE DÉBITOS (<span id="lblAnoProximo">2027</span>)</span>
                             <i class="fa-solid fa-chart-line text-sky-400 text-lg"></i>
                         </div>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-sky-400 mt-2" id="dashTotalAnoProximo">R$ 0,00</h3>
-                        <p class="text-xs text-gray-500 mt-2">Comprometimento de parcelas já registradas para o próximo ano</p>
+                        <p class="text-sm font-normal uppercase text-gray-500 mt-2">COMPROMETIMENTO DE PARCELAS JÁ REGISTRADAS PARA O PRÓXIMO ANO</p>
                     </div>
 
                     <!-- CARD DE PROJEÇÃO MENSAL DE DÉBITOS -->
                     <div class="neon-card p-4 sm:p-5 rounded-2xl space-y-3">
                         <div class="flex items-center justify-between border-b border-gray-800 pb-2">
-                            <h3 class="font-bold text-white text-sm flex items-center gap-2">
-                                <i class="fa-solid fa-calendar-days text-sky-400"></i> Projeção Mensal de Débitos
+                            <h3 class="font-normal uppercase text-white text-base flex items-center gap-2">
+                                <i class="fa-solid fa-calendar-days text-sky-400"></i> PROJEÇÃO MENSAL DE DÉBITOS
                             </h3>
                         </div>
                         <div class="space-y-2 max-h-[420px] overflow-y-auto pr-1" id="listProjecaoAnual"></div>
@@ -285,43 +285,43 @@
         <section id="section-lancamentos" class="app-section space-y-6 hidden">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="neon-card p-6 rounded-2xl space-y-4">
-                    <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Lançar Compra / Despesa Manual</h3>
+                    <h3 class="text-xl font-normal uppercase text-white border-b border-gray-800 pb-3">LANÇAR COMPRA / DESPESA MANUAL</h3>
                     <form id="formNovaCompra" onsubmit="salvarCompra(event)" class="space-y-4">
-                        <input type="text" id="compraDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" placeholder="Descrição da Compra" required>
+                        <input type="text" id="compraDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" placeholder="Descrição da Compra" required>
                         <div class="grid grid-cols-2 gap-4">
-                            <select id="compraCartao" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required></select>
-                            <input type="date" id="compraData" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
+                            <select id="compraCartao" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" required></select>
+                            <input type="date" id="compraData" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" required>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            <input type="number" step="0.01" id="compraValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" placeholder="Valor Total R$" required>
-                            <input type="number" id="compraParcelas" min="1" value="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
+                            <input type="number" step="0.01" id="compraValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" placeholder="Valor Total R$" required>
+                            <input type="number" id="compraParcelas" min="1" value="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" required>
                         </div>
-                        <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold rounded-xl shadow-neon-blue">Registrar Compra</button>
+                        <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-sky-600 to-blue-600 text-white font-normal uppercase text-base rounded-xl shadow-neon-blue">REGISTRAR COMPRA</button>
                     </form>
                 </div>
 
                 <!-- CARD DE SINCRONIZAÇÃO E BACKUP -->
                 <div class="neon-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
                     <div>
-                        <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Sincronização & Backup de Dados</h3>
-                        <p class="text-xs text-gray-400 mt-3 leading-relaxed">
-                            Use os botões de <b>Backup</b> para transferir seus lançamentos entre o PC e o Celular. Ou use a <b>Sincronização</b> para limpar dados antigos e aplicar a base a partir de Dezembro/2026.
+                        <h3 class="text-xl font-normal uppercase text-white border-b border-gray-800 pb-3">SINCRONIZAÇÃO & BACKUP DE DADOS</h3>
+                        <p class="text-sm font-normal uppercase text-gray-400 mt-3 leading-relaxed">
+                            USE OS BOTÕES DE BACKUP PARA TRANSFERIR SEUS LANÇAMENTOS ENTRE O PC E O CELULAR. OU USE A SINCRONIZAÇÃO PARA LIMPAR DADOS ANTIGOS E APLICAR A BASE A PARTIR DE DEZEMBRO/2026.
                         </p>
                         
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
-                            <button onclick="exportarBackupJSON()" class="py-3 px-4 bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
-                                <i class="fa-solid fa-file-export text-sm"></i> Exportar Backup (PC)
+                            <button onclick="exportarBackupJSON()" class="py-3 px-4 bg-emerald-700 hover:bg-emerald-600 text-white font-normal uppercase text-sm rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+                                <i class="fa-solid fa-file-export text-base"></i> EXPORTAR BACKUP (PC)
                             </button>
-                            <button onclick="document.getElementById('fileInputBackup').click()" class="py-3 px-4 bg-sky-700 hover:bg-sky-600 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
-                                <i class="fa-solid fa-file-import text-sm"></i> Importar Backup (Celular)
+                            <button onclick="document.getElementById('fileInputBackup').click()" class="py-3 px-4 bg-sky-700 hover:bg-sky-600 text-white font-normal uppercase text-sm rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+                                <i class="fa-solid fa-file-import text-base"></i> IMPORTAR BACKUP (CELULAR)
                             </button>
                             <input type="file" id="fileInputBackup" accept=".json" onchange="importarBackupJSON(event)" class="hidden">
                         </div>
                     </div>
 
                     <div class="border-t border-gray-800 pt-4">
-                        <button onclick="forcarResetEstado()" class="w-full py-3 bg-gray-800 hover:bg-sky-600 text-white font-bold text-xs rounded-xl border border-gray-700 transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-arrows-rotate"></i> Sincronizar Base Oficial (Dez/2026+)
+                        <button onclick="forcarResetEstado()" class="w-full py-3 bg-gray-800 hover:bg-sky-600 text-white font-normal uppercase text-sm rounded-xl border border-gray-700 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-arrows-rotate"></i> SINCRONIZAR BASE OFICIAL (DEZ/2026+)
                         </button>
                     </div>
                 </div>
@@ -333,12 +333,12 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- Receitas Próprias -->
                 <div class="neon-card p-6 rounded-2xl space-y-4">
-                    <h3 class="text-lg font-bold text-emerald-400 border-b border-gray-800 pb-3">Receitas Próprias & Rendimentos</h3>
+                    <h3 class="text-xl font-normal uppercase text-emerald-400 border-b border-gray-800 pb-3">RECEITAS PRÓPRIAS & RENDIMENTOS</h3>
                     
                     <form onsubmit="adicionarReceita(event)" class="flex gap-2">
-                        <input type="text" id="recDesc" placeholder="Descrição (Ex: Salário Base)" class="flex-1 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
-                        <input type="number" step="0.01" id="recValor" placeholder="Valor R$" class="w-32 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
-                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-xl font-bold"><i class="fa-solid fa-plus"></i></button>
+                        <input type="text" id="recDesc" placeholder="Descrição (Ex: Salário Base)" class="flex-1 bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" required>
+                        <input type="number" step="0.01" id="recValor" placeholder="Valor R$" class="w-32 bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" required>
+                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-xl font-normal text-base"><i class="fa-solid fa-plus"></i></button>
                     </form>
 
                     <div class="space-y-2 mt-4" id="listReceitasProprias"></div>
@@ -346,45 +346,45 @@
 
                 <!-- Receita de Terceiros (Cartão Compartilhado) -->
                 <div class="neon-card p-6 rounded-2xl space-y-4">
-                    <h3 class="text-lg font-bold text-sky-400 border-b border-gray-800 pb-3">Receita de Terceiros (Cartão Compartilhado)</h3>
+                    <h3 class="text-xl font-normal uppercase text-sky-400 border-b border-gray-800 pb-3">RECEITA DE TERCEIROS (CARTÃO COMPARTILHADO)</h3>
                     
                     <form onsubmit="adicionarTerceiro(event)" class="space-y-3">
-                        <input type="text" id="tercNome" placeholder="Nome da Pessoa (Ex: Ivo)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
-                        <input type="text" id="tercDesc" placeholder="Descrição da Despesa" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
+                        <input type="text" id="tercNome" placeholder="Nome da Pessoa (Ex: Ivo)" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" required>
+                        <input type="text" id="tercDesc" placeholder="Descrição da Despesa" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" required>
                         
                         <div class="grid grid-cols-2 gap-3">
-                            <input type="number" step="0.01" id="tercValorTotal" placeholder="Valor Total (R$)" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
-                            <select id="tercCartao" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required></select>
+                            <input type="number" step="0.01" id="tercValorTotal" placeholder="Valor Total (R$)" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" required>
+                            <select id="tercCartao" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" required></select>
                         </div>
 
                         <div class="grid grid-cols-2 gap-3">
                             <div>
-                                <label class="block text-xs font-semibold text-gray-400 mb-1">Nº de Parcelas</label>
-                                <input type="number" id="tercParcelas" min="1" value="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
+                                <label class="block text-sm font-normal uppercase text-gray-400 mb-1">Nº DE PARCELAS</label>
+                                <input type="number" id="tercParcelas" min="1" value="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" required>
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-gray-400 mb-1">Mês de Início</label>
-                                <select id="tercMesInicio" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" required>
-                                    <option value="2026-NOV">2026 - Novembro</option>
-                                    <option value="2026-DEZ" selected>2026 - Dezembro</option>
-                                    <option value="2027-JAN">2027 - Janeiro</option>
-                                    <option value="2027-FEV">2027 - Fevereiro</option>
-                                    <option value="2027-MAR">2027 - Março</option>
-                                    <option value="2027-ABR">2027 - Abril</option>
-                                    <option value="2027-MAI">2027 - Maio</option>
-                                    <option value="2027-JUN">2027 - Junho</option>
-                                    <option value="2027-JUL">2027 - Julho</option>
-                                    <option value="2027-AGO">2027 - Agosto</option>
-                                    <option value="2027-SET">2027 - Setembro</option>
-                                    <option value="2027-OUT">2027 - Outubro</option>
-                                    <option value="2027-NOV">2027 - Novembro</option>
-                                    <option value="2027-DEZ">2027 - Dezembro</option>
+                                <label class="block text-sm font-normal uppercase text-gray-400 mb-1">MÊS DE INÍCIO</label>
+                                <select id="tercMesInicio" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" required>
+                                    <option value="2026-NOV">2026 - NOVEMBRO</option>
+                                    <option value="2026-DEZ" selected>2026 - DEZEMBRO</option>
+                                    <option value="2027-JAN">2027 - JANEIRO</option>
+                                    <option value="2027-FEV">2027 - FEVEREIRO</option>
+                                    <option value="2027-MAR">2027 - MARÇO</option>
+                                    <option value="2027-ABR">2027 - ABRIL</option>
+                                    <option value="2027-MAI">2027 - MAIO</option>
+                                    <option value="2027-JUN">2027 - JUNHO</option>
+                                    <option value="2027-JUL">2027 - JULHO</option>
+                                    <option value="2027-AGO">2027 - AGOSTO</option>
+                                    <option value="2027-SET">2027 - SETEMBRO</option>
+                                    <option value="2027-OUT">2027 - OUTUBRO</option>
+                                    <option value="2027-NOV">2027 - NOVEMBRO</option>
+                                    <option value="2027-DEZ">2027 - DEZEMBRO</option>
                                 </select>
                             </div>
                         </div>
 
-                        <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white py-3.5 rounded-xl font-bold text-sm shadow-neon-blue transition">
-                            Adicionar Cobrança
+                        <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white py-3.5 rounded-xl font-normal uppercase text-base shadow-neon-blue transition">
+                            ADICIONAR COBRANÇA
                         </button>
                     </form>
 
@@ -396,23 +396,23 @@
         <!-- ADMIN DE CARTÕES / DESPESAS FIXAS -->
         <section id="section-admin-cartoes" class="app-section space-y-6 hidden">
             <div class="neon-card p-6 rounded-2xl space-y-6">
-                <h3 class="text-lg font-bold text-white border-b border-gray-800 pb-3">Admin de Cartões/Despesas Fixas & Dias de Fechamento</h3>
+                <h3 class="text-xl font-normal uppercase text-white border-b border-gray-800 pb-3">ADMIN DE CARTÕES/DESPESAS FIXAS & DIAS DE FECHAMENTO</h3>
                 
                 <form onsubmit="cadastrarCartao(event)" class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                    <input type="text" id="cardNome" class="sm:col-span-2 bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" placeholder="Nome do Cartão ou Despesa Fixa" required>
-                    <input type="number" id="cardFechamento" min="1" max="31" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" placeholder="Dia Fechamento" required>
-                    <input type="number" id="cardVencimento" min="1" max="31" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white font-mono" placeholder="Dia Vencimento" required>
-                    <button type="submit" class="sm:col-span-4 py-3 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-neon-blue">Cadastrar Cartões/Despesas Fixas</button>
+                    <input type="text" id="cardNome" class="sm:col-span-2 bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" placeholder="Nome do Cartão ou Despesa Fixa" required>
+                    <input type="number" id="cardFechamento" min="1" max="31" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" placeholder="Dia Fechamento" required>
+                    <input type="number" id="cardVencimento" min="1" max="31" class="bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white font-mono" placeholder="Dia Vencimento" required>
+                    <button type="submit" class="sm:col-span-4 py-3 bg-sky-600 hover:bg-sky-500 text-white font-normal uppercase text-base rounded-xl shadow-neon-blue">CADASTRAR CARTÕES/DESPESAS FIXAS</button>
                 </form>
 
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm text-gray-300">
-                        <thead class="bg-gray-900 text-xs uppercase text-gray-400 border-b border-gray-800">
+                    <table class="w-full text-left text-base font-normal text-gray-300">
+                        <thead class="bg-gray-900 text-sm font-normal uppercase text-gray-400 border-b border-gray-800">
                             <tr>
-                                <th class="py-3 px-4">Cartão / Despesa</th>
-                                <th class="py-3 px-4">Fechamento</th>
-                                <th class="py-3 px-4">Vencimento</th>
-                                <th class="py-3 px-4 text-center">Ações</th>
+                                <th class="py-3 px-4 font-normal uppercase">CARTÃO / DESPESA</th>
+                                <th class="py-3 px-4 font-normal uppercase">FECHAMENTO</th>
+                                <th class="py-3 px-4 font-normal uppercase">VENCIMENTO</th>
+                                <th class="py-3 px-4 font-normal uppercase text-center">AÇÕES</th>
                             </tr>
                         </thead>
                         <tbody id="tbodyAdminCartoes" class="divide-y divide-gray-800"></tbody>
@@ -425,10 +425,10 @@
         <section id="section-base-dados" class="app-section space-y-6 hidden">
             <div class="neon-card p-6 rounded-2xl space-y-4">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-800 pb-3 gap-3">
-                    <h3 class="text-lg font-bold text-white">Base de Dados Geral</h3>
+                    <h3 class="text-xl font-normal uppercase text-white">BASE DE DADOS GERAL</h3>
                     <div class="flex items-center gap-2 w-full sm:w-auto">
-                        <button onclick="limparFiltrosBase()" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-2 rounded-lg border border-gray-700 transition">
-                            <i class="fa-solid fa-filter-circle-xmark mr-1"></i> Limpar Filtros
+                        <button onclick="limparFiltrosBase()" class="text-sm font-normal uppercase bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-2 rounded-lg border border-gray-700 transition">
+                            <i class="fa-solid fa-filter-circle-xmark mr-1"></i> LIMPAR FILTROS
                         </button>
                     </div>
                 </div>
@@ -436,33 +436,33 @@
                 <!-- FILTROS DE COLUNA -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-gray-900/60 p-3 rounded-xl border border-gray-800">
                     <div>
-                        <label class="block text-[10px] uppercase font-semibold text-gray-400 mb-1">Filtrar por Descrição</label>
-                        <input type="text" id="filtroDesc" oninput="renderBaseDados()" placeholder="Digite para filtrar..." class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-xs text-white focus:border-sky-500 focus:outline-none font-mono">
+                        <label class="block text-xs font-normal uppercase text-gray-400 mb-1">FILTRAR POR DESCRIÇÃO</label>
+                        <input type="text" id="filtroDesc" oninput="renderBaseDados()" placeholder="Digite para filtrar..." class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-sm text-white focus:border-sky-500 focus:outline-none font-mono">
                     </div>
                     <div>
-                        <label class="block text-[10px] uppercase font-semibold text-gray-400 mb-1">Filtrar por Cartão / Conta</label>
-                        <select id="filtroCartao" onchange="renderBaseDados()" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-xs text-white focus:border-sky-500 focus:outline-none font-mono">
-                            <option value="">Todos os Cartões</option>
+                        <label class="block text-xs font-normal uppercase text-gray-400 mb-1">FILTRAR POR CARTÃO / CONTA</label>
+                        <select id="filtroCartao" onchange="renderBaseDados()" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-sm text-white focus:border-sky-500 focus:outline-none font-mono">
+                            <option value="">TODOS OS CARTÕES</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[10px] uppercase font-semibold text-gray-400 mb-1">Filtrar por Ano / Mês (Data)</label>
-                        <input type="text" id="filtroData" oninput="renderBaseDados()" placeholder="Ex: 2026-12" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-xs text-white focus:border-sky-500 focus:outline-none font-mono">
+                        <label class="block text-xs font-normal uppercase text-gray-400 mb-1">FILTRAR POR ANO / MÊS (DATA)</label>
+                        <input type="text" id="filtroData" oninput="renderBaseDados()" placeholder="Ex: 2026-12" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-sm text-white focus:border-sky-500 focus:outline-none font-mono">
                     </div>
                 </div>
 
                 <!-- TABELA COM CABEÇALHO FIXO -->
                 <div class="max-h-[500px] overflow-y-auto border border-gray-800 rounded-xl">
-                    <table class="w-full text-left text-xs text-gray-300">
-                        <thead class="bg-gray-900 uppercase text-gray-400 sticky top-0 z-20 border-b border-gray-800 shadow-md">
+                    <table class="w-full text-left text-sm font-normal text-gray-300">
+                        <thead class="bg-gray-900 font-normal uppercase text-gray-400 sticky top-0 z-20 border-b border-gray-800 shadow-md">
                             <tr>
-                                <th class="py-3 px-3">Data</th>
-                                <th class="py-3 px-3">Descrição</th>
-                                <th class="py-3 px-3">Cartão / Conta</th>
-                                <th class="py-3 px-3">Valor Total</th>
-                                <th class="py-3 px-3">Parc.</th>
-                                <th class="py-3 px-3">Valor Parc.</th>
-                                <th class="py-3 px-3 text-center">Ações</th>
+                                <th class="py-3 px-3 font-normal uppercase">DATA</th>
+                                <th class="py-3 px-3 font-normal uppercase">DESCRIÇÃO</th>
+                                <th class="py-3 px-3 font-normal uppercase">CARTÃO / CONTA</th>
+                                <th class="py-3 px-3 font-normal uppercase">VALOR TOTAL</th>
+                                <th class="py-3 px-3 font-normal uppercase">PARC.</th>
+                                <th class="py-3 px-3 font-normal uppercase">VALOR PARC.</th>
+                                <th class="py-3 px-3 font-normal uppercase text-center">AÇÕES</th>
                             </tr>
                         </thead>
                         <tbody id="tbodyBaseDados" class="divide-y divide-gray-800"></tbody>
@@ -477,39 +477,39 @@
     <div id="modalEditCompra" class="fixed inset-0 bg-black/80 z-[90] hidden flex items-center justify-center p-4">
         <div class="neon-card w-full max-w-md p-6 rounded-2xl space-y-4 border border-sky-800 shadow-neon-blue">
             <div class="flex justify-between items-center border-b border-gray-800 pb-3">
-                <h4 class="font-bold text-white text-lg"><i class="fa-solid fa-pen-to-square text-sky-400"></i> Editar Compra Registrada</h4>
+                <h4 class="font-normal uppercase text-white text-xl"><i class="fa-solid fa-pen-to-square text-sky-400"></i> EDITAR COMPRA REGISTRADA</h4>
                 <button onclick="fecharModalEditCompra()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             
             <form onsubmit="salvarEdicaoCompra(event)" class="space-y-4">
                 <input type="hidden" id="editCompraId">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-400 mb-1">Descrição</label>
-                    <input type="text" id="editCompraDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                    <label class="block text-sm font-normal uppercase text-gray-400 mb-1">DESCRIÇÃO</label>
+                    <input type="text" id="editCompraDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 mb-1">Cartão / Conta</label>
-                        <select id="editCompraCartao" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required></select>
+                        <label class="block text-sm font-normal uppercase text-gray-400 mb-1">CARTÃO / CONTA</label>
+                        <select id="editCompraCartao" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required></select>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 mb-1">Data</label>
-                        <input type="date" id="editCompraData" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                        <label class="block text-sm font-normal uppercase text-gray-400 mb-1">DATA</label>
+                        <input type="date" id="editCompraData" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 mb-1">Valor Total (R$)</label>
-                        <input type="number" step="0.01" id="editCompraValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                        <label class="block text-sm font-normal uppercase text-gray-400 mb-1">VALOR TOTAL (R$)</label>
+                        <input type="number" step="0.01" id="editCompraValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 mb-1">Parcelas</label>
-                        <input type="number" id="editCompraParcelas" min="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                        <label class="block text-sm font-normal uppercase text-gray-400 mb-1">PARCELAS</label>
+                        <input type="number" id="editCompraParcelas" min="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
                     </div>
                 </div>
                 <div class="flex gap-2">
-                    <button type="button" onclick="fecharModalEditCompra()" class="w-1/2 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold rounded-xl">Cancelar</button>
-                    <button type="submit" class="w-1/2 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-neon-blue">Salvar Alterações</button>
+                    <button type="button" onclick="fecharModalEditCompra()" class="w-1/2 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 font-normal uppercase text-sm rounded-xl">CANCELAR</button>
+                    <button type="submit" class="w-1/2 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-normal uppercase text-sm rounded-xl shadow-neon-blue">SALVAR ALTERAÇÕES</button>
                 </div>
             </form>
         </div>
@@ -519,29 +519,29 @@
     <div id="modalEditCartao" class="fixed inset-0 bg-black/80 z-[90] hidden flex items-center justify-center p-4">
         <div class="neon-card w-full max-w-md p-6 rounded-2xl space-y-4 border border-sky-800">
             <div class="flex justify-between items-center border-b border-gray-800 pb-3">
-                <h4 class="font-bold text-white text-lg"><i class="fa-solid fa-pen text-sky-400"></i> Editar Cartão / Despesa Fixa</h4>
+                <h4 class="font-normal uppercase text-white text-xl"><i class="fa-solid fa-pen text-sky-400"></i> EDITAR CARTÃO / DESPESA FIXA</h4>
                 <button onclick="fecharModalEditCartao()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             
             <form onsubmit="salvarEdicaoCartao(event)" class="space-y-4">
                 <input type="hidden" id="editCartaoId">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-400 mb-1">Nome do Cartão ou Despesa Fixa</label>
-                    <input type="text" id="editCartaoNome" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                    <label class="block text-sm font-normal uppercase text-gray-400 mb-1">NOME DO CARTÃO OU DESPESA FIXA</label>
+                    <input type="text" id="editCartaoNome" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 mb-1">Dia Fechamento</label>
-                        <input type="number" id="editCartaoFechamento" min="1" max="31" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                        <label class="block text-sm font-normal uppercase text-gray-400 mb-1">DIA FECHAMENTO</label>
+                        <input type="number" id="editCartaoFechamento" min="1" max="31" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 mb-1">Dia Vencimento</label>
-                        <input type="number" id="editCartaoVencimento" min="1" max="31" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                        <label class="block text-sm font-normal uppercase text-gray-400 mb-1">DIA VENCIMENTO</label>
+                        <input type="number" id="editCartaoVencimento" min="1" max="31" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
                     </div>
                 </div>
                 <div class="flex gap-2">
-                    <button type="button" onclick="fecharModalEditCartao()" class="w-1/2 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold rounded-xl">Cancelar</button>
-                    <button type="submit" class="w-1/2 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-neon-blue">Salvar Alterações</button>
+                    <button type="button" onclick="fecharModalEditCartao()" class="w-1/2 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 font-normal uppercase text-sm rounded-xl">CANCELAR</button>
+                    <button type="submit" class="w-1/2 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-normal uppercase text-sm rounded-xl shadow-neon-blue">SALVAR ALTERAÇÕES</button>
                 </div>
             </form>
         </div>
@@ -551,23 +551,59 @@
     <div id="modalEditReceita" class="fixed inset-0 bg-black/80 z-[90] hidden flex items-center justify-center p-4">
         <div class="neon-card w-full max-w-md p-6 rounded-2xl space-y-4 border border-sky-800">
             <div class="flex justify-between items-center border-b border-gray-800 pb-3">
-                <h4 class="font-bold text-white text-lg"><i class="fa-solid fa-pen-to-square text-sky-400"></i> Editar Receita Própria</h4>
+                <h4 class="font-normal uppercase text-white text-xl"><i class="fa-solid fa-pen-to-square text-sky-400"></i> EDITAR RECEITA PRÓPRIA</h4>
                 <button onclick="fecharModalEditReceita()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             
             <form onsubmit="salvarEdicaoReceita(event)" class="space-y-4">
                 <input type="hidden" id="editRecId">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-400 mb-1">Descrição</label>
-                    <input type="text" id="editRecDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                    <label class="block text-sm font-normal uppercase text-gray-400 mb-1">DESCRIÇÃO</label>
+                    <input type="text" id="editRecDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-gray-400 mb-1">Valor (R$)</label>
-                    <input type="number" step="0.01" id="editRecValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-sm text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                    <label class="block text-sm font-normal uppercase text-gray-400 mb-1">VALOR (R$)</label>
+                    <input type="number" step="0.01" id="editRecValor" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
                 </div>
                 <div class="flex gap-2">
-                    <button type="button" onclick="fecharModalEditReceita()" class="w-1/2 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold rounded-xl">Cancelar</button>
-                    <button type="submit" class="w-1/2 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-neon-blue">Salvar Alterações</button>
+                    <button type="button" onclick="fecharModalEditReceita()" class="w-1/2 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 font-normal uppercase text-sm rounded-xl">CANCELAR</button>
+                    <button type="submit" class="w-1/2 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-normal uppercase text-sm rounded-xl shadow-neon-blue">SALVAR ALTERAÇÕES</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE EDIÇÃO DE COBRANÇA DE TERCEIRO -->
+    <div id="modalEditTerceiro" class="fixed inset-0 bg-black/80 z-[90] hidden flex items-center justify-center p-4">
+        <div class="neon-card w-full max-w-md p-6 rounded-2xl space-y-4 border border-sky-800 shadow-neon-blue">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+                <h4 class="font-normal uppercase text-white text-xl"><i class="fa-solid fa-pen-to-square text-sky-400"></i> EDITAR COBRANÇA DE TERCEIRO</h4>
+                <button onclick="fecharModalEditTerceiro()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            
+            <form onsubmit="salvarEdicaoTerceiro(event)" class="space-y-4">
+                <input type="hidden" id="editTercId">
+                <div>
+                    <label class="block text-sm font-normal uppercase text-gray-400 mb-1">NOME DA PESSOA</label>
+                    <input type="text" id="editTercNome" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-normal uppercase text-gray-400 mb-1">DESCRIÇÃO DA DESPESA</label>
+                    <input type="text" id="editTercDesc" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-sm font-normal uppercase text-gray-400 mb-1">VALOR TOTAL (R$)</label>
+                        <input type="number" step="0.01" id="editTercValorTotal" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-normal uppercase text-gray-400 mb-1">Nº DE PARCELAS</label>
+                        <input type="number" id="editTercParcelas" min="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl p-3 text-base text-white focus:border-sky-500 focus:outline-none font-mono" required>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button type="button" onclick="fecharModalEditTerceiro()" class="w-1/2 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 font-normal uppercase text-sm rounded-xl">CANCELAR</button>
+                    <button type="submit" class="w-1/2 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-normal uppercase text-sm rounded-xl shadow-neon-blue">SALVAR ALTERAÇÕES</button>
                 </div>
             </form>
         </div>
@@ -742,7 +778,6 @@
                 }
             ],
             comprasBase: [
-                // DESPESAS FIXAS A PARTIR DE DEZEMBRO 2026
                 { id: 954, data: "2026-11-15", desc: "Escola | Theodoro - Dezembro", cartao: "Escola | Theodoro", valor: 382.50, parcelas: 1, parceladoValor: 382.50 },
 
                 { id: 992, data: "2026-11-15", desc: "Financiamento 99Pay - Parcela Dez", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
@@ -763,7 +798,6 @@
                 { id: 711, data: "2026-11-15", desc: "CMT I Guilherme (1) - Dez", cartao: "CMT I Guilherme", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
                 { id: 713, data: "2026-11-15", desc: "CMT I Guilherme (2) - Dez", cartao: "CMT I Guilherme", valor: 190.00, parcelas: 1, parceladoValor: 190.00 },
 
-                // PARCELAS REMANESCENTES A PARTIR DE DEZEMBRO 2026 (NUBANK EDILENE)
                 { id: 101, data: "2026-11-10", desc: "Mix Mateus - Parcela 3/3", cartao: "Nubank Edilene", valor: 140.00, parcelas: 1, parceladoValor: 140.00 },
                 { id: 104, data: "2026-11-10", desc: "Mp *Oticascarol - Parcelas 5 a 10/10", cartao: "Nubank Edilene", valor: 1140.00, parcelas: 6, parceladoValor: 190.00 },
                 { id: 107, data: "2026-11-10", desc: "Transportes Boa Espera - Parcela 6/6", cartao: "Nubank Edilene", valor: 70.00, parcelas: 1, parceladoValor: 70.00 },
@@ -782,7 +816,6 @@
                 { id: 158, data: "2026-11-10", desc: "Shopee*Jeanjacksoncord - Parcela 2/2", cartao: "Nubank Edilene", valor: 13.05, parcelas: 1, parceladoValor: 13.05 },
                 { id: 159, data: "2026-11-10", desc: "Shopee *Vitaoalimentos - Parcela 2/2", cartao: "Nubank Edilene", valor: 14.01, parcelas: 1, parceladoValor: 14.01 },
 
-                // PARCELAS REMANESCENTES A PARTIR DE DEZEMBRO 2026 (NUBANK NEUDSON)
                 { id: 202, data: "2026-11-10", desc: "Facial - Parcela 3/3", cartao: "Nubank Neudson", valor: 86.66, parcelas: 1, parceladoValor: 86.66 },
                 { id: 204, data: "2026-11-10", desc: "Raia Drogasil - Parcela 3/3", cartao: "Nubank Neudson", valor: 111.26, parcelas: 1, parceladoValor: 111.26 },
                 { id: 205, data: "2026-11-10", desc: "Mlp*Magalu-Bumper Maga - Parcela 5/5", cartao: "Nubank Neudson", valor: 143.97, parcelas: 1, parceladoValor: 143.97 },
@@ -800,23 +833,19 @@
 
         let appState = JSON.parse(localStorage.getItem('DESPAG_STATE'));
 
-        // SE FOR UMA VERSÃO ANTERIOR À LIMPEZA DE NOVEMBRO, EXECUTA A LIMPEZA PRESERVANDO DEZ/2026+
         if (!appState || appState.versaoBase !== "5.1-LIMPEZA-NOV") {
             let estadoLimpo = JSON.parse(JSON.stringify(estadoPadrao));
 
             if (appState) {
-                // Preserva receitas próprias existentes
                 if (appState.receitasProprias && appState.receitasProprias.length > 0) {
                     estadoLimpo.receitasProprias = appState.receitasProprias;
                 }
-                // Preserva cartões cadastrados pelo usuário
                 if (appState.cartoes && appState.cartoes.length > 0) {
                     let cartoesMap = new Map();
                     estadoLimpo.cartoes.forEach(c => cartoesMap.set(c.id, c));
                     appState.cartoes.forEach(c => cartoesMap.set(c.id, c));
                     estadoLimpo.cartoes = Array.from(cartoesMap.values());
                 }
-                // Preserva parcelas de terceiros de Dezembro/2026 em diante
                 if (appState.terceirosGrupos && appState.terceirosGrupos.length > 0) {
                     let gruposFiltrados = appState.terceirosGrupos.map(g => {
                         let parcsFuturas = (g.parcelas || []).filter(p => p.mes !== "2026-NOV");
@@ -827,7 +856,6 @@
                         estadoLimpo.terceirosGrupos = gruposFiltrados;
                     }
                 }
-                // Preserva compras manuais criadas pelo usuário que caiam de Dezembro/2026 em diante
                 if (appState.comprasBase && appState.comprasBase.length > 0) {
                     let idsPadraoAntigos = new Set([
                         951,952,953,954,991,992,993,994,995,996,801,802,803,804,805,806,807,808,
@@ -852,7 +880,6 @@
             localStorage.setItem('DESPAG_STATE', JSON.stringify(appState));
         }
 
-        // MIGRAÇÃO DE RECEITAS PRÓPRIAS
         if (appState.receitasProprias) {
             appState.receitasProprias.forEach(r => {
                 if (!r.meses) {
@@ -965,7 +992,6 @@
                         }
                         let targetMesSigla = `${aCur}-${nomesMesesSigla[mCur]}`;
 
-                        // Garante que Novembro permaneça sem despesas acumuladas
                         if (targetMesSigla === "2026-NOV") continue;
 
                         if (faturasCalculadas[targetMesSigla] && faturasCalculadas[targetMesSigla][compra.cartao]) {
@@ -1052,7 +1078,7 @@
                 appState.cartoes.forEach(c => {
                     const opt = document.createElement('option');
                     opt.value = c.nome;
-                    opt.textContent = `${c.nome} (Fechamento dia ${c.fechamento})`;
+                    opt.textContent = `${c.nome.toUpperCase()} (FECHAMENTO DIA ${c.fechamento})`;
                     select.appendChild(opt);
                 });
                 if (valorAtual) select.value = valorAtual;
@@ -1063,11 +1089,11 @@
             const selectFiltro = document.getElementById('filtroCartao');
             if (!selectFiltro) return;
             const atual = selectFiltro.value;
-            selectFiltro.innerHTML = '<option value="">Todos os Cartões</option>';
+            selectFiltro.innerHTML = '<option value="">TODOS OS CARTÕES</option>';
             appState.cartoes.forEach(c => {
                 const opt = document.createElement('option');
                 opt.value = c.nome;
-                opt.textContent = c.nome;
+                opt.textContent = c.nome.toUpperCase();
                 selectFiltro.appendChild(opt);
             });
             selectFiltro.value = atual;
@@ -1126,13 +1152,13 @@
                 }
 
                 let tr = document.createElement('tr');
-                tr.className = "hover:bg-gray-800/40 transition text-xs sm:text-sm";
+                tr.className = "hover:bg-gray-800/40 transition text-sm sm:text-base font-normal";
                 tr.innerHTML = `
-                    <td class="py-2 px-2 sm:py-3 sm:px-4 font-normal text-white leading-tight">${cartao.nome}</td>
+                    <td class="py-2 px-2 sm:py-3 sm:px-4 font-normal uppercase text-white leading-tight">${cartao.nome}</td>
                     <td class="py-2 px-2 sm:py-3 sm:px-4 font-normal ${info.pago ? 'line-through text-gray-500' : 'text-white'} whitespace-nowrap">
                         ${formatarBRL(valorFatura)}
                     </td>
-                    <td class="py-2 px-2 sm:py-3 sm:px-4 text-[11px] sm:text-xs text-gray-400 whitespace-nowrap">Dia ${cartao.vencimento}</td>
+                    <td class="py-2 px-2 sm:py-3 sm:px-4 text-xs sm:text-sm font-normal uppercase text-gray-400 whitespace-nowrap">DIA ${cartao.vencimento}</td>
                     <td class="py-2 px-1 sm:py-3 sm:px-4 text-center">
                         <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 rounded bg-gray-900 border-gray-700 text-sky-600 cursor-pointer" ${info.pago ? 'checked' : ''} onchange="toggleStatusPagoConta('${cartao.nome}')">
                     </td>
@@ -1226,16 +1252,16 @@
                 listP.innerHTML += `
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 rounded-xl bg-gray-900 border border-gray-800 gap-2">
                         <div class="flex flex-col">
-                            <span class="text-sm font-medium text-gray-200">${r.desc}</span>
-                            <span class="font-bold ${foiRecebido ? 'text-emerald-400' : 'text-gray-400'} text-xs">${formatarBRL(dadosMes.valor)}</span>
+                            <span class="text-base font-normal uppercase text-gray-200">${r.desc}</span>
+                            <span class="font-bold ${foiRecebido ? 'text-emerald-400' : 'text-gray-400'} text-sm">${formatarBRL(dadosMes.valor)}</span>
                         </div>
                         <div class="flex items-center gap-2.5 self-end sm:self-center">
-                            <label class="flex items-center gap-1.5 cursor-pointer bg-gray-950 px-2.5 py-1 rounded-md border border-gray-800 text-xs">
+                            <label class="flex items-center gap-1.5 cursor-pointer bg-gray-950 px-2.5 py-1 rounded-md border border-gray-800 text-sm font-normal uppercase">
                                 <input type="checkbox" ${foiRecebido ? 'checked' : ''} onchange="toggleStatusReceitaPropria(${r.id})" class="rounded bg-gray-900 border-gray-700 text-emerald-500 cursor-pointer">
-                                <span class="${foiRecebido ? 'text-emerald-400 font-bold' : 'text-gray-400'}">${foiRecebido ? 'Recebido' : 'Pendente'}</span>
+                                <span class="${foiRecebido ? 'text-emerald-400' : 'text-gray-400'}">${foiRecebido ? 'RECEBIDO' : 'PENDENTE'}</span>
                             </label>
-                            <button onclick="abrirEditReceita(${r.id})" class="text-xs text-sky-400 hover:text-sky-300 p-1"><i class="fa-solid fa-pen"></i></button>
-                            <button onclick="excluirReceita(${r.id})" class="text-xs text-rose-500 hover:text-rose-400 p-1"><i class="fa-solid fa-trash"></i></button>
+                            <button onclick="abrirEditReceita(${r.id})" class="text-sm text-sky-400 hover:text-sky-300 p-1" title="Editar Receita"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="excluirReceita(${r.id})" class="text-sm text-rose-500 hover:text-rose-400 p-1" title="Excluir Receita"><i class="fa-solid fa-trash"></i></button>
                         </div>
                     </div>
                 `;
@@ -1248,7 +1274,7 @@
             let gruposDoMes = appState.terceirosGrupos.filter(g => g.parcelas.some(p => p.mes === mes));
 
             if (gruposDoMes.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-500">Nenhuma cobrança de terceiro registrada para ${mes}.</p>`;
+                container.innerHTML = `<p class="text-sm font-normal uppercase text-gray-500">NENHUMA COBRANÇA DE TERCEIRO REGISTRADA PARA ${mes}.</p>`;
                 return;
             }
 
@@ -1266,11 +1292,11 @@
                 let cardHtml = `
                     <div class="p-4 rounded-xl bg-gray-900 border border-gray-800 space-y-3">
                         <div class="flex justify-between items-center border-b border-gray-800 pb-2">
-                            <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                            <h4 class="font-normal uppercase text-white text-base flex items-center gap-2">
                                 <i class="fa-solid fa-user text-sky-400"></i> ${pessoa}
                             </h4>
-                            <span class="text-xs bg-sky-950 text-sky-300 px-2.5 py-1 rounded-md font-bold border border-sky-800/50">
-                                TOTAL MÊS (${mes}): ${formatarBRL(totalPessoaMes)}
+                            <span class="text-sm bg-sky-950 text-sky-300 px-2.5 py-1 rounded-md font-normal uppercase border border-sky-800/50">
+                                TOTAL MÊS (${mes}): <strong class="font-extrabold">${formatarBRL(totalPessoaMes)}</strong>
                             </span>
                         </div>
                 `;
@@ -1278,20 +1304,21 @@
                 itensPessoa.forEach(item => {
                     let g = item.grupo;
                     let p = item.parcela;
-                    let infoParcela = g.numParcelas > 1 ? ` (Parc. ${p.numero}/${g.numParcelas})` : '';
+                    let infoParcela = g.numParcelas > 1 ? ` (PARC. ${p.numero}/${g.numParcelas})` : '';
 
                     cardHtml += `
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 rounded-lg bg-gray-950/80 text-xs gap-2">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 rounded-lg bg-gray-950/80 text-sm font-normal gap-2">
                             <div>
-                                <p class="font-bold text-white">${g.desc}${infoParcela}</p>
-                                <p class="text-gray-400">${g.cartao} - Total ${formatarBRL(g.valorTotal)} | Parcela: <span class="text-emerald-400 font-semibold">${formatarBRL(p.valor)}</span></p>
+                                <p class="font-normal uppercase text-white">${g.desc}${infoParcela}</p>
+                                <p class="text-gray-400 uppercase text-xs sm:text-sm">${g.cartao} - TOTAL ${formatarBRL(g.valorTotal)} | PARCELA: <span class="text-emerald-400 font-bold">${formatarBRL(p.valor)}</span></p>
                             </div>
-                            <div class="flex items-center gap-3 self-end sm:self-center">
-                                <label class="flex items-center gap-1.5 cursor-pointer bg-gray-900 px-2.5 py-1 rounded-md border border-gray-800">
+                            <div class="flex items-center gap-2.5 self-end sm:self-center">
+                                <label class="flex items-center gap-1.5 cursor-pointer bg-gray-900 px-2.5 py-1 rounded-md border border-gray-800 uppercase text-xs sm:text-sm">
                                     <input type="checkbox" ${p.pago ? 'checked' : ''} onchange="toggleTerceiroParcelaPago(${g.id}, '${mes}')" class="rounded bg-gray-900 border-gray-700 text-sky-500 cursor-pointer">
-                                    <span class="${p.pago ? 'text-emerald-400 font-bold' : 'text-gray-400'}">${p.pago ? 'Reembolsado' : 'Pendente'}</span>
+                                    <span class="${p.pago ? 'text-emerald-400' : 'text-gray-400'}">${p.pago ? 'REEMBOLSADO' : 'PENDENTE'}</span>
                                 </label>
-                                <button onclick="excluirTerceiroGrupo(${g.id})" class="text-rose-500 hover:text-rose-400 p-1"><i class="fa-solid fa-trash"></i></button>
+                                <button onclick="abrirEditTerceiro(${g.id})" class="text-sky-400 hover:text-sky-300 p-1" title="Editar Cobrança"><i class="fa-solid fa-pen"></i></button>
+                                <button onclick="excluirTerceiroGrupo(${g.id})" class="text-rose-500 hover:text-rose-400 p-1" title="Excluir Cobrança"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </div>
                     `;
@@ -1388,6 +1415,64 @@
             renderDashboard();
         }
 
+        function abrirEditTerceiro(id) {
+            const grupo = appState.terceirosGrupos.find(g => g.id === id);
+            if (grupo) {
+                document.getElementById('editTercId').value = grupo.id;
+                document.getElementById('editTercNome').value = grupo.nome;
+                document.getElementById('editTercDesc').value = grupo.desc;
+                document.getElementById('editTercValorTotal').value = grupo.valorTotal;
+                document.getElementById('editTercParcelas').value = grupo.numParcelas;
+                document.getElementById('modalEditTerceiro').classList.remove('hidden');
+            }
+        }
+
+        function fecharModalEditTerceiro() {
+            document.getElementById('modalEditTerceiro').classList.add('hidden');
+        }
+
+        function salvarEdicaoTerceiro(e) {
+            e.preventDefault();
+            const id = parseInt(document.getElementById('editTercId').value);
+            const nome = document.getElementById('editTercNome').value;
+            const desc = document.getElementById('editTercDesc').value;
+            const valorTotal = parseFloat(document.getElementById('editTercValorTotal').value);
+            const numParcelas = parseInt(document.getElementById('editTercParcelas').value) || 1;
+
+            let grupo = appState.terceirosGrupos.find(g => g.id === id);
+            if (grupo) {
+                grupo.nome = nome;
+                grupo.desc = desc;
+                grupo.valorTotal = valorTotal;
+                grupo.numParcelas = numParcelas;
+
+                const valorParcela = valorTotal / numParcelas;
+                let mesBase = (grupo.parcelas && grupo.parcelas.length > 0) ? grupo.parcelas[0].mes : (grupo.mesInicio || appState.mesAtivo);
+                let idxInicio = MESES_CHRONO.indexOf(mesBase);
+                if (idxInicio < 0) idxInicio = 0;
+
+                let statusPagosAntigos = {};
+                if (grupo.parcelas) {
+                    grupo.parcelas.forEach(p => { statusPagosAntigos[p.mes] = p.pago; });
+                }
+
+                let novasParcelas = [];
+                for (let i = 0; i < numParcelas; i++) {
+                    let mesTarget = MESES_CHRONO[(idxInicio + i) % MESES_CHRONO.length];
+                    novasParcelas.push({
+                        mes: mesTarget,
+                        numero: i + 1,
+                        valor: valorParcela,
+                        pago: statusPagosAntigos[mesTarget] || false
+                    });
+                }
+                grupo.parcelas = novasParcelas;
+            }
+
+            fecharModalEditTerceiro();
+            renderDashboard();
+        }
+
         function toggleTerceiroParcelaPago(grupoId, mes) {
             let grupo = appState.terceirosGrupos.find(g => g.id === grupoId);
             if (grupo) {
@@ -1451,14 +1536,14 @@
             tbody.innerHTML = '';
             appState.cartoes.forEach(c => {
                 tbody.innerHTML += `
-                    <tr class="hover:bg-gray-800/40 transition">
-                        <td class="py-3 px-4 font-bold text-white">${c.nome}</td>
-                        <td class="py-3 px-4 text-sky-400">Dia ${c.fechamento}</td>
-                        <td class="py-3 px-4 text-gray-300">Dia ${c.vencimento}</td>
+                    <tr class="hover:bg-gray-800/40 transition font-normal">
+                        <td class="py-3 px-4 font-normal uppercase text-white">${c.nome}</td>
+                        <td class="py-3 px-4 font-normal uppercase text-sky-400">DIA ${c.fechamento}</td>
+                        <td class="py-3 px-4 font-normal uppercase text-gray-300">DIA ${c.vencimento}</td>
                         <td class="py-3 px-4 text-center">
                             <div class="flex items-center justify-center gap-2">
-                                <button onclick="abrirEditCartao(${c.id})" class="text-xs bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-800 px-2.5 py-1.5 rounded-lg transition" title="Editar Cartão"><i class="fa-solid fa-pen"></i></button>
-                                <button onclick="removerCartao(${c.id})" class="text-xs bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 px-2.5 py-1.5 rounded-lg transition" title="Excluir Cartão"><i class="fa-solid fa-trash"></i></button>
+                                <button onclick="abrirEditCartao(${c.id})" class="text-sm bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-800 px-2.5 py-1.5 rounded-lg transition" title="Editar Cartão"><i class="fa-solid fa-pen"></i></button>
+                                <button onclick="removerCartao(${c.id})" class="text-sm bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 px-2.5 py-1.5 rounded-lg transition" title="Excluir Cartão"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -1515,7 +1600,7 @@
             tbody.innerHTML = '';
 
             if (!appState.comprasBase || appState.comprasBase.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="py-4 text-center text-gray-500">Nenhuma compra lançada na base de dados.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" class="py-4 text-center text-gray-500 uppercase text-sm font-normal">NENHUMA COMPRA LANÇADA NA BASE DE DADOS.</td></tr>`;
                 return;
             }
 
@@ -1531,23 +1616,23 @@
             });
 
             if (dadosFiltrados.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="py-4 text-center text-gray-500">Nenhum registro encontrado com esses filtros.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" class="py-4 text-center text-gray-500 uppercase text-sm font-normal">NENHUM REGISTRO ENCONTRADO COM ESSES FILTROS.</td></tr>`;
                 return;
             }
 
             dadosFiltrados.forEach(c => {
                 tbody.innerHTML += `
-                    <tr class="hover:bg-gray-800/40 transition">
+                    <tr class="hover:bg-gray-800/40 transition font-normal">
                         <td class="py-3 px-3 text-gray-300 font-mono">${c.data}</td>
-                        <td class="py-3 px-3 font-semibold text-white">${c.desc}</td>
-                        <td class="py-3 px-3"><span class="px-2.5 py-1 rounded-md bg-sky-950 text-sky-300 border border-sky-800/50 font-medium">${c.cartao}</span></td>
+                        <td class="py-3 px-3 font-normal uppercase text-white">${c.desc}</td>
+                        <td class="py-3 px-3"><span class="px-2.5 py-1 rounded-md bg-sky-950 text-sky-300 border border-sky-800/50 font-normal uppercase">${c.cartao}</span></td>
                         <td class="py-3 px-3 font-bold text-white">${formatarBRL(c.valor)}</td>
-                        <td class="py-3 px-3 text-gray-400">${c.parcelas}x</td>
-                        <td class="py-3 px-3 text-emerald-400 font-semibold">${formatarBRL(c.parceladoValor)}</td>
+                        <td class="py-3 px-3 text-gray-400">${c.parcelas}X</td>
+                        <td class="py-3 px-3 text-emerald-400 font-bold">${formatarBRL(c.parceladoValor)}</td>
                         <td class="py-3 px-3 text-center">
                             <div class="flex items-center justify-center gap-2">
-                                <button onclick="abrirEditCompra(${c.id})" class="text-xs bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-800 px-2.5 py-1 rounded-lg transition" title="Editar Compra"><i class="fa-solid fa-pen"></i></button>
-                                <button onclick="excluirCompra(${c.id})" class="text-xs bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 px-2.5 py-1 rounded-lg transition" title="Excluir Compra"><i class="fa-solid fa-trash"></i></button>
+                                <button onclick="abrirEditCompra(${c.id})" class="text-sm bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-800 px-2.5 py-1 rounded-lg transition" title="Editar Compra"><i class="fa-solid fa-pen"></i></button>
+                                <button onclick="excluirCompra(${c.id})" class="text-sm bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 px-2.5 py-1 rounded-lg transition" title="Excluir Compra"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -1612,8 +1697,8 @@
                 const isCurrent = m === appState.mesAtivo;
                 list.innerHTML += `
                     <div class="flex justify-between items-center p-2.5 rounded-lg ${isCurrent ? 'bg-sky-950/60 border border-sky-700/60' : 'bg-gray-900 border border-gray-800/60'}">
-                        <span class="text-xs font-bold ${isCurrent ? 'text-sky-300' : 'text-gray-400'}">${m}</span>
-                        <span class="text-xs font-extrabold ${isCurrent ? 'text-sky-200' : 'text-gray-200'}">${formatarBRL(totalM)}</span>
+                        <span class="text-sm font-normal uppercase ${isCurrent ? 'text-sky-300' : 'text-gray-400'}">${m}</span>
+                        <span class="text-sm font-extrabold ${isCurrent ? 'text-sky-200' : 'text-gray-200'}">${formatarBRL(totalM)}</span>
                     </div>
                 `;
             });
