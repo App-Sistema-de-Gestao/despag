@@ -321,7 +321,7 @@
 
                     <div class="border-t border-gray-800 pt-4">
                         <button onclick="forcarResetEstado()" class="w-full py-3 bg-gray-800 hover:bg-sky-600 text-white font-normal uppercase text-sm rounded-xl border border-gray-700 transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-arrows-rotate"></i> SINCRONIZAR BASE OFICIAL (DEZ/2026+)
+                            <i class="fa-solid fa-arrows-rotate"></i> SINCRONIZAR BASE CONSOLIDADA (2026/2027)
                         </button>
                     </div>
                 </div>
@@ -631,209 +631,1692 @@
         }
 
         const estadoPadrao = {
-            versaoBase: "5.1-LIMPEZA-NOV",
-            mesAtivo: "2026-DEZ",
-            cartoes: [
-                { id: 1, nome: "Nubank Neudson", fechamento: 25, vencimento: 5 },
-                { id: 2, nome: "Nubank Edilene", fechamento: 23, vencimento: 3 },
-                { id: 3, nome: "Visa Bradesco", fechamento: 15, vencimento: 25 },
-                { id: 4, nome: "99Pay", fechamento: 20, vencimento: 1 },
-                { id: 5, nome: "Cartão Recarga PAY", fechamento: 28, vencimento: 6 },
-                { id: 6, nome: "CMT I Andrielly", fechamento: 25, vencimento: 5 },
-                { id: 7, nome: "CMT I Guilherme", fechamento: 25, vencimento: 5 },
-                { id: 8, nome: "Natação", fechamento: 10, vencimento: 10 },
-                { id: 9, nome: "Mercado Pago", fechamento: 29, vencimento: 4 },
-                { id: 10, nome: "Equatorial i", fechamento: 16, vencimento: 6 },
-                { id: 11, nome: "Equatorial ii", fechamento: 15, vencimento: 11 },
-                { id: 12, nome: "Escola | Theodoro", fechamento: 20, vencimento: 5 },
-                { id: 13, nome: "Mercado Pago Edilene", fechamento: 20, vencimento: 17 }
+            "versaoBase": "5.2-CONSOLIDADO-2026-2027",
+            "mesAtivo": "2026-DEZ",
+            "cartoes": [
+                        {
+                                    "id": 1,
+                                    "nome": "Nubank Neudson",
+                                    "fechamento": 25,
+                                    "vencimento": 5
+                        },
+                        {
+                                    "id": 2,
+                                    "nome": "Nubank Edilene",
+                                    "fechamento": 23,
+                                    "vencimento": 3
+                        },
+                        {
+                                    "id": 3,
+                                    "nome": "Visa Bradesco",
+                                    "fechamento": 20,
+                                    "vencimento": 5
+                        },
+                        {
+                                    "id": 4,
+                                    "nome": "99Pay",
+                                    "fechamento": 20,
+                                    "vencimento": 8
+                        },
+                        {
+                                    "id": 5,
+                                    "nome": "Cartão Recarga PAY",
+                                    "fechamento": 28,
+                                    "vencimento": 6
+                        },
+                        {
+                                    "id": 6,
+                                    "nome": "CMT I Andrielly",
+                                    "fechamento": 25,
+                                    "vencimento": 5
+                        },
+                        {
+                                    "id": 7,
+                                    "nome": "CMT I Guilherme",
+                                    "fechamento": 25,
+                                    "vencimento": 5
+                        },
+                        {
+                                    "id": 8,
+                                    "nome": "Natação",
+                                    "fechamento": 10,
+                                    "vencimento": 10
+                        },
+                        {
+                                    "id": 9,
+                                    "nome": "Mercado Pago",
+                                    "fechamento": 29,
+                                    "vencimento": 4
+                        },
+                        {
+                                    "id": 10,
+                                    "nome": "Equatorial i",
+                                    "fechamento": 16,
+                                    "vencimento": 6
+                        },
+                        {
+                                    "id": 11,
+                                    "nome": "Equatorial ii",
+                                    "fechamento": 15,
+                                    "vencimento": 11
+                        },
+                        {
+                                    "id": 12,
+                                    "nome": "Escola | Theodoro",
+                                    "fechamento": 20,
+                                    "vencimento": 5
+                        },
+                        {
+                                    "id": 13,
+                                    "nome": "Mercado Pago Edilene",
+                                    "fechamento": 20,
+                                    "vencimento": 17
+                        },
+                        {
+                                    "id": 1793561808356,
+                                    "nome": "Outros",
+                                    "fechamento": 20,
+                                    "vencimento": 10
+                        }
             ],
-            faturasIniciais: {},
-            receitasProprias: [
-                { id: 1, desc: "Salário Base", meses: gerarValoresMensaisReceita(3700.00) },
-                { id: 2, desc: "Renda Extra / Aluguel Garagem", meses: gerarValoresMensaisReceita(100.00) },
-                { id: 3, desc: "Edmilson", meses: gerarValoresMensaisReceita(168.25) }
+            "faturasIniciais": {},
+            "receitasProprias": [
+                        {
+                                    "id": 1,
+                                    "desc": "Salário Base",
+                                    "valor": 3700,
+                                    "recebido": false,
+                                    "meses": {
+                                                "2026-NOV": {
+                                                            "valor": 3700,
+                                                            "recebido": true
+                                                },
+                                                "2026-DEZ": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                },
+                                                "2027-JAN": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                },
+                                                "2027-FEV": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                },
+                                                "2027-MAR": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                },
+                                                "2027-ABR": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                },
+                                                "2027-MAI": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                },
+                                                "2027-JUN": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                },
+                                                "2027-JUL": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                },
+                                                "2027-AGO": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                },
+                                                "2027-SET": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                },
+                                                "2027-OUT": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                },
+                                                "2027-NOV": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                },
+                                                "2027-DEZ": {
+                                                            "valor": 7087.38,
+                                                            "recebido": false
+                                                }
+                                    }
+                        },
+                        {
+                                    "id": 2,
+                                    "desc": "Renda Extra / Aluguel Garagem",
+                                    "valor": 100,
+                                    "recebido": false,
+                                    "meses": {
+                                                "2026-NOV": {
+                                                            "valor": 100,
+                                                            "recebido": true
+                                                },
+                                                "2026-DEZ": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                },
+                                                "2027-JAN": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                },
+                                                "2027-FEV": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                },
+                                                "2027-MAR": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                },
+                                                "2027-ABR": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                },
+                                                "2027-MAI": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                },
+                                                "2027-JUN": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                },
+                                                "2027-JUL": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                },
+                                                "2027-AGO": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                },
+                                                "2027-SET": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                },
+                                                "2027-OUT": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                },
+                                                "2027-NOV": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                },
+                                                "2027-DEZ": {
+                                                            "valor": 100,
+                                                            "recebido": false
+                                                }
+                                    }
+                        },
+                        {
+                                    "id": 1793748465188,
+                                    "desc": "Edmilson",
+                                    "valor": 168.25,
+                                    "recebido": false,
+                                    "meses": {
+                                                "2026-NOV": {
+                                                            "valor": 168.25,
+                                                            "recebido": true
+                                                },
+                                                "2026-DEZ": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                },
+                                                "2027-JAN": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                },
+                                                "2027-FEV": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                },
+                                                "2027-MAR": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                },
+                                                "2027-ABR": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                },
+                                                "2027-MAI": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                },
+                                                "2027-JUN": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                },
+                                                "2027-JUL": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                },
+                                                "2027-AGO": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                },
+                                                "2027-SET": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                },
+                                                "2027-OUT": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                },
+                                                "2027-NOV": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                },
+                                                "2027-DEZ": {
+                                                            "valor": 168.25,
+                                                            "recebido": false
+                                                }
+                                    }
+                        }
             ],
-            terceirosGrupos: [
-                {
-                    id: 301,
-                    nome: "Edmilson",
-                    desc: "Reembolso Cartão / Despesa",
-                    cartao: "Nubank Neudson",
-                    valorTotal: 200.00,
-                    numParcelas: 2,
-                    mesInicio: "2026-NOV",
-                    parcelas: [
-                        { mes: "2026-DEZ", numero: 2, valor: 100.00, pago: false }
-                    ]
-                },
-                {
-                    id: 303,
-                    nome: "Marques",
-                    desc: "Despesa Compartilhada 2",
-                    cartao: "Nubank Neudson",
-                    valorTotal: 387.50,
-                    numParcelas: 2,
-                    mesInicio: "2026-NOV",
-                    parcelas: [
-                        { mes: "2026-DEZ", numero: 2, valor: 193.75, pago: false }
-                    ]
-                },
-                {
-                    id: 304,
-                    nome: "Marques",
-                    desc: "Despesa Longo Prazo",
-                    cartao: "Nubank Neudson",
-                    valorTotal: 1283.34,
-                    numParcelas: 6,
-                    mesInicio: "2026-NOV",
-                    parcelas: [
-                        { mes: "2026-DEZ", numero: 2, valor: 213.89, pago: false },
-                        { mes: "2027-JAN", numero: 3, valor: 213.89, pago: false },
-                        { mes: "2027-FEV", numero: 4, valor: 213.89, pago: false },
-                        { mes: "2027-MAR", numero: 5, valor: 213.89, pago: false },
-                        { mes: "2027-ABR", numero: 6, valor: 213.89, pago: false }
-                    ]
-                },
-                {
-                    id: 305,
-                    nome: "Ivo",
-                    desc: "Repasse / Despesa Compartilhada",
-                    cartao: "Nubank Neudson",
-                    valorTotal: 2800.00,
-                    numParcelas: 5,
-                    mesInicio: "2026-NOV",
-                    parcelas: [
-                        { mes: "2026-DEZ", numero: 2, valor: 560.00, pago: false },
-                        { mes: "2027-JAN", numero: 3, valor: 560.00, pago: false },
-                        { mes: "2027-FEV", numero: 4, valor: 560.00, pago: false },
-                        { mes: "2027-MAR", numero: 5, valor: 560.00, pago: false }
-                    ]
-                },
-                {
-                    id: 306,
-                    nome: "Thiago Borges",
-                    desc: "Acordo / Fatura Compartilhada",
-                    cartao: "Nubank Neudson",
-                    valorTotal: 1520.00,
-                    numParcelas: 7,
-                    mesInicio: "2026-NOV",
-                    parcelas: [
-                        { mes: "2026-DEZ", numero: 2, valor: 190.00, pago: false },
-                        { mes: "2027-JAN", numero: 3, valor: 190.00, pago: false },
-                        { mes: "2027-FEV", numero: 4, valor: 190.00, pago: false },
-                        { mes: "2027-MAR", numero: 5, valor: 190.00, pago: false },
-                        { mes: "2027-ABR", numero: 6, valor: 190.00, pago: false },
-                        { mes: "2027-MAI", numero: 7, valor: 190.00, pago: false }
-                    ]
-                },
-                {
-                    id: 307,
-                    nome: "Gilmar",
-                    desc: "Reembolso Despesa",
-                    cartao: "Nubank Neudson",
-                    valorTotal: 287.96,
-                    numParcelas: 2,
-                    mesInicio: "2026-NOV",
-                    parcelas: [
-                        { mes: "2026-DEZ", numero: 2, valor: 143.98, pago: false }
-                    ]
-                },
-                {
-                    id: 308,
-                    nome: "Deuzelina",
-                    desc: "Despesa 1",
-                    cartao: "Nubank Neudson",
-                    valorTotal: 118.06,
-                    numParcelas: 2,
-                    mesInicio: "2026-NOV",
-                    parcelas: [
-                        { mes: "2026-DEZ", numero: 2, valor: 59.03, pago: false }
-                    ]
-                },
-                {
-                    id: 309,
-                    nome: "Deuzelina",
-                    desc: "Despesa 2",
-                    cartao: "Nubank Neudson",
-                    valorTotal: 222.52,
-                    numParcelas: 2,
-                    mesInicio: "2026-NOV",
-                    parcelas: [
-                        { mes: "2026-DEZ", numero: 2, valor: 111.26, pago: false }
-                    ]
-                },
-                {
-                    id: 311,
-                    nome: "Deuzelina",
-                    desc: "Despesa 4",
-                    cartao: "Nubank Neudson",
-                    valorTotal: 178.56,
-                    numParcelas: 3,
-                    mesInicio: "2026-NOV",
-                    parcelas: [
-                        { mes: "2026-DEZ", numero: 2, valor: 59.52, pago: false },
-                        { mes: "2027-JAN", numero: 3, valor: 59.52, pago: false }
-                    ]
-                }
+            "terceirosGrupos": [
+                        {
+                                    "id": 303,
+                                    "nome": "Marques",
+                                    "desc": "Despesa Compartilhada 2",
+                                    "cartao": "Nubank Neudson",
+                                    "valorTotal": 387.5,
+                                    "numParcelas": 2,
+                                    "mesInicio": "2026-NOV",
+                                    "parcelas": [
+                                                {
+                                                            "mes": "2026-DEZ",
+                                                            "numero": 2,
+                                                            "valor": 193.75,
+                                                            "pago": false
+                                                }
+                                    ]
+                        },
+                        {
+                                    "id": 304,
+                                    "nome": "Marques",
+                                    "desc": "Despesa Longo Prazo",
+                                    "cartao": "Nubank Neudson",
+                                    "valorTotal": 1283.34,
+                                    "numParcelas": 6,
+                                    "mesInicio": "2026-NOV",
+                                    "parcelas": [
+                                                {
+                                                            "mes": "2026-DEZ",
+                                                            "numero": 2,
+                                                            "valor": 213.89,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-JAN",
+                                                            "numero": 3,
+                                                            "valor": 213.89,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-FEV",
+                                                            "numero": 4,
+                                                            "valor": 213.89,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-MAR",
+                                                            "numero": 5,
+                                                            "valor": 213.89,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-ABR",
+                                                            "numero": 6,
+                                                            "valor": 213.89,
+                                                            "pago": false
+                                                }
+                                    ]
+                        },
+                        {
+                                    "id": 305,
+                                    "nome": "Ivo",
+                                    "desc": "Repasse / Despesa Compartilhada",
+                                    "cartao": "Nubank Neudson",
+                                    "valorTotal": 2800,
+                                    "numParcelas": 5,
+                                    "mesInicio": "2026-NOV",
+                                    "parcelas": [
+                                                {
+                                                            "mes": "2026-DEZ",
+                                                            "numero": 2,
+                                                            "valor": 560,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-JAN",
+                                                            "numero": 3,
+                                                            "valor": 560,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-FEV",
+                                                            "numero": 4,
+                                                            "valor": 560,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-MAR",
+                                                            "numero": 5,
+                                                            "valor": 560,
+                                                            "pago": false
+                                                }
+                                    ]
+                        },
+                        {
+                                    "id": 306,
+                                    "nome": "Thiago Borges",
+                                    "desc": "Acordo / Fatura Compartilhada",
+                                    "cartao": "Nubank Neudson",
+                                    "valorTotal": 1520,
+                                    "numParcelas": 7,
+                                    "mesInicio": "2026-NOV",
+                                    "parcelas": [
+                                                {
+                                                            "mes": "2026-DEZ",
+                                                            "numero": 2,
+                                                            "valor": 190,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-JAN",
+                                                            "numero": 3,
+                                                            "valor": 190,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-FEV",
+                                                            "numero": 4,
+                                                            "valor": 190,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-MAR",
+                                                            "numero": 5,
+                                                            "valor": 190,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-ABR",
+                                                            "numero": 6,
+                                                            "valor": 190,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-MAI",
+                                                            "numero": 7,
+                                                            "valor": 190,
+                                                            "pago": false
+                                                }
+                                    ]
+                        },
+                        {
+                                    "id": 307,
+                                    "nome": "Gilmar",
+                                    "desc": "Reembolso Despesa",
+                                    "cartao": "Nubank Neudson",
+                                    "valorTotal": 287.96,
+                                    "numParcelas": 2,
+                                    "mesInicio": "2026-NOV",
+                                    "parcelas": [
+                                                {
+                                                            "mes": "2026-DEZ",
+                                                            "numero": 2,
+                                                            "valor": 143.98,
+                                                            "pago": false
+                                                }
+                                    ]
+                        },
+                        {
+                                    "id": 309,
+                                    "nome": "Deuzelina",
+                                    "desc": "Despesa 2",
+                                    "cartao": "Nubank Neudson",
+                                    "valorTotal": 222.52,
+                                    "numParcelas": 2,
+                                    "mesInicio": "2026-NOV",
+                                    "parcelas": [
+                                                {
+                                                            "mes": "2026-DEZ",
+                                                            "numero": 2,
+                                                            "valor": 111.26,
+                                                            "pago": false
+                                                }
+                                    ]
+                        },
+                        {
+                                    "id": 311,
+                                    "nome": "Deuzelina",
+                                    "desc": "Despesa 4",
+                                    "cartao": "Nubank Neudson",
+                                    "valorTotal": 178.56,
+                                    "numParcelas": 3,
+                                    "mesInicio": "2026-NOV",
+                                    "parcelas": [
+                                                {
+                                                            "mes": "2026-DEZ",
+                                                            "numero": 2,
+                                                            "valor": 59.52,
+                                                            "pago": false
+                                                },
+                                                {
+                                                            "mes": "2027-JAN",
+                                                            "numero": 3,
+                                                            "valor": 59.52,
+                                                            "pago": false
+                                                }
+                                    ]
+                        }
             ],
-            comprasBase: [
-                { id: 954, data: "2026-11-15", desc: "Escola | Theodoro - Dezembro", cartao: "Escola | Theodoro", valor: 382.50, parcelas: 1, parceladoValor: 382.50 },
-
-                { id: 992, data: "2026-11-15", desc: "Financiamento 99Pay - Parcela Dez", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 993, data: "2026-12-15", desc: "Financiamento 99Pay - Parcela Jan", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 994, data: "2027-01-15", desc: "Financiamento 99Pay - Parcela Fev", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 995, data: "2027-02-15", desc: "Financiamento 99Pay - Parcela Mar", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-                { id: 996, data: "2027-03-15", desc: "Financiamento 99Pay - Parcela Abr", cartao: "99Pay", valor: 1092.81, parcelas: 1, parceladoValor: 1092.81 },
-
-                { id: 802, data: "2026-11-05", desc: "Pix para o professor Durval - Dez", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 803, data: "2026-12-05", desc: "Pix para o professor Durval - Jan", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 804, data: "2027-01-05", desc: "Pix para o professor Durval - Fev", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 805, data: "2027-02-05", desc: "Pix para o professor Durval - Mar", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 806, data: "2027-03-05", desc: "Pix para o professor Durval - Abr", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 807, data: "2027-04-05", desc: "Pix para o professor Durval - Mai", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-                { id: 808, data: "2027-05-05", desc: "Pix para o professor Durval - Jun", cartao: "Natação", valor: 120.00, parcelas: 1, parceladoValor: 120.00 },
-
-                { id: 702, data: "2026-11-15", desc: "CMT I Andrielly - Mensalidade Dez", cartao: "CMT I Andrielly", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
-                { id: 711, data: "2026-11-15", desc: "CMT I Guilherme (1) - Dez", cartao: "CMT I Guilherme", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
-                { id: 713, data: "2026-11-15", desc: "CMT I Guilherme (2) - Dez", cartao: "CMT I Guilherme", valor: 190.00, parcelas: 1, parceladoValor: 190.00 },
-
-                { id: 101, data: "2026-11-10", desc: "Mix Mateus - Parcela 3/3", cartao: "Nubank Edilene", valor: 140.00, parcelas: 1, parceladoValor: 140.00 },
-                { id: 104, data: "2026-11-10", desc: "Mp *Oticascarol - Parcelas 5 a 10/10", cartao: "Nubank Edilene", valor: 1140.00, parcelas: 6, parceladoValor: 190.00 },
-                { id: 107, data: "2026-11-10", desc: "Transportes Boa Espera - Parcela 6/6", cartao: "Nubank Edilene", valor: 70.00, parcelas: 1, parceladoValor: 70.00 },
-                { id: 111, data: "2026-11-10", desc: "Tiago Marques Silva - Parcela 8/8", cartao: "Nubank Edilene", valor: 193.75, parcelas: 1, parceladoValor: 193.75 },
-                { id: 119, data: "2026-11-10", desc: "R F Pacheco Oliveira C - Parcelas 5 a 10/10", cartao: "Nubank Edilene", valor: 1800.00, parcelas: 6, parceladoValor: 300.00 },
-                { id: 123, data: "2026-11-10", desc: "Shopee *Sarawhannie - Parcela 2/2", cartao: "Nubank Edilene", valor: 18.01, parcelas: 1, parceladoValor: 18.01 },
-                { id: 125, data: "2026-11-10", desc: "Shopee *Espacokids - Parcela 2/2", cartao: "Nubank Edilene", valor: 11.99, parcelas: 1, parceladoValor: 11.99 },
-                { id: 126, data: "2026-11-10", desc: "Shopee *Poloinfantilst - Parcela 2/2", cartao: "Nubank Edilene", valor: 9.61, parcelas: 1, parceladoValor: 9.61 },
-                { id: 128, data: "2026-11-10", desc: "Shopee *Manphi - Parcela 2/2", cartao: "Nubank Edilene", valor: 10.98, parcelas: 1, parceladoValor: 10.98 },
-                { id: 129, data: "2026-11-10", desc: "Shopee *Poloinfantilst - Parcela 2/2", cartao: "Nubank Edilene", valor: 15.10, parcelas: 1, parceladoValor: 15.10 },
-                { id: 131, data: "2026-11-10", desc: "Mp *Comercialns - Parcelas 2 a 5/5", cartao: "Nubank Edilene", valor: 2240.00, parcelas: 4, parceladoValor: 560.00 },
-                { id: 134, data: "2026-11-10", desc: "Shopee *Toplojajero - Parcela 2/2", cartao: "Nubank Edilene", valor: 10.82, parcelas: 1, parceladoValor: 10.82 },
-                { id: 137, data: "2026-11-10", desc: "Shopee *Dafabricasuple - Parcela 2/2", cartao: "Nubank Edilene", valor: 17.66, parcelas: 1, parceladoValor: 17.66 },
-                { id: 142, data: "2026-11-10", desc: "Digas - Parcela 2/2", cartao: "Nubank Edilene", valor: 65.00, parcelas: 1, parceladoValor: 65.00 },
-                { id: 144, data: "2026-11-10", desc: "Shopee *Poloinfantilst - Parcela 2/2", cartao: "Nubank Edilene", valor: 32.39, parcelas: 1, parceladoValor: 32.39 },
-                { id: 158, data: "2026-11-10", desc: "Shopee*Jeanjacksoncord - Parcela 2/2", cartao: "Nubank Edilene", valor: 13.05, parcelas: 1, parceladoValor: 13.05 },
-                { id: 159, data: "2026-11-10", desc: "Shopee *Vitaoalimentos - Parcela 2/2", cartao: "Nubank Edilene", valor: 14.01, parcelas: 1, parceladoValor: 14.01 },
-
-                { id: 202, data: "2026-11-10", desc: "Facial - Parcela 3/3", cartao: "Nubank Neudson", valor: 86.66, parcelas: 1, parceladoValor: 86.66 },
-                { id: 204, data: "2026-11-10", desc: "Raia Drogasil - Parcela 3/3", cartao: "Nubank Neudson", valor: 111.26, parcelas: 1, parceladoValor: 111.26 },
-                { id: 205, data: "2026-11-10", desc: "Mlp*Magalu-Bumper Maga - Parcela 5/5", cartao: "Nubank Neudson", valor: 143.97, parcelas: 1, parceladoValor: 143.97 },
-                { id: 207, data: "2026-11-10", desc: "Htm Vitoria Fernandes - Parcelas 3 a 12/12", cartao: "Nubank Neudson", valor: 40.60, parcelas: 10, parceladoValor: 4.06 },
-                { id: 208, data: "2026-11-10", desc: "Htm Vitoria Fernandes - Parcelas 3 a 4/4", cartao: "Nubank Neudson", valor: 7.80, parcelas: 2, parceladoValor: 3.90 },
-                { id: 209, data: "2026-11-10", desc: "Amazonmktplc*Ajrcomerc - Parcelas 5 a 6/6", cartao: "Nubank Neudson", valor: 64.96, parcelas: 2, parceladoValor: 32.48 },
-                { id: 210, data: "2026-11-10", desc: "Shopee *Lojafigueiredo - Parcelas 3 a 4/4", cartao: "Nubank Neudson", valor: 23.50, parcelas: 2, parceladoValor: 11.75 },
-                { id: 213, data: "2026-11-10", desc: "Kvn*Metodo Hftc - Parcelas 9 a 12/12", cartao: "Nubank Neudson", valor: 80.76, parcelas: 4, parceladoValor: 20.19 },
-                { id: 214, data: "2026-11-10", desc: "Htm Cleisson Rocha - Parcela 12/12", cartao: "Nubank Neudson", valor: 92.45, parcelas: 1, parceladoValor: 92.45 },
-                { id: 215, data: "2026-11-10", desc: "Amazonmktplc*Eromanovs - Parcelas 2 a 5/5", cartao: "Nubank Neudson", valor: 140.80, parcelas: 4, parceladoValor: 35.20 },
-                { id: 216, data: "2026-11-10", desc: "Extrafarma C*Paguemeno - Parcelas 2 a 5/5", cartao: "Nubank Neudson", valor: 260.88, parcelas: 4, parceladoValor: 65.22 },
-                { id: 217, data: "2026-11-10", desc: "Shopee *Susek - Parcela 2/2", cartao: "Nubank Neudson", valor: 15.00, parcelas: 1, parceladoValor: 15.00 }
+            "comprasBase": [
+                        {
+                                    "id": 954,
+                                    "data": "2026-11-15",
+                                    "desc": "Escola | Theodoro - Dezembro",
+                                    "cartao": "Escola | Theodoro",
+                                    "valor": 382.5,
+                                    "parcelas": 1,
+                                    "parceladoValor": 382.5
+                        },
+                        {
+                                    "id": 992,
+                                    "data": "2026-11-15",
+                                    "desc": "Financiamento 99Pay - Parcela Dez",
+                                    "cartao": "99Pay",
+                                    "valor": 1092.81,
+                                    "parcelas": 1,
+                                    "parceladoValor": 1092.81
+                        },
+                        {
+                                    "id": 993,
+                                    "data": "2026-12-15",
+                                    "desc": "Financiamento 99Pay - Parcela Jan",
+                                    "cartao": "99Pay",
+                                    "valor": 1092.81,
+                                    "parcelas": 1,
+                                    "parceladoValor": 1092.81
+                        },
+                        {
+                                    "id": 994,
+                                    "data": "2027-01-15",
+                                    "desc": "Financiamento 99Pay - Parcela Fev",
+                                    "cartao": "99Pay",
+                                    "valor": 1092.81,
+                                    "parcelas": 1,
+                                    "parceladoValor": 1092.81
+                        },
+                        {
+                                    "id": 995,
+                                    "data": "2027-02-15",
+                                    "desc": "Financiamento 99Pay - Parcela Mar",
+                                    "cartao": "99Pay",
+                                    "valor": 1092.81,
+                                    "parcelas": 1,
+                                    "parceladoValor": 1092.81
+                        },
+                        {
+                                    "id": 996,
+                                    "data": "2027-03-15",
+                                    "desc": "Financiamento 99Pay - Parcela Abr",
+                                    "cartao": "99Pay",
+                                    "valor": 1092.81,
+                                    "parcelas": 1,
+                                    "parceladoValor": 1092.81
+                        },
+                        {
+                                    "id": 802,
+                                    "data": "2026-11-05",
+                                    "desc": "Pix para o professor Durval - Dez",
+                                    "cartao": "Natação",
+                                    "valor": 120.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 120.0
+                        },
+                        {
+                                    "id": 803,
+                                    "data": "2026-12-05",
+                                    "desc": "Pix para o professor Durval - Jan",
+                                    "cartao": "Natação",
+                                    "valor": 120.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 120.0
+                        },
+                        {
+                                    "id": 804,
+                                    "data": "2027-01-05",
+                                    "desc": "Pix para o professor Durval - Fev",
+                                    "cartao": "Natação",
+                                    "valor": 120.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 120.0
+                        },
+                        {
+                                    "id": 805,
+                                    "data": "2027-02-05",
+                                    "desc": "Pix para o professor Durval - Mar",
+                                    "cartao": "Natação",
+                                    "valor": 120.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 120.0
+                        },
+                        {
+                                    "id": 806,
+                                    "data": "2027-03-05",
+                                    "desc": "Pix para o professor Durval - Abr",
+                                    "cartao": "Natação",
+                                    "valor": 120.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 120.0
+                        },
+                        {
+                                    "id": 807,
+                                    "data": "2027-04-05",
+                                    "desc": "Pix para o professor Durval - Mai",
+                                    "cartao": "Natação",
+                                    "valor": 120.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 120.0
+                        },
+                        {
+                                    "id": 808,
+                                    "data": "2027-05-05",
+                                    "desc": "Pix para o professor Durval - Jun",
+                                    "cartao": "Natação",
+                                    "valor": 120.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 120.0
+                        },
+                        {
+                                    "id": 702,
+                                    "data": "2026-11-15",
+                                    "desc": "CMT I Andrielly - Mensalidade Dez",
+                                    "cartao": "CMT I Andrielly",
+                                    "valor": 126.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 126.0
+                        },
+                        {
+                                    "id": 711,
+                                    "data": "2026-11-15",
+                                    "desc": "CMT I Guilherme (1) - Dez",
+                                    "cartao": "CMT I Guilherme",
+                                    "valor": 126.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 126.0
+                        },
+                        {
+                                    "id": 713,
+                                    "data": "2026-11-15",
+                                    "desc": "CMT I Guilherme (2) - Dez",
+                                    "cartao": "CMT I Guilherme",
+                                    "valor": 190.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 190.0
+                        },
+                        {
+                                    "id": 5000,
+                                    "data": "2026-11-05",
+                                    "desc": "Clroanu*Clroanuflex - Parcela 1/12",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 418.8,
+                                    "parcelas": 12,
+                                    "parceladoValor": 34.9
+                        },
+                        {
+                                    "id": 5001,
+                                    "data": "2026-11-05",
+                                    "desc": "Pix no Crédito - NEXORA SOLUÇÕES EMPRESARIAIS - 1/2",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 20.98,
+                                    "parcelas": 2,
+                                    "parceladoValor": 10.49
+                        },
+                        {
+                                    "id": 5002,
+                                    "data": "2026-11-05",
+                                    "desc": "Pix no Crédito - PAYTRIX SOLUTIONS LTDA",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 10.27,
+                                    "parcelas": 1,
+                                    "parceladoValor": 10.27
+                        },
+                        {
+                                    "id": 5003,
+                                    "data": "2026-11-05",
+                                    "desc": "Farmacia Pag*Paguemeno - Parcela 1/5",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 313.65,
+                                    "parcelas": 5,
+                                    "parceladoValor": 62.73
+                        },
+                        {
+                                    "id": 5004,
+                                    "data": "2026-11-05",
+                                    "desc": "Boleto no Crédito - AEDPMFCMT - 1/2",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 134.9,
+                                    "parcelas": 2,
+                                    "parceladoValor": 67.45
+                        },
+                        {
+                                    "id": 5005,
+                                    "data": "2026-11-05",
+                                    "desc": "Raia Drogasil - Parcela 1/3",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 135.78,
+                                    "parcelas": 3,
+                                    "parceladoValor": 45.26
+                        },
+                        {
+                                    "id": 5006,
+                                    "data": "2026-11-05",
+                                    "desc": "Raia Drogasil",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 398.76,
+                                    "parcelas": 1,
+                                    "parceladoValor": 398.76
+                        },
+                        {
+                                    "id": 5007,
+                                    "data": "2026-11-05",
+                                    "desc": "Pix no Crédito - Neudson Vagno Costa - 1/2",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 875.64,
+                                    "parcelas": 2,
+                                    "parceladoValor": 437.82
+                        },
+                        {
+                                    "id": 5008,
+                                    "data": "2026-11-05",
+                                    "desc": "Facial - Parcela 3/3",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 86.66,
+                                    "parcelas": 1,
+                                    "parceladoValor": 86.66
+                        },
+                        {
+                                    "id": 5009,
+                                    "data": "2026-11-05",
+                                    "desc": "Raia Drogasil - Parcela 3/3",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 111.26,
+                                    "parcelas": 1,
+                                    "parceladoValor": 111.26
+                        },
+                        {
+                                    "id": 5010,
+                                    "data": "2026-11-05",
+                                    "desc": "Mlp*Magalu-Bumper Maga - Parcela 5/5",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 143.97,
+                                    "parcelas": 1,
+                                    "parceladoValor": 143.97
+                        },
+                        {
+                                    "id": 5011,
+                                    "data": "2026-11-05",
+                                    "desc": "Htm*Vitoria Fernandes - Parcela 3/12",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 40.6,
+                                    "parcelas": 10,
+                                    "parceladoValor": 4.06
+                        },
+                        {
+                                    "id": 5012,
+                                    "data": "2026-11-05",
+                                    "desc": "Htm*Vitoria Fernandes - Parcela 3/4",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 7.8,
+                                    "parcelas": 2,
+                                    "parceladoValor": 3.9
+                        },
+                        {
+                                    "id": 5013,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Lojafigueiredo - Parcela 3/4",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 23.5,
+                                    "parcelas": 2,
+                                    "parceladoValor": 11.75
+                        },
+                        {
+                                    "id": 5014,
+                                    "data": "2026-11-05",
+                                    "desc": "Amazonmktplc*Ajrcomerc - Parcela 5/6",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 64.96,
+                                    "parcelas": 2,
+                                    "parceladoValor": 32.48
+                        },
+                        {
+                                    "id": 5015,
+                                    "data": "2026-11-05",
+                                    "desc": "Amazonmktplc*Eromanovs - Parcela 2/5",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 140.8,
+                                    "parcelas": 4,
+                                    "parceladoValor": 35.2
+                        },
+                        {
+                                    "id": 5016,
+                                    "data": "2026-11-05",
+                                    "desc": "Extrafarma C*Paguemeno - Parcela 2/5",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 260.76,
+                                    "parcelas": 4,
+                                    "parceladoValor": 65.19
+                        },
+                        {
+                                    "id": 5017,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Susek - Parcela 2/2",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 14.99,
+                                    "parcelas": 1,
+                                    "parceladoValor": 14.99
+                        },
+                        {
+                                    "id": 5018,
+                                    "data": "2026-11-05",
+                                    "desc": "Kvn*Metodo Hftc - Parcela 9/12",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 80.76,
+                                    "parcelas": 4,
+                                    "parceladoValor": 20.19
+                        },
+                        {
+                                    "id": 5019,
+                                    "data": "2026-11-05",
+                                    "desc": "Htm*Cleisson Rocha - Parcela 12/12",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 92.45,
+                                    "parcelas": 1,
+                                    "parceladoValor": 92.45
+                        },
+                        {
+                                    "id": 5020,
+                                    "data": "2026-11-05",
+                                    "desc": "Pagamento recebido",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": -996.28,
+                                    "parcelas": 1,
+                                    "parceladoValor": -996.28
+                        },
+                        {
+                                    "id": 5021,
+                                    "data": "2026-11-05",
+                                    "desc": "IOF por fatura atrasada",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 3.88,
+                                    "parcelas": 1,
+                                    "parceladoValor": 3.88
+                        },
+                        {
+                                    "id": 5022,
+                                    "data": "2026-11-05",
+                                    "desc": "Multa por fatura atrasada",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 20.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 20.0
+                        },
+                        {
+                                    "id": 5023,
+                                    "data": "2026-11-05",
+                                    "desc": "Valor pendente do mês anterior",
+                                    "cartao": "Nubank Neudson",
+                                    "valor": 996.27,
+                                    "parcelas": 1,
+                                    "parceladoValor": 996.27
+                        },
+                        {
+                                    "id": 5024,
+                                    "data": "2026-11-05",
+                                    "desc": "Google Google One 14m (Fixa)",
+                                    "cartao": "Cartão Recarga PAY",
+                                    "valor": 49.95,
+                                    "parcelas": 5,
+                                    "parceladoValor": 9.99
+                        },
+                        {
+                                    "id": 5025,
+                                    "data": "2026-11-05",
+                                    "desc": "Pg Supertroco",
+                                    "cartao": "Cartão Recarga PAY",
+                                    "valor": 18.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 18.0
+                        },
+                        {
+                                    "id": 5026,
+                                    "data": "2026-11-05",
+                                    "desc": "Recargapay Neudsonvagn",
+                                    "cartao": "Cartão Recarga PAY",
+                                    "valor": 2538.7,
+                                    "parcelas": 1,
+                                    "parceladoValor": 2538.7
+                        },
+                        {
+                                    "id": 5027,
+                                    "data": "2026-11-05",
+                                    "desc": "Google Amazon Shoppin",
+                                    "cartao": "Cartão Recarga PAY",
+                                    "valor": 19.9,
+                                    "parcelas": 1,
+                                    "parceladoValor": 19.9
+                        },
+                        {
+                                    "id": 5028,
+                                    "data": "2026-11-05",
+                                    "desc": "Claro Flex (Fixa)",
+                                    "cartao": "Cartão Recarga PAY",
+                                    "valor": 174.95,
+                                    "parcelas": 5,
+                                    "parceladoValor": 34.99
+                        },
+                        {
+                                    "id": 5029,
+                                    "data": "2026-11-05",
+                                    "desc": "Pg Nio Fibra (Fixa)",
+                                    "cartao": "Cartão Recarga PAY",
+                                    "valor": 89.9,
+                                    "parcelas": 1,
+                                    "parceladoValor": 89.9
+                        },
+                        {
+                                    "id": 5030,
+                                    "data": "2026-11-05",
+                                    "desc": "Farmacias Pa Pagu... 2/3",
+                                    "cartao": "Cartão Recarga PAY",
+                                    "valor": 119.04,
+                                    "parcelas": 2,
+                                    "parceladoValor": 59.52
+                        },
+                        {
+                                    "id": 5031,
+                                    "data": "2026-11-05",
+                                    "desc": "Recargapay Neud... 5/9",
+                                    "cartao": "Cartão Recarga PAY",
+                                    "valor": 1069.45,
+                                    "parcelas": 5,
+                                    "parceladoValor": 213.89
+                        },
+                        {
+                                    "id": 5032,
+                                    "data": "2026-11-05",
+                                    "desc": "Amazonmktplc Fa... 5/5",
+                                    "cartao": "Cartão Recarga PAY",
+                                    "valor": 33.12,
+                                    "parcelas": 1,
+                                    "parceladoValor": 33.12
+                        },
+                        {
+                                    "id": 5033,
+                                    "data": "2026-11-05",
+                                    "desc": "Casasbahiacom 11/12",
+                                    "cartao": "Cartão Recarga PAY",
+                                    "valor": 93.16,
+                                    "parcelas": 2,
+                                    "parceladoValor": 46.58
+                        },
+                        {
+                                    "id": 5034,
+                                    "data": "2026-11-05",
+                                    "desc": "Fatura Mercado Pago App (Consolidado Revisado) (2026-DEZ a 2026-DEZ)",
+                                    "cartao": "Mercado Pago",
+                                    "valor": 1985.65,
+                                    "parcelas": 1,
+                                    "parceladoValor": 1985.65
+                        },
+                        {
+                                    "id": 5035,
+                                    "data": "2026-12-05",
+                                    "desc": "Fatura Mercado Pago App (Consolidado Revisado) (2027-JAN a 2027-JAN)",
+                                    "cartao": "Mercado Pago",
+                                    "valor": 747.32,
+                                    "parcelas": 1,
+                                    "parceladoValor": 747.32
+                        },
+                        {
+                                    "id": 5036,
+                                    "data": "2027-01-05",
+                                    "desc": "Fatura Mercado Pago App (Consolidado Revisado) (2027-FEV a 2027-FEV)",
+                                    "cartao": "Mercado Pago",
+                                    "valor": 319.03,
+                                    "parcelas": 1,
+                                    "parceladoValor": 319.03
+                        },
+                        {
+                                    "id": 5037,
+                                    "data": "2027-02-05",
+                                    "desc": "Fatura Mercado Pago App (Consolidado Revisado) (2027-MAR a 2027-ABR)",
+                                    "cartao": "Mercado Pago",
+                                    "valor": 58.54,
+                                    "parcelas": 2,
+                                    "parceladoValor": 29.27
+                        },
+                        {
+                                    "id": 5038,
+                                    "data": "2026-11-05",
+                                    "desc": "Fatura Mercado Pago Edilene (Dez/Jan + Parcelas Shopee) (2026-DEZ a 2026-DEZ)",
+                                    "cartao": "Mercado Pago Edilene",
+                                    "valor": 48.29,
+                                    "parcelas": 1,
+                                    "parceladoValor": 48.29
+                        },
+                        {
+                                    "id": 5039,
+                                    "data": "2026-12-05",
+                                    "desc": "Fatura Mercado Pago Edilene (Dez/Jan + Parcelas Shopee) (2027-JAN a 2027-JAN)",
+                                    "cartao": "Mercado Pago Edilene",
+                                    "valor": 35.22,
+                                    "parcelas": 1,
+                                    "parceladoValor": 35.22
+                        },
+                        {
+                                    "id": 5040,
+                                    "data": "2027-01-05",
+                                    "desc": "Fatura Mercado Pago Edilene (Dez/Jan + Parcelas Shopee) (2027-FEV a 2027-MAR)",
+                                    "cartao": "Mercado Pago Edilene",
+                                    "valor": 29.82,
+                                    "parcelas": 2,
+                                    "parceladoValor": 14.91
+                        },
+                        {
+                                    "id": 5041,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Lorealparisloj",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 33.68,
+                                    "parcelas": 1,
+                                    "parceladoValor": 33.68
+                        },
+                        {
+                                    "id": 5042,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Simplyhomepr",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 13.55,
+                                    "parcelas": 1,
+                                    "parceladoValor": 13.55
+                        },
+                        {
+                                    "id": 5043,
+                                    "data": "2026-11-05",
+                                    "desc": "Estorno de compra (Shopee)",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": -11.95,
+                                    "parcelas": 1,
+                                    "parceladoValor": -11.95
+                        },
+                        {
+                                    "id": 5044,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Moldcor",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 4.7,
+                                    "parcelas": 1,
+                                    "parceladoValor": 4.7
+                        },
+                        {
+                                    "id": 5045,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Utilizoo",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 34.31,
+                                    "parcelas": 1,
+                                    "parceladoValor": 34.31
+                        },
+                        {
+                                    "id": 5046,
+                                    "data": "2026-11-05",
+                                    "desc": "Claro *98984067717",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 36.9,
+                                    "parcelas": 1,
+                                    "parceladoValor": 36.9
+                        },
+                        {
+                                    "id": 5047,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Kivendemodasli",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 11.25,
+                                    "parcelas": 1,
+                                    "parceladoValor": 11.25
+                        },
+                        {
+                                    "id": 5048,
+                                    "data": "2026-11-05",
+                                    "desc": "Estorno de compra (Shopee)",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": -7.83,
+                                    "parcelas": 1,
+                                    "parceladoValor": -7.83
+                        },
+                        {
+                                    "id": 5049,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Marsilatacadis",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 11.99,
+                                    "parcelas": 1,
+                                    "parceladoValor": 11.99
+                        },
+                        {
+                                    "id": 5050,
+                                    "data": "2026-11-05",
+                                    "desc": "Abastec*Abastece Ai",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 100.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 100.0
+                        },
+                        {
+                                    "id": 5051,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Veluie",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 7.83,
+                                    "parcelas": 1,
+                                    "parceladoValor": 7.83
+                        },
+                        {
+                                    "id": 5052,
+                                    "data": "2026-11-05",
+                                    "desc": "Mp *Paodailha",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 4.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 4.0
+                        },
+                        {
+                                    "id": 5053,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Shpstecnologia",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 21.36,
+                                    "parcelas": 1,
+                                    "parceladoValor": 21.36
+                        },
+                        {
+                                    "id": 5054,
+                                    "data": "2026-11-05",
+                                    "desc": "Mix Mateus - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 132.02,
+                                    "parcelas": 2,
+                                    "parceladoValor": 66.01
+                        },
+                        {
+                                    "id": 5055,
+                                    "data": "2026-11-05",
+                                    "desc": "Mix Mateus",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 17.06,
+                                    "parcelas": 1,
+                                    "parceladoValor": 17.06
+                        },
+                        {
+                                    "id": 5056,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee*Shpstecnologiae - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 109.66,
+                                    "parcelas": 2,
+                                    "parceladoValor": 54.83
+                        },
+                        {
+                                    "id": 5057,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Susek - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 17.32,
+                                    "parcelas": 2,
+                                    "parceladoValor": 8.66
+                        },
+                        {
+                                    "id": 5058,
+                                    "data": "2026-11-05",
+                                    "desc": "Mp *Frutarianssen",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 4.4,
+                                    "parcelas": 1,
+                                    "parceladoValor": 4.4
+                        },
+                        {
+                                    "id": 5059,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Niveaoficial - Parcela 1/3",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 60.96,
+                                    "parcelas": 3,
+                                    "parceladoValor": 20.32
+                        },
+                        {
+                                    "id": 5060,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Bodyactionofic - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 35.9,
+                                    "parcelas": 2,
+                                    "parceladoValor": 17.95
+                        },
+                        {
+                                    "id": 5061,
+                                    "data": "2026-11-05",
+                                    "desc": "Jim.Com* Paula de Ang",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 3.5,
+                                    "parcelas": 1,
+                                    "parceladoValor": 3.5
+                        },
+                        {
+                                    "id": 5062,
+                                    "data": "2026-11-05",
+                                    "desc": "Mp *Paodailha",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 3.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 3.0
+                        },
+                        {
+                                    "id": 5063,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Danacosmeticos",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 12.15,
+                                    "parcelas": 1,
+                                    "parceladoValor": 12.15
+                        },
+                        {
+                                    "id": 5064,
+                                    "data": "2026-11-05",
+                                    "desc": "Mix Mateus",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 7.99,
+                                    "parcelas": 1,
+                                    "parceladoValor": 7.99
+                        },
+                        {
+                                    "id": 5065,
+                                    "data": "2026-11-05",
+                                    "desc": "Mix Mateus - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 59.54,
+                                    "parcelas": 2,
+                                    "parceladoValor": 29.77
+                        },
+                        {
+                                    "id": 5066,
+                                    "data": "2026-11-05",
+                                    "desc": "Pix no Crédito - Neudson Vagno Costa - 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 1059.44,
+                                    "parcelas": 2,
+                                    "parceladoValor": 529.72
+                        },
+                        {
+                                    "id": 5067,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Soldiersnutrit",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 21.71,
+                                    "parcelas": 1,
+                                    "parceladoValor": 21.71
+                        },
+                        {
+                                    "id": 5068,
+                                    "data": "2026-11-05",
+                                    "desc": "Mp *Paodailha",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 4.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 4.0
+                        },
+                        {
+                                    "id": 5069,
+                                    "data": "2026-11-05",
+                                    "desc": "Estorno de compra (Shopee)",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": -9.55,
+                                    "parcelas": 1,
+                                    "parceladoValor": -9.55
+                        },
+                        {
+                                    "id": 5070,
+                                    "data": "2026-11-05",
+                                    "desc": "Jim.Com* Paula de Ang",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 7.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 7.0
+                        },
+                        {
+                                    "id": 5071,
+                                    "data": "2026-11-05",
+                                    "desc": "Farmaciapopular",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 41.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 41.0
+                        },
+                        {
+                                    "id": 5072,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Compreicalcado - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 37.5,
+                                    "parcelas": 2,
+                                    "parceladoValor": 18.75
+                        },
+                        {
+                                    "id": 5073,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Ppfit",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 7.49,
+                                    "parcelas": 1,
+                                    "parceladoValor": 7.49
+                        },
+                        {
+                                    "id": 5074,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Niveaoficial - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 73.48,
+                                    "parcelas": 2,
+                                    "parceladoValor": 36.74
+                        },
+                        {
+                                    "id": 5075,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Salonline - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 14.18,
+                                    "parcelas": 2,
+                                    "parceladoValor": 7.09
+                        },
+                        {
+                                    "id": 5076,
+                                    "data": "2026-11-05",
+                                    "desc": "Mix Mateus - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 190.22,
+                                    "parcelas": 2,
+                                    "parceladoValor": 95.11
+                        },
+                        {
+                                    "id": 5077,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Ppfit",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 6.95,
+                                    "parcelas": 1,
+                                    "parceladoValor": 6.95
+                        },
+                        {
+                                    "id": 5078,
+                                    "data": "2026-11-05",
+                                    "desc": "Limite convertido em saldo na sua conta do Nubank",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 1080.96,
+                                    "parcelas": 1,
+                                    "parceladoValor": 1080.96
+                        },
+                        {
+                                    "id": 5079,
+                                    "data": "2026-11-05",
+                                    "desc": "Limite convertido em saldo na sua conta do Nubank",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 1625.74,
+                                    "parcelas": 1,
+                                    "parceladoValor": 1625.74
+                        },
+                        {
+                                    "id": 5080,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Fashiononlinel",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 13.2,
+                                    "parcelas": 1,
+                                    "parceladoValor": 13.2
+                        },
+                        {
+                                    "id": 5081,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Terravitta",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 8.79,
+                                    "parcelas": 1,
+                                    "parceladoValor": 8.79
+                        },
+                        {
+                                    "id": 5082,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Salonline - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 19.1,
+                                    "parcelas": 2,
+                                    "parceladoValor": 9.55
+                        },
+                        {
+                                    "id": 5083,
+                                    "data": "2026-11-05",
+                                    "desc": "Boleto no Crédito - MERCADO PAGO INSTITUICAO DE PAGAMENTO LTDA",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 54.67,
+                                    "parcelas": 1,
+                                    "parceladoValor": 54.67
+                        },
+                        {
+                                    "id": 5084,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Shoopstoreon - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 20.46,
+                                    "parcelas": 2,
+                                    "parceladoValor": 10.23
+                        },
+                        {
+                                    "id": 5085,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Ppfit",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 9.97,
+                                    "parcelas": 1,
+                                    "parceladoValor": 9.97
+                        },
+                        {
+                                    "id": 5086,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Inovakids - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 48.64,
+                                    "parcelas": 2,
+                                    "parceladoValor": 24.32
+                        },
+                        {
+                                    "id": 5087,
+                                    "data": "2026-11-05",
+                                    "desc": "Mix Mateus - Parcela 1/3",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 74.16,
+                                    "parcelas": 3,
+                                    "parceladoValor": 24.72
+                        },
+                        {
+                                    "id": 5088,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Ppfit",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 9.98,
+                                    "parcelas": 1,
+                                    "parceladoValor": 9.98
+                        },
+                        {
+                                    "id": 5089,
+                                    "data": "2026-11-05",
+                                    "desc": "Estorno de compra (Shopee)",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": -10.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": -10.0
+                        },
+                        {
+                                    "id": 5090,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Daelikids - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 37.34,
+                                    "parcelas": 2,
+                                    "parceladoValor": 18.67
+                        },
+                        {
+                                    "id": 5091,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Modaandrulis - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 30.3,
+                                    "parcelas": 2,
+                                    "parceladoValor": 15.15
+                        },
+                        {
+                                    "id": 5092,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Liabya",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 8.91,
+                                    "parcelas": 1,
+                                    "parceladoValor": 8.91
+                        },
+                        {
+                                    "id": 5093,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Liabya - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 27.82,
+                                    "parcelas": 2,
+                                    "parceladoValor": 13.91
+                        },
+                        {
+                                    "id": 5094,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Lumiss",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 28.69,
+                                    "parcelas": 1,
+                                    "parceladoValor": 28.69
+                        },
+                        {
+                                    "id": 5095,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Drogariaaraujo",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 11.95,
+                                    "parcelas": 1,
+                                    "parceladoValor": 11.95
+                        },
+                        {
+                                    "id": 5096,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Tudonobre - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 64.58,
+                                    "parcelas": 2,
+                                    "parceladoValor": 32.29
+                        },
+                        {
+                                    "id": 5097,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Intimusoficial - Parcela 1/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 31.88,
+                                    "parcelas": 2,
+                                    "parceladoValor": 15.94
+                        },
+                        {
+                                    "id": 5098,
+                                    "data": "2026-11-05",
+                                    "desc": "Digas - Parcela 2/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 65.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 65.0
+                        },
+                        {
+                                    "id": 5099,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Poloinfantilst - Parcela 2/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 9.6,
+                                    "parcelas": 1,
+                                    "parceladoValor": 9.6
+                        },
+                        {
+                                    "id": 5100,
+                                    "data": "2026-11-05",
+                                    "desc": "Mix Mateus - Parcela 3/3",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 140.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 140.0
+                        },
+                        {
+                                    "id": 5101,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Dafabricasuple - Parcela 2/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 17.66,
+                                    "parcelas": 1,
+                                    "parceladoValor": 17.66
+                        },
+                        {
+                                    "id": 5102,
+                                    "data": "2026-11-05",
+                                    "desc": "Mp *Comercialns - Parcela 2/5",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 2240.0,
+                                    "parcelas": 4,
+                                    "parceladoValor": 560.0
+                        },
+                        {
+                                    "id": 5103,
+                                    "data": "2026-11-05",
+                                    "desc": "Mp *Oticascarol - Parcela 5/10",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 1140.0,
+                                    "parcelas": 6,
+                                    "parceladoValor": 190.0
+                        },
+                        {
+                                    "id": 5104,
+                                    "data": "2026-11-05",
+                                    "desc": "Transportes Boa Espera - Parcela 6/6",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 70.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 70.0
+                        },
+                        {
+                                    "id": 5105,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee*Jeanjacksoncord - Parcela 2/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 13.05,
+                                    "parcelas": 1,
+                                    "parceladoValor": 13.05
+                        },
+                        {
+                                    "id": 5106,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Lindapluslinge",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 25.5,
+                                    "parcelas": 1,
+                                    "parceladoValor": 25.5
+                        },
+                        {
+                                    "id": 5107,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Manphi - Parcela 2/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 10.97,
+                                    "parcelas": 1,
+                                    "parceladoValor": 10.97
+                        },
+                        {
+                                    "id": 5108,
+                                    "data": "2026-11-05",
+                                    "desc": "Tiago Marques Silva - Parcela 8/8",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 193.75,
+                                    "parcelas": 1,
+                                    "parceladoValor": 193.75
+                        },
+                        {
+                                    "id": 5109,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Ppfit",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 7.99,
+                                    "parcelas": 1,
+                                    "parceladoValor": 7.99
+                        },
+                        {
+                                    "id": 5110,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Poloinfantilst - Parcela 2/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 15.09,
+                                    "parcelas": 1,
+                                    "parceladoValor": 15.09
+                        },
+                        {
+                                    "id": 5111,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Poloinfantilst - Parcela 2/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 32.38,
+                                    "parcelas": 1,
+                                    "parceladoValor": 32.38
+                        },
+                        {
+                                    "id": 5112,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Toplojajero - Parcela 2/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 10.82,
+                                    "parcelas": 1,
+                                    "parceladoValor": 10.82
+                        },
+                        {
+                                    "id": 5113,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Sarawhannie - Parcela 2/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 18.01,
+                                    "parcelas": 1,
+                                    "parceladoValor": 18.01
+                        },
+                        {
+                                    "id": 5114,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Vitaoalimentos - Parcela 2/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 14.0,
+                                    "parcelas": 1,
+                                    "parceladoValor": 14.0
+                        },
+                        {
+                                    "id": 5115,
+                                    "data": "2026-11-05",
+                                    "desc": "Shopee *Espacokids - Parcela 2/2",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 11.99,
+                                    "parcelas": 1,
+                                    "parceladoValor": 11.99
+                        },
+                        {
+                                    "id": 5116,
+                                    "data": "2026-11-05",
+                                    "desc": "R F Pacheco Oliveira C - Parcela 5/10",
+                                    "cartao": "Nubank Edilene",
+                                    "valor": 1800.0,
+                                    "parcelas": 6,
+                                    "parceladoValor": 300.0
+                        }
             ]
-        };
+};
 
         let appState = JSON.parse(localStorage.getItem('DESPAG_STATE'));
 
-        if (!appState || appState.versaoBase !== "5.1-LIMPEZA-NOV") {
+        if (!appState || appState.versaoBase !== "5.2-CONSOLIDADO-2026-2027") {
             let estadoLimpo = JSON.parse(JSON.stringify(estadoPadrao));
 
             if (appState) {
