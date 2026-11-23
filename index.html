@@ -4,63 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DESPAG | Gerenciamento Unificado de Cartões & Finanças</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --bg-card-hover: #263349;
-            --text-main: #f8fafc;
+            --bg-dark: #090d16;
+            --bg-card: #111827;
+            --bg-card-hover: #1a2234;
+            --text-main: #f1f5f9;
             --text-muted: #94a3b8;
             --accent-emerald: #10b981;
             --accent-emerald-glow: rgba(16, 185, 129, 0.25);
-            --accent-blue: #38bdf8;
+            --accent-blue: #0ea5e9;
             --accent-amber: #f59e0b;
             --accent-rose: #f43f5e;
             --accent-purple: #a855f7;
-            --border-color: #334155;
+            --border-color: #1f2937;
             --radius-md: 12px;
             --radius-lg: 16px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Share Tech Mono', monospace; }
+        body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; letter-spacing: 0.02em; }
 
         /* SIDEBAR */
-        .sidebar { width: 265px; background-color: #0b1120; border-right: 1px solid var(--border-color); padding: 24px 16px; display: flex; flex-direction: column; justify-content: space-between; position: fixed; height: 100vh; z-index: 50; transition: transform 0.3s ease; }
+        .sidebar { width: 265px; background-color: #0d1322; border-right: 1px solid var(--border-color); padding: 24px 16px; display: flex; flex-direction: column; justify-content: space-between; position: fixed; height: 100vh; z-index: 50; transition: transform 0.3s ease; }
         .brand { display: flex; align-items: center; gap: 12px; padding: 0 8px 24px 8px; border-bottom: 1px solid var(--border-color); margin-bottom: 24px; }
-        .brand-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent-emerald), #059669); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px var(--accent-emerald-glow); font-weight: 800; font-size: 1.2rem; color: white; }
-        .brand h1 { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; }
-        .brand span { font-size: 0.72rem; color: var(--accent-emerald); display: block; font-weight: 600; }
+        .brand-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent-emerald), #059669); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px var(--accent-emerald-glow); font-weight: 700; font-size: 1.25rem; color: white; }
+        .brand h1 { font-size: 1.45rem; font-weight: 700; letter-spacing: 1px; }
+        .brand span { font-size: 0.78rem; color: var(--accent-emerald); display: block; }
 
         .nav-menu { display: flex; flex-direction: column; gap: 6px; flex: 1; overflow-y: auto; }
-        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: var(--radius-md); color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.88rem; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: var(--radius-md); color: var(--text-muted); text-decoration: none; font-size: 0.92rem; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; text-transform: uppercase; }
         .nav-item:hover { background-color: var(--bg-card); color: var(--text-main); border-color: var(--accent-emerald); }
         .nav-item.active { background: linear-gradient(90deg, rgba(16, 185, 129, 0.15), transparent); color: var(--accent-emerald); border-left: 3px solid var(--accent-emerald); }
 
         .sidebar-footer { padding-top: 16px; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 8px; }
-        .btn-sync { width: 100%; background-color: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 10px; border-radius: var(--radius-md); font-size: 0.82rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
+        .btn-sync { width: 100%; background-color: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 10px; border-radius: var(--radius-md); font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; text-transform: uppercase; }
         .btn-sync:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
 
         /* MAIN CONTENT */
         .main-content { flex: 1; margin-left: 265px; padding: 28px 32px; max-width: calc(100vw - 265px); }
         .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
-        .page-title h2 { font-size: 1.65rem; font-weight: 800; }
-        .page-title p { color: var(--text-muted); font-size: 0.88rem; margin-top: 4px; }
+        .page-title h2 { font-size: 1.7rem; font-weight: 700; text-transform: uppercase; }
+        .page-title p { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
 
         .month-selector-box { display: flex; align-items: center; gap: 12px; background-color: var(--bg-card); padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color); }
-        .month-selector-box select { background: transparent; border: none; color: var(--text-main); font-weight: 700; font-size: 0.95rem; cursor: pointer; outline: none; }
+        .month-selector-box select { background: transparent; border: none; color: var(--text-main); font-size: 1rem; cursor: pointer; outline: none; text-transform: uppercase; }
         .month-selector-box select option { background-color: var(--bg-dark); }
 
         /* CARDS KPI */
-        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 24px; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); gap: 18px; margin-bottom: 24px; }
         .kpi-card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px; transition: all 0.25s; position: relative; overflow: hidden; }
-        .kpi-card:hover { transform: translateY(-2px); border-color: var(--accent-emerald); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); }
-        .kpi-header { display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin-bottom: 10px; }
-        .kpi-value { font-size: 1.55rem; font-weight: 800; letter-spacing: -0.5px; }
-        .kpi-sub { font-size: 0.75rem; margin-top: 8px; display: flex; align-items: center; gap: 4px; color: var(--text-muted); }
+        .kpi-card:hover { transform: translateY(-2px); border-color: var(--accent-blue); box-shadow: 0 0 20px rgba(14, 165, 233, 0.25); }
+        .kpi-header { display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.84rem; margin-bottom: 10px; text-transform: uppercase; }
+        .kpi-value { font-size: 1.75rem; font-weight: 700; }
+        .kpi-sub { font-size: 0.78rem; margin-top: 8px; display: flex; align-items: center; gap: 4px; color: var(--text-muted); text-transform: uppercase; }
 
         .text-emerald { color: var(--accent-emerald); }
         .text-blue { color: var(--accent-blue); }
@@ -73,38 +75,55 @@
         .tab-panel.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-        .card-box { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 22px; margin-bottom: 24px; }
-        .card-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 12px; }
-        .card-box-title { font-size: 1.08rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .card-box { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 22px; margin-bottom: 24px; transition: border-color 0.25s; }
+        .card-box:hover { border-color: rgba(14, 165, 233, 0.45); }
+        .card-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 14px; }
+        .card-box-title { font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
 
         /* BUTTONS */
-        .btn { padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 0.84rem; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
-        .btn-primary { background-color: var(--accent-emerald); color: #022c22; }
+        .btn { padding: 10px 16px; border-radius: 10px; font-size: 0.88rem; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; text-transform: uppercase; }
+        .btn-primary { background-color: var(--accent-emerald); color: #022c22; font-weight: 700; }
         .btn-primary:hover { background-color: #059669; color: white; }
-        .btn-blue { background-color: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.3); }
-        .btn-blue:hover { background-color: var(--accent-blue); color: #0f172a; }
-        .btn-amber { background-color: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
-        .btn-amber:hover { background-color: var(--accent-amber); color: #0f172a; }
-        .btn-danger { background-color: rgba(244, 63, 94, 0.15); color: var(--accent-rose); border: 1px solid rgba(244, 63, 94, 0.3); }
+        .btn-blue { background-color: rgba(14, 165, 233, 0.15); color: var(--accent-blue); border: 1px solid rgba(14, 165, 233, 0.35); }
+        .btn-blue:hover { background-color: var(--accent-blue); color: #090d16; }
+        .btn-amber { background-color: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.35); }
+        .btn-amber:hover { background-color: var(--accent-amber); color: #090d16; }
+        .btn-danger { background-color: rgba(244, 63, 94, 0.15); color: var(--accent-rose); border: 1px solid rgba(244, 63, 94, 0.35); }
         .btn-danger:hover { background-color: var(--accent-rose); color: white; }
-        .btn-sm { padding: 6px 10px; font-size: 0.78rem; border-radius: 8px; }
+        .btn-sm { padding: 6px 10px; font-size: 0.8rem; border-radius: 8px; }
 
         /* TABLES */
         .table-responsive { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { padding: 12px 14px; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); border-bottom: 1px solid var(--border-color); background-color: rgba(15, 23, 42, 0.4); white-space: nowrap; }
-        td { padding: 12px 14px; font-size: 0.86rem; border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
+        th { padding: 12px 14px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); border-bottom: 1px solid var(--border-color); background-color: rgba(9, 13, 22, 0.6); white-space: nowrap; }
+        td { padding: 12px 14px; font-size: 0.92rem; border-bottom: 1px solid rgba(31, 41, 55, 0.8); }
         tr:hover td { background-color: rgba(255, 255, 255, 0.02); }
 
-        .badge { padding: 4px 9px; border-radius: 999px; font-size: 0.71rem; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+        /* CHECKBOX CUSTOMIZADO ESTILO TERMINAL */
+        .chk-conta {
+            width: 19px;
+            height: 19px;
+            accent-color: var(--accent-emerald);
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .linha-paga td {
+            opacity: 0.55;
+        }
+        .valor-riscado {
+            text-decoration: line-through;
+            color: var(--text-muted) !important;
+        }
+
+        .badge { padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; text-transform: uppercase; }
         .badge-emerald { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
-        .badge-blue { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); }
+        .badge-blue { background: rgba(14, 165, 233, 0.15); color: var(--accent-blue); }
         .badge-amber { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
         .badge-rose { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); }
         .badge-purple { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
 
         /* PROGRESS BARS */
-        .progress-bg { width: 100%; height: 8px; background-color: #0f172a; border-radius: 99px; overflow: hidden; margin-top: 8px; }
+        .progress-bg { width: 100%; height: 8px; background-color: #090d16; border-radius: 99px; overflow: hidden; margin-top: 8px; }
         .progress-fill { height: 100%; border-radius: 99px; transition: width 0.4s ease; }
 
         /* CHARTS GRID */
@@ -119,32 +138,32 @@
         .cc-recarga { background: linear-gradient(135deg, #065f46, #059669); }
         .cc-mp { background: linear-gradient(135deg, #0369a1, #0284c7); }
         .cc-99 { background: linear-gradient(135deg, #b45309, #d97706); }
-        .cc-outro { background: linear-gradient(135deg, #334155, #475569); }
+        .cc-outro { background: linear-gradient(135deg, #1e293b, #334155); }
         .cc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
         .cc-chip { width: 34px; height: 24px; background: rgba(255,255,255,0.25); border-radius: 5px; }
 
         /* TERCEIROS DETALHADO */
-        .terceiro-group-card { background-color: rgba(15, 23, 42, 0.55); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+        .terceiro-group-card { background-color: rgba(9, 13, 22, 0.65); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
         .terceiro-group-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color); margin-bottom: 14px; }
         .parcelas-pills { display: flex; flex-wrap: wrap; gap: 8px; }
-        .parcela-pill { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 12px; font-size: 0.78rem; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.2s; }
+        .parcela-pill { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 12px; font-size: 0.82rem; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.2s; }
         .parcela-pill:hover { border-color: var(--accent-blue); }
         .parcela-pill.paga { border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.08); }
         .parcela-pill.mes-atual { box-shadow: 0 0 0 2px var(--accent-amber); }
 
         /* MODAL */
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(2, 6, 23, 0.82); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
         .modal-overlay.open { display: flex; }
         .modal-content { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); width: 100%; max-width: 580px; padding: 24px; max-height: 92vh; overflow-y: auto; }
         .form-group { margin-bottom: 14px; }
-        .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
-        .form-control { width: 100%; background-color: var(--bg-dark); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 12px; border-radius: 10px; font-size: 0.88rem; outline: none; }
+        .form-group label { display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
+        .form-control { width: 100%; background-color: var(--bg-dark); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 12px; border-radius: 10px; font-size: 0.92rem; outline: none; }
         .form-control:focus { border-color: var(--accent-emerald); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
 
         /* SIMULADOR */
-        .sim-result-box { background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1px solid var(--accent-emerald); border-radius: 14px; padding: 18px; margin-top: 16px; }
+        .sim-result-box { background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(14, 165, 233, 0.12)); border: 1px solid var(--accent-emerald); border-radius: 14px; padding: 18px; margin-top: 16px; }
         .preview-parcelas-box { background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; margin-top: 10px; max-height: 180px; overflow-y: auto; }
 
         /* MOBILE */
@@ -166,12 +185,12 @@
                 <div class="brand-icon">D$</div>
                 <div>
                     <h1>DESPAG</h1>
-                    <span>Gestão Integrada v5.3</span>
+                    <span>GESTÃO INTEGRADA v5.4</span>
                 </div>
             </div>
             <nav class="nav-menu">
                 <a class="nav-item active" onclick="switchTab('dashboard', this)"><i data-lucide="layout-dashboard" size="18"></i> Visão Geral & Balanço</a>
-                <a class="nav-item" onclick="switchTab('cartoes', this)"><i data-lucide="credit-card" size="18"></i> Cartões & Faturas</a>
+                <a class="nav-item" onclick="switchTab('cartoes', this)"><i data-lucide="credit-card" size="18"></i> Cartões & Contas</a>
                 <a class="nav-item" onclick="switchTab('lancamentos', this)"><i data-lucide="shopping-bag" size="18"></i> Lançamentos & Base</a>
                 <a class="nav-item" onclick="switchTab('terceiros', this)"><i data-lucide="users" size="18"></i> Terceiros & Empréstimos</a>
                 <a class="nav-item" onclick="switchTab('receitas', this)"><i data-lucide="wallet" size="18"></i> Minhas Receitas & Renda</a>
@@ -193,8 +212,8 @@
             <div style="display:flex; align-items:center; gap:12px;">
                 <button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')"><i data-lucide="menu"></i></button>
                 <div class="page-title">
-                    <h2 id="headerTitle">Visão Geral & Balanço</h2>
-                    <p>Controle consolidado de cartões, reembolsos detalhados e saldo líquido real</p>
+                    <h2 id="headerTitle">VISÃO GERAL & BALANÇO</h2>
+                    <p>CONTROLE CONSOLIDADO DE CARTÕES, CHECKLIST MENSAL E SALDO LÍQUIDO REAL</p>
                 </div>
             </div>
 
@@ -203,7 +222,7 @@
                     <i data-lucide="calendar" size="18" class="text-emerald"></i>
                     <select id="mesGlobal" onchange="atualizarTudo()"></select>
                 </div>
-                <button class="btn btn-blue" onclick="abrirModalTerceiro()"><i data-lucide="user-plus" size="17"></i> Novo Empréstimo Terceiro</button>
+                <button class="btn btn-blue" onclick="abrirModalTerceiro()"><i data-lucide="user-plus" size="17"></i> Novo Terceiro</button>
                 <button class="btn btn-primary" onclick="abrirModalLancamento()"><i data-lucide="plus-circle" size="17"></i> Nova Despesa</button>
             </div>
         </div>
@@ -213,40 +232,65 @@
             <div class="kpi-card">
                 <div class="kpi-header"><span>MINHA RENDA PRÓPRIA</span><i data-lucide="trending-up" size="18" class="text-emerald"></i></div>
                 <div class="kpi-value text-emerald" id="kpiRendaPropria">R$ 0,00</div>
-                <div class="kpi-sub">Salário, Proventos e Extras</div>
+                <div class="kpi-sub">SALÁRIO, PROVENTOS E EXTRAS</div>
             </div>
 
             <div class="kpi-card">
-                <div class="kpi-header"><span>TOTAL DAS FATURAS (BRUTO)</span><i data-lucide="credit-card" size="18" class="text-rose"></i></div>
+                <div class="kpi-header"><span>A PAGAR PENDENTE (MÊS)</span><i data-lucide="credit-card" size="18" class="text-rose"></i></div>
                 <div class="kpi-value text-rose" id="kpiFaturasBrutas">R$ 0,00</div>
-                <div class="kpi-sub" id="kpiSubCartoes">Soma consolidada dos cartões</div>
+                <div class="kpi-sub" id="kpiSubCartoes">SUBTRAI AO DAR CHECK NAS CONTAS</div>
             </div>
 
             <div class="kpi-card">
                 <div class="kpi-header"><span>REEMBOLSO TERCEIROS (MÊS)</span><i data-lucide="users" size="18" class="text-blue"></i></div>
                 <div class="kpi-value text-blue" id="kpiTerceiros">R$ 0,00</div>
-                <div class="kpi-sub" id="kpiSubTerceiros">0 parcelas a receber no mês</div>
+                <div class="kpi-sub" id="kpiSubTerceiros">0 PARCELAS A RECEBER NO MÊS</div>
             </div>
 
             <div class="kpi-card" style="border-color: rgba(16, 185, 129, 0.4);">
-                <div class="kpi-header"><span>CUSTO REAL MEU (LÍQUIDO)</span><i data-lucide="shield-check" size="18" class="text-amber"></i></div>
+                <div class="kpi-header"><span>CUSTO REAL MEU (PENDENTE)</span><i data-lucide="shield-check" size="18" class="text-amber"></i></div>
                 <div class="kpi-value text-amber" id="kpiCustoLiquido">R$ 0,00</div>
-                <div class="kpi-sub" id="kpiSaldoFinal">Saldo Livre: R$ 0,00</div>
+                <div class="kpi-sub" id="kpiSaldoFinal">SALDO LIVRE: R$ 0,00</div>
             </div>
         </div>
 
         <!-- ABA 1: DASHBOARD -->
         <div id="tab-dashboard" class="tab-panel active">
+
+            <!-- CHECKLIST FATURAS E CONTAS DO MÊS -->
+            <div class="card-box">
+                <div class="card-box-header">
+                    <div class="card-box-title"><i data-lucide="list-checks" size="20" class="text-blue"></i> FATURAS E CONTAS DO MÊS</div>
+                    <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                        <span class="badge badge-emerald" id="badgeTotalPagoMes">PAGO: R$ 0,00</span>
+                        <span class="badge badge-rose" id="badgeTotalRestanteMes">RESTANTE: R$ 0,00</span>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>CARTÃO / CONTA</th>
+                                <th>VALOR A PAGAR</th>
+                                <th>VENC.</th>
+                                <th style="text-align:center;">STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyChecklistContas"></tbody>
+                    </table>
+                </div>
+            </div>
+
             <div class="charts-grid">
                 <div class="card-box">
                     <div class="card-box-header">
-                        <div class="card-box-title"><i data-lucide="bar-chart-3" size="19" class="text-emerald"></i> Evolução Mensal: Fatura Total vs. Reembolso Terceiros vs. Custo Meu</div>
+                        <div class="card-box-title"><i data-lucide="bar-chart-3" size="19" class="text-emerald"></i> EVOLUÇÃO MENSAL: FATURA TOTAL VS. REEMBOLSO VS. CUSTO MEU</div>
                     </div>
                     <div style="height: 290px;"><canvas id="chartEvolucao"></canvas></div>
                 </div>
                 <div class="card-box">
                     <div class="card-box-header">
-                        <div class="card-box-title"><i data-lucide="pie-chart" size="19" class="text-blue"></i> Peso por Cartão no Mês</div>
+                        <div class="card-box-title"><i data-lucide="pie-chart" size="19" class="text-blue"></i> PESO POR CARTÃO / CONTA NO MÊS</div>
                     </div>
                     <div style="height: 290px;"><canvas id="chartCartoes"></canvas></div>
                 </div>
@@ -255,20 +299,20 @@
             <!-- RESUMO RÁPIDO DE TERCEIROS NO MÊS -->
             <div class="card-box">
                 <div class="card-box-header">
-                    <div class="card-box-title"><i data-lucide="user-check" size="19" class="text-blue"></i> Resumo de Terceiros no Mês Selecionado</div>
-                    <button class="btn btn-blue btn-sm" onclick="switchTab('terceiros', document.querySelectorAll('.nav-item')[3])">Gerenciar Todos os Empréstimos</button>
+                    <div class="card-box-title"><i data-lucide="user-check" size="19" class="text-blue"></i> RESUMO DE TERCEIROS NO MÊS SELECIONADO</div>
+                    <button class="btn btn-blue btn-sm" onclick="switchTab('terceiros', document.querySelectorAll('.nav-item')[3])">GERENCIAR TODOS OS EMPRÉSTIMOS</button>
                 </div>
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
-                                <th>Pessoa</th>
-                                <th>Compra / Item</th>
-                                <th>Cartão Utilizado</th>
-                                <th>Parcela</th>
-                                <th>Valor no Mês</th>
-                                <th>Status</th>
-                                <th>Ação Rápida</th>
+                                <th>PESSOA</th>
+                                <th>COMPRA / ITEM</th>
+                                <th>CARTÃO UTILIZADO</th>
+                                <th>PARCELA</th>
+                                <th>VALOR NO MÊS</th>
+                                <th>STATUS</th>
+                                <th>AÇÃO RÁPIDA</th>
                             </tr>
                         </thead>
                         <tbody id="tabelaResumoTerceirosMes"></tbody>
@@ -279,19 +323,19 @@
             <!-- PROJEÇÃO CONSOLIDADA -->
             <div class="card-box">
                 <div class="card-box-header">
-                    <div class="card-box-title"><i data-lucide="layers" size="19" class="text-amber"></i> Projeção Consolidada Mês a Mês (2026 - 2027)</div>
+                    <div class="card-box-title"><i data-lucide="layers" size="19" class="text-amber"></i> PROJEÇÃO CONSOLIDADA MÊS A MÊS (2026 - 2027)</div>
                 </div>
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
-                                <th>Mês Ref.</th>
-                                <th>Receita Própria</th>
-                                <th>Fatura Bruta Cartões</th>
-                                <th>(-) Reembolso Terceiros</th>
-                                <th>(=) Meu Custo Real</th>
-                                <th>Saldo Livre</th>
-                                <th>Comprometimento</th>
+                                <th>MÊS REF.</th>
+                                <th>RECEITA PRÓPRIA</th>
+                                <th>TOTAL CONTAS / FATURAS</th>
+                                <th>(-) REEMBOLSO TERCEIROS</th>
+                                <th>(=) MEU CUSTO REAL</th>
+                                <th>SALDO LIVRE</th>
+                                <th>COMPROMETIMENTO</th>
                             </tr>
                         </thead>
                         <tbody id="tabelaProjecaoAnual"></tbody>
@@ -304,15 +348,15 @@
         <div id="tab-cartoes" class="tab-panel">
             <div class="card-box">
                 <div class="card-box-header">
-                    <div class="card-box-title"><i data-lucide="credit-card" size="19" class="text-emerald"></i> Meus Cartões & Comprometimento de Limite</div>
-                    <button class="btn btn-primary btn-sm" onclick="abrirModalCartao()"><i data-lucide="plus" size="15"></i> Adicionar / Editar Cartão</button>
+                    <div class="card-box-title"><i data-lucide="credit-card" size="19" class="text-emerald"></i> MEUS CARTÕES & CONTAS FIXAS</div>
+                    <button class="btn btn-primary btn-sm" onclick="abrirModalCartao()"><i data-lucide="plus" size="15"></i> ADICIONAR / EDITAR CARTÃO</button>
                 </div>
                 <div class="credit-cards-grid" id="gridCartoes"></div>
             </div>
 
             <div class="card-box">
                 <div class="card-box-header">
-                    <div class="card-box-title"><i data-lucide="table" size="19" class="text-blue"></i> Matriz de Faturas por Cartão (Visão Geral)</div>
+                    <div class="card-box-title"><i data-lucide="table" size="19" class="text-blue"></i> MATRIZ DE FATURAS E CONTAS (VISÃO GERAL)</div>
                 </div>
                 <div class="table-responsive">
                     <table>
@@ -327,26 +371,26 @@
         <div id="tab-lancamentos" class="tab-panel">
             <div class="card-box">
                 <div class="card-box-header">
-                    <div class="card-box-title"><i data-lucide="list-filter" size="19" class="text-emerald"></i> Base Detalhada de Lançamentos dos Cartões (133 itens)</div>
+                    <div class="card-box-title"><i data-lucide="list-filter" size="19" class="text-emerald"></i> BASE DETALHADA DE LANÇAMENTOS DOS CARTÕES & CONTAS</div>
                     <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                        <input type="text" id="buscaLancamento" class="form-control" style="width:230px;" placeholder="Buscar descrição..." onkeyup="renderizarLancamentos()">
-                        <select id="filtroCartaoLanc" class="form-control" style="width:190px;" onchange="renderizarLancamentos()">
-                            <option value="TODOS">Todos os Cartões</option>
+                        <input type="text" id="buscaLancamento" class="form-control" style="width:230px;" placeholder="BUSCAR DESCRIÇÃO..." onkeyup="renderizarLancamentos()">
+                        <select id="filtroCartaoLanc" class="form-control" style="width:210px;" onchange="renderizarLancamentos()">
+                            <option value="TODOS">TODOS OS CARTÕES / CONTAS</option>
                         </select>
-                        <button class="btn btn-primary" onclick="abrirModalLancamento()"><i data-lucide="plus" size="16"></i> Lançar Compra</button>
+                        <button class="btn btn-primary" onclick="abrirModalLancamento()"><i data-lucide="plus" size="16"></i> LANÇAR DESPESA</button>
                     </div>
                 </div>
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
-                                <th>Data</th>
-                                <th>Descrição</th>
-                                <th>Cartão</th>
-                                <th>Valor Total</th>
-                                <th>Parcelamento</th>
-                                <th>Valor Parcela</th>
-                                <th>Ações</th>
+                                <th>DATA</th>
+                                <th>DESCRIÇÃO</th>
+                                <th>CARTÃO / CONTA</th>
+                                <th>VALOR TOTAL</th>
+                                <th>PARCELAMENTO</th>
+                                <th>VALOR PARCELA</th>
+                                <th>AÇÕES</th>
                             </tr>
                         </thead>
                         <tbody id="tabelaLancamentos"></tbody>
@@ -361,33 +405,30 @@
                 <div class="kpi-card">
                     <div class="kpi-header"><span>TOTAL A RECEBER (MÊS ATUAL)</span><i data-lucide="calendar-check" size="18" class="text-blue"></i></div>
                     <div class="kpi-value text-blue" id="kpiTercMesTotal">R$ 0,00</div>
-                    <div class="kpi-sub" id="kpiTercMesPago">Pago: R$ 0,00 | Pendente: R$ 0,00</div>
+                    <div class="kpi-sub" id="kpiTercMesPago">PAGO: R$ 0,00 | PENDENTE: R$ 0,00</div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-header"><span>SALDO DEVEDOR FUTURO (TODOS OS MESES)</span><i data-lucide="layers" size="18" class="text-purple"></i></div>
                     <div class="kpi-value text-purple" id="kpiTercFuturoTotal">R$ 0,00</div>
-                    <div class="kpi-sub">Soma de todas as parcelas futuras não pagas</div>
+                    <div class="kpi-sub">SOMA DE TODAS AS PARCELAS FUTURAS NÃO PAGAS</div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-header"><span>PESSOAS COM SALDO ATIVO</span><i data-lucide="users" size="18" class="text-emerald"></i></div>
                     <div class="kpi-value text-emerald" id="kpiTercPessoasCount">0</div>
-                    <div class="kpi-sub">Clique nas parcelas abaixo para dar baixa</div>
+                    <div class="kpi-sub">CLIQUE NAS PARCELAS ABAIXO PARA DAR BAIXA</div>
                 </div>
             </div>
 
             <div class="card-box">
                 <div class="card-box-header">
-                    <div class="card-box-title"><i data-lucide="users" size="19" class="text-blue"></i> Controle Detalhado por Pessoa e Compra Emprestada</div>
+                    <div class="card-box-title"><i data-lucide="users" size="19" class="text-blue"></i> CONTROLE DETALHADO POR PESSOA E COMPRA EMPRESTADA</div>
                     <div style="display:flex; gap:10px; flex-wrap:wrap;">
                         <select id="filtroPessoaTerceiro" class="form-control" style="width:200px;" onchange="renderizarTerceiros()">
-                            <option value="TODAS">Todas as Pessoas</option>
+                            <option value="TODAS">TODAS AS PESSOAS</option>
                         </select>
-                        <button class="btn btn-primary" onclick="abrirModalTerceiro()"><i data-lucide="plus" size="16"></i> Cadastrar Compra / Parcelas de Terceiro</button>
+                        <button class="btn btn-primary" onclick="abrirModalTerceiro()"><i data-lucide="plus" size="16"></i> CADASTRAR COMPRA / PARCELAS DE TERCEIRO</button>
                     </div>
                 </div>
-                <p style="color:var(--text-muted); font-size:0.84rem; margin-bottom:18px;">
-                    Cada bloco abaixo representa uma compra emprestada no seu cartão. Clique em qualquer etiqueta de parcela para marcar como <strong>Pago</strong> ou <strong>Pendente</strong>.
-                </p>
                 <div id="listaGruposTerceiros"></div>
             </div>
         </div>
@@ -396,18 +437,18 @@
         <div id="tab-receitas" class="tab-panel">
             <div class="card-box">
                 <div class="card-box-header">
-                    <div class="card-box-title"><i data-lucide="wallet" size="19" class="text-emerald"></i> Fontes de Renda Própria (Salário, Comissões, Extras)</div>
-                    <button class="btn btn-primary" onclick="abrirModalReceita()"><i data-lucide="plus" size="16"></i> Nova Fonte de Renda</button>
+                    <div class="card-box-title"><i data-lucide="wallet" size="19" class="text-emerald"></i> FONTES DE RENDA PRÓPRIA (SALÁRIO, COMISSÕES, EXTRAS)</div>
+                    <button class="btn btn-primary" onclick="abrirModalReceita()"><i data-lucide="plus" size="16"></i> NOVA FONTE DE RENDA</button>
                 </div>
                 <div class="table-responsive">
                     <table>
                         <thead>
                             <tr>
-                                <th>Fonte de Renda</th>
-                                <th>Tipo</th>
-                                <th>Mês Referência</th>
-                                <th>Valor</th>
-                                <th>Ações</th>
+                                <th>FONTE DE RENDA</th>
+                                <th>TIPO</th>
+                                <th>MÊS REFERÊNCIA</th>
+                                <th>VALOR</th>
+                                <th>AÇÕES</th>
                             </tr>
                         </thead>
                         <tbody id="tabelaReceitas"></tbody>
@@ -420,37 +461,36 @@
         <div id="tab-simulador" class="tab-panel">
             <div class="card-box" style="max-width: 720px;">
                 <div class="card-box-header">
-                    <div class="card-box-title"><i data-lucide="calculator" size="19" class="text-amber"></i> Simulador de Impacto no Orçamento Futuro</div>
+                    <div class="card-box-title"><i data-lucide="calculator" size="19" class="text-amber"></i> SIMULADOR DE IMPACTO NO ORÇAMENTO FUTURO</div>
                 </div>
-                <p style="color:var(--text-muted); font-size:0.86rem; margin-bottom:18px;">Simule uma nova compra antes de passar o cartão e veja exatamente em qual fatura ela cairá.</p>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Valor Total da Compra (R$)</label>
+                        <label>VALOR TOTAL DA COMPRA (R$)</label>
                         <input type="number" id="simValor" class="form-control" value="600" step="0.01" oninput="simularCompra()">
                     </div>
                     <div class="form-group">
-                        <label>Quantidade de Parcelas</label>
+                        <label>QUANTIDADE DE PARCELAS</label>
                         <select id="simParcelas" class="form-control" onchange="simularCompra()">
-                            <option value="1">1x (À vista no crédito)</option>
-                            <option value="2">2x sem juros</option>
-                            <option value="3" selected>3x sem juros</option>
-                            <option value="4">4x sem juros</option>
-                            <option value="5">5x sem juros</option>
-                            <option value="6">6x sem juros</option>
-                            <option value="10">10x sem juros</option>
-                            <option value="12">12x sem juros</option>
+                            <option value="1">1X (À VISTA NO CRÉDITO)</option>
+                            <option value="2">2X SEM JUROS</option>
+                            <option value="3" selected>3X SEM JUROS</option>
+                            <option value="4">4X SEM JUROS</option>
+                            <option value="5">5X SEM JUROS</option>
+                            <option value="6">6X SEM JUROS</option>
+                            <option value="10">10X SEM JUROS</option>
+                            <option value="12">12X SEM JUROS</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Cartão Escolhido</label>
+                        <label>CARTÃO ESCOLHIDO</label>
                         <select id="simCartao" class="form-control" onchange="simularCompra()"></select>
                     </div>
                     <div class="form-group">
-                        <label>Data Prevista da Compra</label>
+                        <label>DATA PREVISTA DA COMPRA</label>
                         <input type="date" id="simData" class="form-control" onchange="simularCompra()">
                     </div>
                 </div>
@@ -463,35 +503,35 @@
     <!-- MODAL LANÇAMENTO -->
     <div class="modal-overlay" id="modalLancamento">
         <div class="modal-content">
-            <h3 style="margin-bottom:16px;" id="tituloModalLanc">Nova Despesa no Cartão</h3>
+            <h3 style="margin-bottom:16px; text-transform:uppercase;" id="tituloModalLanc">NOVA DESPESA NO CARTÃO / CONTA</h3>
             <input type="hidden" id="editLancId">
             <div class="form-group">
-                <label>Descrição da Compra</label>
-                <input type="text" id="lancDesc" class="form-control" placeholder="Ex: Supermercado Mateus, Farmácia...">
+                <label>DESCRIÇÃO DA COMPRA / CONTA</label>
+                <input type="text" id="lancDesc" class="form-control" placeholder="EX: SUPERMERCADO MATEUS, CONTA DE LUZ...">
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label>Cartão</label>
+                    <label>CARTÃO / CONTA</label>
                     <select id="lancCartao" class="form-control"></select>
                 </div>
                 <div class="form-group">
-                    <label>Data da Compra</label>
+                    <label>DATA DO LANÇAMENTO</label>
                     <input type="date" id="lancData" class="form-control">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label>Valor Total (R$)</label>
+                    <label>VALOR TOTAL (R$)</label>
                     <input type="number" id="lancValor" class="form-control" step="0.01" placeholder="0.00">
                 </div>
                 <div class="form-group">
-                    <label>Nº de Parcelas</label>
+                    <label>Nº DE PARCELAS</label>
                     <input type="number" id="lancParcelas" class="form-control" value="1" min="1" max="36">
                 </div>
             </div>
             <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:18px;">
-                <button class="btn btn-danger" onclick="fecharModais()">Cancelar</button>
-                <button class="btn btn-primary" onclick="salvarLancamento()">Salvar Lançamento</button>
+                <button class="btn btn-danger" onclick="fecharModais()">CANCELAR</button>
+                <button class="btn btn-primary" onclick="salvarLancamento()">SALVAR LANÇAMENTO</button>
             </div>
         </div>
     </div>
@@ -499,56 +539,55 @@
     <!-- MODAL TERCEIRO -->
     <div class="modal-overlay" id="modalTerceiro">
         <div class="modal-content">
-            <h3 style="margin-bottom:6px;" id="tituloModalTerc">Cadastrar Empréstimo / Compra de Terceiro</h3>
-            <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:16px;">Informe os dados da compra feita no seu cartão. As parcelas serão geradas automaticamente mês a mês.</p>
+            <h3 style="margin-bottom:6px; text-transform:uppercase;" id="tituloModalTerc">CADASTRAR EMPRÉSTIMO / COMPRA DE TERCEIRO</h3>
             <input type="hidden" id="editTercGroupId">
 
             <div class="form-row">
                 <div class="form-group">
-                    <label>Nome da Pessoa</label>
-                    <input type="text" id="tercNome" class="form-control" placeholder="Ex: Mãe, Irmão, João..." list="listaNomesTerceiros">
+                    <label>NOME DA PESSOA</label>
+                    <input type="text" id="tercNome" class="form-control" placeholder="EX: MÃE, IRMÃO, JOÃO..." list="listaNomesTerceiros">
                     <datalist id="listaNomesTerceiros"></datalist>
                 </div>
                 <div class="form-group">
-                    <label>Cartão Utilizado</label>
+                    <label>CARTÃO UTILIZADO</label>
                     <select id="tercCartao" class="form-control" onchange="atualizarPreviewTerceiro()"></select>
                 </div>
             </div>
 
             <div class="form-group">
-                <label>Descrição do Item / Compra</label>
-                <input type="text" id="tercDesc" class="form-control" placeholder="Ex: Celular Samsung, Passagem Aérea, Farmácia..." oninput="atualizarPreviewTerceiro()">
+                <label>DESCRIÇÃO DO ITEM / COMPRA</label>
+                <input type="text" id="tercDesc" class="form-control" placeholder="EX: CELULAR, PASSAGEM, FARMÁCIA..." oninput="atualizarPreviewTerceiro()">
             </div>
 
             <div class="form-row-3">
                 <div class="form-group">
-                    <label>Valor Total (R$)</label>
+                    <label>VALOR TOTAL (R$)</label>
                     <input type="number" id="tercValorTotal" class="form-control" step="0.01" placeholder="0.00" oninput="atualizarPreviewTerceiro()">
                 </div>
                 <div class="form-group">
-                    <label>Qtd. Parcelas</label>
+                    <label>QTD. PARCELAS</label>
                     <input type="number" id="tercQtdParcelas" class="form-control" value="1" min="1" max="24" oninput="atualizarPreviewTerceiro()">
                 </div>
                 <div class="form-group">
-                    <label>1ª Fatura (Mês Inicial)</label>
+                    <label>1ª FATURA (MÊS INICIAL)</label>
                     <select id="tercMesInicio" class="form-control" onchange="atualizarPreviewTerceiro()"></select>
                 </div>
             </div>
 
             <div class="form-group">
                 <label style="display:flex; align-items:center; gap:8px; cursor:pointer; color:var(--text-main);">
-                    <input type="checkbox" id="tercLancarNoCartao" checked>
-                    <span>Lançar também na fatura do cartão selecionado (se ainda não estiver lá)</span>
+                    <input type="checkbox" id="tercLancarNoCartao">
+                    <span>LANÇAR TAMBÉM NA FATURA DO CARTÃO SELECIONADO</span>
                 </label>
             </div>
 
             <div class="preview-parcelas-box" id="previewParcelasTerceiro">
-                <span style="font-size:0.78rem; color:var(--text-muted);">Preencha o valor e parcelas para visualizar o cronograma...</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">PREENCHA O VALOR E PARCELAS PARA VISUALIZAR O CRONOGRAMA...</span>
             </div>
 
             <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:18px;">
-                <button class="btn btn-danger" onclick="fecharModais()">Cancelar</button>
-                <button class="btn btn-primary" onclick="salvarGrupoTerceiro()">Salvar Empréstimo & Parcelas</button>
+                <button class="btn btn-danger" onclick="fecharModais()">CANCELAR</button>
+                <button class="btn btn-primary" onclick="salvarGrupoTerceiro()">SALVAR EMPRÉSTIMO & PARCELAS</button>
             </div>
         </div>
     </div>
@@ -556,27 +595,27 @@
     <!-- MODAL RECEITA -->
     <div class="modal-overlay" id="modalReceita">
         <div class="modal-content">
-            <h3 style="margin-bottom:16px;">Adicionar Fonte de Renda</h3>
+            <h3 style="margin-bottom:16px; text-transform:uppercase;">ADICIONAR FONTE DE RENDA</h3>
             <div class="form-group">
-                <label>Descrição da Receita</label>
-                <input type="text" id="recDesc" class="form-control" placeholder="Ex: Salário Líquido, Comissão Dr. Energia...">
+                <label>DESCRIÇÃO DA RECEITA</label>
+                <input type="text" id="recDesc" class="form-control" placeholder="EX: SALÁRIO LÍQUIDO, COMISSÃO DR. ENERGIA...">
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label>Valor (R$)</label>
+                    <label>VALOR (R$)</label>
                     <input type="number" id="recValor" class="form-control" step="0.01">
                 </div>
                 <div class="form-group">
-                    <label>Recorrência</label>
+                    <label>RECORRÊNCIA</label>
                     <select id="recTipo" class="form-control">
-                        <option value="FIXA">Fixa (Todos os meses)</option>
-                        <option value="UNICA">Única (Apenas mês selecionado)</option>
+                        <option value="FIXA">FIXA (TODOS OS MESES)</option>
+                        <option value="UNICA">ÚNICA (APENAS MÊS SELECIONADO)</option>
                     </select>
                 </div>
             </div>
             <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:18px;">
-                <button class="btn btn-danger" onclick="fecharModais()">Cancelar</button>
-                <button class="btn btn-primary" onclick="salvarReceita()">Salvar Receita</button>
+                <button class="btn btn-danger" onclick="fecharModais()">CANCELAR</button>
+                <button class="btn btn-primary" onclick="salvarReceita()">SALVAR RECEITA</button>
             </div>
         </div>
     </div>
@@ -584,40 +623,40 @@
     <!-- MODAL CARTÃO -->
     <div class="modal-overlay" id="modalCartao">
         <div class="modal-content">
-            <h3 style="margin-bottom:16px;">Configurar Cartão de Crédito</h3>
+            <h3 style="margin-bottom:16px; text-transform:uppercase;">CONFIGURAR CARTÃO / CONTA</h3>
             <div class="form-group">
-                <label>Nome do Cartão</label>
-                <input type="text" id="cardNome" class="form-control" placeholder="Ex: Nubank Neudson">
+                <label>NOME DO CARTÃO / CONTA</label>
+                <input type="text" id="cardNome" class="form-control" placeholder="EX: NUBANK NEUDSON">
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label>Limite Total (R$)</label>
+                    <label>LIMITE / TETO (R$)</label>
                     <input type="number" id="cardLimite" class="form-control" value="5000">
                 </div>
                 <div class="form-group">
-                    <label>Dia de Fechamento</label>
+                    <label>DIA DE FECHAMENTO</label>
                     <input type="number" id="cardFechamento" class="form-control" value="25" min="1" max="31">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label>Dia de Vencimento</label>
-                    <input type="number" id="cardVencimento" class="form-control" value="3" min="1" max="31">
+                    <label>DIA DE VENCIMENTO</label>
+                    <input type="number" id="cardVencimento" class="form-control" value="5" min="1" max="31">
                 </div>
                 <div class="form-group">
-                    <label>Cor / Estilo</label>
+                    <label>COR / ESTILO</label>
                     <select id="cardEstilo" class="form-control">
-                        <option value="cc-nu">Roxo (Nubank)</option>
-                        <option value="cc-recarga">Verde (RecargaPay)</option>
-                        <option value="cc-mp">Azul (Mercado Pago)</option>
-                        <option value="cc-99">Laranja (99Pay)</option>
-                        <option value="cc-outro">Grafite (Outros)</option>
+                        <option value="cc-nu">ROXO (NUBANK)</option>
+                        <option value="cc-recarga">VERDE (RECARGAPAY)</option>
+                        <option value="cc-mp">AZUL (MERCADO PAGO)</option>
+                        <option value="cc-99">LARANJA (99PAY)</option>
+                        <option value="cc-outro">GRAFITE (CONTAS / OUTROS)</option>
                     </select>
                 </div>
             </div>
             <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:18px;">
-                <button class="btn btn-danger" onclick="fecharModais()">Cancelar</button>
-                <button class="btn btn-primary" onclick="salvarCartao()">Salvar Cartão</button>
+                <button class="btn btn-danger" onclick="fecharModais()">CANCELAR</button>
+                <button class="btn btn-primary" onclick="salvarCartao()">SALVAR CARTÃO / CONTA</button>
             </div>
         </div>
     </div>
@@ -631,35 +670,44 @@
         ];
 
         const NOMES_MESES_PT = {
-            "2026-DEZ": "Dezembro / 2026",
-            "2027-JAN": "Janeiro / 2027",
-            "2027-FEV": "Fevereiro / 2027",
-            "2027-MAR": "Março / 2027",
-            "2027-ABR": "Abril / 2027",
-            "2027-MAI": "Maio / 2027",
-            "2027-JUN": "Junho / 2027",
-            "2027-JUL": "Julho / 2027",
-            "2027-AGO": "Agosto / 2027",
-            "2027-SET": "Setembro / 2027",
-            "2027-OUT": "Outubro / 2027",
-            "2027-NOV": "Novembro / 2027",
-            "2027-DEZ": "Dezembro / 2027"
+            "2026-DEZ": "DEZEMBRO / 2026",
+            "2027-JAN": "JANEIRO / 2027",
+            "2027-FEV": "FEVEREIRO / 2027",
+            "2027-MAR": "MARÇO / 2027",
+            "2027-ABR": "ABRIL / 2027",
+            "2027-MAI": "MAIO / 2027",
+            "2027-JUN": "JUNHO / 2027",
+            "2027-JUL": "JULHO / 2027",
+            "2027-AGO": "AGOSTO / 2027",
+            "2027-SET": "SETEMBRO / 2027",
+            "2027-OUT": "OUTUBRO / 2027",
+            "2027-NOV": "NOVEMBRO / 2027",
+            "2027-DEZ": "DEZEMBRO / 2027"
         };
 
         const estadoPadrao = {
-            versaoBase: "5.3-CONSOLIDADO-LIMPO-2026-2027",
+            versaoBase: "5.4-CHECKLIST-MONO-2026-2027",
             receitasProprias: [
                 { id: 1, desc: "Salário / Proventos Fixos", valor: 6500.00, tipo: "FIXA", mes: "TODOS" },
                 { id: 2, desc: "Comissões / Renda Extra", valor: 800.00, tipo: "FIXA", mes: "TODOS" }
             ],
             cartoes: [
-                { id: "c1", nome: "Nubank Neudson", limite: 6000, fechamento: 25, vencimento: 3, estilo: "cc-nu" },
-                { id: "c2", nome: "Nubank Edilene", limite: 7500, fechamento: 26, vencimento: 4, estilo: "cc-nu" },
-                { id: "c3", nome: "Cartão Recarga PAY", limite: 4500, fechamento: 26, vencimento: 4, estilo: "cc-recarga" },
-                { id: "c4", nome: "Mercado Pago", limite: 3500, fechamento: 25, vencimento: 1, estilo: "cc-mp" },
-                { id: "c5", nome: "Mercado Pago Edilene", limite: 2000, fechamento: 25, vencimento: 5, estilo: "cc-mp" },
-                { id: "c6", nome: "99Pay", limite: 2500, fechamento: 20, vencimento: 28, estilo: "cc-99" }
+                { id: "c1", nome: "Nubank Neudson", limite: 6000, fechamento: 25, vencimento: 5, estilo: "cc-nu" },
+                { id: "c2", nome: "Nubank Edilene", limite: 7500, fechamento: 26, vencimento: 3, estilo: "cc-nu" },
+                { id: "c3", nome: "Visa Bradesco", limite: 3000, fechamento: 15, vencimento: 5, estilo: "cc-outro" },
+                { id: "c4", nome: "99Pay", limite: 2500, fechamento: 20, vencimento: 8, estilo: "cc-99" },
+                { id: "c5", nome: "Cartão Recarga PAY", limite: 4500, fechamento: 26, vencimento: 6, estilo: "cc-recarga" },
+                { id: "c6", nome: "CMT I Andrielly", limite: 500, fechamento: 25, vencimento: 5, estilo: "cc-outro" },
+                { id: "c7", nome: "CMT I Guilherme", limite: 500, fechamento: 25, vencimento: 5, estilo: "cc-outro" },
+                { id: "c8", nome: "Natação", limite: 500, fechamento: 25, vencimento: 10, estilo: "cc-outro" },
+                { id: "c9", nome: "Mercado Pago", limite: 3500, fechamento: 25, vencimento: 4, estilo: "cc-mp" },
+                { id: "c10", nome: "Equatorial I", limite: 1000, fechamento: 25, vencimento: 6, estilo: "cc-outro" },
+                { id: "c11", nome: "Equatorial II", limite: 1000, fechamento: 25, vencimento: 11, estilo: "cc-outro" },
+                { id: "c12", nome: "Escola | Theodoro", limite: 1000, fechamento: 25, vencimento: 5, estilo: "cc-outro" },
+                { id: "c13", nome: "Mercado Pago Edilene", limite: 2000, fechamento: 25, vencimento: 17, estilo: "cc-mp" },
+                { id: "c14", nome: "Outros", limite: 1000, fechamento: 25, vencimento: 10, estilo: "cc-outro" }
             ],
+            statusPagosContas: {},
             terceirosGrupos: [],
             faturasGerais: {},
             comprasBase: [
@@ -806,18 +854,27 @@
                 { id: 1130, data: "2026-11-10", desc: "Pix no Crédito / Empréstimo Nubank (6x)", cartao: "Nubank Edilene", valor: 2940.00, parcelas: 6, parceladoValor: 490.00 },
                 { id: 1131, data: "2026-11-10", desc: "Shopee *Shopee - Parcela 2/2", cartao: "Nubank Edilene", valor: 21.70, parcelas: 1, parceladoValor: 21.70 },
                 { id: 1132, data: "2026-11-10", desc: "Demais Parcelamentos Antigos (2x)", cartao: "Nubank Edilene", valor: 128.72, parcelas: 2, parceladoValor: 64.36 },
-                { id: 1133, data: "2026-11-10", desc: "Demais Parcelas Finais Dez/26", cartao: "Nubank Edilene", valor: 15.05, parcelas: 1, parceladoValor: 15.05 }
+                { id: 1133, data: "2026-11-10", desc: "Demais Parcelas Finais Dez/26", cartao: "Nubank Edilene", valor: 15.05, parcelas: 1, parceladoValor: 15.05 },
+
+                // ================= CONTAS FIXAS / MENSALIDADES =================
+                { id: 1134, data: "2026-11-10", desc: "Mensalidade CMT I Andrielly", cartao: "CMT I Andrielly", valor: 126.00, parcelas: 1, parceladoValor: 126.00 },
+                { id: 1135, data: "2026-11-10", desc: "Mensalidade CMT I Guilherme", cartao: "CMT I Guilherme", valor: 316.00, parcelas: 1, parceladoValor: 316.00 },
+                { id: 1136, data: "2026-11-10", desc: "Mensalidade Natação (7x)", cartao: "Natação", valor: 840.00, parcelas: 7, parceladoValor: 120.00 },
+                { id: 1137, data: "2026-11-10", desc: "Mensalidade Escola | Theodoro", cartao: "Escola | Theodoro", valor: 382.50, parcelas: 1, parceladoValor: 382.50 }
             ]
         };
 
         let appState = JSON.parse(localStorage.getItem('DESPAG_STATE'));
 
-        if (!appState || appState.versaoBase !== "5.3-CONSOLIDADO-LIMPO-2026-2027") {
+        if (!appState || appState.versaoBase !== "5.4-CHECKLIST-MONO-2026-2027") {
             let estadoLimpo = JSON.parse(JSON.stringify(estadoPadrao));
 
             if (appState) {
                 if (appState.receitasProprias && appState.receitasProprias.length > 0) {
                     estadoLimpo.receitasProprias = appState.receitasProprias;
+                }
+                if (appState.statusPagosContas) {
+                    estadoLimpo.statusPagosContas = appState.statusPagosContas;
                 }
                 if (appState.terceirosGrupos && appState.terceirosGrupos.length > 0) {
                     let gruposFiltrados = appState.terceirosGrupos.map(g => {
@@ -833,6 +890,10 @@
 
             appState = estadoLimpo;
             localStorage.setItem('DESPAG_STATE', JSON.stringify(appState));
+        }
+
+        if (!appState.statusPagosContas) {
+            appState.statusPagosContas = {};
         }
 
         function recalcularFaturasGerais() {
@@ -893,6 +954,19 @@
             localStorage.setItem('DESPAG_STATE', JSON.stringify(appState));
         }
 
+        function isContaPaga(mes, nomeConta) {
+            return !!(appState.statusPagosContas[mes] && appState.statusPagosContas[mes][nomeConta]);
+        }
+
+        function toggleContaPaga(mes, nomeConta) {
+            if (!appState.statusPagosContas[mes]) {
+                appState.statusPagosContas[mes] = {};
+            }
+            appState.statusPagosContas[mes][nomeConta] = !appState.statusPagosContas[mes][nomeConta];
+            salvarState();
+            atualizarTudo();
+        }
+
         const fmtBRL = (v) => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
         let chartEvolucaoInstance = null;
@@ -922,9 +996,9 @@
                 const el = document.getElementById(id);
                 if (!el) return;
                 const valAtual = el.value;
-                el.innerHTML = id === 'filtroCartaoLanc' ? '<option value="TODOS">Todos os Cartões</option>' : '';
+                el.innerHTML = id === 'filtroCartaoLanc' ? '<option value="TODOS">TODOS OS CARTÕES / CONTAS</option>' : '';
                 appState.cartoes.forEach(c => {
-                    el.innerHTML += `<option value="${c.nome}">${c.nome}</option>`;
+                    el.innerHTML += `<option value="${c.nome}">${c.nome.toUpperCase()}</option>`;
                 });
                 if (valAtual) el.value = valAtual;
             });
@@ -935,7 +1009,7 @@
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById('tab-' + tabId).classList.add('active');
             if (navEl) navEl.classList.add('active');
-            document.getElementById('headerTitle').innerText = navEl ? navEl.innerText.trim() : 'DESPAG';
+            document.getElementById('headerTitle').innerText = navEl ? navEl.innerText.trim().toUpperCase() : 'DESPAG';
             document.getElementById('sidebar').classList.remove('open');
         }
 
@@ -946,8 +1020,19 @@
             });
 
             let faturasObj = appState.faturasGerais[mes] || {};
-            let faturaBruta = 0;
-            Object.values(faturasObj).forEach(val => faturaBruta += Number(val));
+            let faturaTotalGeral = 0;
+            let faturaPendente = 0;
+            let faturaPaga = 0;
+
+            appState.cartoes.forEach(c => {
+                const val = Number(faturasObj[c.nome] || 0);
+                faturaTotalGeral += val;
+                if (isContaPaga(mes, c.nome)) {
+                    faturaPaga += val;
+                } else {
+                    faturaPendente += val;
+                }
+            });
 
             let parcelasTerceirosMes = [];
             let terceirosTotal = 0;
@@ -972,12 +1057,14 @@
                 });
             });
 
-            let custoLiquido = Math.max(0, faturaBruta - terceirosTotal);
+            let custoLiquido = Math.max(0, faturaPendente - terceirosTotal);
             let saldoLivre = renda - custoLiquido;
 
             return {
                 renda,
-                faturaBruta,
+                faturaTotalGeral,
+                faturaPendente,
+                faturaPaga,
                 terceirosTotal,
                 terceirosPago,
                 terceirosPendente: terceirosTotal - terceirosPago,
@@ -994,15 +1081,17 @@
             const res = getResumoMes(mes);
 
             document.getElementById('kpiRendaPropria').innerText = fmtBRL(res.renda);
-            document.getElementById('kpiFaturasBrutas').innerText = fmtBRL(res.faturaBruta);
+            document.getElementById('kpiFaturasBrutas').innerText = fmtBRL(res.faturaPendente);
+            document.getElementById('kpiSubCartoes').innerText = `TOTAL: ${fmtBRL(res.faturaTotalGeral)} | PAGO: ${fmtBRL(res.faturaPaga)}`;
             document.getElementById('kpiTerceiros').innerText = fmtBRL(res.terceirosTotal);
-            document.getElementById('kpiSubTerceiros').innerText = `${res.parcelasTerceirosMes.length} parcela(s) (${fmtBRL(res.terceirosPago)} pago)`;
+            document.getElementById('kpiSubTerceiros').innerText = `${res.parcelasTerceirosMes.length} PARCELA(S) (${fmtBRL(res.terceirosPago)} PAGO)`;
             document.getElementById('kpiCustoLiquido').innerText = fmtBRL(res.custoLiquido);
 
             const elSaldo = document.getElementById('kpiSaldoFinal');
-            elSaldo.innerText = `Saldo Livre: ${fmtBRL(res.saldoLivre)}`;
+            elSaldo.innerText = `SALDO LIVRE: ${fmtBRL(res.saldoLivre)}`;
             elSaldo.className = res.saldoLivre >= 0 ? 'kpi-sub text-emerald' : 'kpi-sub text-rose';
 
+            renderizarChecklistContas(mes, res);
             renderizarResumoTerceirosMes(mes, res);
             renderizarTabelaProjecao();
             renderizarCartoes(mes, res.faturasObj);
@@ -1014,23 +1103,44 @@
             simularCompra();
         }
 
+        function renderizarChecklistContas(mes, res) {
+            const tbody = document.getElementById('tbodyChecklistContas');
+            document.getElementById('badgeTotalPagoMes').innerText = `PAGO: ${fmtBRL(res.faturaPaga)}`;
+            document.getElementById('badgeTotalRestanteMes').innerText = `A PAGAR: ${fmtBRL(res.faturaPendente)}`;
+
+            tbody.innerHTML = appState.cartoes.map(c => {
+                const valor = Number(res.faturasObj[c.nome] || 0);
+                const pago = isContaPaga(mes, c.nome);
+                return `
+                    <tr class="${pago ? 'linha-paga' : ''}">
+                        <td style="font-weight:700; text-transform:uppercase;">${c.nome}</td>
+                        <td class="${pago ? 'valor-riscado' : ''}" style="font-weight:700;">${fmtBRL(valor)}</td>
+                        <td style="color:var(--text-muted); font-size:0.84rem;">DIA ${c.vencimento}</td>
+                        <td style="text-align:center;">
+                            <input type="checkbox" class="chk-conta" ${pago ? 'checked' : ''} onchange="toggleContaPaga('${mes}', '${c.nome}')">
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
         function renderizarResumoTerceirosMes(mes, res) {
             const tbody = document.getElementById('tabelaResumoTerceirosMes');
             if (res.parcelasTerceirosMes.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:20px;">Nenhuma parcela de terceiro agendada para ${NOMES_MESES_PT[mes]}. Clique em "Novo Empréstimo Terceiro" para cadastrar.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:20px;">NENHUMA PARCELA DE TERCEIRO AGENDADA PARA ${NOMES_MESES_PT[mes]}.</td></tr>`;
                 return;
             }
             tbody.innerHTML = res.parcelasTerceirosMes.map(p => `
                 <tr>
-                    <td><strong>${p.pessoa}</strong></td>
-                    <td>${p.desc}</td>
+                    <td><strong>${p.pessoa.toUpperCase()}</strong></td>
+                    <td>${p.desc.toUpperCase()}</td>
                     <td><span class="badge badge-blue">${p.cartao}</span></td>
                     <td><span class="badge badge-purple">${p.num}/${p.totalParcelas}</span></td>
                     <td class="text-blue"><strong>${fmtBRL(p.valor)}</strong></td>
-                    <td>${p.pago ? '<span class="badge badge-emerald">Pago</span>' : '<span class="badge badge-amber">Pendente</span>'}</td>
+                    <td>${p.pago ? '<span class="badge badge-emerald">PAGO</span>' : '<span class="badge badge-amber">PENDENTE</span>'}</td>
                     <td>
                         <button class="btn btn-sm ${p.pago ? 'btn-amber' : 'btn-blue'}" onclick="alternarStatusParcela(${p.grupoId}, ${p.num})">
-                            ${p.pago ? 'Desfazer' : 'Dar Baixa'}
+                            ${p.pago ? 'DESFAZER' : 'DAR BAIXA'}
                         </button>
                     </td>
                 </tr>
@@ -1048,11 +1158,11 @@
                     <tr>
                         <td><strong>${NOMES_MESES_PT[m]}</strong></td>
                         <td class="text-emerald">${fmtBRL(r.renda)}</td>
-                        <td class="text-rose">${fmtBRL(r.faturaBruta)}</td>
+                        <td class="text-rose">${fmtBRL(r.faturaPendente)}</td>
                         <td class="text-blue">- ${fmtBRL(r.terceirosTotal)}</td>
                         <td class="text-amber"><strong>${fmtBRL(r.custoLiquido)}</strong></td>
                         <td style="font-weight:700; color:${r.saldoLivre >= 0 ? 'var(--accent-emerald)' : 'var(--accent-rose)'}">${fmtBRL(r.saldoLivre)}</td>
-                        <td><span class="badge ${badgeClass}">${perc}% da Renda</span></td>
+                        <td><span class="badge ${badgeClass}">${perc}% DA RENDA</span></td>
                     </tr>
                 `;
             });
@@ -1068,19 +1178,19 @@
                     <div class="cc-card ${c.estilo}">
                         <div class="cc-top">
                             <div>
-                                <div style="font-size:0.75rem; opacity:0.8; text-transform:uppercase;">Cartão de Crédito</div>
-                                <div style="font-size:1.12rem; font-weight:800; margin-top:2px;">${c.nome}</div>
+                                <div style="font-size:0.75rem; opacity:0.8; text-transform:uppercase;">CARTÃO / CONTA</div>
+                                <div style="font-size:1.15rem; font-weight:700; margin-top:2px; text-transform:uppercase;">${c.nome}</div>
                             </div>
                             <div class="cc-chip"></div>
                         </div>
-                        <div style="font-size:1.45rem; font-weight:800; margin-bottom:4px;">${fmtBRL(gasto)}</div>
-                        <div style="font-size:0.76rem; opacity:0.9;">Fatura em ${NOMES_MESES_PT[mes]} • Limite: ${fmtBRL(c.limite)}</div>
+                        <div style="font-size:1.55rem; font-weight:700; margin-bottom:4px;">${fmtBRL(gasto)}</div>
+                        <div style="font-size:0.78rem; opacity:0.9;">FATURA EM ${NOMES_MESES_PT[mes]} • TETO: ${fmtBRL(c.limite)}</div>
                         <div class="progress-bg" style="background:rgba(0,0,0,0.3); margin-top:12px;">
                             <div class="progress-fill" style="width:${perc}%; background:white;"></div>
                         </div>
-                        <div style="display:flex; justify-content:space-between; font-size:0.72rem; margin-top:8px; opacity:0.85;">
-                            <span>Fecha dia ${c.fechamento} | Vence dia ${c.vencimento}</span>
-                            <span>${perc}% usado</span>
+                        <div style="display:flex; justify-content:space-between; font-size:0.75rem; margin-top:8px; opacity:0.85;">
+                            <span>FECHA DIA ${c.fechamento} | VENCE DIA ${c.vencimento}</span>
+                            <span>${perc}% USADO</span>
                         </div>
                     </div>
                 `;
@@ -1091,14 +1201,14 @@
             const thead = document.getElementById('theadMatrizCartoes');
             const tbody = document.getElementById('tbodyMatrizCartoes');
 
-            let headHtml = '<tr><th>Cartão</th>';
+            let headHtml = '<tr><th>CARTÃO / CONTA</th>';
             MESES_CHRONO.slice(0, 8).forEach(m => headHtml += `<th>${m}</th>`);
             headHtml += '</tr>';
             thead.innerHTML = headHtml;
 
             let bodyHtml = '';
             appState.cartoes.forEach(c => {
-                bodyHtml += `<tr><td><strong>${c.nome}</strong></td>`;
+                bodyHtml += `<tr><td style="text-transform:uppercase;"><strong>${c.nome}</strong></td>`;
                 MESES_CHRONO.slice(0, 8).forEach(m => {
                     const val = (appState.faturasGerais[m] && appState.faturasGerais[m][c.nome]) || 0;
                     bodyHtml += `<td>${val > 0 ? fmtBRL(val) : '<span style="color:var(--text-muted)">-</span>'}</td>`;
@@ -1122,10 +1232,10 @@
             tbody.innerHTML = filtrados.map(item => `
                 <tr>
                     <td>${item.data.split('-').reverse().join('/')}</td>
-                    <td><strong>${item.desc}</strong></td>
+                    <td style="text-transform:uppercase;"><strong>${item.desc}</strong></td>
                     <td><span class="badge badge-blue">${item.cartao}</span></td>
                     <td>${fmtBRL(item.valor)}</td>
-                    <td>${item.parcelas}x</td>
+                    <td>${item.parcelas}X</td>
                     <td class="text-emerald"><strong>${fmtBRL(item.parceladoValor)}</strong></td>
                     <td>
                         <button class="btn btn-blue btn-sm" onclick="editarLancamento(${item.id})" title="Editar"><i data-lucide="edit-2" size="13"></i></button>
@@ -1154,14 +1264,14 @@
             });
 
             document.getElementById('kpiTercMesTotal').innerText = fmtBRL(res.terceirosTotal);
-            document.getElementById('kpiTercMesPago').innerText = `Pago: ${fmtBRL(res.terceirosPago)} | Pendente: ${fmtBRL(res.terceirosPendente)}`;
+            document.getElementById('kpiTercMesPago').innerText = `PAGO: ${fmtBRL(res.terceirosPago)} | PENDENTE: ${fmtBRL(res.terceirosPendente)}`;
             document.getElementById('kpiTercFuturoTotal').innerText = fmtBRL(saldoFuturoTotal);
             document.getElementById('kpiTercPessoasCount').innerText = pessoasAtivasSet.size;
 
             const selPessoa = document.getElementById('filtroPessoaTerceiro');
             const datalist = document.getElementById('listaNomesTerceiros');
             const todasPessoas = [...new Set(appState.terceirosGrupos.map(g => g.pessoa))];
-            selPessoa.innerHTML = '<option value="TODAS">Todas as Pessoas</option>' + todasPessoas.map(p => `<option value="${p}">${p}</option>`).join('');
+            selPessoa.innerHTML = '<option value="TODAS">TODAS AS PESSOAS</option>' + todasPessoas.map(p => `<option value="${p}">${p.toUpperCase()}</option>`).join('');
             selPessoa.value = todasPessoas.includes(filtroPessoa) ? filtroPessoa : 'TODAS';
             datalist.innerHTML = todasPessoas.map(p => `<option value="${p}">`).join('');
 
@@ -1170,7 +1280,7 @@
 
             if (gruposFiltrados.length === 0) {
                 container.innerHTML = `<div style="text-align:center; padding:32px; color:var(--text-muted); border:1px dashed var(--border-color); border-radius:12px;">
-                    Nenhum empréstimo ou compra de terceiro cadastrada. Clique em <strong>"Cadastrar Compra / Parcelas de Terceiro"</strong> acima para registrar.
+                    NENHUM EMPRÉSTIMO OU COMPRA DE TERCEIRO CADASTRADA. CLIQUE EM <strong>"CADASTRAR COMPRA / PARCELAS DE TERCEIRO"</strong> ACIMA.
                 </div>`;
                 return;
             }
@@ -1197,17 +1307,17 @@
                         <div class="terceiro-group-header">
                             <div>
                                 <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-                                    <span style="font-size:1.05rem; font-weight:800; color:var(--text-main);">${g.pessoa}</span>
+                                    <span style="font-size:1.1rem; font-weight:700; color:var(--text-main); text-transform:uppercase;">${g.pessoa}</span>
                                     <span class="badge badge-blue">${g.cartao}</span>
-                                    <span class="badge badge-purple">${g.qtdParcelas}x de ${fmtBRL(g.valorParcela)}</span>
+                                    <span class="badge badge-purple">${g.qtdParcelas}X DE ${fmtBRL(g.valorParcela)}</span>
                                 </div>
-                                <div style="color:var(--text-muted); font-size:0.86rem; margin-top:4px;">${g.desc}</div>
+                                <div style="color:var(--text-muted); font-size:0.88rem; margin-top:4px; text-transform:uppercase;">${g.desc}</div>
                             </div>
                             <div style="text-align:right;">
-                                <div style="font-size:0.8rem; color:var(--text-muted);">Total: <strong>${fmtBRL(g.valorTotal)}</strong> | Restante: <strong class="text-amber">${fmtBRL(saldoRestanteGrupo)}</strong></div>
+                                <div style="font-size:0.84rem; color:var(--text-muted);">TOTAL: <strong>${fmtBRL(g.valorTotal)}</strong> | RESTANTE: <strong class="text-amber">${fmtBRL(saldoRestanteGrupo)}</strong></div>
                                 <div style="margin-top:8px; display:flex; gap:6px; justify-content:flex-end;">
-                                    <button class="btn btn-blue btn-sm" onclick="editarGrupoTerceiro(${g.id})"><i data-lucide="edit-2" size="13"></i> Editar</button>
-                                    <button class="btn btn-danger btn-sm" onclick="removerGrupoTerceiro(${g.id})"><i data-lucide="trash-2" size="13"></i> Excluir</button>
+                                    <button class="btn btn-blue btn-sm" onclick="editarGrupoTerceiro(${g.id})"><i data-lucide="edit-2" size="13"></i> EDITAR</button>
+                                    <button class="btn btn-danger btn-sm" onclick="removerGrupoTerceiro(${g.id})"><i data-lucide="trash-2" size="13"></i> EXCLUIR</button>
                                 </div>
                             </div>
                         </div>
@@ -1223,9 +1333,9 @@
             const tbody = document.getElementById('tabelaReceitas');
             tbody.innerHTML = appState.receitasProprias.map(r => `
                 <tr>
-                    <td><strong>${r.desc}</strong></td>
+                    <td style="text-transform:uppercase;"><strong>${r.desc}</strong></td>
                     <td><span class="badge ${r.tipo === 'FIXA' ? 'badge-emerald' : 'badge-blue'}">${r.tipo}</span></td>
-                    <td>${r.tipo === 'FIXA' ? 'Todos os Meses' : (NOMES_MESES_PT[r.mes] || r.mes)}</td>
+                    <td>${r.tipo === 'FIXA' ? 'TODOS OS MESES' : (NOMES_MESES_PT[r.mes] || r.mes)}</td>
                     <td class="text-emerald"><strong>${fmtBRL(r.valor)}</strong></td>
                     <td><button class="btn btn-danger btn-sm" onclick="removerReceita(${r.id})"><i data-lucide="trash-2" size="14"></i></button></td>
                 </tr>
@@ -1238,7 +1348,7 @@
             if (chartEvolucaoInstance) chartEvolucaoInstance.destroy();
 
             const labels = MESES_CHRONO.slice(0, 7).map(m => m.replace('2026-', '').replace('2027-', '') + '/' + m.slice(2, 4));
-            const dataBruta = MESES_CHRONO.slice(0, 7).map(m => getResumoMes(m).faturaBruta);
+            const dataBruta = MESES_CHRONO.slice(0, 7).map(m => getResumoMes(m).faturaPendente);
             const dataTerceiros = MESES_CHRONO.slice(0, 7).map(m => getResumoMes(m).terceirosTotal);
             const dataLiquida = MESES_CHRONO.slice(0, 7).map(m => getResumoMes(m).custoLiquido);
 
@@ -1247,18 +1357,18 @@
                 data: {
                     labels,
                     datasets: [
-                        { label: 'Meu Custo Real (R$)', data: dataLiquida, backgroundColor: '#10b981', borderRadius: 6 },
-                        { label: 'Reembolso Terceiros (R$)', data: dataTerceiros, backgroundColor: '#38bdf8', borderRadius: 6 },
-                        { label: 'Fatura Bruta Total (R$)', data: dataBruta, type: 'line', borderColor: '#f43f5e', backgroundColor: '#f43f5e', tension: 0.3, borderWidth: 2.5 }
+                        { label: 'MEU CUSTO REAL (R$)', data: dataLiquida, backgroundColor: '#10b981', borderRadius: 6 },
+                        { label: 'REEMBOLSO TERCEIROS (R$)', data: dataTerceiros, backgroundColor: '#0ea5e9', borderRadius: 6 },
+                        { label: 'A PAGAR PENDENTE (R$)', data: dataBruta, type: 'line', borderColor: '#f43f5e', backgroundColor: '#f43f5e', tension: 0.3, borderWidth: 2.5 }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { labels: { color: '#cbd5e1', font: { size: 11 } } } },
+                    plugins: { legend: { labels: { color: '#cbd5e1', font: { family: "'Share Tech Mono', monospace", size: 12 } } } },
                     scales: {
-                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(51,65,85,0.4)' } }
+                        x: { ticks: { color: '#94a3b8', font: { family: "'Share Tech Mono', monospace" } }, grid: { display: false } },
+                        y: { ticks: { color: '#94a3b8', font: { family: "'Share Tech Mono', monospace" } }, grid: { color: 'rgba(31,41,55,0.6)' } }
                     }
                 }
             });
@@ -1272,17 +1382,17 @@
             chartCartoesInstance = new Chart(ctxCard, {
                 type: 'doughnut',
                 data: {
-                    labels: cardLabels,
+                    labels: cardLabels.map(l => l.toUpperCase()),
                     datasets: [{
                         data: cardVals,
-                        backgroundColor: ['#7c3aed', '#059669', '#0284c7', '#d97706', '#f43f5e', '#10b981'],
+                        backgroundColor: ['#7c3aed', '#059669', '#0284c7', '#d97706', '#f43f5e', '#10b981', '#a855f7', '#eab308', '#38bdf8'],
                         borderWidth: 0
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } } }
+                    plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { family: "'Share Tech Mono', monospace", size: 11 } } } }
                 }
             });
         }
@@ -1294,7 +1404,7 @@
             const dataStr = document.getElementById('simData').value;
             const valParcela = valor / parcelas;
 
-            const cardObj = appState.cartoes.find(c => c.nome === cardNome) || { fechamento: 25, vencimento: 3 };
+            const cardObj = appState.cartoes.find(c => c.nome === cardNome) || { fechamento: 25, vencimento: 5 };
             const diaCompra = dataStr ? Number(dataStr.split('-')[2]) : 15;
             const caiProximaFatura = diaCompra > cardObj.fechamento;
 
@@ -1305,19 +1415,19 @@
             document.getElementById('simResultado').innerHTML = `
                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                     <div>
-                        <span style="font-size:0.78rem; color:var(--text-muted); text-transform:uppercase;">Parcela Mensal Estimada</span>
-                        <div style="font-size:1.5rem; font-weight:800; color:var(--accent-emerald);">${parcelas}x de ${fmtBRL(valParcela)}</div>
+                        <span style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase;">PARCELA MENSAL ESTIMADA</span>
+                        <div style="font-size:1.6rem; font-weight:700; color:var(--accent-emerald);">${parcelas}X DE ${fmtBRL(valParcela)}</div>
                     </div>
                     <div style="text-align:right;">
                         <span class="badge ${caiProximaFatura ? 'badge-emerald' : 'badge-amber'}">
-                            ${caiProximaFatura ? 'Melhor Dia! Cai só na fatura seguinte' : 'Atenção: Entra na fatura aberta atual'}
+                            ${caiProximaFatura ? 'MELHOR DIA! CAI SÓ NA FATURA SEGUINTE' : 'ATENÇÃO: ENTRA NA FATURA ABERTA ATUAL'}
                         </span>
-                        <div style="font-size:0.78rem; color:var(--text-muted); margin-top:4px;">Fechamento do ${cardNome}: dia ${cardObj.fechamento}</div>
+                        <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">FECHAMENTO DO ${cardNome.toUpperCase()}: DIA ${cardObj.fechamento}</div>
                     </div>
                 </div>
                 <hr style="border-color:rgba(255,255,255,0.1); margin:12px 0;">
-                <div style="font-size:0.86rem;">
-                    Saldo livre estimado após essa parcela:
+                <div style="font-size:0.9rem;">
+                    SALDO LIVRE ESTIMADO APÓS ESSA PARCELA:
                     <strong style="color:${novoSaldo >= 0 ? 'var(--accent-emerald)' : 'var(--accent-rose)'}">${fmtBRL(novoSaldo)}</strong>
                 </div>
             `;
@@ -1325,7 +1435,7 @@
 
         function abrirModalLancamento() {
             document.getElementById('editLancId').value = '';
-            document.getElementById('tituloModalLanc').innerText = 'Nova Despesa no Cartão';
+            document.getElementById('tituloModalLanc').innerText = 'NOVA DESPESA NO CARTÃO / CONTA';
             document.getElementById('lancDesc').value = '';
             document.getElementById('lancValor').value = '';
             document.getElementById('lancParcelas').value = 1;
@@ -1336,7 +1446,7 @@
             const item = appState.comprasBase.find(c => c.id === id);
             if (!item) return;
             document.getElementById('editLancId').value = item.id;
-            document.getElementById('tituloModalLanc').innerText = 'Editar Despesa do Cartão';
+            document.getElementById('tituloModalLanc').innerText = 'EDITAR DESPESA DO CARTÃO / CONTA';
             document.getElementById('lancDesc').value = item.desc;
             document.getElementById('lancCartao').value = item.cartao;
             document.getElementById('lancData').value = item.data;
@@ -1408,21 +1518,21 @@
             const box = document.getElementById('previewParcelasTerceiro');
 
             if (valorTotal <= 0 || qtd < 1) {
-                box.innerHTML = `<span style="font-size:0.78rem; color:var(--text-muted);">Informe um valor válido para visualizar as parcelas...</span>`;
+                box.innerHTML = `<span style="font-size:0.8rem; color:var(--text-muted);">INFORME UM VALOR VÁLIDO PARA VISUALIZAR AS PARCELAS...</span>`;
                 return;
             }
 
             const lista = gerarListaParcelas(valorTotal, qtd, mesInicio);
-            box.innerHTML = `<div style="font-size:0.76rem; font-weight:700; color:var(--accent-blue); margin-bottom:6px;">Cronograma de Reembolso (${qtd}x de ${fmtBRL(lista[0].valor)}):</div>` +
-                lista.map(p => `<div style="display:flex; justify-content:space-between; font-size:0.78rem; padding:3px 0; border-bottom:1px solid rgba(51,65,85,0.4);">
-                    <span>Parcela ${p.num}/${qtd} (${NOMES_MESES_PT[p.mes] || p.mes})</span>
+            box.innerHTML = `<div style="font-size:0.8rem; font-weight:700; color:var(--accent-blue); margin-bottom:6px;">CRONOGRAMA DE REEMBOLSO (${qtd}X DE ${fmtBRL(lista[0].valor)}):</div>` +
+                lista.map(p => `<div style="display:flex; justify-content:space-between; font-size:0.82rem; padding:3px 0; border-bottom:1px solid rgba(31,41,55,0.6);">
+                    <span>PARCELA ${p.num}/${qtd} (${NOMES_MESES_PT[p.mes] || p.mes})</span>
                     <strong>${fmtBRL(p.valor)}</strong>
                 </div>`).join('');
         }
 
         function abrirModalTerceiro() {
             document.getElementById('editTercGroupId').value = '';
-            document.getElementById('tituloModalTerc').innerText = 'Cadastrar Empréstimo / Compra de Terceiro';
+            document.getElementById('tituloModalTerc').innerText = 'CADASTRAR EMPRÉSTIMO / COMPRA DE TERCEIRO';
             document.getElementById('tercNome').value = '';
             document.getElementById('tercDesc').value = '';
             document.getElementById('tercValorTotal').value = '';
@@ -1437,7 +1547,7 @@
             const g = appState.terceirosGrupos.find(x => x.id === groupId);
             if (!g) return;
             document.getElementById('editTercGroupId').value = g.id;
-            document.getElementById('tituloModalTerc').innerText = 'Editar Empréstimo de Terceiro';
+            document.getElementById('tituloModalTerc').innerText = 'EDITAR EMPRÉSTIMO DE TERCEIRO';
             document.getElementById('tercNome').value = g.pessoa;
             document.getElementById('tercCartao').value = g.cartao;
             document.getElementById('tercDesc').value = g.desc;
@@ -1596,6 +1706,7 @@
                     const imported = JSON.parse(e.target.result);
                     if (imported.cartoes && imported.comprasBase) {
                         appState = imported;
+                        if (!appState.statusPagosContas) appState.statusPagosContas = {};
                         salvarState();
                         popularSelectsCartoes();
                         atualizarTudo();
