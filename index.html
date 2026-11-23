@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DESPAG | Gerenciamento Unificado de Cartões & Finanças</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="theme-color" content="#090d16">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -33,7 +37,8 @@
         /* SIDEBAR */
         .sidebar { width: 265px; background-color: #0d1322; border-right: 1px solid var(--border-color); padding: 24px 16px; display: flex; flex-direction: column; justify-content: space-between; position: fixed; height: 100vh; z-index: 50; transition: transform 0.3s ease; }
         .brand { display: flex; align-items: center; gap: 12px; padding: 0 8px 24px 8px; border-bottom: 1px solid var(--border-color); margin-bottom: 24px; }
-        .brand-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent-emerald), #059669); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px var(--accent-emerald-glow); font-weight: 700; font-size: 1.25rem; color: white; }
+        .brand-icon { width: 42px; height: 42px; background: #090d16; border: 1px solid rgba(14, 165, 233, 0.5); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 18px rgba(14, 165, 233, 0.45); overflow: hidden; padding: 0; flex-shrink: 0; }
+        .brand-icon img { width: 100%; height: 100%; object-fit: cover; }
         .brand h1 { font-size: 1.45rem; font-weight: 700; letter-spacing: 1px; }
         .brand span { font-size: 0.78rem; color: var(--accent-emerald); display: block; }
 
@@ -99,21 +104,10 @@
         td { padding: 12px 14px; font-size: 0.92rem; border-bottom: 1px solid rgba(31, 41, 55, 0.8); }
         tr:hover td { background-color: rgba(255, 255, 255, 0.02); }
 
-        /* CHECKBOX CUSTOMIZADO ESTILO TERMINAL */
-        .chk-conta {
-            width: 19px;
-            height: 19px;
-            accent-color: var(--accent-emerald);
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .linha-paga td {
-            opacity: 0.55;
-        }
-        .valor-riscado {
-            text-decoration: line-through;
-            color: var(--text-muted) !important;
-        }
+        /* CHECKBOX CUSTOMIZADO */
+        .chk-conta { width: 19px; height: 19px; accent-color: var(--accent-emerald); cursor: pointer; border-radius: 4px; }
+        .linha-paga td { opacity: 0.55; }
+        .valor-riscado { text-decoration: line-through; color: var(--text-muted) !important; }
 
         .badge { padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; text-transform: uppercase; }
         .badge-emerald { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
@@ -182,12 +176,12 @@
     <aside class="sidebar" id="sidebar">
         <div>
             <div class="brand">
-                <div class="brand-icon" style="background: #090d16; border: 1px solid rgba(14, 165, 233, 0.5); box-shadow: 0 0 18px rgba(14, 165, 233, 0.45); overflow: hidden; padding: 0;">
-                    <img src="icon.png" alt="DESPAG" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%230284c7\'/><text x=\'50\' y=\'68\' font-size=\'55\' font-weight=\'900\' fill=\'white\' text-anchor=\'middle\'>D</text></svg>';">
+                <div class="brand-icon">
+                    <img src="icon.png" alt="DESPAG" onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%230284c7\'/><text x=\'50\' y=\'68\' font-size=\'55\' font-weight=\'900\' fill=\'white\' text-anchor=\'middle\'>D</text></svg>';">
                 </div>
                 <div>
                     <h1>DESPAG</h1>
-                    <span>GESTÃO INTEGRADA v5.4</span>
+                    <span>GESTÃO INTEGRADA v5.5</span>
                 </div>
             </div>
             <nav class="nav-menu">
@@ -688,7 +682,7 @@
         };
 
         const estadoPadrao = {
-            versaoBase: "5.4-CHECKLIST-MONO-2026-2027",
+            versaoBase: "5.5-COMPLETO-TERCEIROS-RECUPERADOS",
             receitasProprias: [
                 { id: 1, desc: "Salário / Proventos Fixos", valor: 6500.00, tipo: "FIXA", mes: "TODOS" },
                 { id: 2, desc: "Comissões / Renda Extra", valor: 800.00, tipo: "FIXA", mes: "TODOS" }
@@ -710,7 +704,129 @@
                 { id: "c14", nome: "Outros", limite: 1000, fechamento: 25, vencimento: 10, estilo: "cc-outro" }
             ],
             statusPagosContas: {},
-            terceirosGrupos: [],
+            terceirosGrupos: [
+                {
+                    id: 301,
+                    pessoa: "Edmilson",
+                    cartao: "Nubank Neudson",
+                    desc: "Reembolso Cartão / Despesa",
+                    valorTotal: 200.00,
+                    qtdParcelas: 2,
+                    valorParcela: 100.00,
+                    parcelas: [
+                        { num: 2, mes: "2026-DEZ", valor: 100.00, pago: false }
+                    ]
+                },
+                {
+                    id: 303,
+                    pessoa: "Marques",
+                    cartao: "Nubank Neudson",
+                    desc: "Despesa Compartilhada 2",
+                    valorTotal: 387.50,
+                    qtdParcelas: 2,
+                    valorParcela: 193.75,
+                    parcelas: [
+                        { num: 2, mes: "2026-DEZ", valor: 193.75, pago: false }
+                    ]
+                },
+                {
+                    id: 304,
+                    pessoa: "Marques",
+                    cartao: "Nubank Neudson",
+                    desc: "Despesa Longo Prazo",
+                    valorTotal: 1283.34,
+                    qtdParcelas: 6,
+                    valorParcela: 213.89,
+                    parcelas: [
+                        { num: 2, mes: "2026-DEZ", valor: 213.89, pago: false },
+                        { num: 3, mes: "2027-JAN", valor: 213.89, pago: false },
+                        { num: 4, mes: "2027-FEV", valor: 213.89, pago: false },
+                        { num: 5, mes: "2027-MAR", valor: 213.89, pago: false },
+                        { num: 6, mes: "2027-ABR", valor: 213.89, pago: false }
+                    ]
+                },
+                {
+                    id: 305,
+                    pessoa: "Ivo",
+                    cartao: "Nubank Neudson",
+                    desc: "Repasse / Despesa Compartilhada",
+                    valorTotal: 2800.00,
+                    qtdParcelas: 5,
+                    valorParcela: 560.00,
+                    parcelas: [
+                        { num: 2, mes: "2026-DEZ", valor: 560.00, pago: false },
+                        { num: 3, mes: "2027-JAN", valor: 560.00, pago: false },
+                        { num: 4, mes: "2027-FEV", valor: 560.00, pago: false },
+                        { num: 5, mes: "2027-MAR", valor: 560.00, pago: false }
+                    ]
+                },
+                {
+                    id: 306,
+                    pessoa: "Thiago Borges",
+                    cartao: "Nubank Neudson",
+                    desc: "Acordo / Fatura Compartilhada",
+                    valorTotal: 1520.00,
+                    qtdParcelas: 7,
+                    valorParcela: 190.00,
+                    parcelas: [
+                        { num: 2, mes: "2026-DEZ", valor: 190.00, pago: false },
+                        { num: 3, mes: "2027-JAN", valor: 190.00, pago: false },
+                        { num: 4, mes: "2027-FEV", valor: 190.00, pago: false },
+                        { num: 5, mes: "2027-MAR", valor: 190.00, pago: false },
+                        { num: 6, mes: "2027-ABR", valor: 190.00, pago: false },
+                        { num: 7, mes: "2027-MAI", valor: 190.00, pago: false }
+                    ]
+                },
+                {
+                    id: 307,
+                    pessoa: "Gilmar",
+                    cartao: "Nubank Neudson",
+                    desc: "Reembolso Despesa",
+                    valorTotal: 287.96,
+                    qtdParcelas: 2,
+                    valorParcela: 143.98,
+                    parcelas: [
+                        { num: 2, mes: "2026-DEZ", valor: 143.98, pago: false }
+                    ]
+                },
+                {
+                    id: 308,
+                    pessoa: "Deuzelina",
+                    cartao: "Nubank Neudson",
+                    desc: "Despesa 1",
+                    valorTotal: 118.06,
+                    qtdParcelas: 2,
+                    valorParcela: 59.03,
+                    parcelas: [
+                        { num: 2, mes: "2026-DEZ", valor: 59.03, pago: false }
+                    ]
+                },
+                {
+                    id: 309,
+                    pessoa: "Deuzelina",
+                    cartao: "Nubank Neudson",
+                    desc: "Despesa 2",
+                    valorTotal: 222.52,
+                    qtdParcelas: 2,
+                    valorParcela: 111.26,
+                    parcelas: [
+                        { num: 2, mes: "2026-DEZ", valor: 111.26, pago: false }
+                    ]
+                },
+                {
+                    id: 311,
+                    pessoa: "Deuzelina",
+                    cartao: "Nubank Neudson",
+                    desc: "Despesa 4",
+                    valorTotal: 178.56,
+                    qtdParcelas: 3,
+                    valorParcela: 59.52,
+                    parcelas: [
+                        { num: 2, mes: "2026-DEZ", valor: 59.52, pago: false },
+                        { num: 3, mes: "2027-JAN", valor: 59.52, pago: false }
+                    ]
+                }
+            ],
             faturasGerais: {},
             comprasBase: [
                 // ================= NUBANK NEUDSON =================
@@ -868,7 +984,7 @@
 
         let appState = JSON.parse(localStorage.getItem('DESPAG_STATE'));
 
-        if (!appState || appState.versaoBase !== "5.4-CHECKLIST-MONO-2026-2027") {
+        if (!appState || appState.versaoBase !== "5.5-COMPLETO-TERCEIROS-RECUPERADOS") {
             let estadoLimpo = JSON.parse(JSON.stringify(estadoPadrao));
 
             if (appState) {
@@ -879,13 +995,29 @@
                     estadoLimpo.statusPagosContas = appState.statusPagosContas;
                 }
                 if (appState.terceirosGrupos && appState.terceirosGrupos.length > 0) {
-                    let gruposFiltrados = appState.terceirosGrupos.map(g => {
-                        let parcsFuturas = (g.parcelas || []).filter(p => p.mes !== "2026-NOV");
-                        return { ...g, parcelas: parcsFuturas };
+                    let gruposCompat = appState.terceirosGrupos.map(g => {
+                        let parcs = (g.parcelas || [])
+                            .filter(p => p.mes !== "2026-NOV")
+                            .map(p => ({
+                                num: p.num || p.numero || 1,
+                                mes: p.mes,
+                                valor: Number(p.valor),
+                                pago: !!p.pago
+                            }));
+                        return {
+                            id: g.id,
+                            pessoa: g.pessoa || g.nome || "Terceiro",
+                            cartao: g.cartao || "Nubank Neudson",
+                            desc: g.desc || "Despesa",
+                            valorTotal: Number(g.valorTotal || 0),
+                            qtdParcelas: Number(g.qtdParcelas || g.numParcelas || parcs.length || 1),
+                            valorParcela: Number(g.valorParcela || (parcs[0] ? parcs[0].valor : 0)),
+                            parcelas: parcs
+                        };
                     }).filter(g => g.parcelas.length > 0);
 
-                    if (gruposFiltrados.length > 0) {
-                        estadoLimpo.terceirosGrupos = gruposFiltrados;
+                    if (gruposCompat.length > 0) {
+                        estadoLimpo.terceirosGrupos = gruposCompat;
                     }
                 }
             }
@@ -1041,19 +1173,22 @@
             let terceirosPago = 0;
 
             appState.terceirosGrupos.forEach(grupo => {
+                const nomePessoa = grupo.pessoa || grupo.nome || "Terceiro";
+                const totParc = grupo.qtdParcelas || grupo.numParcelas || (grupo.parcelas ? grupo.parcelas.length : 1);
                 (grupo.parcelas || []).forEach(p => {
                     if (p.mes === mes) {
+                        const numParc = p.num || p.numero || 1;
                         terceirosTotal += Number(p.valor);
                         if (p.pago) terceirosPago += Number(p.valor);
                         parcelasTerceirosMes.push({
                             grupoId: grupo.id,
-                            pessoa: grupo.pessoa,
+                            pessoa: nomePessoa,
                             desc: grupo.desc,
                             cartao: grupo.cartao,
-                            num: p.num,
-                            totalParcelas: grupo.qtdParcelas,
+                            num: numParc,
+                            totalParcelas: totParc,
                             valor: Number(p.valor),
-                            pago: p.pago
+                            pago: !!p.pago
                         });
                     }
                 });
@@ -1257,10 +1392,11 @@
             let pessoasAtivasSet = new Set();
 
             appState.terceirosGrupos.forEach(g => {
+                const nomeP = g.pessoa || g.nome || "Terceiro";
                 (g.parcelas || []).forEach(p => {
                     if (!p.pago) {
                         saldoFuturoTotal += Number(p.valor);
-                        pessoasAtivasSet.add(g.pessoa);
+                        pessoasAtivasSet.add(nomeP);
                     }
                 });
             });
@@ -1272,13 +1408,13 @@
 
             const selPessoa = document.getElementById('filtroPessoaTerceiro');
             const datalist = document.getElementById('listaNomesTerceiros');
-            const todasPessoas = [...new Set(appState.terceirosGrupos.map(g => g.pessoa))];
+            const todasPessoas = [...new Set(appState.terceirosGrupos.map(g => g.pessoa || g.nome))];
             selPessoa.innerHTML = '<option value="TODAS">TODAS AS PESSOAS</option>' + todasPessoas.map(p => `<option value="${p}">${p.toUpperCase()}</option>`).join('');
             selPessoa.value = todasPessoas.includes(filtroPessoa) ? filtroPessoa : 'TODAS';
             datalist.innerHTML = todasPessoas.map(p => `<option value="${p}">`).join('');
 
             const container = document.getElementById('listaGruposTerceiros');
-            const gruposFiltrados = appState.terceirosGrupos.filter(g => selPessoa.value === 'TODAS' || g.pessoa === selPessoa.value);
+            const gruposFiltrados = appState.terceirosGrupos.filter(g => selPessoa.value === 'TODAS' || (g.pessoa || g.nome) === selPessoa.value);
 
             if (gruposFiltrados.length === 0) {
                 container.innerHTML = `<div style="text-align:center; padding:32px; color:var(--text-muted); border:1px dashed var(--border-color); border-radius:12px;">
@@ -1288,16 +1424,19 @@
             }
 
             container.innerHTML = gruposFiltrados.map(g => {
-                const totalPagoGrupo = g.parcelas.filter(p => p.pago).reduce((acc, p) => acc + Number(p.valor), 0);
-                const saldoRestanteGrupo = Number(g.valorTotal) - totalPagoGrupo;
+                const nomePessoa = g.pessoa || g.nome || "Terceiro";
+                const totParc = g.qtdParcelas || g.numParcelas || g.parcelas.length;
+                const valParc = g.valorParcela || (g.parcelas[0] ? g.parcelas[0].valor : 0);
+                const saldoRestanteGrupo = g.parcelas.filter(p => !p.pago).reduce((acc, p) => acc + Number(p.valor), 0);
 
                 const pillsHtml = g.parcelas.map(p => {
+                    const numParc = p.num || p.numero || 1;
                     const isMesAtual = p.mes === mesAtual;
                     return `
-                        <div class="parcela-pill ${p.pago ? 'paga' : ''} ${isMesAtual ? 'mes-atual' : ''}" onclick="alternarStatusParcela(${g.id}, ${p.num})" title="Clique para alternar Pago/Pendente">
+                        <div class="parcela-pill ${p.pago ? 'paga' : ''} ${isMesAtual ? 'mes-atual' : ''}" onclick="alternarStatusParcela(${g.id}, ${numParc})" title="Clique para alternar Pago/Pendente">
                             <i data-lucide="${p.pago ? 'check-circle-2' : 'clock'}" size="15" class="${p.pago ? 'text-emerald' : 'text-amber'}"></i>
                             <div>
-                                <div style="font-weight:700;">${p.num}/${g.qtdParcelas} • ${p.mes}</div>
+                                <div style="font-weight:700;">${numParc}/${totParc} • ${p.mes}</div>
                                 <div style="color:${p.pago ? 'var(--accent-emerald)' : 'var(--text-main)'}">${fmtBRL(p.valor)}</div>
                             </div>
                         </div>
@@ -1309,14 +1448,14 @@
                         <div class="terceiro-group-header">
                             <div>
                                 <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-                                    <span style="font-size:1.1rem; font-weight:700; color:var(--text-main); text-transform:uppercase;">${g.pessoa}</span>
+                                    <span style="font-size:1.1rem; font-weight:700; color:var(--text-main); text-transform:uppercase;">${nomePessoa}</span>
                                     <span class="badge badge-blue">${g.cartao}</span>
-                                    <span class="badge badge-purple">${g.qtdParcelas}X DE ${fmtBRL(g.valorParcela)}</span>
+                                    <span class="badge badge-purple">${totParc}X DE ${fmtBRL(valParc)}</span>
                                 </div>
                                 <div style="color:var(--text-muted); font-size:0.88rem; margin-top:4px; text-transform:uppercase;">${g.desc}</div>
                             </div>
                             <div style="text-align:right;">
-                                <div style="font-size:0.84rem; color:var(--text-muted);">TOTAL: <strong>${fmtBRL(g.valorTotal)}</strong> | RESTANTE: <strong class="text-amber">${fmtBRL(saldoRestanteGrupo)}</strong></div>
+                                <div style="font-size:0.84rem; color:var(--text-muted);">TOTAL: <strong>${fmtBRL(g.valorTotal)}</strong> | A RECEBER: <strong class="text-amber">${fmtBRL(saldoRestanteGrupo)}</strong></div>
                                 <div style="margin-top:8px; display:flex; gap:6px; justify-content:flex-end;">
                                     <button class="btn btn-blue btn-sm" onclick="editarGrupoTerceiro(${g.id})"><i data-lucide="edit-2" size="13"></i> EDITAR</button>
                                     <button class="btn btn-danger btn-sm" onclick="removerGrupoTerceiro(${g.id})"><i data-lucide="trash-2" size="13"></i> EXCLUIR</button>
@@ -1550,11 +1689,11 @@
             if (!g) return;
             document.getElementById('editTercGroupId').value = g.id;
             document.getElementById('tituloModalTerc').innerText = 'EDITAR EMPRÉSTIMO DE TERCEIRO';
-            document.getElementById('tercNome').value = g.pessoa;
+            document.getElementById('tercNome').value = g.pessoa || g.nome || '';
             document.getElementById('tercCartao').value = g.cartao;
             document.getElementById('tercDesc').value = g.desc;
             document.getElementById('tercValorTotal').value = g.valorTotal;
-            document.getElementById('tercQtdParcelas').value = g.qtdParcelas;
+            document.getElementById('tercQtdParcelas').value = g.qtdParcelas || g.numParcelas || g.parcelas.length;
             document.getElementById('tercMesInicio').value = g.parcelas[0]?.mes || document.getElementById('mesGlobal').value;
             document.getElementById('tercLancarNoCartao').checked = false;
             atualizarPreviewTerceiro();
@@ -1581,7 +1720,7 @@
                 if (idx !== -1) {
                     const antigas = appState.terceirosGrupos[idx].parcelas || [];
                     novasParcelas.forEach(np => {
-                        const match = antigas.find(ap => ap.num === np.num);
+                        const match = antigas.find(ap => (ap.num || ap.numero) === np.num);
                         if (match) np.pago = match.pago;
                     });
                     appState.terceirosGrupos[idx] = {
@@ -1628,7 +1767,7 @@
         function alternarStatusParcela(groupId, numParcela) {
             const grupo = appState.terceirosGrupos.find(g => g.id === groupId);
             if (!grupo) return;
-            const parc = grupo.parcelas.find(p => p.num === numParcela);
+            const parc = grupo.parcelas.find(p => (p.num || p.numero) === numParcela);
             if (parc) {
                 parc.pago = !parc.pago;
                 salvarState();
@@ -1707,6 +1846,23 @@
                 try {
                     const imported = JSON.parse(e.target.result);
                     if (imported.cartoes && imported.comprasBase) {
+                        if (imported.terceirosGrupos) {
+                            imported.terceirosGrupos = imported.terceirosGrupos.map(g => ({
+                                id: g.id,
+                                pessoa: g.pessoa || g.nome || "Terceiro",
+                                cartao: g.cartao || "Nubank Neudson",
+                                desc: g.desc || "Despesa",
+                                valorTotal: Number(g.valorTotal || 0),
+                                qtdParcelas: Number(g.qtdParcelas || g.numParcelas || (g.parcelas ? g.parcelas.length : 1)),
+                                valorParcela: Number(g.valorParcela || (g.parcelas && g.parcelas[0] ? g.parcelas[0].valor : 0)),
+                                parcelas: (g.parcelas || []).map(p => ({
+                                    num: p.num || p.numero || 1,
+                                    mes: p.mes,
+                                    valor: Number(p.valor),
+                                    pago: !!p.pago
+                                }))
+                            }));
+                        }
                         appState = imported;
                         if (!appState.statusPagosContas) appState.statusPagosContas = {};
                         salvarState();
@@ -1724,7 +1880,7 @@
         }
 
         function resetarPadrao() {
-            if (confirm('Isso limpará o cache local e restaurará a base consolidada limpa. Continuar?')) {
+            if (confirm('Isso limpará o cache local e restaurará a base consolidada limpa com todos os terceiros. Continuar?')) {
                 localStorage.removeItem('DESPAG_STATE');
                 location.reload();
             }
